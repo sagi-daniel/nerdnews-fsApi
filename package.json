@@ -1,0 +1,17 @@
+{
+  "name": "geek-hub-fsapi",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "node api/src/index.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.19.2",
+    "mongoose": "^8.2.3",
+    "winston": "^3.13.0"
+  }
+}
