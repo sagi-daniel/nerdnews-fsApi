@@ -3,14 +3,14 @@ const catchAsync = require("../../../utils/catchAsync");
 const rssNewsService = require("./rssNews.service");
 
 exports.create = catchAsync(async (req, res, next) => {
-  const rssnNews = await rssNewsService.create(req.body);
-  if (!rssnNews) {
+  const rssNews = await rssNewsService.create(req.body);
+  if (!rssNews) {
     return next(new AppError(`News could not saved`));
   }
   res.status(200).json({
     status: "success",
     data: {
-      rssnNews,
+      rssNews,
     },
   });
 });
@@ -44,21 +44,21 @@ exports.findById = catchAsync(async (req, res, next) => {
 
 exports.update = catchAsync(async (req, res, next) => {
   const id = req.params.id;
-  const rssnNews = await rssNewsService.update(id, req.body);
+  const rssNews = await rssNewsService.update(id, req.body);
   if (!rssNews) {
     return next(new AppError(`News with ${id} ID could not found`));
   }
   res.status(200).json({
     status: "success",
     data: {
-      rssnNews,
+      rssNews,
     },
   });
 });
 
 exports.remove = catchAsync(async (req, res, next) => {
   const id = req.params.id;
-  const rssnNews = await rssNewsService.remove(id);
+  const rssNews = await rssNewsService.remove(id);
   if (!rssNews) {
     return next(new AppError(`News with ${id} ID could not found`));
   }
@@ -66,7 +66,7 @@ exports.remove = catchAsync(async (req, res, next) => {
   res.status(200).json({
     status: "success",
     data: {
-      rssnNews,
+      rssNews,
     },
   });
 });

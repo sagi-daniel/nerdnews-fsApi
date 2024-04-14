@@ -41,7 +41,7 @@ describe("Rss News Controller Tests", () => {
     expect(response.json).toHaveBeenCalledWith({
       status: "success",
       data: {
-        rssnNews: { ...VALID_DATA, id: mockData.length },
+        rssNews: { ...VALID_DATA, id: mockData.length },
       },
     });
   });
@@ -123,7 +123,7 @@ describe("Rss News Controller Tests", () => {
     expect(response.json).toHaveBeenCalledWith({
       status: "success",
       data: {
-        rssnNews: { ...VALID_DATA, id: VALID_ID },
+        rssNews: { ...VALID_DATA, id: VALID_ID },
       },
     });
   });
@@ -143,7 +143,7 @@ describe("Rss News Controller Tests", () => {
     expect(response.json).toHaveBeenCalledWith({
       status: "success",
       data: {
-        rssnNews: {
+        rssNews: {
           id: 1,
           release: "2024-04-02T13:29:01.000+00:00",
           category: "1c",
