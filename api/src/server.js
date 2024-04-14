@@ -10,12 +10,17 @@ mongoose
   )
   .then(() => {
     console.log("Mongodb connection is successful!");
-  })
-  .catch((err) => {
-    console.error(err);
-    process.exit();
   });
 
-app.listen(process.env.PORT, () => {
-  console.log(`Server is running on PORT:${process.env.PORT}`);
+const PORT = process.env.PORT || 8000;
+const server = app.listen(PORT, () => {
+  console.log(`Server is running on PORT:${PORT}`);
+});
+
+process.on("unhandledRejection", (err) => {
+  console.log("UNHANDLED REJECTION! 💥 Shutting down...");
+  console.log(err.name, err.message);
+  server.close(() => {
+    process.exit(1);
+  });
 });

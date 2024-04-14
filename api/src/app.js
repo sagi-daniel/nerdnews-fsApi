@@ -3,7 +3,6 @@ const morgan = require("morgan");
 const cron = require("node-cron");
 const app = express();
 const AppError = require("./utils/appError");
-const globalErrorHandler = require("./controllers/error/error.controller");
 
 if (process.env.NODE_ENV === "development") {
   app.use(morgan("dev"));
@@ -25,7 +24,7 @@ app.use(
   require("./controllers/rss/rssCategory/rssCategory.routes")
 );
 
-//*SCHEDULED TASKS
+// //*SCHEDULED TASKS
 cron.schedule(
   "* * * * *",
   require("./controllers/scheduler/scheduler.controller")
@@ -35,6 +34,6 @@ app.all("*", (req, res, next) => {
   next(new AppError(`Could not found ${req.originalUrl} on this server!`, 404));
 });
 
-app.use(globalErrorHandler);
+app.use(require("./controllers/error/error.controller"));
 
 module.exports = app;
