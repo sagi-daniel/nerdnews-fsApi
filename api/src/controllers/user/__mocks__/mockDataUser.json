@@ -1,0 +1,114 @@
+[
+  {
+    "id": 1,
+    "role": "ADMIN",
+    "firstName": "John",
+    "lastName": "Doe",
+    "userName": "admin",
+    "email": "john@admin.com",
+    "password": "admin123",
+    "passwordConfirm": "admin123",
+    "birthDate": "1990-05-27T00:00:00.000+00:00",
+    "phone": "06236754758",
+    "userNews": [
+      "660d0796e5991461e9fc51df",
+      "660d0796e5991461e9fc51e1",
+      "660d0796e5991461e9fc51e5",
+      "660d0796e5991461e9fc51e9",
+      "660d0796e5991461e9fc51e7",
+      "660d0796e5991461e9fc51ed"
+    ],
+    "userMovies": [
+      "660d0796e5991461e9fc51df",
+      "660d0796e5991461e9fc51e1",
+      "660d0796e5991461e9fc51e5",
+      "660d0796e5991461e9fc51e9",
+      "660d0796e5991461e9fc51e7",
+      "660d0796e5991461e9fc51ed"
+    ]
+  },
+  {
+    "id": 2,
+    "role": "USER",
+    "firstName": "Hermione",
+    "lastName": "Granger",
+    "userName": "admin",
+    "email": "Hermione@user.com",
+    "password": "user1234",
+    "passwordConfirm": "user1234",
+    "birthDate": "1990-05-27T00:00:00.000+00:00",
+    "phone": "06236754758",
+    "userNews": [
+      "660d0796e5991461e9fc51df",
+      "660d0796e5991461e9fc51e1",
+      "660d0796e5991461e9fc51e5",
+      "660d0796e5991461e9fc51e9",
+      "660d0796e5991461e9fc51e7",
+      "660d0796e5991461e9fc51ed"
+    ],
+    "userMovies": [
+      "660d0796e5991461e9fc51df",
+      "660d0796e5991461e9fc51e1",
+      "660d0796e5991461e9fc51e5",
+      "660d0796e5991461e9fc51e9",
+      "660d0796e5991461e9fc51e7",
+      "660d0796e5991461e9fc51ed"
+    ]
+  },
+  {
+      "id": 3,
+      "role": "USER",
+      "firstName": "Harry",
+      "lastName": "Potter",
+      "userName": "harryP",
+      "email": "Hermione@user.com",
+      "password": "user1234",
+      "passwordConfirm": "user1234",
+      "birthDate": "1990-05-27T00:00:00.000+00:00",
+      "phone": "06236754758",
+      "userNews": [
+        "660d0796e5991461e9fc51df",
+        "660d0796e5991461e9fc51e1",
+        "660d0796e5991461e9fc51e5",
+        "660d0796e5991461e9fc51e9",
+        "660d0796e5991461e9fc51e7",
+        "660d0796e5991461e9fc51ed"
+      ],
+      "userMovies": [
+        "660d0796e5991461e9fc51df",
+        "660d0796e5991461e9fc51e1",
+        "660d0796e5991461e9fc51e5",
+        "660d0796e5991461e9fc51e9",
+        "660d0796e5991461e9fc51e7",
+        "660d0796e5991461e9fc51ed"
+      ]
+  },
+    {
+      "id": 4,
+      "role": "ADMIN",
+      "firstName": "Perselus",
+      "lastName": "Piton",
+      "userName": "perselP",
+      "email": "perselp@admin.com",
+      "password": "admin123",
+      "passwordConfirm": "admin123",
+      "birthDate": "1960-05-27T00:00:00.000+00:00",
+      "phone": "06236754758",
+      "userNews": [
+        "660d0796e5991461e9fc51df",
+        "660d0796e5991461e9fc51e1",
+        "660d0796e5991461e9fc51e5",
+        "660d0796e5991461e9fc51e9",
+        "660d0796e5991461e9fc51e7",
+        "660d0796e5991461e9fc51ed"
+      ],
+      "userMovies": [
+        "660d0796e5991461e9fc51df",
+        "660d0796e5991461e9fc51e1",
+        "660d0796e5991461e9fc51e5",
+        "660d0796e5991461e9fc51e9",
+        "660d0796e5991461e9fc51e7",
+        "660d0796e5991461e9fc51ed"
+      ]
+    }
+]
