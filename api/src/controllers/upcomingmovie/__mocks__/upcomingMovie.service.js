@@ -1,5 +1,3 @@
-const AppError = require("../../../utils/appError");
-
 const upcomingMovieService = jest.mock("./upcomingMovie.service");
 
 let mockData;
