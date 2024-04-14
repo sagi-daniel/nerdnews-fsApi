@@ -1,12 +1,16 @@
 const mongoose = require("mongoose");
 const validator = require("validator");
 
+const Schema = mongoose.Schema;
+
 const UserSchema = mongoose.Schema(
   {
     role: {
       type: String,
-      required: true,
+      enum: ["ADMIN", "USER"],
+      default: "USER",
       uppercase: true,
+      required: true,
     },
     userName: {
       type: String,
@@ -17,18 +21,18 @@ const UserSchema = mongoose.Schema(
       required: true,
       unique: true,
       lowercase: true,
-      validator: [validator.isEmail, "Please provide a valid email"],
+      validate: [validator.isEmail, "Please provide a valid email"],
     },
     password: {
       type: String,
       required: true,
-      minlength: 5,
+      minlength: 8,
       select: true,
     },
     passwordConfirm: {
       type: String,
       required: false,
-      minlength: 5,
+      minlength: 8,
       select: true,
     },
     firstName: {
@@ -39,7 +43,7 @@ const UserSchema = mongoose.Schema(
       type: String,
       required: true,
     },
-    birthYear: {
+    birth: {
       type: String,
       required: true,
     },
@@ -47,8 +51,11 @@ const UserSchema = mongoose.Schema(
       type: String,
       required: true,
     },
-    favorites: {
-      type: Array,
+    userNews: {
+      type: [{ type: Schema.Types.ObjectId, ref: "RssNews" }],
+    },
+    userMovies: {
+      type: [{ type: Schema.Types.ObjectId, ref: "UpcomingMovie" }],
     },
   },
   { timestamps: true }
