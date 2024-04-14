@@ -1,10 +1,16 @@
 const express = require("express");
+const morgan = require("morgan");
 const cron = require("node-cron");
 const app = express();
 const AppError = require("./utils/appError");
 const globalErrorHandler = require("./controllers/error/error.controller");
 
+if (process.env.NODE_ENV === "development") {
+  app.use(morgan("dev"));
+}
+
 app.use(express.json());
+app.use(express.static(`${__dirname}/public`));
 
 //* ROUTES
 app.use("/user", require("./controllers/user/user.routes"));
