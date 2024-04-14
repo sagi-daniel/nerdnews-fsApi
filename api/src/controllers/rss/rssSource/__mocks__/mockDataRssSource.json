@@ -1,0 +1,37 @@
+[
+  {
+    "id": 1,
+    "sourceName": "SAMPLE RSS SOURCE 1",
+    "sourceLink": "https://sample1.com/",
+    "category": "1c",
+    "comment": "sample comment 1"
+  },
+  {
+    "id": 2,
+    "sourceName": "SAMPLE RSS SOURCE 2",
+    "sourceLink": "https://sample2.com/",
+    "category": "2c",
+    "comment": "sample comment 2"
+  },
+  {
+    "id": 3,
+    "sourceName": "SAMPLE RSS SOURCE 3",
+    "sourceLink": "https://sample3.com/",
+    "category": "3c",
+    "comment": "sample comment 3"
+  },
+  {
+    "id": 4,
+    "sourceName": "SAMPLE RSS SOURCE 4",
+    "sourceLink": "https://sample4.com/",
+    "category": "4c",
+    "comment": "sample comment 4"
+  },
+  {
+    "id": 5,
+    "sourceName": "SAMPLE RSS SOURCE 5",
+    "sourceLink": "https://sample5.com/",
+    "category": "5c",
+    "comment": "sample comment 5"
+  }
+]

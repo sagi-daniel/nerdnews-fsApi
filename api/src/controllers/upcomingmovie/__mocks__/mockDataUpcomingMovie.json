@@ -1,0 +1,42 @@
+[
+  {
+    "id": 1,
+    "tmdb_id": 123456,
+    "release": "2024-05-27T00:00:00.000+00:00",
+    "title": "Sample Movie 1",
+    "overview": "Sample movie overview 1",
+    "poster": "https://sample.com/sample1.jpg"
+  },
+  {
+    "id": 2,
+    "tmdb_id": 123456,
+    "release": "2024-04-27T00:00:00.000+00:00",
+    "title": "Sample Movie 2",
+    "overview": "Sample movie overview 2",
+    "poster": "https://sample.com/sample1.jpg"
+  },
+  {
+    "id": 3,
+    "tmdb_id": 123456,
+    "release": "2024-03-27T00:00:00.000+00:00",
+    "title": "Sample Movie 3",
+    "overview": "Sample movie overview 3",
+    "poster": "https://sample.com/sample1.jpg"
+  },
+  {
+    "id": 4,
+    "tmdb_id": 123456,
+    "release": "2024-02-27T00:00:00.000+00:00",
+    "title": "Sample Movie 4",
+    "overview": "Sample movie overview 4",
+    "poster": "https://sample.com/sample1.jpg"
+  },
+  {
+    "id": 5,
+    "tmdb_id": 123456,
+    "release": "2024-01-27T00:00:00.000+00:00",
+    "title": "Sample Movie 5",
+    "overview": "Sample movie overview 5",
+    "poster": "https://sample.com/sample5.jpg"
+  }
+]

@@ -1,9 +1,21 @@
-const express = require("express");
-const app = express();
+const mongoose = require("mongoose");
+const dotenv = require("dotenv");
+dotenv.config({ path: "./.env" });
+const logger = require("./config/logger");
+const app = require("./app");
 
-app.use(express.json());
+mongoose
+  .connect(
+    `mongodb+srv://${process.env.DB_USERNAME}:${process.env.DB_PASSWORD}@${process.env.HOST}`
+  )
+  .then(() => {
+    logger.info("Mongodb connection is successful!");
+  })
+  .catch((err) => {
+    logger.error(err);
+    process.exit();
+  });
 
-// Use routes
-app.use("/", () => console.log("Hi GeekHub"));
-
-module.exports = app;
+app.listen(process.env.PORT, () => {
+  console.log(`Server is running on PORT:${process.env.PORT}`);
+});
