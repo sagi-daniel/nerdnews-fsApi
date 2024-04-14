@@ -7,7 +7,7 @@ const globalErrorHandler = require("./controllers/error/error.controller");
 app.use(express.json());
 
 //* ROUTES
-// app.use("/user", require("./controllers/user/"));
+app.use("/user", require("./controllers/user/user.routes"));
 app.use(
   "/upcomingmovie",
   require("./controllers/upcomingmovie/upcomingMovie.routes")
