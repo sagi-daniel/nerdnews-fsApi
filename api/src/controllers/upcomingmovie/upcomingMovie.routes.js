@@ -7,10 +7,7 @@ const {
   remove,
 } = require("./upcomingMovie.controller");
 
-router.route("/").get(findAll);
-router.route("/:id").get(findById);
-router.route("/").post(create);
-router.route("/:id").patch(update);
-router.route("/:id").delete(remove);
+router.route("/").get(findAll).post(create);
+router.route("/:id").get(findById).patch(update);
 
 module.exports = router;
