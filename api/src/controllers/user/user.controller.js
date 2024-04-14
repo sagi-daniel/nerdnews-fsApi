@@ -43,6 +43,9 @@ exports.findById = catchAsync(async (req, res, next) => {
 exports.update = catchAsync(async (req, res, next) => {
   const id = req.params.id;
   const user = await userService.update(id, req.body);
+  if (!user) {
+    return next(new AppError(`User with ${id} ID could not found`));
+  }
   res.status(200).json({
     status: "success",
     data: {
@@ -54,6 +57,9 @@ exports.update = catchAsync(async (req, res, next) => {
 exports.remove = catchAsync(async (req, res, next) => {
   const id = req.params.id;
   const user = await userService.remove(id);
+  if (!user) {
+    return next(new AppError(`User with ${id} ID could not found`));
+  }
   res.status(200).json({
     status: "success",
     data: {

@@ -1,11 +1,10 @@
-const logger = require("../../../config/logger");
 const AppError = require("../../../utils/appError");
 const catchAsync = require("../../../utils/catchAsync");
 const rssCategoryService = require("./rssCategory.service");
 
 exports.create = catchAsync(async (req, res, next) => {
   const rssCategory = await rssCategoryService.create(req.body);
-  if (!rssCategory || Object.keys(rssCategory).length === 0) {
+  if (!rssCategory) {
     return next(new AppError(`Category could not saved`));
   }
   res.status(200).json({
@@ -14,7 +13,6 @@ exports.create = catchAsync(async (req, res, next) => {
       rssCategory,
     },
   });
-  logger.info(`Category was saved`);
 });
 
 exports.findAll = catchAsync(async (req, res, next) => {
@@ -26,7 +24,6 @@ exports.findAll = catchAsync(async (req, res, next) => {
       rssCategories,
     },
   });
-  logger.info(`${rssCategories.length} rss category was found`);
 });
 
 exports.findById = catchAsync(async (req, res, next) => {
@@ -43,29 +40,32 @@ exports.findById = catchAsync(async (req, res, next) => {
       },
     });
   }
-  logger.info(`${id} was found`);
 });
 
 exports.update = catchAsync(async (req, res, next) => {
   const id = req.params.id;
   const rssCategory = await rssCategoryService.update(id, req.body);
+  if (!rssCategory) {
+    return next(new AppError(`Category with ${id} ID could not found`));
+  }
   res.status(200).json({
     status: "success",
     data: {
       rssCategory,
     },
   });
-  logger.info(`${id} was updated`);
 });
 
 exports.remove = catchAsync(async (req, res, next) => {
   const id = req.params.id;
   const rssCategory = await rssCategoryService.remove(id);
+  if (!rssCategory) {
+    return next(new AppError(`Category with ${id} ID could not found`));
+  }
   res.status(200).json({
     status: "success",
     data: {
       rssCategory,
     },
   });
-  logger.info(`Category with ${id} ID was deleted`);
 });

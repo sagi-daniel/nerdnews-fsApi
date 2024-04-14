@@ -41,22 +41,18 @@ async function parser1(url, category) {
 
 //*Parser for RSS structure
 async function parser2(url, category) {
-  try {
-    const parser = new Parser();
-    const feeds = await parser.parseURL(url);
-    const formattedFeeds = feeds.items.map((item) => ({
-      release: item.pubDate ? item.pubDate : undefined,
-      title: item.title ? item.title : undefined,
-      link: item.link ? item.link : undefined,
-      content: item.content ? item.content : undefined,
-      contentSnippet: item.contentSnippet ? item.contentSnippet : undefined,
-      imageUrl: item.enclosure ? item.enclosure.url : undefined,
-      category,
-    }));
-    return formattedFeeds;
-  } catch (error) {
-    throw new Error(`Fetch error:  ${error}`);
-  }
+  const parser = new Parser();
+  const feeds = await parser.parseURL(url);
+  const formattedFeeds = feeds.items.map((item) => ({
+    release: item.pubDate ? item.pubDate : undefined,
+    title: item.title ? item.title : undefined,
+    link: item.link ? item.link : undefined,
+    content: item.content ? item.content : undefined,
+    contentSnippet: item.contentSnippet ? item.contentSnippet : undefined,
+    imageUrl: item.enclosure ? item.enclosure.url : undefined,
+    category,
+  }));
+  return formattedFeeds;
 }
 
 async function rssParser(url, category, rssSource) {

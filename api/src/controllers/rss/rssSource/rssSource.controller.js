@@ -1,11 +1,10 @@
-const logger = require("../../../config/logger");
 const AppError = require("../../../utils/appError");
 const catchAsync = require("../../../utils/catchAsync");
 const rssSourceService = require("./rssSource.service");
 
 exports.create = catchAsync(async (req, res, next) => {
   const rssSource = await rssSourceService.create(req.body);
-  if (!rssSource || Object.keys(rssSource).length === 0) {
+  if (!rssSource) {
     return next(new AppError(`Source could not saved`));
   }
   res.status(200).json({
@@ -14,7 +13,6 @@ exports.create = catchAsync(async (req, res, next) => {
       rssSource,
     },
   });
-  logger.info(`Source was saved`);
 });
 
 exports.findAll = catchAsync(async (req, res, next) => {
@@ -26,7 +24,6 @@ exports.findAll = catchAsync(async (req, res, next) => {
       rssSources,
     },
   });
-  logger.info(`${rssSources.length} RSS Source were founded`);
 });
 
 exports.findById = catchAsync(async (req, res, next) => {
@@ -42,30 +39,33 @@ exports.findById = catchAsync(async (req, res, next) => {
         rssSource,
       },
     });
-    logger.info(`${id} was found`);
   }
 });
 
 exports.update = catchAsync(async (req, res, next) => {
   const id = req.params.id;
   const rssSource = await rssSourceService.update(id, req.body);
+  if (!rssSource) {
+    return next(new AppError(`Source with ${id} ID could not found`));
+  }
   res.status(200).json({
     status: "success",
     data: {
       rssSource,
     },
   });
-  logger.info(`${id} was updated`);
 });
 
 exports.remove = catchAsync(async (req, res, next) => {
   const id = req.params.id;
   const rssSource = await rssSourceService.remove(id);
+  if (!rssSource) {
+    return next(new AppError(`Source with ${id} ID could not found`));
+  }
   res.status(200).json({
     status: "success",
     data: {
       rssSource,
     },
   });
-  logger.info(`Source with ${id} ID was deleted`);
 });
