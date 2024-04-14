@@ -208,11 +208,12 @@ describe("User Controller Tests", () => {
       status: "success",
       data: {
         user: {
+          id: VALID_ID,
           role: "ADMIN",
-          firstName: "Jane",
+          firstName: "John",
           lastName: "Doe",
           userName: "admin",
-          email: "jane@admin.com",
+          email: "john@admin.com",
           password: "admin123",
           passwordConfirm: "admin123",
           birthDate: "1990-05-27T00:00:00.000+00:00",
