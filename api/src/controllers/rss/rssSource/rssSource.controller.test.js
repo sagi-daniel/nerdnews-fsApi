@@ -44,7 +44,7 @@ describe("Rss Source Controller Tests", () => {
     });
   });
 
-  test("create() with EMPTY Data ", async () => {
+  test("create() with INVALID Data ", async () => {
     const INVALID_DATA = "";
     const request = mockRequest({
       body: INVALID_DATA,
@@ -123,6 +123,34 @@ describe("Rss Source Controller Tests", () => {
     });
   });
 
+  test("update() with INVALID ID", async () => {
+    const INVALID_ID = 0;
+    const VALID_DATA = {
+      sourceName: "SAMPLE RSS SOURCE 6",
+      sourceLink: "https://sample6.com/",
+      category: "6c",
+      comment: "sample comment 6",
+    };
+    const request = mockRequest({
+      body: VALID_DATA,
+      params: {
+        id: INVALID_ID,
+      },
+    });
+
+    await rssSourceController.update(request, response, nextFunction);
+
+    expect(rssSourceService.update).toHaveBeenCalledWith(
+      INVALID_ID,
+      VALID_DATA
+    );
+    expect(rssSourceService.update).toHaveBeenCalledTimes(1);
+    expect(response.json).not.toHaveBeenCalled();
+    expect(nextFunction).toHaveBeenCalledWith(
+      new AppError(`Source with ${INVALID_ID} ID could not found`)
+    );
+  });
+
   test("remove() with VALID ID", async () => {
     const VALID_ID = 1;
     const request = mockRequest({
@@ -147,5 +175,23 @@ describe("Rss Source Controller Tests", () => {
         },
       },
     });
+  });
+
+  test("remove() with INVALID ID", async () => {
+    const INVALID_ID = 0;
+    const request = mockRequest({
+      params: {
+        id: INVALID_ID,
+      },
+    });
+
+    await rssSourceController.remove(request, response, nextFunction);
+
+    expect(rssSourceService.remove).toHaveBeenCalledWith(INVALID_ID);
+    expect(rssSourceService.remove).toHaveBeenCalledTimes(1);
+    expect(response.json).not.toHaveBeenCalled();
+    expect(nextFunction).toHaveBeenCalledWith(
+      new AppError(`Source with ${INVALID_ID} ID could not found`)
+    );
   });
 });

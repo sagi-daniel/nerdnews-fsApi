@@ -45,7 +45,7 @@ describe("UpcomingMovie Controller Tests", () => {
     });
   });
 
-  test("create() with EMPTY Data ", async () => {
+  test("create() with INVALID Data ", async () => {
     const INVALID_DATA = "";
     const request = mockRequest({
       body: INVALID_DATA,
@@ -135,6 +135,35 @@ describe("UpcomingMovie Controller Tests", () => {
     });
   });
 
+  test("update() with INVALID ID", async () => {
+    const INVALID_ID = 0;
+    const VALID_DATA = {
+      tmdb_id: 123456,
+      release: "2024-08-27T00:00:00.000+00:00",
+      title: "Sample Movie 6",
+      overview: "Sample movie overview 6",
+      poster: "https://sample.com/sample6.jpg",
+    };
+    const request = mockRequest({
+      body: VALID_DATA,
+      params: {
+        id: INVALID_ID,
+      },
+    });
+
+    await upcomingMovieController.update(request, response, nextFunction);
+
+    expect(upcomingMovieService.update).toHaveBeenCalledWith(
+      INVALID_ID,
+      VALID_DATA
+    );
+    expect(upcomingMovieService.update).toHaveBeenCalledTimes(1);
+    expect(response.json).not.toHaveBeenCalled();
+    expect(nextFunction).toHaveBeenCalledWith(
+      new AppError(`UpcomingMovie with ${INVALID_ID} ID could not found`)
+    );
+  });
+
   test("remove() with VALID ID", async () => {
     const VALID_ID = 1;
     const request = mockRequest({
@@ -160,5 +189,23 @@ describe("UpcomingMovie Controller Tests", () => {
         },
       },
     });
+  });
+
+  test("remove() with INVALID ID", async () => {
+    const INVALID_ID = 0;
+    const request = mockRequest({
+      params: {
+        id: INVALID_ID,
+      },
+    });
+
+    await upcomingMovieController.remove(request, response, nextFunction);
+
+    expect(upcomingMovieService.remove).toHaveBeenCalledWith(INVALID_ID);
+    expect(upcomingMovieService.remove).toHaveBeenCalledTimes(1);
+    expect(response.json).not.toHaveBeenCalled();
+    expect(nextFunction).toHaveBeenCalledWith(
+      new AppError(`UpcomingMovie with ${INVALID_ID} ID could not found`)
+    );
   });
 });

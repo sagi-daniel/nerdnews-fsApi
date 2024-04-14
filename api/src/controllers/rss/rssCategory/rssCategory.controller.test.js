@@ -42,7 +42,7 @@ describe("Rss Category Controller Tests", () => {
     });
   });
 
-  test("create() with EMPTY Data ", async () => {
+  test("create() with INVALID Data ", async () => {
     const INVALID_DATA = "";
     const request = mockRequest({
       body: INVALID_DATA,
@@ -124,6 +124,31 @@ describe("Rss Category Controller Tests", () => {
     });
   });
 
+  test("update() with INVALID ID", async () => {
+    const INVALID_ID = 0;
+    const VALID_DATA = {
+      categoryName: "CATEGORY15",
+    };
+    const request = mockRequest({
+      body: VALID_DATA,
+      params: {
+        id: INVALID_ID,
+      },
+    });
+
+    await rssCategoryController.update(request, response, nextFunction);
+
+    expect(rssCategoryService.update).toHaveBeenCalledWith(
+      INVALID_ID,
+      VALID_DATA
+    );
+    expect(rssCategoryService.update).toHaveBeenCalledTimes(1);
+    expect(response.json).not.toHaveBeenCalled();
+    expect(nextFunction).toHaveBeenCalledWith(
+      new AppError(`Category with ${INVALID_ID} ID could not found`)
+    );
+  });
+
   test("remove() with VALID ID", async () => {
     const VALID_ID = 1;
     const request = mockRequest({
@@ -145,5 +170,23 @@ describe("Rss Category Controller Tests", () => {
         },
       },
     });
+  });
+
+  test("remove() with INVALID ID", async () => {
+    const INVALID_ID = 0;
+    const request = mockRequest({
+      params: {
+        id: INVALID_ID,
+      },
+    });
+
+    await rssCategoryController.remove(request, response, nextFunction);
+
+    expect(rssCategoryService.remove).toHaveBeenCalledWith(INVALID_ID);
+    expect(rssCategoryService.remove).toHaveBeenCalledTimes(1);
+    expect(response.json).not.toHaveBeenCalled();
+    expect(nextFunction).toHaveBeenCalledWith(
+      new AppError(`Category with ${INVALID_ID} ID could not found`)
+    );
   });
 });
