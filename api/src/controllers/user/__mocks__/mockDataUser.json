@@ -8,7 +8,7 @@
     "email": "john@admin.com",
     "password": "admin123",
     "passwordConfirm": "admin123",
-    "birthDate": "1990-05-27T00:00:00.000+00:00",
+    "birthdate": "1990-05-27T00:00:00.000+00:00",
     "phone": "06236754758",
     "userNews": [
       "660d0796e5991461e9fc51df",
@@ -36,7 +36,7 @@
     "email": "Hermione@user.com",
     "password": "user1234",
     "passwordConfirm": "user1234",
-    "birthDate": "1990-05-27T00:00:00.000+00:00",
+    "birthdate": "1990-05-27T00:00:00.000+00:00",
     "phone": "06236754758",
     "userNews": [
       "660d0796e5991461e9fc51df",
@@ -64,7 +64,7 @@
       "email": "Hermione@user.com",
       "password": "user1234",
       "passwordConfirm": "user1234",
-      "birthDate": "1990-05-27T00:00:00.000+00:00",
+      "birthdate": "1990-05-27T00:00:00.000+00:00",
       "phone": "06236754758",
       "userNews": [
         "660d0796e5991461e9fc51df",
@@ -92,7 +92,7 @@
       "email": "perselp@admin.com",
       "password": "admin123",
       "passwordConfirm": "admin123",
-      "birthDate": "1960-05-27T00:00:00.000+00:00",
+      "birthdate": "1960-05-27T00:00:00.000+00:00",
       "phone": "06236754758",
       "userNews": [
         "660d0796e5991461e9fc51df",
