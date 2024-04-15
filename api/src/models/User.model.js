@@ -14,49 +14,36 @@ const UserSchema = mongoose.Schema(
     },
     userName: {
       type: String,
-      required: true,
+      required: [true, "Please provide a valid username!"],
     },
     email: {
       type: String,
-      required: true,
       unique: true,
       lowercase: true,
+      required: [true, "Please provide your email!"],
       validate: [validator.isEmail, "Please provide a valid email"],
     },
     password: {
       type: String,
-      required: true,
+      required: [true, "Please provide a password!"],
       minlength: 8,
-      select: true,
     },
     passwordConfirm: {
       type: String,
-      required: false,
+      required: [true, "Please confrim your password!"],
       minlength: 8,
-      select: true,
     },
     firstName: {
       type: String,
-      required: true,
+      required: [true, "Please tell us your firstname!"],
     },
     lastName: {
       type: String,
-      required: true,
+      rrequired: [true, "Please tell us your lastname!"],
     },
-    birth: {
-      type: String,
-      required: true,
-    },
-    phone: {
-      type: String,
-      required: true,
-    },
-    userNews: {
-      type: [{ type: Schema.Types.ObjectId, ref: "RssNews" }],
-    },
-    userMovies: {
-      type: [{ type: Schema.Types.ObjectId, ref: "UpcomingMovie" }],
-    },
+    photo: String,
+    userNews: [{ type: Schema.Types.ObjectId, ref: "RssNews" }],
+    userMovies: [{ type: Schema.Types.ObjectId, ref: "UpcomingMovie" }],
   },
   { timestamps: true }
 );
