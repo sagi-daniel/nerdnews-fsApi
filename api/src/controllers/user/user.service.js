@@ -11,4 +11,4 @@ exports.findById = (id) => User.findById(id);
 
 exports.update = (id, user) => User.findByIdAndUpdate(id, user, { new: true });
 
-exports.remove = (id) => User.findByIdAndRemove(id);
+exports.remove = (id) => User.findByIdAndDelete(id);

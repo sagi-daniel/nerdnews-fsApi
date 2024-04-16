@@ -12,4 +12,4 @@ exports.findById = (id) => RssSource.findById(id).populate("category");
 exports.update = (id, rssSource) =>
   RssSource.findByIdAndUpdate(id, rssSource, { new: true });
 
-exports.remove = (id) => RssSource.findByIdAndRemove(id);
+exports.remove = (id) => RssSource.findByIdAndDelete(id);

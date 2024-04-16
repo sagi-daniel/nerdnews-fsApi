@@ -20,4 +20,4 @@ exports.findByMonthRange = (monthRange) =>
 exports.update = (id, rssNews) =>
   RssNews.findByIdAndUpdate(id, rssNews, { new: true });
 
-exports.delete = (id) => RssNews.findByIdAndRemove(id);
+exports.remove = (id) => RssNews.findByIdfindByIdAndDeleteAndRemove(id);

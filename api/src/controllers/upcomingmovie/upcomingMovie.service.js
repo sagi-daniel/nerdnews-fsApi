@@ -12,4 +12,4 @@ exports.findById = (id) => UpcomingMovie.findById(id);
 exports.update = (id, upcomingMovie) =>
   UpcomingMovie.findByIdAndUpdate(id, upcomingMovie, { new: true });
 
-exports.remove = (id) => UpcomingMovie.findByIdAndRemove(id);
+exports.remove = (id) => UpcomingMovie.findByIdAndDelete(id);
