@@ -1,4 +1,5 @@
 const router = require("express").Router();
+const authController = require("../auth/auth.controller");
 const {
   create,
   findAll,
@@ -6,6 +7,9 @@ const {
   update,
   remove,
 } = require("./user.controller");
+
+router.post("/signup", authController.signup);
+router.post("/login", authController.login);
 
 router
   .route("/")
