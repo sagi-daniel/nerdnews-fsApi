@@ -7,6 +7,8 @@ const {
   remove,
 } = require("./rssCategory.controller");
 
+const authController = require("../../auth/auth.controller");
+
 router
   .route("/")
   .get(findAll)
@@ -15,6 +17,6 @@ router
   .route("/:id")
   .get(findById)
   .patch(update)
-  .delete(remove);
+  .delete(authController.protect, authController.restrictTo("USER"), remove);
 
 module.exports = router;
