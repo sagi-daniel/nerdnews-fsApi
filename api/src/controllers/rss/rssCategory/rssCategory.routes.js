@@ -11,12 +11,28 @@ const authController = require("../../auth/auth.controller");
 
 router
   .route("/")
-  .get(findAll)
-  .post(create);
+  .get(
+    authController.protect,
+    authController.restrictTo("user", "admin"),
+    findAll
+  )
+  .post(
+    authController.protect,
+    authController.restrictTo("user", "admin"),
+    create
+  );
 router
   .route("/:id")
-  .get(findById)
+  .get(
+    authController.protect,
+    authController.restrictTo("user", "admin"),
+    findById
+  )
   .patch(update)
-  .delete(authController.protect, authController.restrictTo("USER"), remove);
+  .delete(
+    authController.protect,
+    authController.restrictTo("user", "admin"),
+    remove
+  );
 
 module.exports = router;

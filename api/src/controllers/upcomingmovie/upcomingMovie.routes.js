@@ -1,4 +1,5 @@
 const router = require("express").Router();
+const authController = require("../auth/auth.controller");
 const {
   create,
   findAll,
@@ -10,11 +11,11 @@ const {
 router
   .route("/")
   .get(findAll)
-  .post(create);
+  .post(authController.protect, authController.restrictTo("admin"), create);
 router
   .route("/:id")
   .get(findById)
-  .patch(update)
-  .delete(remove);
+  .patch(authController.protect, authController.restrictTo("admin"), update)
+  .delete(authController.protect, authController.restrictTo("admin"), remove);
 
 module.exports = router;

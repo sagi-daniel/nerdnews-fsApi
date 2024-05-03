@@ -5,9 +5,17 @@ exports.create = (rssNews) => {
   return newRssNews.save();
 };
 
-exports.findAll = () => RssNews.find().populate("category");
+exports.findAll = () =>
+  RssNews.find().populate({
+    path: "category",
+    select: "-__v -createdAt -updatedAt",
+  });
 
-exports.findById = (id) => RssNews.findById(id).populate("category");
+exports.findById = (id) =>
+  RssNews.findById(id).populate({
+    path: "category",
+    select: "-__v -createdAt -updatedAt",
+  });
 
 exports.findByMonthRange = (monthRange) =>
   RssNews.find({
