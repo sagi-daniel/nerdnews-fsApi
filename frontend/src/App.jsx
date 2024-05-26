@@ -3,8 +3,6 @@ import { BrowserRouter, Navigate, Route, Routes } from 'react-router-dom';
 // import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
 // import { Toaster } from 'react-hot-toast';
 
-import GlobalStyles from './styles/GlobalStyles';
-
 import AppLayout from './components/parts/AppLayout';
 import Home from './pages/Home';
 import UpcomingMovies from './pages/UpcomingMovies';
@@ -13,7 +11,7 @@ import PageNotFound from './pages/PageNotFound';
 function App() {
   return (
     <>
-      <GlobalStyles />
+
       <BrowserRouter>
         <Routes>
           <Route
