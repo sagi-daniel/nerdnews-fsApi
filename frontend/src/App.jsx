@@ -7,32 +7,34 @@ import AppLayout from './components/parts/AppLayout';
 import Home from './pages/Home';
 import UpcomingMovies from './pages/UpcomingMovies';
 import PageNotFound from './pages/PageNotFound';
+import { DarkModeProvider } from './context/DarkModeContext';
 
 function App() {
   return (
     <>
-
-      <BrowserRouter>
-        <Routes>
-          <Route
-            element={
-              // <ProtectedRoute>
-              <AppLayout />
-              // </ProtectedRoute>
-            }
-          >
-            <Route index element={<Navigate replace to="Home" />} />
-            <Route path="home" element={<Home />} />
-            <Route path="bookings" element={<UpcomingMovies />} />
-            {/* <Route path="bookings/:bookingId" element={<Booking />} />
+      <DarkModeProvider>
+        <BrowserRouter>
+          <Routes>
+            <Route
+              element={
+                // <ProtectedRoute>
+                <AppLayout />
+                // </ProtectedRoute>
+              }
+            >
+              <Route index element={<Navigate replace to="Home" />} />
+              <Route path="home" element={<Home />} />
+              <Route path="upcomingmovies" element={<UpcomingMovies />} />
+              {/* <Route path="bookings/:bookingId" element={<Booking />} />
             <Route path="checkin/:bookingId" element={<Checkin />} />
             <Route path="account" element={<Account />} /> */}
-          </Route>
+            </Route>
 
-          {/* <Route path="login" element={<Login />} /> */}
-          <Route path="*" element={<PageNotFound />} />
-        </Routes>
-      </BrowserRouter>
+            {/* <Route path="login" element={<Login />} /> */}
+            <Route path="*" element={<PageNotFound />} />
+          </Routes>
+        </BrowserRouter>
+      </DarkModeProvider>
     </>
   );
 }

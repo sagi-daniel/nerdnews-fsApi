@@ -1,3 +1,68 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400;500;700;900&display=swap');
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+:root {
+  /* Brand colors */
+  --color-primary: #cde435;
+  --color-primary-content: #141703;
+  --color-primary-dark: #b4cb1b;
+  --color-primary-light: #d8ea62;
+
+  --color-secondary: #35e4a3;
+  --color-secondary-content: #031710;
+  --color-secondary-dark: #1bcb8a;
+  --color-secondary-light: #62eab7;
+
+  /* Neutral colors */
+  --color-bg-dark: #050505;
+  --color-content-dark: #f4f4f4;
+  --color-border-dark: #333333;
+
+  --color-bg-light: #f4f4f4;
+  --color-content-light: #050505;
+  --color-border-light: #dfdfdf;
+
+  /* Utility colors */
+  --color-success: #35e435;
+  --color-success-content: #031703;
+  --color-warning: #e4e435;
+  --color-warning-content: #171703;
+  --color-error: #e43535;
+  --color-error-content: #ffffff;
+}
+
+@layer utilities {
+  .hover-half-underline::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    width: 1.5rem;
+    height: 0.1rem;
+    background-color: var(--color-primary);
+    transform: scaleX(0);
+    transition: transform 0.3s ease;
+  }
+  .hover-half-underline:hover::after {
+    transform: scaleX(1);
+  }
+  .btn-primary {
+    @apply px-6 py-3 bg-primary text-primary-content  rounded-lg  hover:bg-primary-dark focus:outline-none focus:ring-2 focus:ring-primary-dark focus:ring-opacity-75;
+  }
+  .btn-secondary {
+    @apply px-6 py-3 bg-primary text-secondary-content  rounded-lg  hover:bg-secondary-dark focus:outline-none focus:ring-2 focus:ring-secondary-dark focus:ring-opacity-75;
+  }
+}
+
+body {
+  margin: 0 auto;
+  max-width: 1360px;
+  background: var(--color-bg-light);
+}
+
+.dark body {
+  background: var(--color-bg-dark);
+}
