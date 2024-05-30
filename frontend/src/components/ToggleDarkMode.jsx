@@ -21,7 +21,7 @@ const ToggleDarkMode = () => {
             transform: isDarkMode ? 'translateX(1.25rem)' : 'translateX(0)',
           }}
         >
-          {isDarkMode ? <FiSun className="w-3 h-3" /> : <FiMoon className="w-3 h-3" />}
+          {isDarkMode ? <FiSun className="size-3 " /> : <FiMoon className="size-3 " />}
         </div>
       </div>
     </div>

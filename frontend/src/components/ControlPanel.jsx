@@ -1,6 +1,5 @@
 import ToggleDarkMode from './ToggleDarkMode';
-
-import { FiLogIn } from 'react-icons/fi';
+import LoginIcon from './LoginIcon';
 
 function ControlPanel({ mobile = false }) {
   const mobileStyle = `flex justify-start pt-2`;
@@ -8,7 +7,7 @@ function ControlPanel({ mobile = false }) {
 
   return (
     <div className={`${mobile ? mobileStyle : desktopStyle} gap-5 items-center`}>
-      <FiLogIn className="text-2xl duration-200 cursor-pointer text-content-light hover:text-primary dark:text-content-dark  hover:dark:text-primary " />
+      <LoginIcon />
       <ToggleDarkMode />
     </div>
   );
