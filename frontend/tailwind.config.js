@@ -40,6 +40,9 @@ export default {
         error: 'var(--color-error)',
         'error-content': 'var(--color-error-content)',
       },
+      fontSize: {
+        xxs: '0.7rem',
+      },
     },
   },
   plugins: [],
