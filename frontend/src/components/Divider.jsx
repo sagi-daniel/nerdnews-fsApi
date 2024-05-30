@@ -14,12 +14,12 @@ function Divider({ size = 'full', align = 'left', color = 'primary' }) {
 
   const colorClasses = {
     primary: 'border-primary',
-    neutral: 'border-content-light dark:border-content-dark',
+    neutral: 'border-border-light dark:border-border-dark',
   };
 
   return (
     <div
-      className={`flex  mt-3 mb-0 ${alignmentClasses[align]} ${sizeClasses[size]} border-t ${colorClasses[color]} w-full`}
+      className={`flex mt-3 mb-0 border-y-2 ${alignmentClasses[align]} ${sizeClasses[size]} border-t ${colorClasses[color]} w-full`}
     />
   );
 }

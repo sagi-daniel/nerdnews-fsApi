@@ -3,11 +3,16 @@ import { BrowserRouter, Navigate, Route, Routes } from 'react-router-dom';
 // import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
 // import { Toaster } from 'react-hot-toast';
 
+import { DarkModeProvider } from './context/DarkModeContext';
+
 import AppLayout from './components/parts/AppLayout';
 import Home from './pages/Home';
+import News from './pages/News';
 import UpcomingMovies from './pages/UpcomingMovies';
+import SignUp from './pages/SignUp';
+
 import PageNotFound from './pages/PageNotFound';
-import { DarkModeProvider } from './context/DarkModeContext';
+import Login from './pages/Login';
 
 function App() {
   return (
@@ -24,13 +29,15 @@ function App() {
             >
               <Route index element={<Navigate replace to="Home" />} />
               <Route path="home" element={<Home />} />
-              <Route path="upcomingmovies" element={<UpcomingMovies />} />
+              <Route path="news" element={<News />} />
+              <Route path="movies" element={<UpcomingMovies />} />
+              <Route path="signup" element={<SignUp />} />
+              <Route path="login" element={<Login />} />
               {/* <Route path="bookings/:bookingId" element={<Booking />} />
             <Route path="checkin/:bookingId" element={<Checkin />} />
             <Route path="account" element={<Account />} /> */}
             </Route>
 
-            {/* <Route path="login" element={<Login />} /> */}
             <Route path="*" element={<PageNotFound />} />
           </Routes>
         </BrowserRouter>

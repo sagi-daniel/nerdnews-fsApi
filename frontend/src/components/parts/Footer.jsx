@@ -5,16 +5,16 @@ function Footer() {
   const year = new Date().getFullYear();
 
   return (
-    <>
+    <footer>
       <Divider color="neutral" />
-      <footer className=" flex items-center mb-3 text-content-light dark:text-content-dark">
+      <div className=" mt-2 flex items-center pb-3 text-content-light dark:text-content-dark">
         <div className="w-full flex items-center justify-between">
-          <Logo align="left" size="small" />
+          <Logo align="left" size="xsmall" />
 
-          <p className="text-sm">&copy;{year} geekHUB. All rights reserved.</p>
+          <p className="text-xxs md:text-xs lg:text-sm">&copy;{year} geekHUB. Minden jog fenntartva!</p>
         </div>
-      </footer>
-    </>
+      </div>
+    </footer>
   );
 }
 

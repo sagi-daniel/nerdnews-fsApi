@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import { useDarkMode } from '../context/DarkModeContext';
 
 const Logo = ({ align = 'left', size = 'small' }) => {
@@ -12,6 +13,7 @@ const Logo = ({ align = 'left', size = 'small' }) => {
     right: 'justify-end',
   };
   const sizeClasses = {
+    xsmall: 'w-20',
     small: 'w-40',
     medium: 'w-60',
     large: 'w-80',
@@ -19,7 +21,9 @@ const Logo = ({ align = 'left', size = 'small' }) => {
 
   return (
     <div className={`flex ${alignmentClasses[align]} ${sizeClasses[size]} h-auto`}>
-      <img src={logoSrc} alt="geekHUB logo" />
+      <Link to={'/Home'}>
+        <img src={logoSrc} alt="geekHUB logo" />
+      </Link>
     </div>
   );
 };

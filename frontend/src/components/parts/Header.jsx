@@ -6,8 +6,8 @@ import Divider from '../Divider';
 
 function Header() {
   return (
-    <header className="sticky z-10 bg-bg-light dark:bg-bg-dark top-0 flex flex-col items-center">
-      <div className="w-full flex items-center justify-between text-content-light dark:text-content-dark">
+    <header className="sticky z-10 bg-bg-light dark:bg-bg-dark py-2 top-0 flex flex-col items-center">
+      <div className=" w-full flex items-center justify-between text-content-light dark:text-content-dark">
         <Logo />
         <Navbar />
         <ControlPanel />
