@@ -10,6 +10,7 @@ function Navbar() {
     { name: 'Home', path: '/home', type: 'regular' },
     { name: 'News', path: '/news', type: 'regular' },
     { name: 'Movies', path: '/movies', type: 'regular' },
+    { name: 'IP-Calc', path: '/cidr', type: 'regular' },
     { name: 'Sign up', path: '/signup', type: 'action' },
   ];
 
