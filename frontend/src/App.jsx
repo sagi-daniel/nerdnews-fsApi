@@ -9,10 +9,12 @@ import AppLayout from './components/parts/AppLayout';
 import Home from './pages/Home';
 import News from './pages/News';
 import UpcomingMovies from './pages/UpcomingMovies';
+import IpCidrCalculator from './pages/IpCidrCalculator';
+
 import SignUp from './pages/SignUp';
+import Login from './pages/Login';
 
 import PageNotFound from './pages/PageNotFound';
-import Login from './pages/Login';
 
 function App() {
   return (
@@ -31,6 +33,7 @@ function App() {
               <Route path="home" element={<Home />} />
               <Route path="news" element={<News />} />
               <Route path="movies" element={<UpcomingMovies />} />
+              <Route path="cidr" element={<IpCidrCalculator />} />
               <Route path="signup" element={<SignUp />} />
               <Route path="login" element={<Login />} />
               {/* <Route path="bookings/:bookingId" element={<Booking />} />
