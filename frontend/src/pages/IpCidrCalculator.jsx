@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import calculateCIDR from '../utils/cidrCalc';
-import InputField from '../InputField';
+import InputField from '../components/InputField';
 
 function CidrCalculator() {
   const [ip, setIp] = useState('');
