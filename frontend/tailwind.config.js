@@ -41,7 +41,7 @@ export default {
         'error-content': 'var(--color-error-content)',
       },
       fontSize: {
-        xxs: '0.7rem',
+        xxs: '0.6rem',
       },
     },
   },
