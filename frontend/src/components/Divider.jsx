@@ -19,7 +19,7 @@ function Divider({ size = 'full', align = 'left', color = 'primary' }) {
 
   return (
     <div
-      className={`flex mt-3 mb-0 border-y-2 ${alignmentClasses[align]} ${sizeClasses[size]} border-t ${colorClasses[color]} w-full`}
+      className={`flex mt-3 mb-0 border-y-2 rounded-full ${alignmentClasses[align]} ${sizeClasses[size]} border-t ${colorClasses[color]} w-full`}
     />
   );
 }
