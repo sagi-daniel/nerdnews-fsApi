@@ -1,7 +1,10 @@
+import MovieSlider from '../features/upcomingMovies/MovieSlider';
+
 function UpcomingMovies() {
   return (
-    <div>
-      <h1>UpcomingMovies</h1>
+    <div className="prose">
+      <h2>Mozi premierek:</h2>
+      <MovieSlider />
     </div>
   );
 }
