@@ -12,11 +12,11 @@ export const QUERY_DEFAULT_OPTIONS = {
   },
 };
 export const MENU_ITEMS = [
-  { name: 'Home', path: 'home', type: 'regular', element: 'Home' },
-  { name: 'News', path: 'news', type: 'regular', element: 'News' },
-  { name: 'Movies', path: 'movies', type: 'regular', element: 'UpcomingMovies' },
-  { name: 'IP-Calc', path: 'cidr', type: 'regular', element: 'IpCidrCalculator' },
-  { name: 'Sign up', path: 'signup', type: 'action', element: 'SignUp' },
+  { name: 'Főoldal', path: 'home', type: 'regular', element: 'Home' },
+  { name: 'Hírek', path: 'news', type: 'regular', element: 'News' },
+  { name: 'Filmek', path: 'movies', type: 'regular', element: 'UpcomingMovies' },
+  // { name: 'Egyéb', path: 'cidr', type: 'regular', element: 'IpCidrCalculator' },
+  { name: 'Regisztráció', path: 'signup', type: 'action', element: 'SignUp' },
 ];
 
 //API URL

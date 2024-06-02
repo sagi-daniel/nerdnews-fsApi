@@ -34,14 +34,6 @@
 }
 
 @layer utilities {
-  .container-res {
-    @apply flex flex-col md:flex-row gap-10 justify-center items-center;
-  }
-
-  .column {
-    @apply flex flex-col w-full md:w-1/3;
-  }
-
   .hover-outline-highlight {
     @apply hover:outline hover:outline-border-dark hover:dark:outline-border-light rounded-md;
   }
@@ -69,7 +61,15 @@
   .btn-primary-lg {
     @apply px-12 py-6 bg-primary text-primary-content  rounded-lg  hover:bg-primary-dark focus:outline-none focus:ring-2 focus:ring-primary-dark focus:ring-opacity-75 disabled:bg-border-light disabled:text-gray-400;
   }
-  .btn-secondary {
-    @apply px-6 py-3 bg-secondary text-secondary-content  rounded-lg  hover:bg-secondary-dark focus:outline-none focus:ring-2 focus:ring-secondary-dark focus:ring-opacity-75 disabled:bg-border-light disabled:text-gray-400;
+  .btn-secondary-sm {
+    @apply px-2 py-1 bg-secondary text-secondary-content  rounded-lg  hover:bg-secondary-dark focus:outline-none focus:ring-2 focus:ring-secondary-dark focus:ring-opacity-75 disabled:bg-border-light disabled:text-gray-400;
+  }
+
+  .btn-secondary-md {
+    @apply px-4 py-2 bg-secondary text-secondary-content  rounded-lg  hover:bg-secondary-dark focus:outline-none focus:ring-2 focus:ring-secondary-dark focus:ring-opacity-75 disabled:bg-border-light disabled:text-gray-400;
+  }
+
+  .btn-secondary-lg {
+    @apply px-12 py-6 bg-secondary text-secondary-content  rounded-lg  hover:bg-secondary-dark focus:outline-none focus:ring-2 focus:ring-secondary-dark focus:ring-opacity-75 disabled:bg-border-light disabled:text-gray-400;
   }
 }

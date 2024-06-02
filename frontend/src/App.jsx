@@ -1,7 +1,6 @@
 import { BrowserRouter, Navigate, Route, Routes } from 'react-router-dom';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
-import { Helmet } from 'react-helmet';
 
 // import { Toaster } from 'react-hot-toast';
 
@@ -22,44 +21,39 @@ import PageNotFound from './pages/PageNotFound';
 import PrivacyPolicy from './pages/PrivacyPolicy';
 
 //CONSTANTS
-import { QUERY_DEFAULT_OPTIONS, SITE_NAME } from './utils/constants';
+import { QUERY_DEFAULT_OPTIONS } from './utils/constants';
 
 function App() {
   return (
-    <>
-      <Helmet>
-        <title>{SITE_NAME}</title>
-      </Helmet>
-      <QueryClientProvider client={new QueryClient(QUERY_DEFAULT_OPTIONS)}>
-        <ReactQueryDevtools initialIsOpen={false} />
-        <DarkModeProvider>
-          <BrowserRouter>
-            <Routes>
-              <Route
-                element={
-                  // <ProtectedRoute>
-                  <AppLayout />
-                  // </ProtectedRoute>
-                }
-              >
-                <Route index element={<Navigate replace to="Home" />} />
-                <Route path="home" element={<Home />} />
-                <Route path="news" element={<News />} />
-                <Route path="movies" element={<UpcomingMovies />} />
-                <Route path="cidr" element={<IpCidrCalculator />} />
-                <Route path="signup" element={<SignUp />} />
-                <Route path="login" element={<Login />} />
-                {/* <Route path="bookings/:bookingId" element={<Booking />} />
+    <QueryClientProvider client={new QueryClient(QUERY_DEFAULT_OPTIONS)}>
+      <ReactQueryDevtools initialIsOpen={false} />
+      <DarkModeProvider>
+        <BrowserRouter>
+          <Routes>
+            <Route
+              element={
+                // <ProtectedRoute>
+                <AppLayout />
+                // </ProtectedRoute>
+              }
+            >
+              <Route index element={<Navigate replace to="Home" />} />
+              <Route path="home" element={<Home />} />
+              <Route path="news" element={<News />} />
+              <Route path="movies" element={<UpcomingMovies />} />
+              <Route path="cidr" element={<IpCidrCalculator />} />
+              <Route path="signup" element={<SignUp />} />
+              <Route path="login" element={<Login />} />
+              {/* <Route path="bookings/:bookingId" element={<Booking />} />
             <Route path="checkin/:bookingId" element={<Checkin />} />
             <Route path="account" element={<Account />} /> */}
-                <Route path="privacy-policy" element={<PrivacyPolicy />} />
-                <Route path="*" element={<PageNotFound />} />
-              </Route>
-            </Routes>
-          </BrowserRouter>
-        </DarkModeProvider>
-      </QueryClientProvider>
-    </>
+              <Route path="privacy-policy" element={<PrivacyPolicy />} />
+              <Route path="*" element={<PageNotFound />} />
+            </Route>
+          </Routes>
+        </BrowserRouter>
+      </DarkModeProvider>
+    </QueryClientProvider>
   );
 }
 

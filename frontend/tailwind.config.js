@@ -40,6 +40,9 @@ export default {
         error: 'var(--color-error)',
         'error-content': 'var(--color-error-content)',
       },
+      backgroundImage: {
+        hero: "url('/assets/images/hero.jpg')",
+      },
       fontSize: {
         xxs: '0.6rem',
       },
