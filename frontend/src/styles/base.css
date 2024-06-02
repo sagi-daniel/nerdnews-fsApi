@@ -13,7 +13,7 @@
 
 body {
   margin: 0 auto;
-  padding: 0 5px;
+  padding: 0;
   max-width: 1360px;
   min-width: 350px;
   background: var(--color-bg-light);

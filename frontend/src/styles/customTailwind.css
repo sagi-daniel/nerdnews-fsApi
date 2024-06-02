@@ -1,14 +1,14 @@
 @layer base {
   h1 {
-    @apply text-4xl;
+    @apply text-4xl mb-4;
     line-height: 1.3;
   }
   h2 {
-    @apply text-3xl;
+    @apply text-3xl mb-2;
     line-height: 1.3;
   }
   h3 {
-    @apply text-2xl;
+    @apply text-2xl mb-1;
     line-height: 1.3;
   }
   h4 {
@@ -34,6 +34,18 @@
 }
 
 @layer utilities {
+  .container-res {
+    @apply flex flex-col md:flex-row gap-10 justify-center items-center;
+  }
+
+  .column {
+    @apply flex flex-col w-full md:w-1/3;
+  }
+
+  .hover-outline-highlight {
+    @apply hover:outline hover:outline-border-dark hover:dark:outline-border-light rounded-md;
+  }
+
   .hover-half-underline::after {
     content: '';
     position: absolute;

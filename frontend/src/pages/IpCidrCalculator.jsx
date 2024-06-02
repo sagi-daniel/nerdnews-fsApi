@@ -34,9 +34,9 @@ function CidrCalculator() {
   };
 
   return (
-    <div className="flex flex-col md:flex-row gap-10 justify-center items-center">
-      <div className="flex flex-col w-full md:w-1/3">
-        <h1 className="text-2xl mb-4">CIDR IP Kalkulátor</h1>
+    <div className="container-res">
+      <div className="column">
+        <h1 className="">CIDR IP Kalkulátor</h1>
         <InputField
           type="text"
           id={'ip'}
@@ -63,26 +63,28 @@ function CidrCalculator() {
           Számol
         </button>
       </div>
-      {result && (
-        <div className="flex flex-col w-full md:w-1/3 border border-bg-border-dark dark:border-bg-light p-4 rounded-md mt-4 md:mt-0">
-          <h2 className="text-lg font-bold mb-2">Eredmény:</h2>
-          <p>
-            <span className="font-bold">Network:</span> {result.network}
-          </p>
-          <p>
-            <span className="font-bold">Broadcast:</span> {result.broadcast}
-          </p>
-          <p>
-            <span className="font-bold">First Host:</span> {result.firstHost}
-          </p>
-          <p>
-            <span className="font-bold">Last Host:</span> {result.lastHost}
-          </p>
-          <p>
-            <span className="font-bold">Next Subnet:</span> {result.nextSubnet}
-          </p>
-        </div>
-      )}
+      <div className="column">
+        {result && (
+          <div className="border border-bg-border-dark dark:border-bg-light p-4 rounded-md mt-4 md:mt-0">
+            <h2 className="text-lg font-bold mb-2">Eredmény:</h2>
+            <p>
+              <span className="font-bold">Network:</span> {result.network}
+            </p>
+            <p>
+              <span className="font-bold">Broadcast:</span> {result.broadcast}
+            </p>
+            <p>
+              <span className="font-bold">First Host:</span> {result.firstHost}
+            </p>
+            <p>
+              <span className="font-bold">Last Host:</span> {result.lastHost}
+            </p>
+            <p>
+              <span className="font-bold">Next Subnet:</span> {result.nextSubnet}
+            </p>
+          </div>
+        )}
+      </div>
     </div>
   );
 }

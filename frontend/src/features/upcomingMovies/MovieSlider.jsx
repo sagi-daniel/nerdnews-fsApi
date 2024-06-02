@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { useQuery } from '@tanstack/react-query';
 import getMovies from '../../services/apiUpcomingMovies';
 import LoadingSpinner from '../../components/LoadingSpinner';
