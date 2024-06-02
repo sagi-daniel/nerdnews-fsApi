@@ -1,5 +1,5 @@
-//BRAND META
-export const SITE_NAME = 'Portfolio page';
+//SITE META
+export const SITE_NAME = 'Portfolio';
 export const SITE_DESCRIPTION = 'Ez egy portfolio oldal';
 export const CURRENT_YEAR = new Date().getFullYear();
 
@@ -19,5 +19,5 @@ export const MENU_ITEMS = [
   { name: 'Sign up', path: 'signup', type: 'action', element: 'SignUp' },
 ];
 
-//API CALLS
+//API URL
 export const BASE_URL = 'http://localhost:8000';
