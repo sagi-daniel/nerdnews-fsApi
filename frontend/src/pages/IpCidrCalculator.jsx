@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import calculateCIDR from '../utils/cidrCalc';
 import InputField from '../components/InputField';
+import Section from '../components/Section';
 
 function CidrCalculator() {
   const [ip, setIp] = useState('');
@@ -34,8 +35,8 @@ function CidrCalculator() {
   };
 
   return (
-    <div className="container-res">
-      <div className="column">
+    <Section type="horizontal">
+      <div className="flex flex-col md:w-1/2 justify-center ">
         <h1 className="">CIDR IP Kalkulátor</h1>
         <InputField
           type="text"
@@ -59,11 +60,14 @@ function CidrCalculator() {
           errorMessage="Kérem, adjon meg egy érvényes prefixet (0-32)."
           successMessage="Érvényes prefix"
         />
-        <button onClick={handleCalculate} disabled={!ipValid || !prefixValid} className="btn-primary-md ">
-          Számol
-        </button>
+        <div>
+          <button onClick={handleCalculate} disabled={!ipValid || !prefixValid} className="btn-primary-md ">
+            Számol
+          </button>
+        </div>
       </div>
-      <div className="column">
+
+      <div className="flex flex-col md:w-1/2 justify-center">
         {result && (
           <div className="border border-bg-border-dark dark:border-bg-light p-4 rounded-md mt-4 md:mt-0">
             <h2 className="text-lg font-bold mb-2">Eredmény:</h2>
@@ -85,7 +89,7 @@ function CidrCalculator() {
           </div>
         )}
       </div>
-    </div>
+    </Section>
   );
 }
 

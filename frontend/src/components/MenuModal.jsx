@@ -7,7 +7,7 @@ const MenuModal = ({ menuItems, isModalOpen, toggleModal }) => {
   return (
     <div
       className={`fixed inset-0 bg-black bg-opacity-50 z-50 ${
-        isModalOpen ? 'opacity-100' : 'opacity-0'
+        isModalOpen ? 'pointer-events-auto opacity-100' : 'pointer-events-none opacity-0'
       } transition-opacity duration-300 ease-in-out`}
       onClick={toggleModal}
     >

@@ -1,18 +1,24 @@
 function NewsCard({ news }) {
-  const truncatedSnippet =
-    news.contentSnippet.length > 50 ? `${news.contentSnippet.substring(0, 50)}...` : news.contentSnippet;
+  const { imageUrl, category, title, contentSnippet } = news;
+
+  // Function to truncate the description to 20 characters
+  const truncateDescription = (text) => {
+    if (text.length <= 40) {
+      return text;
+    }
+    return text.slice(0, 40) + '...';
+  };
 
   return (
-    <div className="max-w-md mx-auto bg-white shadow-md rounded-lg overflow-hidden h-96">
-      <img className="w-full h-48 object-cover object-center" src={news.imageUrl} alt={news.title} />
-      <div className="p-6">
-        <h3 className="font-bold text-gray-800 mb-2">{news.title}</h3>
-        <p className="text-gray-700 text-base">{truncatedSnippet}</p>
-        <div className="mt-4">
-          <a href={news.link} className="text-indigo-500 hover:text-indigo-600 font-semibold text-sm">
-            Read more
-          </a>
-        </div>
+    <div className="flex flex-col justify-between max-w-sm  outline outline-border-light dark:outline-border-dark bg-border-dark dark:bg-bg-light text-content-dark dark:text-content-light rounded-md h-full">
+      <div className="">
+        <img src={imageUrl} alt={title} className="w-full h-48 object-cover mb-4" />
+        <small className="px-1">{category.categoryName}</small>
+        <h3 className="px-1 text-lg font-bold mt-1">{title}</h3>
+        <p className=" px-1 mt-2">{truncateDescription(contentSnippet)}</p>
+      </div>
+      <div className="p-3 flex items-end justify-start mt-4">
+        <img src="./assets/logo/logo-light.svg" alt="Source Logo" className="w-10 h-10 rounded-full" />
       </div>
     </div>
   );

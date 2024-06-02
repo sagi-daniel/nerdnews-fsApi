@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { useQuery } from '@tanstack/react-query';
-import getMovies from '../../services/apiUpcomingMovies';
+import { getMovies } from '../../services/apiUpcomingMovies';
 import LoadingSpinner from '../../components/LoadingSpinner';
 import Error from '../../components/Error';
 import MovieModal from './MovieModal';
