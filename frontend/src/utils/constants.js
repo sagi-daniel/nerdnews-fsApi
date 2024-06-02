@@ -1,5 +1,5 @@
 //BRAND META
-export const SITE_NAME = 'geekHUB';
+export const SITE_NAME = 'Portfolio page';
 export const SITE_DESCRIPTION = 'Ez egy portfolio oldal';
 export const CURRENT_YEAR = new Date().getFullYear();
 

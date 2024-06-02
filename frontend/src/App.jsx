@@ -47,9 +47,8 @@ function App() {
                 {/* <Route path="bookings/:bookingId" element={<Booking />} />
             <Route path="checkin/:bookingId" element={<Checkin />} />
             <Route path="account" element={<Account />} /> */}
+                <Route path="*" element={<PageNotFound />} />
               </Route>
-
-              <Route path="*" element={<PageNotFound />} />
             </Routes>
           </BrowserRouter>
         </DarkModeProvider>
