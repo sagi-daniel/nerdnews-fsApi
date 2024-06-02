@@ -6,13 +6,15 @@ import ControlPanel from './ControlPanel';
 const MenuModal = ({ menuItems, isModalOpen, toggleModal }) => {
   return (
     <div
-      className={`fixed inset-0 bg-black bg-opacity-50 z-50 transform ${
-        isModalOpen ? 'translate-x-0' : '-translate-x-full'
-      } transition-transform duration-300 ease-in-out`}
+      className={`fixed inset-0 bg-black bg-opacity-50 z-50 ${
+        isModalOpen ? 'opacity-100' : 'opacity-0'
+      } transition-opacity duration-300 ease-in-out`}
       onClick={toggleModal}
     >
       <div
-        className="bg-border-light dark:bg-border-dark p-5 rounded-r-lg shadow-lg w-1/2 h-full max-w-md"
+        className={`bg-border-light dark:bg-border-dark p-5 rounded-r-lg shadow-lg w-1/2 h-full max-w-md fixed left-0 top-0 transform ${
+          isModalOpen ? 'translate-x-0' : '-translate-x-full'
+        } transition-transform duration-300 ease-in-out`}
         onClick={(e) => e.stopPropagation()}
       >
         <div className="flex justify-end mb-4">
