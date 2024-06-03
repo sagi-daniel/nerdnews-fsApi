@@ -16,7 +16,7 @@ export const MENU_ITEMS = [
   { name: 'Hírek', path: 'news', type: 'regular', element: 'News' },
   { name: 'Filmek', path: 'movies', type: 'regular', element: 'UpcomingMovies' },
   // { name: 'Egyéb', path: 'cidr', type: 'regular', element: 'IpCidrCalculator' },
-  { name: 'Regisztráció', path: 'signup', type: 'action', element: 'SignUp' },
+  // { name: 'Regisztráció', path: 'signup', type: 'action', element: 'SignUp' },
 ];
 
 //API URL
