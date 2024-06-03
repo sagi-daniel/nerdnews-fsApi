@@ -11,7 +11,7 @@ const PrivacyPolicy = () => {
           <strong>Az adatkezelő neve:</strong> Sági Dániel
         </p>
         <p>
-          <strong>Székhely címe:</strong> 8991, Teskánd Vorhotai utca 9/C
+          <strong>Székhely címe:</strong> 1108, Budapest Hang utca 8.
         </p>
         <p>
           <strong>Kapcsolattartási e-mail címe:</strong> dsagi727@gmail.com
@@ -50,7 +50,14 @@ const PrivacyPolicy = () => {
 
       <section className="mb-6">
         <h2 className="text-xl font-semibold">5. Adattovábbítás</h2>
-        <p>Az adatkezelő nem továbbít személyes adatokat harmadik félnek.</p>
+        <p>Az adatkezelő az alábbi esetekben továbbít személyes adatokat harmadik félnek:</p>
+        <ul className="list-disc list-inside ml-4">
+          <li>
+            <strong>MongoDB Atlas:</strong> Az adatokat a MongoDB Atlas felhőalapú adatbázis szolgáltatásában tároljuk,
+            amely magas szintű adatbiztonsági intézkedéseket alkalmaz, mint például adat titkosítás és
+            hozzáférés-ellenőrzés.
+          </li>
+        </ul>
       </section>
 
       <section className="mb-6">
@@ -59,6 +66,7 @@ const PrivacyPolicy = () => {
         <ul className="list-disc list-inside ml-4">
           <li>Titkosítás</li>
           <li>Jelszóvédelem</li>
+          <li>Hozzáférés-ellenőrzés</li>
         </ul>
       </section>
 
