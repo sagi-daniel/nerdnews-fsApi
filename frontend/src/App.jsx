@@ -16,6 +16,7 @@ import IpCidrCalculator from './pages/IpCidrCalculator';
 
 import SignUp from './pages/SignUp';
 import Login from './pages/Login';
+import MyAccount from './pages/MyAccount';
 
 import PageNotFound from './pages/PageNotFound';
 import PrivacyPolicy from './pages/PrivacyPolicy';
@@ -44,6 +45,7 @@ function App() {
               <Route path="cidr" element={<IpCidrCalculator />} />
               <Route path="signup" element={<SignUp />} />
               <Route path="login" element={<Login />} />
+              <Route path="myAccount" element={<MyAccount />} />
               {/* <Route path="bookings/:bookingId" element={<Booking />} />
             <Route path="checkin/:bookingId" element={<Checkin />} />
             <Route path="account" element={<Account />} /> */}
