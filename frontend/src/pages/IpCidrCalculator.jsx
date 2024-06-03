@@ -2,40 +2,36 @@ import { useState } from 'react';
 import calculateCIDR from '../utils/cidrCalc';
 import InputField from '../components/InputField';
 import Section from '../components/Section';
+import { validateIpAddress, validatePrefix } from '../utils/validators';
+import { useLocaleStorageState } from '../hooks/useLocaleStorageState';
+import { FiRefreshCcw } from 'react-icons/fi';
 
 function CidrCalculator() {
-  const [ip, setIp] = useState('');
-  const [prefix, setPrefix] = useState('');
-  const [result, setResult] = useState(null);
+  const [ip, setIp] = useLocaleStorageState('', 'ip-input');
+  const [prefix, setPrefix] = useLocaleStorageState('', 'prefix-input');
+  const [result, setResult] = useLocaleStorageState(null, 'cidr');
 
   const [ipValid, setIpValid] = useState('');
   const [prefixValid, setPrefixValid] = useState('');
 
-  const validateIpAddress = (ip) => {
-    // Regex az IP cím ellenőrzésére
-    const ipRegex =
-      /\b(?:25[0-5]|2[0-4][0-9]|[01]?\d{1,2})\.(?:25[0-5]|2[0-4][0-9]|[01]?\d{1,2})\.(?:25[0-5]|2[0-4][0-9]|[01]?\d{1,2})\.(?:25[0-5]|2[0-4][0-9]|[01]?\d{1,2})\b/;
-    return ipRegex.test(ip);
-  };
-
-  const validatePrefix = (prefix) => {
-    // A prefix csak 0 és 32 közötti szám lehet
-    const prefixNum = parseInt(prefix);
-    return !isNaN(prefixNum) && prefixNum >= 0 && prefixNum <= 32;
-  };
-
   const handleCalculate = () => {
     if (!ip || !prefix || !validateIpAddress(ip) || !validatePrefix(prefix)) {
       setResult(null);
+
       return;
     }
-
     const cidrResult = calculateCIDR(ip, prefix);
     setResult(cidrResult);
   };
 
+  const handleCloseResult = () => {
+    setResult(null);
+    setIp('');
+    setPrefix('');
+  };
+
   return (
-    <Section type="horizontal">
+    <Section type="horizontal" space="large">
       <div className="flex flex-col md:w-1/2 justify-center ">
         <h1 className="">CIDR IP Kalkulátor</h1>
         <InputField
@@ -69,7 +65,14 @@ function CidrCalculator() {
 
       <div className="flex flex-col md:w-1/2 justify-center">
         {result && (
-          <div className="border border-bg-border-dark dark:border-bg-light p-4 rounded-md mt-4 md:mt-0">
+          <div className=" relative bg-primary text-primary-content border border-bg-border-dark dark:border-bg-light p-4 rounded-md mt-4 md:mt-0">
+            <div
+              onClick={handleCloseResult}
+              className="absolute flex justify-center items-center gap-2 right-2 top-2 cursor-pointer"
+            >
+              Újra
+              <FiRefreshCcw />
+            </div>
             <h2 className="text-lg font-bold mb-2">Eredmény:</h2>
             <p>
               <span className="font-bold">Network:</span> {result.network}
