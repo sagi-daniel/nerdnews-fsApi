@@ -11,14 +11,14 @@ function Home() {
           <div>
             <h1 className="text-4xl font-bold text-center md:text-left ">Üdvözlünk a weboldalon!</h1>
             <p className=" pb-6 text-center md:text-left ">
-              Itt mindig naprakész információkat találsz a legújabb tech hírekről és a közelgő mozifilmekről.
-              <br /> Ne maradj le semmiről, regisztrálj most, hogy élvezhesd az összes funkciót!
+              Itt naprakész infókat találsz a legújabb tech hírekről és a közelgő mozifilmekről.
+              <br /> Ne maradj le semmiről, regisztrálj!
             </p>
           </div>
 
           <div className="text-center md:text-left">
-            <Link to="/login" className="btn-primary-md">
-              Bejelentkezés
+            <Link to="/singup" className="btn-primary-md">
+              Regisztráció
             </Link>
           </div>
         </div>
@@ -28,11 +28,13 @@ function Home() {
           </div>
         </div>
       </Section>
-      {/* <Section>
-        <NewsGrid />
-      </Section> */}
+
       <Section type="vertical">
         <h2>Közelgő Mozifilmek</h2>
+        <MovieSlider />
+      </Section>
+      <Section type="vertical">
+        <h2>Legújabb Hírek</h2>
         <MovieSlider />
       </Section>
     </>
