@@ -54,7 +54,7 @@ function Slider({ items }) {
         <div className="slider-fill bg-primary" style={{ width: `${scrollPercentage}%` }}></div>
       </div>
       {scrollPercentage > 0 && <SliderButton direction="left" onClick={handleLeftClick} />}
-      {scrollPercentage < 99 && <SliderButton direction="right" onClick={handleRightClick} />}
+      {scrollPercentage < 100 && <SliderButton direction="right" onClick={handleRightClick} />}
     </div>
   );
 }
