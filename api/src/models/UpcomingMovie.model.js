@@ -1,5 +1,5 @@
-const mongoose = require("mongoose");
-const validator = require("validator");
+const mongoose = require('mongoose');
+const validator = require('validator');
 
 const UpcomingMovieSchema = mongoose.Schema(
   {
@@ -25,8 +25,11 @@ const UpcomingMovieSchema = mongoose.Schema(
       required: true,
       unique: true,
     },
+    vote: {
+      type: {},
+    },
   },
   { timestamps: true }
 );
 
-module.exports = mongoose.model("UpcomingMovie", UpcomingMovieSchema);
+module.exports = mongoose.model('UpcomingMovie', UpcomingMovieSchema);

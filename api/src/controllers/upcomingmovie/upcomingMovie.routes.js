@@ -1,21 +1,16 @@
-const router = require("express").Router();
-const authController = require("../auth/auth.controller");
-const {
-  create,
-  findAll,
-  findById,
-  update,
-  remove,
-} = require("./upcomingMovie.controller");
+const router = require('express').Router();
+const authController = require('../auth/auth.controller');
+const { create, findAll, findById, findByDateRange, update, remove } = require('./upcomingMovie.controller');
 
 router
-  .route("/")
+  .route('/')
   .get(findAll)
-  .post(authController.protect, authController.restrictTo("admin"), create);
+  .get(findByDateRange)
+  .post(authController.protect, authController.restrictTo('admin'), create);
 router
-  .route("/:id")
+  .route('/:id')
   .get(findById)
-  .patch(authController.protect, authController.restrictTo("admin"), update)
-  .delete(authController.protect, authController.restrictTo("admin"), remove);
+  .patch(authController.protect, authController.restrictTo('admin'), update)
+  .delete(authController.protect, authController.restrictTo('admin'), remove);
 
 module.exports = router;
