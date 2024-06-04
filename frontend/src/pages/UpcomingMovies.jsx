@@ -1,11 +1,12 @@
+import Section from '../components/Section';
 import MovieSlider from '../features/upcomingMovies/MovieSlider';
 
 function UpcomingMovies() {
   return (
-    <div className="prose">
+    <Section type="vertical">
       <h2>Mozi premierek:</h2>
       <MovieSlider />
-    </div>
+    </Section>
   );
 }
 
