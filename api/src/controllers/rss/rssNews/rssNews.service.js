@@ -1,20 +1,23 @@
-const RssNews = require("../../../models/rss/RssNews.model");
+const RssNews = require('../../../models/rss/RssNews.model');
 
 exports.create = (rssNews) => {
   const newRssNews = new RssNews(rssNews);
   return newRssNews.save();
 };
 
-exports.findAll = () =>
-  RssNews.find().populate({
-    path: "category",
-    select: "-__v -createdAt -updatedAt",
-  });
+exports.findAll = (sort, limit) =>
+  RssNews.find()
+    .populate({
+      path: 'category',
+      select: '-__v -createdAt -updatedAt',
+    })
+    .sort({ release: sort })
+    .limit(limit);
 
 exports.findById = (id) =>
   RssNews.findById(id).populate({
-    path: "category",
-    select: "-__v -createdAt -updatedAt",
+    path: 'category',
+    select: '-__v -createdAt -updatedAt',
   });
 
 exports.findByMonthRange = (monthRange) =>
@@ -25,7 +28,6 @@ exports.findByMonthRange = (monthRange) =>
     },
   });
 
-exports.update = (id, rssNews) =>
-  RssNews.findByIdAndUpdate(id, rssNews, { new: true });
+exports.update = (id, rssNews) => RssNews.findByIdAndUpdate(id, rssNews, { new: true });
 
 exports.remove = (id) => RssNews.findByIdfindByIdAndDeleteAndRemove(id);
