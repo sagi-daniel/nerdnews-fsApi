@@ -5,7 +5,7 @@ import { FiPlus } from 'react-icons/fi';
 function NewsCard({ news }) {
   return (
     <div className="flex-[0_0_40%] sm:flex-[0_0_25%] lg:flex-[0_0_15%]">
-      <div className="relative flex flex-col justify-between max-w-sm bg-border-dark text-content-dark h-full w-72 rounded-md">
+      <div className="relative flex flex-col justify-between max-w-sm bg-border-dark text-content-dark h-full w-80 rounded-md">
         <div className="flex flex-col justify-evenly">
           <img src={news.imageUrl} alt={news.title} className="h-48 object-cover  rounded-t-md" />
 
@@ -15,8 +15,8 @@ function NewsCard({ news }) {
               {news.category.categoryName}
             </span>
 
-            <h3 className="text-lg font-bold mt-1">{truncateText(news.title, 50)}</h3>
-            <p className=" mt-2">{truncateText(news.contentSnippet, 50)}</p>
+            <h3 className="text-lg font-bold mt-1">{truncateText(news.title, 80)}</h3>
+            <p className=" mt-2">{truncateText(news.contentSnippet, 100)}</p>
           </div>
         </div>
 
