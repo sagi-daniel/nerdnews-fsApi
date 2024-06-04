@@ -32,8 +32,6 @@ exports.findByDateRange = catchAsync(async (req, res, next) => {
   const limit = req.query.limit || 20;
   const sort = req.query.sort || -1;
 
-  console.log(fromDate, toDate, sort, limit);
-
   const movies = await upcomingMovieService.findByDateRange(fromDate, toDate, sort, limit);
   res.status(200).json({
     satus: 'success',
