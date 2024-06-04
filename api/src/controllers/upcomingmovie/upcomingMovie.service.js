@@ -7,13 +7,15 @@ exports.create = (upcomingMovie) => {
 
 exports.findAll = () => UpcomingMovie.find();
 
-exports.findByDateRange = (fromDate, toDate) =>
+exports.findByDateRange = (fromDate, toDate, sort, limit) =>
   UpcomingMovie.find({
     release: {
       $lte: toDate,
       $gte: fromDate,
     },
-  });
+  })
+    .sort({ release: sort })
+    .limit(limit);
 
 exports.findById = (id) => UpcomingMovie.findById(id);
 

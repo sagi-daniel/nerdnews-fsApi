@@ -27,10 +27,14 @@ exports.findAll = catchAsync(async (req, res, next) => {
 });
 
 exports.findByDateRange = catchAsync(async (req, res, next) => {
-  const fromDate = req.query.fromDate;
-  const toDate = req.query.toDate;
+  const fromDate = req.query.fromDate || new Date(new Date()).setMonth(new Date(new Date()).getMonth() - 2);
+  const toDate = req.query.toDate || new Date(new Date()).setMonth(new Date(new Date()).getMonth() + 2);
+  const limit = req.query.limit || 20;
+  const sort = req.query.sort || -1;
 
-  const movies = await upcomingMovieService.findByMonthRange(fromDate, toDate);
+  console.log(fromDate, toDate, sort, limit);
+
+  const movies = await upcomingMovieService.findByDateRange(fromDate, toDate, sort, limit);
   res.status(200).json({
     satus: 'success',
     results: movies.length,
