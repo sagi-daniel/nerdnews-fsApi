@@ -1,7 +1,8 @@
 import { useRef, useState } from 'react';
 import SliderButton from './SliderButton';
+import { Link } from 'react-router-dom';
 
-function Slider({ children }) {
+function Slider({ children, moreLabel, morePath }) {
   const sliderRef = useRef(null);
   const [scrollPercentage, setScrollPercentage] = useState(0);
 
@@ -28,6 +29,9 @@ function Slider({ children }) {
       </div>
       {scrollPercentage > 0 && <SliderButton direction="left" sliderRef={sliderRef} />}
       {scrollPercentage < 99 && <SliderButton direction="right" sliderRef={sliderRef} />}
+      <div className="flex justify-end hover:dark:text-primary">
+        <Link to={morePath}>{moreLabel}</Link>
+      </div>
     </div>
   );
 }

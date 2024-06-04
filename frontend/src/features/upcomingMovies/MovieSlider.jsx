@@ -42,7 +42,7 @@ function MovieSlider() {
         />
       )}
 
-      <Slider>
+      <Slider moreLabel={'Még több mozifilm...'} morePath={'/movies'}>
         {data.data.movies.map((movie, index) => (
           <MovieCard key={index} movie={movie} onClick={handlePosterClick} />
         ))}
