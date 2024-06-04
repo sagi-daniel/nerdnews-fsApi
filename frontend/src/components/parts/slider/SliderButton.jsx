@@ -1,7 +1,7 @@
 import React from 'react';
 import { FiChevronLeft, FiChevronRight } from 'react-icons/fi';
 
-function SliderButton({ direction, onClick, sliderRef }) {
+function SliderButton({ direction, sliderRef }) {
   const directionStyle = {
     left: 'left-0',
     right: 'right-0',
