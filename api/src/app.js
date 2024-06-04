@@ -26,7 +26,7 @@ if (process.env.NODE_ENV === 'development') {
   app.use(morgan('dev'));
 }
 
-//! turn off
+//! turned off
 //Limit request from same API
 // app.use(
 //   rateLimit({
