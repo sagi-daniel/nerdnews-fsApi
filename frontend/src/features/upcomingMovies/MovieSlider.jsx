@@ -41,11 +41,12 @@ function MovieSlider() {
           overview={selectedMovie.overview}
         />
       )}
-      <Slider
-        items={data.data.movies.map((movie, index) => (
+
+      <Slider>
+        {data.data.movies.map((movie, index) => (
           <MovieCard key={index} movie={movie} onClick={handlePosterClick} />
         ))}
-      />
+      </Slider>
     </>
   );
 }

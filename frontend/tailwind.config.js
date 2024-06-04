@@ -48,5 +48,16 @@ export default {
       },
     },
   },
-  plugins: [],
+  plugins: [
+    function ({ addUtilities }) {
+      addUtilities({
+        '.scrollbar-hide': {
+          'scrollbar-width': 'none' /* Firefox */,
+          '&::-webkit-scrollbar': {
+            display: 'none' /* Safari and Chrome */,
+          },
+        },
+      });
+    },
+  ],
 };

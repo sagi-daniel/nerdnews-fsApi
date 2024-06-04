@@ -1,7 +1,7 @@
-import { useRef, useState, useEffect } from 'react';
+import { useRef, useState } from 'react';
 import SliderButton from './SliderButton';
 
-function Slider({ items }) {
+function Slider({ children }) {
   const sliderRef = useRef(null);
   const [scrollPercentage, setScrollPercentage] = useState(0);
 
@@ -14,47 +14,20 @@ function Slider({ items }) {
     }
   };
 
-  useEffect(() => {
-    const slider = sliderRef.current;
-    if (slider) {
-      slider.addEventListener('scroll', handleScroll);
-      handleScroll(); // Initial call to set the initial state
-    }
-    return () => {
-      if (slider) {
-        slider.removeEventListener('scroll', handleScroll);
-      }
-    };
-  }, []);
-
-  const handleLeftClick = () => {
-    sliderRef.current.scrollBy({
-      left: -sliderRef.current.clientWidth,
-      behavior: 'smooth',
-    });
-  };
-
-  const handleRightClick = () => {
-    sliderRef.current.scrollBy({
-      left: sliderRef.current.clientWidth,
-      behavior: 'smooth',
-    });
-  };
-
   return (
-    <div className="relative">
-      <div ref={sliderRef} className="movie-slider" onScroll={handleScroll}>
-        {items.map((item, index) => (
-          <div key={index} className="movie-card flex-shrink-0">
-            {item}
-          </div>
-        ))}
+    <div className="relative overflow-hidden scroll-smooth">
+      <div ref={sliderRef} className="flex gap-2 overflow-x-scroll scrollbar-hide" onScroll={handleScroll}>
+        {children}
       </div>
-      <div className="slider bg-border-light dark:bg-border-dark ">
-        <div className="slider-fill bg-primary" style={{ width: `${scrollPercentage}%` }}></div>
+
+      <div className="relative h-1.5 my-5 rounded-full bg-border-light dark:bg-border-dark">
+        <div
+          className="absolute top-0 left-0 h-full rounded-full bg-border-dark dark:bg-primary"
+          style={{ width: `${scrollPercentage}%` }}
+        ></div>
       </div>
-      {scrollPercentage > 0 && <SliderButton direction="left" onClick={handleLeftClick} />}
-      {scrollPercentage < 100 && <SliderButton direction="right" onClick={handleRightClick} />}
+      {scrollPercentage > 0 && <SliderButton direction="left" sliderRef={sliderRef} />}
+      {scrollPercentage < 99 && <SliderButton direction="right" sliderRef={sliderRef} />}
     </div>
   );
 }
