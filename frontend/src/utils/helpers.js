@@ -26,3 +26,22 @@ export const getToday = function (options = {}) {
 
 export const formatCurrency = (value) =>
   new Intl.NumberFormat('en', { style: 'currency', currency: 'USD' }).format(value);
+
+// ISO date string to YYYY.mm.dd
+export const formatDateIsoToNormal = (isoDate) => {
+  const date = new Date(isoDate);
+
+  const year = date.getFullYear();
+  const month = (date.getMonth() + 1).toString().padStart(2, '0');
+  const day = date.getDate().toString().padStart(2, '0');
+
+  return `${year}.${month}.${day}`;
+};
+
+// Function to truncate the description to 20 characters
+export const truncateText = (text, trunc) => {
+  if (text.length <= trunc) {
+    return text;
+  }
+  return text.slice(0, trunc) + '...';
+};
