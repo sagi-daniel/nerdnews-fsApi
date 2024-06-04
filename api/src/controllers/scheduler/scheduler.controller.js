@@ -1,9 +1,9 @@
-const AppError = require("../../utils/appError");
-const rssHandler = require("./rssScheduleHandling/rssHandler");
-const upcomingMovieHandler = require("./upcomingMovieScheduleHandling/upcomingMovieHandler");
+const AppError = require('../../utils/appError');
+const rssHandler = require('./rssScheduleHandling/rssHandler');
+const upcomingMovieHandler = require('./upcomingMovieScheduleHandling/upcomingMovieHandler');
 
 async function scheduler(req, res, next) {
-  logger.info("Scheduled tasks...");
+  logger.info('Scheduled tasks...');
   try {
     await rssHandler();
     await upcomingMovieHandler();
