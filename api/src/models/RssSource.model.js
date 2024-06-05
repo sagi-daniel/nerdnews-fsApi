@@ -6,10 +6,6 @@ const RssSourceSchema = mongoose.Schema(
       type: String,
       required: true,
     },
-    logo: {
-      type: String,
-      required: true,
-    },
     sourceType: {
       type: String,
       enum: ['RSS', 'RDF'],
@@ -22,7 +18,7 @@ const RssSourceSchema = mongoose.Schema(
     },
     category: {
       type: mongoose.SchemaTypes.ObjectId,
-      ref: 'RssCategory',
+      ref: 'Category',
       required: true,
     },
     comment: {

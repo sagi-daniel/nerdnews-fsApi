@@ -8,7 +8,7 @@ const NewsSchema = mongoose.Schema(
     creator: {
       type: String,
     },
-    Source: {
+    source: {
       type: mongoose.SchemaTypes.ObjectId,
       ref: 'RssSource',
       required: true,
