@@ -26,14 +26,10 @@ const UpcomingMovieSchema = mongoose.Schema(
       unique: true,
     },
     voteAverage: {
-      type: String,
-      required: true,
-      unique: true,
+      type: Number,
     },
     voteCount: {
-      type: String,
-      required: true,
-      unique: true,
+      type: Number,
     },
   },
   { timestamps: true }
