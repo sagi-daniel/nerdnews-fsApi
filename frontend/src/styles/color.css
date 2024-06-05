@@ -19,6 +19,17 @@
   --color-content-light: #050505;
   --color-border-light: #dfdfdf;
 
+  /* News Categories */
+  --color-tech: #144fe0;
+  --color-tech-lighter: #6990f1;
+  --color-tech-content: #ffffff;
+  --color-cybersec: #79e014;
+  --color-cybersec-lighter: #adf169;
+  --color-cybersec-content: #142503;
+  --color-gaming: #5f14e0;
+  --color-gaming-lighter: #9b69f1;
+  --color-gaming-content: #ffffff;
+
   /* Utility colors */
   --color-success: #35e435;
   --color-success-content: #031703;
