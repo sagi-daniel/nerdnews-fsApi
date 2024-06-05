@@ -5,9 +5,13 @@ exports.create = (rssSource) => {
   return newRssSource.save();
 };
 
-exports.findAll = () => RssSource.find().populate('category');
+exports.findAll = () => RssSource.find();
 
-exports.findById = (id) => RssSource.findById(id).populate('category');
+exports.findById = (id) =>
+  RssSource.findById(id).populate({
+    path: 'category',
+    select: '-__v -createdAt -updatedAt',
+  });
 
 exports.update = (id, rssSource) => RssSource.findByIdAndUpdate(id, rssSource, { new: true });
 
