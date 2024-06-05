@@ -4,6 +4,7 @@ const { create, findAll } = require('../../upcomingmovie/upcomingMovie.service.j
 
 async function upcomingMovieHandler() {
   const upcomingMoviesAPI = await fetchUpcomingMovieApi();
+
   const existingMovies = await findAll();
   const upcomingMovies = upcomingMoviesAPI
     .map((movie) => {
@@ -13,10 +14,8 @@ async function upcomingMovieHandler() {
         title: movie.title,
         overview: movie.overview,
         poster: 'https://image.tmdb.org/t/p/original' + movie.poster_path,
-        movieVote: {
-          voteAverage: movie.vote_average,
-          voteCount: movie.vote_count,
-        },
+        voteAverage: movie.vote_average,
+        voteCount: movie.vote_count,
       };
     })
     .filter((movie) => {

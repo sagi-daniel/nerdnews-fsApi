@@ -25,10 +25,15 @@ const UpcomingMovieSchema = mongoose.Schema(
       required: true,
       unique: true,
     },
-    vote: {
-      type: mongoose.SchemaTypes.ObjectId,
-      ref: 'MovieVote',
+    voteAverage: {
+      type: String,
       required: true,
+      unique: true,
+    },
+    voteCount: {
+      type: String,
+      required: true,
+      unique: true,
     },
   },
   { timestamps: true }
