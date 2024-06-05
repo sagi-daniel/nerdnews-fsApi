@@ -9,7 +9,12 @@ async function rssHandler() {
   const existingNews = await findByMonthRange(MONTH_RANGE);
   const newFeeds = [];
   for (const rssSource of rssSources) {
-    const feeds = await rssParser(rssSource.sourceLink, rssSource.category._id, rssSource.sourceType);
+    const feeds = await rssParser(
+      rssSource.sourceLink,
+      rssSource.category._id,
+      rssSource.sourceType,
+      rssSource.sourceName
+    );
     for (feedItem of feeds) {
       const isExisting = existingNews.some((existing) => existing.link === feedItem.link);
       if (!isExisting) {

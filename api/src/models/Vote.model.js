@@ -1,7 +1,7 @@
 const mongoose = require('mongoose');
 
 const MovieVoteSchema = mongoose.Schema({
-  voteAvarage: {
+  voteAverage: {
     type: Number,
     required: true,
   },
