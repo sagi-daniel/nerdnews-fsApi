@@ -15,6 +15,7 @@ const RssSourceSchema = mongoose.Schema(
     sourceLink: {
       type: String,
       required: true,
+      unique: true,
     },
     category: {
       type: mongoose.SchemaTypes.ObjectId,
