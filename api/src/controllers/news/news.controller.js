@@ -1,16 +1,16 @@
 const AppError = require('../../../utils/appError');
 const catchAsync = require('../../../utils/catchAsync');
-const rssNewsService = require('./rssNews.service');
+const newsService = require('./news.service');
 
 exports.create = catchAsync(async (req, res, next) => {
-  const rssNews = await rssNewsService.create(req.body);
-  if (!rssNews) {
+  const news = await newsService.create(req.body);
+  if (!news) {
     return next(new AppError(`News could not saved`));
   }
   res.status(200).json({
     status: 'success',
     data: {
-      rssNews,
+      news,
     },
   });
 });
@@ -18,27 +18,27 @@ exports.create = catchAsync(async (req, res, next) => {
 exports.findAll = catchAsync(async (req, res, next) => {
   const limit = req.query.limit || 20;
   const sort = req.query.sort || -1;
-  const rssNews = await rssNewsService.findAll(sort, limit);
+  const news = await newsService.findAll(sort, limit);
   res.status(200).json({
     status: 'success',
-    results: rssNews.length,
+    results: news.length,
     data: {
-      rssNews,
+      news,
     },
   });
 });
 
 exports.findById = catchAsync(async (req, res, next) => {
   const id = req.params.id;
-  const rssNews = await rssNewsService.findById(id);
-  if (!rssNews) {
+  const news = await newsService.findById(id);
+  if (!news) {
     return next(new AppError(`News with ${id} ID could not found`));
   }
-  if (rssNews) {
+  if (news) {
     res.status(200).json({
       status: 'success',
       data: {
-        rssNews,
+        news,
       },
     });
   }
@@ -46,29 +46,29 @@ exports.findById = catchAsync(async (req, res, next) => {
 
 exports.update = catchAsync(async (req, res, next) => {
   const id = req.params.id;
-  const rssNews = await rssNewsService.update(id, req.body);
-  if (!rssNews) {
+  const news = await newsService.update(id, req.body);
+  if (!news) {
     return next(new AppError(`News with ${id} ID could not found`));
   }
   res.status(200).json({
     status: 'success',
     data: {
-      rssNews,
+      news,
     },
   });
 });
 
 exports.remove = catchAsync(async (req, res, next) => {
   const id = req.params.id;
-  const rssNews = await rssNewsService.remove(id);
-  if (!rssNews) {
+  const news = await newsService.remove(id);
+  if (!news) {
     return next(new AppError(`News with ${id} ID could not found`));
   }
 
   res.status(200).json({
     status: 'success',
     data: {
-      rssNews,
+      news,
     },
   });
 });

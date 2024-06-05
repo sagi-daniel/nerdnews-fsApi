@@ -1,12 +1,12 @@
-const RssNews = require('../../../models/rss/RssNews.model');
+const News = require('../../../models/News.model');
 
-exports.create = (rssNews) => {
-  const newRssNews = new RssNews(rssNews);
-  return newRssNews.save();
+exports.create = (news) => {
+  const newNews = new News(news);
+  return newNews.save();
 };
 
 exports.findAll = (sort, limit) =>
-  RssNews.find()
+  News.find()
     .populate({
       path: 'category',
       select: '-__v -createdAt -updatedAt',
@@ -15,19 +15,19 @@ exports.findAll = (sort, limit) =>
     .limit(limit);
 
 exports.findById = (id) =>
-  RssNews.findById(id).populate({
+  News.findById(id).populate({
     path: 'category',
     select: '-__v -createdAt -updatedAt',
   });
 
 exports.findByMonthRange = (monthRange) =>
-  RssNews.find({
+  News.find({
     release: {
       $gte: new Date(new Date().getMonth() - monthRange).toISOString(),
       $lte: new Date().toISOString(),
     },
   });
 
-exports.update = (id, rssNews) => RssNews.findByIdAndUpdate(id, rssNews, { new: true });
+exports.update = (id, news) => News.findByIdAndUpdate(id, news, { new: true });
 
-exports.remove = (id) => RssNews.findByIdfindByIdAndDeleteAndRemove(id);
+exports.remove = (id) => News.findByIdfindByIdAndDeleteAndRemove(id);

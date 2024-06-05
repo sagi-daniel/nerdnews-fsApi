@@ -1,42 +1,42 @@
-const AppError = require("../../../utils/appError");
-const catchAsync = require("../../../utils/catchAsync");
-const rssCategoryService = require("./rssCategory.service");
+const AppError = require('../../../utils/appError');
+const catchAsync = require('../../../utils/catchAsync');
+const categoryService = require('./category.service');
 
 exports.create = catchAsync(async (req, res, next) => {
-  const rssCategory = await rssCategoryService.create(req.body);
-  if (!rssCategory) {
+  const category = await categoryService.create(req.body);
+  if (!category) {
     return next(new AppError(`Category could not saved`));
   }
   res.status(200).json({
-    status: "success",
+    status: 'success',
     data: {
-      rssCategory,
+      category,
     },
   });
 });
 
 exports.findAll = catchAsync(async (req, res, next) => {
-  const rssCategories = await rssCategoryService.findAll();
+  const categories = await categoryService.findAll();
   res.status(200).json({
-    status: "success",
-    results: rssCategories.length,
+    status: 'success',
+    results: categories.length,
     data: {
-      rssCategories,
+      categories,
     },
   });
 });
 
 exports.findById = catchAsync(async (req, res, next) => {
   const id = req.params.id;
-  const rssCategory = await rssCategoryService.findById(id);
-  if (!rssCategory) {
+  const category = await categoryService.findById(id);
+  if (!category) {
     return next(new AppError(`Category with ${id} ID could not found`));
   }
-  if (rssCategory) {
+  if (category) {
     res.status(200).json({
-      status: "success",
+      status: 'success',
       data: {
-        rssCategory,
+        category,
       },
     });
   }
@@ -44,28 +44,28 @@ exports.findById = catchAsync(async (req, res, next) => {
 
 exports.update = catchAsync(async (req, res, next) => {
   const id = req.params.id;
-  const rssCategory = await rssCategoryService.update(id, req.body);
-  if (!rssCategory) {
+  const category = await categoryService.update(id, req.body);
+  if (!category) {
     return next(new AppError(`Category with ${id} ID could not found`));
   }
   res.status(200).json({
-    status: "success",
+    status: 'success',
     data: {
-      rssCategory,
+      category,
     },
   });
 });
 
 exports.remove = catchAsync(async (req, res, next) => {
   const id = req.params.id;
-  const rssCategory = await rssCategoryService.remove(id);
-  if (!rssCategory) {
+  const category = await categoryService.remove(id);
+  if (!category) {
     return next(new AppError(`Category with ${id} ID could not found`));
   }
   res.status(200).json({
-    status: "success",
+    status: 'success',
     data: {
-      rssCategory,
+      category,
     },
   });
 });
