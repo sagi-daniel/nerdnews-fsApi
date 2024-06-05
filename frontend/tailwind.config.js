@@ -5,7 +5,7 @@ export default {
   darkMode: 'class',
   theme: {
     fontFamily: {
-      sans: 'Roboto Mono, monospace',
+      sans: 'Roboto, monospace',
     },
     screens: {
       sm: '480px',
@@ -32,6 +32,16 @@ export default {
         'bg-light': 'var(--color-bg-light)',
         'content-light': 'var(--color-content-light)',
         'border-light': 'var(--color-border-light)',
+
+        tech: 'var(--color-tech)',
+        'tech-lighter': 'var(--color-tech-lighter)',
+        'tech-content': 'var(--color-tech-content)',
+        cybersec: 'var(--color-cybersec)',
+        'cybersec-lighter': 'var(--color-cybersec-lighter)',
+        'cybersec-content': 'var(--color-cybersec-content)',
+        gaming: 'var(--color-gaming)',
+        'gaming-lighter': 'var(--color-gaming-lighter)',
+        'gaming-content': 'var(--color-gaming-content)',
 
         success: 'var(--color-success)',
         'success-content': 'var(--color-success-content)',
