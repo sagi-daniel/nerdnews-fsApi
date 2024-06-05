@@ -6,7 +6,7 @@ import LoadingSpinner from '../../components/LoadingSpinner';
 import Error from '../../components/Error';
 
 function NewsSlider() {
-  const { data, isLoading, error, isError } = useQuery(['rssNews'], getNews);
+  const { data, isLoading, error, isError } = useQuery(['News'], getNews);
 
   if (isLoading) {
     return <LoadingSpinner />;
@@ -17,8 +17,8 @@ function NewsSlider() {
   }
 
   return (
-    <Slider>
-      {data.data.rssNews.map((news, index) => (
+    <Slider moreLabel={'Még több hír...'} morePath={'/news'}>
+      {data.data.news.map((news, index) => (
         <NewsCard key={index} news={news} />
       ))}
     </Slider>
