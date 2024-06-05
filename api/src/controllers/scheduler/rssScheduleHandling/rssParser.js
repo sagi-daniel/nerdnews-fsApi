@@ -3,7 +3,7 @@ const { parseString } = require('xml2js');
 const Parser = require('rss-parser');
 
 //*Parser for RDF structure
-async function parser1(url, category, sourceName) {
+async function parser1(url, category, source) {
   try {
     const response = await axios.get(url);
     const xmlContent = response.data;
@@ -17,7 +17,7 @@ async function parser1(url, category, sourceName) {
 
         const feeds = result.rss.channel[0].item.map((item) => ({
           release: item.pubDate ? item.pubDate[0] : undefined,
-          sourceName: sourceName ? sourceName : undefined,
+          source,
           title: item.title ? item.title[0] : undefined,
           link: item.link ? item.link[0] : undefined,
           content: item.description ? item.description[0] : undefined,
@@ -38,12 +38,12 @@ async function parser1(url, category, sourceName) {
 }
 
 //*Parser for RSS structure
-async function parser2(url, category, sourceName) {
+async function parser2(url, category, source) {
   const parser = new Parser();
   const feeds = await parser.parseURL(url);
   const formattedFeeds = feeds.items.map((item) => ({
     release: item.pubDate ? item.pubDate : undefined,
-    sourceName: sourceName,
+    source,
     title: item.title ? item.title : undefined,
     link: item.link ? item.link : undefined,
     content: item.content ? item.content : undefined,
@@ -53,14 +53,14 @@ async function parser2(url, category, sourceName) {
   return formattedFeeds;
 }
 
-async function rssParser(url, category, rssSource, sourceName) {
+async function rssParser(url, category, rssSource, source) {
   try {
     let feeds = [];
     if (rssSource === 'RSS') {
-      feeds = await parser2(url, category, sourceName);
+      feeds = await parser2(url, category, source);
     }
     if (rssSource === 'RDF') {
-      feeds = await parser1(url, category, sourceName);
+      feeds = await parser1(url, category, source);
     }
     return feeds;
   } catch (error) {
