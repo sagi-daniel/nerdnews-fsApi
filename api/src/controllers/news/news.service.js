@@ -9,6 +9,10 @@ exports.findAll = (sort, limit) =>
   News.find()
     .populate({
       path: 'category',
+      select: ' -__v',
+    })
+    .populate({
+      path: 'source',
       select: '-__v -createdAt -updatedAt',
     })
     .sort({ release: sort })
@@ -17,15 +21,7 @@ exports.findAll = (sort, limit) =>
 exports.findById = (id) =>
   News.findById(id).populate({
     path: 'category',
-    select: '-__v -createdAt -updatedAt',
-  });
-
-exports.findByMonthRange = (monthRange) =>
-  News.find({
-    release: {
-      $gte: new Date(new Date().getMonth() - monthRange).toISOString(),
-      $lte: new Date().toISOString(),
-    },
+    select: '-__v',
   });
 
 exports.update = (id, news) => News.findByIdAndUpdate(id, news, { new: true });
