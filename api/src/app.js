@@ -58,9 +58,9 @@ app.use(express.static(`${__dirname}/public`));
 app.use('/user', require('./controllers/user/user.routes'));
 
 app.use('/upcomingmovie', require('./controllers/upcomingmovie/upcomingMovie.routes'));
-app.use('/rssnews', require('./controllers/rss/rssNews/rssNews.routes'));
-app.use('/rsssource', require('./controllers/rss/rssSource/rssSource.routes'));
-app.use('/rsscategory', require('./controllers/rss/rssCategory/rssCategory.routes'));
+app.use('/rssnews', require('./controllers/news/news.routes'));
+app.use('/rsssource', require('./controllers/rssSource/rssSource.routes'));
+app.use('/rsscategory', require('./controllers/category/category.routes'));
 
 //SCHEDULED TASKS
 cron.schedule('* 2-3 * * *', require('./controllers/scheduler/scheduler.controller'));

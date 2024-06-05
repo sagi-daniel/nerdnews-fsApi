@@ -1,7 +1,7 @@
 const router = require('express').Router();
 const { create, findAll, findById, update, remove } = require('./category.controller');
 
-const authController = require('../../auth/auth.controller');
+const authController = require('../auth/auth.controller');
 
 router
   .route('/')

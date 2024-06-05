@@ -1,5 +1,5 @@
-const AppError = require('../../../utils/appError');
-const catchAsync = require('../../../utils/catchAsync');
+const AppError = require('../../utils/appError');
+const catchAsync = require('../../utils/catchAsync');
 const categoryService = require('./category.service');
 
 exports.create = catchAsync(async (req, res, next) => {

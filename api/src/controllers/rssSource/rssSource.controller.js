@@ -1,6 +1,6 @@
-const AppError = require("../../../utils/appError");
-const catchAsync = require("../../../utils/catchAsync");
-const rssSourceService = require("./rssSource.service");
+const AppError = require('../../utils/appError');
+const catchAsync = require('../../utils/catchAsync');
+const rssSourceService = require('./rssSource.service');
 
 exports.create = catchAsync(async (req, res, next) => {
   const rssSource = await rssSourceService.create(req.body);
@@ -8,7 +8,7 @@ exports.create = catchAsync(async (req, res, next) => {
     return next(new AppError(`Source could not saved`));
   }
   res.status(200).json({
-    status: "success",
+    status: 'success',
     data: {
       rssSource,
     },
@@ -18,7 +18,7 @@ exports.create = catchAsync(async (req, res, next) => {
 exports.findAll = catchAsync(async (req, res, next) => {
   const rssSources = await rssSourceService.findAll();
   res.status(200).json({
-    status: "success",
+    status: 'success',
     results: rssSources.length,
     data: {
       rssSources,
@@ -34,7 +34,7 @@ exports.findById = catchAsync(async (req, res, next) => {
   }
   if (rssSource) {
     res.status(200).json({
-      status: "success",
+      status: 'success',
       data: {
         rssSource,
       },
@@ -49,7 +49,7 @@ exports.update = catchAsync(async (req, res, next) => {
     return next(new AppError(`Source with ${id} ID could not found`));
   }
   res.status(200).json({
-    status: "success",
+    status: 'success',
     data: {
       rssSource,
     },
@@ -63,7 +63,7 @@ exports.remove = catchAsync(async (req, res, next) => {
     return next(new AppError(`Source with ${id} ID could not found`));
   }
   res.status(200).json({
-    status: "success",
+    status: 'success',
     data: {
       rssSource,
     },

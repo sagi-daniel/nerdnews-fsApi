@@ -1,4 +1,4 @@
-const News = require('../../../models/News.model');
+const News = require('../../models/News.model');
 
 exports.create = (news) => {
   const newNews = new News(news);
