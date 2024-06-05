@@ -26,7 +26,9 @@ const UpcomingMovieSchema = mongoose.Schema(
       unique: true,
     },
     vote: {
-      type: {},
+      type: mongoose.SchemaTypes.ObjectId,
+      ref: 'MovieVote',
+      required: true,
     },
   },
   { timestamps: true }

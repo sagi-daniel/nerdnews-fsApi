@@ -1,6 +1,6 @@
 const mongoose = require('mongoose');
 
-const RssNewsSchema = mongoose.Schema(
+const NewsSchema = mongoose.Schema(
   {
     release: {
       type: Date,
@@ -15,7 +15,7 @@ const RssNewsSchema = mongoose.Schema(
     },
     category: {
       type: mongoose.SchemaTypes.ObjectId,
-      ref: 'NewsCategory',
+      ref: 'Category',
       required: true,
     },
     title: {
@@ -35,4 +35,4 @@ const RssNewsSchema = mongoose.Schema(
   { timestamps: true }
 );
 
-module.exports = mongoose.model('RssNews', RssNewsSchema);
+module.exports = mongoose.model('News', NewsSchema);

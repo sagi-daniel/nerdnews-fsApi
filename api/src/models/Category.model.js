@@ -1,6 +1,6 @@
-const mongoose = require("mongoose");
+const mongoose = require('mongoose');
 
-const RssCategorySchema = mongoose.Schema({
+const CategorySchema = mongoose.Schema({
   categoryName: {
     type: String,
     required: true,
@@ -9,4 +9,4 @@ const RssCategorySchema = mongoose.Schema({
   },
 });
 
-module.exports = mongoose.model("RssCategory", RssCategorySchema);
+module.exports = mongoose.model('Category', CategorySchema);
