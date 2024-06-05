@@ -46,7 +46,7 @@ async function parser2(url, category, source) {
     source,
     title: item.title ? item.title : undefined,
     link: item.link ? item.link : undefined,
-    content: item.content ? item.content : undefined,
+    content: item.contentSnippet ? item.contentSnippet : undefined,
     imageUrl: item.enclosure ? item.enclosure.url : undefined,
     category,
   }));
