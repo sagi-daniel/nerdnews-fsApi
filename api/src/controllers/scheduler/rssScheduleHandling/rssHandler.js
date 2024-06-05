@@ -1,20 +1,15 @@
 const { rssParser } = require('./rssParser');
-const { create, findByMonthRange } = require('../../news/news.service');
-const { findAll } = require('../../rssSource/rssSource.service');
+const { create, findByMonthRange } = require('./rssHandlerService');
+const { findAll } = require('./rssHandlerService');
 
 const MONTH_RANGE = 2;
 
 async function rssHandler() {
-  const rssSources = await findAll().populate('category');
+  const rssSources = await findAll();
   const existingNews = await findByMonthRange(MONTH_RANGE);
   const newFeeds = [];
   for (const rssSource of rssSources) {
-    const feeds = await rssParser(
-      rssSource.sourceLink,
-      rssSource.category._id,
-      rssSource.sourceType,
-      rssSource.sourceName
-    );
+    const feeds = await rssParser(rssSource.sourceLink, rssSource.category, rssSource.sourceType, rssSource._id);
     for (feedItem of feeds) {
       const isExisting = existingNews.some((existing) => existing.link === feedItem.link);
       if (!isExisting) {
