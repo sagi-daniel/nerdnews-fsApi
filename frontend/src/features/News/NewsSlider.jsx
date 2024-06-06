@@ -4,8 +4,9 @@ import Slider from '../../components/parts/slider/Slider';
 import NewsCard from './NewsCard';
 import LoadingSpinner from '../../components/LoadingSpinner';
 import Error from '../../components/Error';
+import Section from '../../components/Section';
 
-function NewsSlider() {
+function NewsSlider({ sliderLabel }) {
   const { data, isLoading, error, isError } = useQuery(['News'], getNews);
 
   if (isLoading) {
@@ -17,11 +18,14 @@ function NewsSlider() {
   }
 
   return (
-    <Slider moreLabel={'Még több hír...'} morePath={'/news'}>
-      {data.data.news.map((news, index) => (
-        <NewsCard key={index} news={news} />
-      ))}
-    </Slider>
+    <Section type="vertical">
+      <h2>{sliderLabel}</h2>
+      <Slider moreLabel={'Még több hír...'} morePath={'/news'}>
+        {data.data.news.map((news, index) => (
+          <NewsCard key={index} news={news} />
+        ))}
+      </Slider>
+    </Section>
   );
 }
 

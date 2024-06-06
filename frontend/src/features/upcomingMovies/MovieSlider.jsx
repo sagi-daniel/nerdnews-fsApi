@@ -6,8 +6,9 @@ import Error from '../../components/Error';
 import MovieModal from './MovieModal';
 import Slider from '../../components/parts/slider/Slider';
 import MovieCard from './MovieCard';
+import Section from '../../components/Section';
 
-function MovieSlider() {
+function MovieSlider({ sliderLabel }) {
   const { data, isLoading, error, isError } = useQuery(['upcomingmovie'], getMovies);
 
   const [selectedMovie, setSelectedMovie] = useState(null);
@@ -32,7 +33,8 @@ function MovieSlider() {
   }
 
   return (
-    <>
+    <Section type="vertical">
+      <h2>{sliderLabel}</h2>
       {modalVisible && selectedMovie && (
         <MovieModal
           closeModal={closeModal}
@@ -47,7 +49,7 @@ function MovieSlider() {
           <MovieCard key={index} movie={movie} onClick={handlePosterClick} />
         ))}
       </Slider>
-    </>
+    </Section>
   );
 }
 
