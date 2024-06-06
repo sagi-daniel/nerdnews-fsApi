@@ -7,7 +7,7 @@ import Error from '../../components/Error';
 import Section from '../../components/Section';
 
 function NewsSlider({ sliderLabel }) {
-  const { data, isLoading, error, isError } = useQuery(['News'], getNews);
+  const { data, isLoading, error, isError } = useQuery(['Top3News'], getNews);
 
   if (isLoading) {
     return <LoadingSpinner />;

@@ -6,7 +6,7 @@ import { FiPlus } from 'react-icons/fi';
 function NewsCard({ news }) {
   return (
     <div className="flex-[0_0_40%] sm:flex-[0_0_25%] lg:flex-[0_0_15%]">
-      <div className="relative flex flex-col justify-between max-w-sm bg-border-dark text-content-dark h-full w-80 rounded-md">
+      <div className="relative mx-1 flex flex-col justify-between max-w-sm bg-border-dark text-content-dark h-full w-80 rounded-md">
         <div className="flex flex-col justify-evenly">
           <img src={news.imageUrl} alt={news.title} className="h-48 object-cover rounded-t-md" />
 

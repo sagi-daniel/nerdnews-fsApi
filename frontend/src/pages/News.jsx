@@ -1,5 +1,5 @@
 import Section from '../components/Section';
-import NewsSlider from '../features/News/NewsSlider';
+import NewsSlider from '../features/news/NewsSlider';
 
 function News() {
   return (
