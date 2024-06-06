@@ -4,7 +4,7 @@ import { useLocaleStorageState } from '../hooks/useLocaleStorageState';
 const DarkModeContext = createContext();
 
 function DarkModeProvider({ children }) {
-  const [isDarkMode, setIsDarkMode] = useLocaleStorageState(false, 'isDarkMode');
+  const [isDarkMode, setIsDarkMode] = useLocaleStorageState(true, 'isDarkMode');
 
   useEffect(() => {
     if (isDarkMode) {
