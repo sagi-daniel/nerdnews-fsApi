@@ -10,7 +10,7 @@ function NewsCard({ news }) {
         <div className="flex flex-col justify-evenly">
           <img src={news.imageUrl} alt={news.title} className="h-48 object-cover rounded-t-md" />
 
-          <div className="p-2">
+          <div className="p-4">
             <div className="absolute top-2 right-1">
               <Badge categoryName={news.category.categoryName} />
             </div>
@@ -25,7 +25,7 @@ function NewsCard({ news }) {
           </div>
         </div>
 
-        <div className="flex p-2">
+        <div className="flex p-4">
           <div className="flex items-center gap-2">
             <a href={news.link} target="_blank" rel="noreferrer" className="btn-primary-sm inline-flex items-center">
               Elolvasom
