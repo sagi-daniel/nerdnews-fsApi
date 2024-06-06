@@ -1,20 +1,13 @@
-import { Link } from 'react-router-dom';
-import Section from '../components/Section';
 import MovieSlider from '../features/upcomingMovies/MovieSlider';
 import NewsSlider from '../features/News/NewsSlider';
+import NewsGrid from '../features/News/NewsGrid';
 
 function Home() {
   return (
     <>
-      <Section type="vertical">
-        <h2>Legújabb Hírek</h2>
-        <NewsSlider />
-      </Section>
-
-      <Section type="vertical">
-        <h2>Közelgő Mozifilmek</h2>
-        <MovieSlider />
-      </Section>
+      <NewsGrid />
+      <NewsSlider sliderLabel="Legújabb Hírek" />
+      <MovieSlider sliderLabel="Közelgő Mozifilmek" />
     </>
   );
 }
