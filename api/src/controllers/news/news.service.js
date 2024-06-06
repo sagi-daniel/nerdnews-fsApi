@@ -5,7 +5,7 @@ exports.create = (news) => {
   return newNews.save();
 };
 
-exports.findAll = (sort, limit) =>
+exports.findAll = (sort, limit, skip) =>
   News.find()
     .populate({
       path: 'category',
@@ -16,6 +16,7 @@ exports.findAll = (sort, limit) =>
       select: '-__v -createdAt -updatedAt',
     })
     .sort({ release: sort })
+    .skip(skip)
     .limit(limit);
 
 exports.findById = (id) =>

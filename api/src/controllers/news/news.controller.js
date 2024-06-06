@@ -17,8 +17,9 @@ exports.create = catchAsync(async (req, res, next) => {
 
 exports.findAll = catchAsync(async (req, res, next) => {
   const limit = req.query.limit || 20;
+  const skip = req.query.skip || 0;
   const sort = req.query.sort || -1;
-  const news = await newsService.findAll(sort, limit);
+  const news = await newsService.findAll(sort, limit, skip);
   res.status(200).json({
     status: 'success',
     results: news.length,
@@ -67,6 +68,20 @@ exports.remove = catchAsync(async (req, res, next) => {
 
   res.status(200).json({
     status: 'success',
+    data: {
+      news,
+    },
+  });
+});
+
+exports.top3fresh = catchAsync(async (req, res, next) => {
+  const limit = 3;
+  const skip = 0;
+  const sort = -1;
+  const news = await newsService.findAll(sort, limit, skip);
+  res.status(200).json({
+    status: 'success',
+    results: news.length,
     data: {
       news,
     },
