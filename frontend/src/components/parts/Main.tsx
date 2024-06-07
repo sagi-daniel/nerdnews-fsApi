@@ -1,10 +1,6 @@
-import React, { ReactNode } from 'react';
+import { ReactNode } from 'react';
 
-interface MainProps {
-  children: ReactNode;
-}
-
-function Main({ children }: MainProps) {
+function Main({ children }: { children: ReactNode }) {
   return <main className="flex flex-col mb-auto text-content-light dark:text-content-dark">{children}</main>;
 }
 

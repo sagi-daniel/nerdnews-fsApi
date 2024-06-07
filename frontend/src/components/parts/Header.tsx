@@ -1,8 +1,7 @@
-import React from "react";
-import Logo from "../Logo";
-import Navbar from "../Navbar";
-import ControlPanel from "../ControlPanel";
-import Divider from "../Divider";
+import Logo from '../Logo';
+import Navbar from '../Navbar';
+import ControlPanel from '../ControlPanel';
+import Divider from '../Divider';
 
 function Header() {
   return (

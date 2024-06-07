@@ -1,8 +1,8 @@
-import { useState } from "react";
-import { FiAlignRight } from "react-icons/fi";
-import MenuModal from "./MenuModal";
-import { MENU_ITEMS } from "../utils/constants";
-import NavItem from "./NavItem";
+import { useState } from 'react';
+import { FiAlignRight } from 'react-icons/fi';
+import { MENU_ITEMS } from '../utils/constants';
+import MenuModal from './MenuModal';
+import NavItem from './NavItem';
 
 function Navbar() {
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -22,11 +22,7 @@ function Navbar() {
         className="text-4xl cursor-pointer text-content-light dark:text-primary hover:text-primary-dark md:hidden"
         onClick={toggleModal}
       />
-      <MenuModal
-        menuItems={MENU_ITEMS}
-        isModalOpen={isModalOpen}
-        toggleModal={toggleModal}
-      />
+      <MenuModal menuItems={MENU_ITEMS} isModalOpen={isModalOpen} toggleModal={toggleModal} />
     </nav>
   );
 }

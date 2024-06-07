@@ -1,22 +1,19 @@
-import { useQuery } from "@tanstack/react-query";
-import { getTop3FreshNews } from "../../services/apiNews";
-import Section from "../../components/Section";
-import LoadingSpinner from "../../components/LoadingSpinner";
-import Error from "../../components/Error";
-import { formatDateIsoToNormal } from "../../utils/helpers";
+import { useQuery } from '@tanstack/react-query';
+import { getTop3FreshNews } from '../../services/apiNews';
+import Section from '../../components/Section';
+import LoadingSpinner from '../../components/LoadingSpinner';
+import Error from '../../components/Error';
+import { formatDateIsoToNormal } from '../../utils/helpers';
 
 function NewsGrid() {
-  const { data, error, isLoading, isError } = useQuery(
-    ["News"],
-    getTop3FreshNews
-  );
+  const { data, error, isLoading, isError } = useQuery(['News'], getTop3FreshNews);
 
   if (isLoading) {
     return <LoadingSpinner />;
   }
 
   if (isError) {
-    return <Error message={error.message} />;
+    return <Error message={(error as Error).message} />;
   }
 
   return (
@@ -28,11 +25,9 @@ function NewsGrid() {
         ></div>
 
         <div className=" absolute bottom-4 left-4 text-white ">
-          <h3 className="text-lg md:text-2xl font-semibold">
-            {data.data.news[0].title}
-          </h3>
+          <h3 className="text-lg md:text-2xl font-semibold">{data.data.news[0].title}</h3>
           <p>
-            <span>{formatDateIsoToNormal(data.data.news[0].release)}</span> |{" "}
+            <span>{formatDateIsoToNormal(data.data.news[0].release)}</span> |{' '}
             <span>{data.data.news[0].category.categoryName}</span>
           </p>
           <p className="text-sm md:text-2xl ">{data.data.news[0].content}</p>
@@ -49,7 +44,7 @@ function NewsGrid() {
           <div className=" absolute bottom-4 left-4 text-white ">
             <h3 className="text-lg font-semibold">{data.data.news[1].title}</h3>
             <p className="text-sm">
-              <span>{formatDateIsoToNormal(data.data.news[1].release)}</span> |{" "}
+              <span>{formatDateIsoToNormal(data.data.news[1].release)}</span> |{' '}
               <span>{data.data.news[1].category.categoryName}</span>
             </p>
           </div>

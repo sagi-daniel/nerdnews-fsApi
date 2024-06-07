@@ -1,11 +1,7 @@
 import { Link } from 'react-router-dom';
 import { FiX } from 'react-icons/fi';
 import ControlPanel from './ControlPanel';
-
-interface MenuItem {
-  path: string;
-  name: string;
-}
+import MenuItem from '../models/MenuItem.model';
 
 interface MenuModalProps {
   menuItems: MenuItem[];

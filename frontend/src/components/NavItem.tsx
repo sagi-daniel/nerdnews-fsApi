@@ -1,16 +1,7 @@
 import { Link } from 'react-router-dom';
+import MenuItem from '../models/MenuItem.model';
 
-interface MenuItem {
-  path: string;
-  name: string;
-  type: string;
-}
-
-interface NavItemProps {
-  menuItem: MenuItem;
-}
-
-function NavItem({ menuItem }: NavItemProps) {
+function NavItem({ menuItem }: { menuItem: MenuItem }) {
   return (
     <Link
       to={`/${menuItem.path}`}

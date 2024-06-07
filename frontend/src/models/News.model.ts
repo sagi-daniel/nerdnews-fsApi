@@ -10,6 +10,6 @@ export default interface NewsModel {
   link: string;
   content: string;
   imageUrl: string;
-  createdAt: string;
-  updatedAt: string;
+  createdAt?: string;
+  updatedAt?: string;
 }

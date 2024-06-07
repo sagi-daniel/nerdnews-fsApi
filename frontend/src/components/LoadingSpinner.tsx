@@ -1,7 +1,4 @@
-// src/components/LoadingSpinner.js
-import React from "react";
-
-const LoadingSpinner = () => {
+function LoadingSpinner() {
   return (
     <div className="flex items-center justify-center overflow-hidden">
       <div className="relative w-16 h-16 animate-spin">
@@ -11,6 +8,6 @@ const LoadingSpinner = () => {
       </div>
     </div>
   );
-};
+}
 
 export default LoadingSpinner;

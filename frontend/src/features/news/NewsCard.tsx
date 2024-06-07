@@ -1,27 +1,9 @@
-import React from 'react';
 import { formatDateIsoToNormal, truncateText } from '../../utils/helpers';
 import { FiPlus } from 'react-icons/fi';
 import Badge from '../../components/Badge';
+import NewsModel from '../../models/News.model';
 
-type CategoryName = 'DEFAULT' | 'TECH' | 'CYBERSEC' | 'GAMING';
-
-interface NewsCardProps {
-  news: {
-    imageUrl: string;
-    title: string;
-    category: {
-      categoryName: CategoryName;
-    };
-    release: string;
-    source: {
-      sourceName: string;
-    };
-    content: string;
-    link: string;
-  };
-}
-
-function NewsCard({ news }: NewsCardProps) {
+function NewsCard({ news }: { news: NewsModel }) {
   return (
     <div className="flex-[0_0_40%] sm:flex-[0_0_25%] lg:flex-[0_0_15%]">
       <div className="relative mx-1 flex flex-col justify-between max-w-sm bg-border-dark text-content-dark h-full w-80 rounded-md">

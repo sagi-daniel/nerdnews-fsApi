@@ -2,7 +2,7 @@ import ToggleDarkMode from './ToggleDarkMode';
 import LoginIcon from './LoginIcon';
 import UserIcon from './UserIcon';
 
-function ControlPanel({ mobile = false }: { mobile: boolean }) {
+function ControlPanel({ mobile = false }: { mobile?: boolean }) {
   const mobileStyle = `flex justify-start pt-2`;
   const desktopStyle = `flex hidden md:flex justify-end`;
 

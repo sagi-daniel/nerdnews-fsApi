@@ -1,4 +1,4 @@
-import React, { useState, ChangeEvent } from "react";
+import React, { useState, ChangeEvent } from 'react';
 
 interface InputFieldProps {
   type?: string;
@@ -12,8 +12,8 @@ interface InputFieldProps {
   successMessage: string;
 }
 
-const InputField: React.FC<InputFieldProps> = ({
-  type = "text",
+function InputField({
+  type = 'text',
   id,
   label,
   value,
@@ -22,8 +22,8 @@ const InputField: React.FC<InputFieldProps> = ({
   validationResult,
   errorMessage,
   successMessage,
-}) => {
-  const [error, setError] = useState<string>("");
+}: InputFieldProps) {
+  const [error, setError] = useState<string>('');
 
   const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
     const newValue = e.target.value;
@@ -34,7 +34,7 @@ const InputField: React.FC<InputFieldProps> = ({
       setError(errorMessage);
     } else {
       validationResult(true);
-      setError("");
+      setError('');
     }
   };
 
@@ -49,11 +49,9 @@ const InputField: React.FC<InputFieldProps> = ({
         className="w-full border border-bg-border-light dark:border-bg-dark rounded-md p-2 text-content-light"
       />
       {error && <small className="text-error">{errorMessage}</small>}
-      {value && !error && (
-        <small className="text-success">{successMessage}</small>
-      )}
+      {value && !error && <small className="text-success">{successMessage}</small>}
     </div>
   );
-};
+}
 
 export default InputField;
