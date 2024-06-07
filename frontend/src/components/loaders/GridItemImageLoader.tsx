@@ -12,11 +12,7 @@ function GridItemImageLoader({ src }: GridItemImageLoader) {
 
   return (
     <div className="relative size-full">
-      {!loaded && (
-        <div className="absolute inset-0 flex items-center justify-center z-[-999]">
-          <LoadingSpinner />
-        </div>
-      )}
+      {!loaded && <LoadingSpinner />}
       <div
         className={`hover:opacity-40 justify-end h-full px-2 py-5 rounded-md bg-cover bg-center ease-in-out hover:scale-110 z-[-999] transition-opacity duration-500 ${
           loaded ? 'opacity-30' : 'opacity-0'

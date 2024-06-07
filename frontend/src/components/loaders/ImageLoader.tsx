@@ -13,11 +13,7 @@ function ImageWithLoader({ src, alt, classes, onClick }: ImageWithLoaderProps) {
 
   return (
     <div className="relative">
-      {!loaded && (
-        <div className="absolute inset-0 flex items-center justify-center">
-          <LoadingSpinner />
-        </div>
-      )}
+      {!loaded && <LoadingSpinner />}
       <img
         src={src}
         alt={alt}
