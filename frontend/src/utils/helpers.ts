@@ -32,7 +32,8 @@ export const getToday = (options: GetTodayOptions = {}): string => {
 export const formatCurrency = (value: number): string =>
   new Intl.NumberFormat('en', { style: 'currency', currency: 'USD' }).format(value);
 
-export const formatDateIsoToNormal = (isoDate: string): string => {
+export const formatDateIsoToNormal = (isoDate: string | undefined): string => {
+  if (!isoDate) return '';
   const date = new Date(isoDate);
 
   const year = date.getFullYear();
@@ -42,7 +43,8 @@ export const formatDateIsoToNormal = (isoDate: string): string => {
   return `${year}.${month}.${day}`;
 };
 
-export const truncateText = (text: string, trunc: number): string => {
+export const truncateText = (text: string | undefined, trunc: number | undefined): string => {
+  if (!text || !trunc) return '';
   if (text.length <= trunc) {
     return text;
   }
