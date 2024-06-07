@@ -4,6 +4,7 @@ interface RatingsBarProps {
 
 function RatingsBar({ rating }: RatingsBarProps) {
   const getColor = (parsedRating: number): string => {
+    if (parsedRating === 0 || parsedRating === undefined) return 'bg-border-dark text-content-dark';
     if (parsedRating < 5) return 'bg-red-600 text-content-dark';
     if (parsedRating < 8) return 'bg-yellow-600 text-content-dark';
     if (parsedRating <= 10) return 'bg-green-600 text-content-dark';
