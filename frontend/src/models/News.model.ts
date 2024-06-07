@@ -1,16 +1,5 @@
-interface SourceModel {
-  _id: string;
-  sourceName: string;
-  sourceType: string;
-  sourceLink: string;
-  category: string;
-  comment: string;
-}
-
-interface CategoryModel {
-  _id: string;
-  categoryName: string;
-}
+import CategoryModel from './CategoryModel';
+import SourceModel from './SourceModel';
 
 export default interface NewsModel {
   _id: string;
