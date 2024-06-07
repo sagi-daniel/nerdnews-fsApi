@@ -1,11 +1,10 @@
-import Section from "../components/Section";
-import NewsSlider from "../features/news/NewsSlider";
+import Section from '../components/Section';
 
 function News() {
   return (
     <Section type="vertical">
-      <h2>Legfrisebb hírek:</h2>
-      <NewsSlider />
+      <div>Filter</div>
+      <div>News</div>
     </Section>
   );
 }
