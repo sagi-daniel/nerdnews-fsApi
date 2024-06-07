@@ -1,5 +1,6 @@
-import { formatDistance, parseISO } from "date-fns";
-import { differenceInDays } from "date-fns";
+import { formatDistance, parseISO } from 'date-fns';
+import { differenceInDays } from 'date-fns';
+import RatingColors from '../models/RaingColors.model';
 
 type DateInput = string | Date;
 
@@ -14,18 +15,15 @@ interface RatingColorOptions {
   under10: string;
 }
 
-export const subtractDates = (
-  dateStr1: DateInput,
-  dateStr2: DateInput
-): number =>
+export const subtractDates = (dateStr1: DateInput, dateStr2: DateInput): number =>
   differenceInDays(parseISO(String(dateStr1)), parseISO(String(dateStr2)));
 
 export const formatDistanceFromNow = (dateStr: string): string =>
   formatDistance(parseISO(dateStr), new Date(), {
     addSuffix: true,
   })
-    .replace("about ", "")
-    .replace("in", "In");
+    .replace('about ', '')
+    .replace('in', 'In');
 
 export const getToday = (options: GetTodayOptions = {}): string => {
   const today = new Date();
@@ -40,16 +38,14 @@ export const getToday = (options: GetTodayOptions = {}): string => {
 };
 
 export const formatCurrency = (value: number): string =>
-  new Intl.NumberFormat("en", { style: "currency", currency: "USD" }).format(
-    value
-  );
+  new Intl.NumberFormat('en', { style: 'currency', currency: 'USD' }).format(value);
 
 export const formatDateIsoToNormal = (isoDate: string): string => {
   const date = new Date(isoDate);
 
   const year = date.getFullYear();
-  const month = (date.getMonth() + 1).toString().padStart(2, "0");
-  const day = date.getDate().toString().padStart(2, "0");
+  const month = (date.getMonth() + 1).toString().padStart(2, '0');
+  const day = date.getDate().toString().padStart(2, '0');
 
   return `${year}.${month}.${day}`;
 };
@@ -58,24 +54,36 @@ export const truncateText = (text: string, trunc: number): string => {
   if (text.length <= trunc) {
     return text;
   }
-  return text.slice(0, trunc) + "...";
+  return text.slice(0, trunc) + '...';
 };
 
-export const getRatingColors = (
-  rating: string | number,
-  ratingColorOptions: RatingColorOptions
-): string => {
+export const getRatingColors = (rating: string | number, ratingColorOptions: RatingColorOptions): RatingColors => {
   const parsedRating = parseFloat(rating as string);
 
   if (parsedRating === 0 || rating === undefined) {
-    return ratingColorOptions.default;
+    return {
+      bgColor: ratingColorOptions.default,
+      textColor: ratingColorOptions.default,
+    };
   } else if (parsedRating < 5) {
-    return ratingColorOptions.under5;
+    return {
+      bgColor: ratingColorOptions.under5,
+      textColor: ratingColorOptions.under5,
+    };
   } else if (parsedRating < 8) {
-    return ratingColorOptions.under8;
+    return {
+      bgColor: ratingColorOptions.under8,
+      textColor: ratingColorOptions.under8,
+    };
   } else if (parsedRating <= 10) {
-    return ratingColorOptions.under10;
+    return {
+      bgColor: ratingColorOptions.under10,
+      textColor: ratingColorOptions.under10,
+    };
   } else {
-    return ratingColorOptions.default;
+    return {
+      bgColor: ratingColorOptions.default,
+      textColor: ratingColorOptions.default,
+    };
   }
 };

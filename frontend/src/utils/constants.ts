@@ -26,19 +26,5 @@ export const MENU_ITEMS = [
 
 export const CATEGORY_ITEMS = [{ name: '', path: 'home', type: 'regular', element: 'Home' }];
 
-interface RatingColorOptions {
-  default: string;
-  under5: string;
-  under8: string;
-  under10: string;
-}
-
-export const RATING_COLOR_OPTIONS: RatingColorOptions = {
-  default: 'bg-border-dark text-content-dark',
-  under5: 'bg-red-600 text-content-dark',
-  under8: 'bg-yellow-600 text-content-dark',
-  under10: 'bg-green-600 text-content-dark',
-};
-
 //API URL
 export const BASE_URL = 'http://localhost:8000';
