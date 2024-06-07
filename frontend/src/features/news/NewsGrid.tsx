@@ -1,7 +1,7 @@
 import { useQuery } from '@tanstack/react-query';
 import { getTop3FreshNews } from '../../services/apiNews';
 import Section from '../../components/Section';
-import LoadingSpinner from '../../components/LoadingSpinner';
+import LoadingSpinner from '../../components/loaders/LoadingSpinner';
 import Error from '../../components/Error';
 import NewsModel from '../../models/News.model';
 import NewsGridItem from './NewsGridItem';

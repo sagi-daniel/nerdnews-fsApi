@@ -1,5 +1,5 @@
-import Section from "../components/Section";
-import MovieSlider from "../features/upcomingMovies/MovieSlider";
+import Section from '../components/Section';
+import MovieSlider from '../features/movies/MovieSlider';
 
 function UpcomingMovies() {
   return (

@@ -2,10 +2,12 @@ import Section from '../components/Section';
 
 function News() {
   return (
-    <Section type="vertical">
-      <div>Filter</div>
-      <div>News</div>
-    </Section>
+    <>
+      <Section type="vertical">
+        <div>filter</div>
+        <div>news</div>
+      </Section>
+    </>
   );
 }
 
