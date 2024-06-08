@@ -57,10 +57,10 @@ app.use(express.static(`${__dirname}/public`));
 // ROUTES MIDDLEWARES
 app.use('/user', require('./controllers/user/user.routes'));
 
-app.use('/upcomingmovie', require('./controllers/upcomingmovie/upcomingMovie.routes'));
-app.use('/rssnews', require('./controllers/news/news.routes'));
-app.use('/rsssource', require('./controllers/rssSource/rssSource.routes'));
-app.use('/rsscategory', require('./controllers/category/category.routes'));
+app.use('/movie', require('./controllers/upcomingmovie/upcomingMovie.routes'));
+app.use('/news', require('./controllers/news/news.routes'));
+app.use('/source', require('./controllers/rssSource/rssSource.routes'));
+app.use('/category', require('./controllers/category/category.routes'));
 
 //SCHEDULED TASKS
 cron.schedule('* * * * *', require('./controllers/scheduler/scheduler.controller'));
