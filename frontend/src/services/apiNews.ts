@@ -1,20 +1,23 @@
 import { BASE_URL } from '../utils/constants';
-import NewsResponseModel from '../models/NewsResponse.model';
 
-export async function getNews(): Promise<NewsResponseModel> {
-  const response = await fetch(`${BASE_URL}/rssnews`);
+import NewsModel from '../models/News.model';
+
+export async function getNews(): Promise<NewsModel[]> {
+  const response = await fetch(`${BASE_URL}/news`);
   if (!response.ok) {
     throw new Error('Network response was not ok');
   }
 
-  return response.json();
+  const responseData = await response.json();
+  return responseData.data.news;
 }
 
-export async function getTop3FreshNews(): Promise<NewsResponseModel> {
+export async function getTop3FreshNews(): Promise<NewsModel[]> {
   const response = await fetch(`${BASE_URL}/rssnews/top3fresh`);
   if (!response.ok) {
     throw new Error('Network response was not ok');
   }
 
-  return response.json();
+  const responseData = await response.json();
+  return responseData.data.news;
 }

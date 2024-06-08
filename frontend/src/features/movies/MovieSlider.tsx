@@ -11,7 +11,7 @@ import MovieModel from '../../models/Movie.model';
 
 function MovieSlider({ sliderLabel }: { sliderLabel: string }) {
   const { data, isLoading, error, isError } = useQuery(['upcomingmovie'], getMovies);
-  const movies: MovieModel[] | undefined = data?.data?.movies;
+  const movies: MovieModel[] | undefined = data;
 
   const [selectedMovie, setSelectedMovie] = useState<MovieModel | null>(null);
   const [modalVisible, setModalVisible] = useState(false);

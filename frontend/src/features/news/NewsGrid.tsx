@@ -8,7 +8,7 @@ import NewsGridItem from './NewsGridItem';
 
 function NewsGrid() {
   const { data, error, isLoading, isError } = useQuery(['News'], getTop3FreshNews);
-  const top3News: NewsModel[] | undefined = data?.data.news;
+  const top3News: NewsModel[] | undefined = data;
 
   if (isLoading) {
     return <LoadingSpinner />;
