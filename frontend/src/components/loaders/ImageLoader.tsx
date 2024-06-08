@@ -8,7 +8,7 @@ interface ImageWithLoaderProps {
   onClick?: () => void;
 }
 
-function ImageWithLoader({ src, alt, classes, onClick }: ImageWithLoaderProps) {
+function ImageLoader({ src, alt, classes, onClick }: ImageWithLoaderProps) {
   const loaded = useLoaderHook(src);
 
   return (
@@ -24,4 +24,4 @@ function ImageWithLoader({ src, alt, classes, onClick }: ImageWithLoaderProps) {
   );
 }
 
-export default ImageWithLoader;
+export default ImageLoader;
