@@ -1,26 +1,19 @@
 import { useQuery } from '@tanstack/react-query';
-import Badge from '../components/Badge';
+import { getNews } from '../services/apiNews';
+import { useLocalStorageState } from '../hooks/useLocalStorageState';
+
 import Section from '../components/Section';
-import CategoryModel from '../models/CategoryModel';
-import { getCategories } from '../services/apiCategory';
 import LoadingSpinner from '../components/loaders/LoadingSpinner';
 import Error from '../components/Error';
-
-interface Cards {
-  _id: string;
-  name: string;
-}
-
-const cards: Cards[] = [
-  { _id: 'ddsdsdsdsdsdsd', name: 'hír1' },
-  { _id: 'ddsdsdsdsdse', name: 'hír2' },
-  { _id: 'ddsdsdsdsded', name: 'hír3' },
-];
+import NewsModel from '../models/News.model';
+import NewsCard from '../features/news/NewsCard';
+import Filter from '../components/Filter';
 
 function News() {
-  const { data, error, isLoading, isError } = useQuery(['categories'], getCategories);
-  console.log(data);
-  const categories: CategoryModel[] | undefined = data;
+  const [selectedCategory, setSelectedCategory] = useLocalStorageState<string | null>('', 'selectedCategory');
+  const { data, error, isLoading, isError } = useQuery(['news'], getNews);
+
+  const news: NewsModel[] | undefined = data;
 
   if (isLoading) {
     return <LoadingSpinner />;
@@ -32,21 +25,16 @@ function News() {
 
   return (
     <>
-      <Section type="horizontal">
-        <div className="flex md:flex-col md:w-1/6 border border-red-600">
-          {/* TODO Category filter, Date filter */}
-          <h2>Filter:</h2>
-          <div className="flex md:flex-col gap-1 ">
-            {categories?.map((category) => (
-              <Badge key={category._id} categoryName={category.categoryName} type="EXTRA" />
-            ))}
-          </div>
+      <Section type="horizontal" gap="small">
+        <div className="flex flex-col md:justify-start  md:w-1/6  md:h-96 p-2 gap-2">
+          {/* TODO Category filter, Date filter, SortByDate */}
+          <h1>Hírek</h1>
+          <Filter setSelectedCategory={setSelectedCategory} />
         </div>
-        <div className="flex flex-col  h-full md:w-5/6 border border-red-600">
-          <h2>Cards:</h2>
-          <div className="flex gap-5">
-            {cards.map((card) => (
-              <div key={card._id}>{card.name}</div>
+        <div className="flex flex-col h-full md:w-5/6 ">
+          <div className="flex justify-center flex-wrap gap-2 ">
+            {news?.map((newsItem) => (
+              <NewsCard key={newsItem._id} news={newsItem} />
             ))}
           </div>
         </div>

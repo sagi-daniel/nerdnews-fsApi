@@ -13,7 +13,7 @@ export async function getNews(): Promise<NewsModel[]> {
 }
 
 export async function getTop3FreshNews(): Promise<NewsModel[]> {
-  const response = await fetch(`${BASE_URL}/rssnews/top3fresh`);
+  const response = await fetch(`${BASE_URL}/news/top3fresh`);
   if (!response.ok) {
     throw new Error('Network response was not ok');
   }
