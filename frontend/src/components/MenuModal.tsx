@@ -12,15 +12,15 @@ interface MenuModalProps {
 function MenuModal({ menuItems, isModalOpen, toggleModal }: MenuModalProps) {
   return (
     <div
-      className={`fixed inset-0 bg-black bg-opacity-50 z-50 ${
+      className={`fixed inset-0 bg-black bg-opacity-50 z-30 ${
         isModalOpen ? 'pointer-events-auto opacity-100' : 'pointer-events-none opacity-0'
       } transition-opacity duration-300 ease-in-out`}
       onClick={toggleModal}
     >
       <div
-        className={`bg-border-light dark:bg-border-dark p-5 rounded-r-lg shadow-lg w-1/2 h-full max-w-md fixed left-0 top-0 transform ${
+        className={`bg-border-light dark:bg-border-dark p-5 rounded-r-lg shadow-lg w-1/2 h-full max-w-md fixed left-0 top-0 transform  ${
           isModalOpen ? 'translate-x-0' : '-translate-x-full'
-        } transition-transform duration-300 ease-in-out`}
+        } transition-transform duration-300 ease-in-out z-40`}
         onClick={(e) => e.stopPropagation()}
       >
         <div className="flex justify-end mb-4">
