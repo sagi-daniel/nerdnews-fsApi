@@ -37,14 +37,7 @@ function MovieSlider({ sliderLabel }: { sliderLabel: string }) {
   return (
     <Section type="vertical">
       <h2>{sliderLabel}</h2>
-      {modalVisible && selectedMovie && (
-        <MovieModal
-          closeModal={closeModal}
-          title={selectedMovie.title}
-          releaseDate={selectedMovie.release}
-          overview={selectedMovie.overview}
-        />
-      )}
+      {modalVisible && selectedMovie && <MovieModal closeModal={closeModal} movie={selectedMovie} />}
 
       <Slider moreLabel={'Még több mozifilm...'} morePath={'/movies'}>
         {movies?.map((movie: MovieModel) => (

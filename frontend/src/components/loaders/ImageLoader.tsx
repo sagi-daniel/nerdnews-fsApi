@@ -12,8 +12,9 @@ function ImageLoader({ src, alt, classes, onClick }: ImageWithLoaderProps) {
   const loaded = useLoaderHook(src);
 
   return (
-    <div className="relative">
+    <div className="relative ">
       {!loaded && <LoadingSpinner />}
+
       <img
         src={src}
         alt={alt}
