@@ -19,7 +19,8 @@ exports.findAll = catchAsync(async (req, res, next) => {
   const limit = req.query.limit || 20;
   const skip = req.query.skip || 0;
   const sort = req.query.sort || -1;
-  const news = await newsService.findAll(sort, limit, skip);
+  const category = req.query.category || {};
+  const news = await newsService.findAll(sort, limit, skip, category);
   res.status(200).json({
     status: 'success',
     results: news.length,

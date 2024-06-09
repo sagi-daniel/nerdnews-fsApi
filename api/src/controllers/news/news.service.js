@@ -5,11 +5,11 @@ exports.create = (news) => {
   return newNews.save();
 };
 
-exports.findAll = (sort, limit, skip) =>
-  News.find()
+exports.findAll = (sort, limit, skip, category) =>
+  News.find(category ? { category: category } : {})
     .populate({
       path: 'category',
-      select: ' -__v',
+      select: '-__v',
     })
     .populate({
       path: 'source',
