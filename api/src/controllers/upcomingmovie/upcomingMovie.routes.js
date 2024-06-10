@@ -1,8 +1,8 @@
 const router = require('express').Router();
 const authController = require('../auth/auth.controller');
-const { create, findAll, findById, findByDateRange, update, remove } = require('./upcomingMovie.controller');
+const { create, findAll, findById, findByQuery, update, remove } = require('./upcomingMovie.controller');
 
-router.route('/').get(findByDateRange).post(authController.protect, authController.restrictTo('admin'), create);
+router.route('/').get(findByQuery).post(authController.protect, authController.restrictTo('admin'), create);
 router
   .route('/:id')
   .get(findById)

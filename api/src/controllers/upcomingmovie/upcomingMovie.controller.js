@@ -26,24 +26,31 @@ exports.findAll = catchAsync(async (req, res, next) => {
   });
 });
 
-exports.findByDateRange = catchAsync(async (req, res, next) => {
+exports.findByQuery = catchAsync(async (req, res, next) => {
   const DEFAULTS = {
-    LIMIT: null,
-    SKIP: 0,
+    PAGE_SIZE: null,
+    PAGE: 0,
     SORT_ORDER: -1, // desc
+    FROM_DATE_RANGE: 6,
+    TO_DATE_RANGE: 6,
   };
 
-  const currentDateMonth = new Date().setMonth(new Date().getMonth());
-  const fromDate = req.query.fromDate ? new Date(req.query.fromDate) : new Date(currentDateMonth - 6);
-  const toDate = req.query.toDate ? new Date(req.query.toDate) : new Date(currentDateMonth + 2);
+  const currentDate = new Date();
+  const fromDate = req.query.fromDate
+    ? new Date(req.query.fromDate)
+    : new Date(new Date(currentDate).setMonth(currentDate.getMonth() - DEFAULTS.FROM_DATE_RANGE));
+  const toDate = req.query.toDate
+    ? new Date(req.query.toDate)
+    : new Date(new Date(currentDate).setMonth(currentDate.getMonth() + DEFAULTS.TO_DATE_RANGE));
 
-  let limit = parseInt(req.query.limit, 10) || DEFAULTS.LIMIT;
-  let skip = parseInt(req.query.skip, 10) || DEFAULTS.SKIP;
+  let pageSize = parseInt(req.query.pageSize, 10) || DEFAULTS.PAGE_SIZE;
+  let page = parseInt(req.query.page, 10) || DEFAULTS.PAGE;
   let sortOrder;
-  const category = req.query.category;
 
-  if (limit < 1) limit = DEFAULTS.LIMIT;
-  if (skip < 0) skip = DEFAULTS.SKIP;
+  let genre = req.query.genre.split(',');
+
+  if (pageSize < 1) pageSize = DEFAULTS.PAGE_SIZE;
+  if (page < 0) page = DEFAULTS.PAGE;
 
   if (req.query.sortOrder) {
     if (req.query.sortOrder.toLowerCase() === 'asc') {
@@ -57,7 +64,7 @@ exports.findByDateRange = catchAsync(async (req, res, next) => {
     sortOrder = DEFAULTS.SORT_ORDER;
   }
 
-  const movies = await upcomingMovieService.findByDateRange(fromDate, toDate, sortOrder, limit, category);
+  const movies = await upcomingMovieService.findByQuery(fromDate, toDate, genre, sortOrder, page, pageSize);
   res.status(200).json({
     satus: 'success',
     results: movies.length,

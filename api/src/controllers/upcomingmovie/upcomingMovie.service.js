@@ -7,15 +7,25 @@ exports.create = (upcomingMovie) => {
 
 exports.findAll = () => UpcomingMovie.find();
 
-exports.findByDateRange = (fromDate, toDate, sort, limit) =>
-  UpcomingMovie.find({
+exports.findByQuery = (fromDate, toDate, genre, sortOrder, page, pageSize) => {
+  if (!Array.isArray(genre)) {
+    genre = [genre];
+  }
+  genre = genre.map((genre) => genre.toUpperCase());
+
+  const skip = (page - 1) * pageSize;
+
+  return UpcomingMovie.find({
     release: {
       $lte: toDate,
       $gte: fromDate,
     },
+    genre: { $all: genre },
   })
-    .sort({ release: sort })
-    .limit(limit);
+    .sort({ release: sortOrder })
+    .skip(skip)
+    .limit(pageSize);
+};
 
 exports.findById = (id) => UpcomingMovie.findById(id);
 
