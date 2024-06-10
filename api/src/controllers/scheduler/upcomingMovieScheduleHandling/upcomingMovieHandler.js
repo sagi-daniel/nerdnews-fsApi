@@ -18,7 +18,7 @@ async function upcomingMovieHandler() {
           genre: movie.genre_ids
             .map((genreId) => {
               const genre = moviesGenreList.find((g) => g.id === genreId);
-              return genre ? genre.name : null;
+              return genre ? genre.name.toUpperCase() : null;
             })
             .filter((genre) => genre !== null),
           poster: 'https://image.tmdb.org/t/p/original' + movie.poster_path,
