@@ -5,6 +5,7 @@ export default interface MovieModel {
   title: string;
   overview: string;
   poster: string;
+  genre: string[];
   voteAverage: number;
   voteCount: number;
   createdAt: string;
