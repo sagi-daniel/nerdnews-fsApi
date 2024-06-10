@@ -10,7 +10,7 @@ import Section from '../../components/Section';
 import MovieModel from '../../models/Movie.model';
 
 function MovieSlider({ sliderLabel }: { sliderLabel: string }) {
-  const { data, isLoading, error, isError } = useQuery(['upcomingmovie'], getMovies);
+  const { data, isLoading, error, isError } = useQuery(['Movie'], getMovies);
   const movies: MovieModel[] | undefined = data;
 
   const [selectedMovie, setSelectedMovie] = useState<MovieModel | null>(null);

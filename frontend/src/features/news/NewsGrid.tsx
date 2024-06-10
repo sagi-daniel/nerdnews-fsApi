@@ -7,7 +7,7 @@ import NewsModel from '../../models/News.model';
 import NewsGridItem from './NewsGridItem';
 
 function NewsGrid() {
-  const { data, error, isLoading, isError } = useQuery(['News'], getTop3FreshNews);
+  const { data, error, isLoading, isError } = useQuery(['GetTop3FreshNews'], getTop3FreshNews);
   const top3News: NewsModel[] | undefined = data;
 
   if (isLoading) {

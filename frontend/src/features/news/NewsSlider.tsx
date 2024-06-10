@@ -8,7 +8,7 @@ import Section from '../../components/Section';
 import NewsModel from '../../models/News.model';
 
 function NewsSlider({ sliderLabel }: { sliderLabel: string }) {
-  const { data, error, isLoading, isError } = useQuery(['Top3News'], getNews);
+  const { data, error, isLoading, isError } = useQuery(['News'], getNews);
   const news: NewsModel[] | undefined = data;
 
   if (isLoading) {
