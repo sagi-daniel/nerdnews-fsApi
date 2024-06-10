@@ -11,7 +11,7 @@ import { DarkModeProvider } from './context/DarkModeContext';
 import AppLayout from './components/parts/AppLayout';
 import Home from './pages/Home';
 import News from './pages/News';
-import UpcomingMovies from './pages/UpcomingMovies';
+import Movies from './pages/Movies';
 import IpCidrCalculator from './pages/IpCidrCalculator';
 
 import SignUp from './pages/SignUp';
@@ -41,14 +41,11 @@ function App() {
               <Route index element={<Navigate replace to="Home" />} />
               <Route path="home" element={<Home />} />
               <Route path="news" element={<News />} />
-              <Route path="movies" element={<UpcomingMovies />} />
+              <Route path="movies" element={<Movies />} />
               <Route path="cidr" element={<IpCidrCalculator />} />
               <Route path="signup" element={<SignUp />} />
               <Route path="login" element={<Login />} />
               <Route path="myAccount" element={<MyAccount />} />
-              {/* <Route path="bookings/:bookingId" element={<Booking />} />
-            <Route path="checkin/:bookingId" element={<Checkin />} />
-            <Route path="account" element={<Account />} /> */}
               <Route path="privacy-policy" element={<PrivacyPolicy />} />
               <Route path="*" element={<PageNotFound />} />
             </Route>
