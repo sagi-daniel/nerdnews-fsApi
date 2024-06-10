@@ -25,6 +25,10 @@ exports.findAll = catchAsync(async (req, res, next) => {
   let limit = parseInt(req.query.limit, 10) || DEFAULTS.LIMIT;
   let skip = parseInt(req.query.skip, 10) || DEFAULTS.SKIP;
   let sortOrder;
+  const category = req.query.category;
+
+  if (limit < 1) limit = DEFAULTS.LIMIT;
+  if (skip < 0) skip = DEFAULTS.SKIP;
 
   if (req.query.sortOrder) {
     if (req.query.sortOrder.toLowerCase() === 'asc') {
@@ -37,11 +41,6 @@ exports.findAll = catchAsync(async (req, res, next) => {
   } else {
     sortOrder = DEFAULTS.SORT_ORDER;
   }
-
-  const category = req.query.category;
-
-  if (limit < 1) limit = DEFAULTS.LIMIT;
-  if (skip < 0) skip = DEFAULTS.SKIP;
 
   const news = await newsService.findAll(sortOrder, limit, skip, category);
 
