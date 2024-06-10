@@ -9,7 +9,7 @@ interface LogoProps {
 function Logo({ align = 'left', size = 'small' }: LogoProps) {
   const { isDarkMode } = useDarkMode();
 
-  const logoSrc = isDarkMode ? './assets/logo/logo-dark.svg' : './assets/logo/logo-light.svg';
+  const logoSrc = isDarkMode ? '/assets/logo/logo-dark.svg' : '/assets/logo/logo-light.svg';
 
   const alignmentClasses: Record<string, string> = {
     left: 'justify-start',
