@@ -1,39 +1,56 @@
 import { useQuery } from '@tanstack/react-query';
-import { getNews } from '../services/apiNews';
-import { useLocalStorageState } from '../hooks/useLocalStorageState';
+import { useLocation, useNavigate } from 'react-router-dom';
+import { getNewsByCategory } from '../services/apiNews';
 
 import Section from '../components/Section';
 import LoadingSpinner from '../components/loaders/LoadingSpinner';
 import Error from '../components/Error';
-import NewsModel from '../models/News.model';
 import NewsCard from '../features/news/NewsCard';
-import Filter from '../components/Filter';
+import CategoryFilter from '../components/CategoryFilter';
+import Sort from '../components/Sort';
+import NewsModel from '../models/News.model';
 
 function News() {
-  const [selectedCategory, setSelectedCategory] = useLocalStorageState<string | null>('', 'selectedCategory');
-  const { data, error, isLoading, isError } = useQuery(['news'], getNews);
+  const location = useLocation();
+  const navigate = useNavigate();
+  const searchParams = new URLSearchParams(location.search);
+  const category = searchParams.get('category');
+  const sortOrder = searchParams.get('sortOrder');
 
-  const news: NewsModel[] | undefined = data;
+  const { data, error, isLoading, isError } = useQuery<NewsModel[], Error>(
+    ['NewsByCategory', category, sortOrder],
+    () => getNewsByCategory(category, sortOrder)
+  );
+
+  const handleSortChange = (newSortOrder: string) => {
+    const params = new URLSearchParams(location.search);
+    if (newSortOrder) {
+      params.set('sortOrder', newSortOrder);
+    } else {
+      params.delete('sortOrder');
+    }
+    navigate(`${location.pathname}?${params.toString()}`);
+  };
 
   if (isLoading) {
     return <LoadingSpinner />;
   }
 
   if (isError) {
-    return <Error message={(error as Error).message} />;
+    return <Error message={error?.message} />;
   }
 
   return (
     <>
       <Section type="horizontal" gap="small">
-        <div className="flex flex-col md:justify-start  md:w-1/6  md:h-96 p-2 gap-2">
-          {/* TODO Category filter, Date filter, SortByDate */}
+        <div className="flex flex-col md:w-1/6 md:h-96 p-2 gap-2">
           <h1>Hírek</h1>
-          <Filter setSelectedCategory={setSelectedCategory} />
+          <Sort onSort={handleSortChange} />
+          <CategoryFilter />
         </div>
-        <div className="flex flex-col h-full md:w-5/6 ">
-          <div className="flex justify-center flex-wrap gap-2 ">
-            {news?.map((newsItem) => (
+        <div className="flex flex-col h-full md:w-5/6">
+          <div className="flex justify-center flex-wrap gap-2">
+            {data?.map((newsItem) => (
               <NewsCard key={newsItem._id} news={newsItem} />
             ))}
           </div>
