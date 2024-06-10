@@ -16,11 +16,35 @@ exports.create = catchAsync(async (req, res, next) => {
 });
 
 exports.findAll = catchAsync(async (req, res, next) => {
-  const limit = req.query.limit || 20;
-  const skip = req.query.skip || 0;
-  const sort = req.query.sort || -1;
+  const DEFAULTS = {
+    LIMIT: null,
+    SKIP: 0,
+    SORT_ORDER: -1, // desc
+  };
+
+  let limit = parseInt(req.query.limit, 10) || DEFAULTS.LIMIT;
+  let skip = parseInt(req.query.skip, 10) || DEFAULTS.SKIP;
+  let sortOrder;
+
+  if (req.query.sortOrder) {
+    if (req.query.sortOrder.toLowerCase() === 'asc') {
+      sortOrder = 1;
+    } else if (req.query.sortOrder.toLowerCase() === 'desc') {
+      sortOrder = -1;
+    } else {
+      return next(new AppError('Invalid sortOrder parameter. Use "asc" or "desc".', 400));
+    }
+  } else {
+    sortOrder = DEFAULTS.SORT_ORDER;
+  }
+
   const category = req.query.category;
-  const news = await newsService.findAll(sort, limit, skip, category);
+
+  if (limit < 1) limit = DEFAULTS.LIMIT;
+  if (skip < 0) skip = DEFAULTS.SKIP;
+
+  const news = await newsService.findAll(sortOrder, limit, skip, category);
+
   res.status(200).json({
     status: 'success',
     results: news.length,
