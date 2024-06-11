@@ -1,7 +1,7 @@
 const Movie = require('../../models/Movie.model');
 
-exports.create = (Movie) => {
-  const newMovie = new Movie(Movie);
+exports.create = (movie) => {
+  const newMovie = new Movie(movie);
   return newMovie.save();
 };
 
