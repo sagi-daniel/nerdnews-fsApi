@@ -1,7 +1,7 @@
 const AppError = require('../../utils/appError');
 const logger = require('../../utils/logger');
 const rssHandler = require('./rssScheduleHandling/rssHandler');
-const upcomingMovieHandler = require('./upcomingMovieScheduleHandling/upcomingMovieHandler');
+const upcomingMovieHandler = require('./movieScheduleHandling/upcomingMovieHandler');
 
 async function scheduler(req, res, next) {
   logger.info('Scheduled tasks started...');

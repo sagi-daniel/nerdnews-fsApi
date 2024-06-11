@@ -1,6 +1,6 @@
 const { fetchGenreMovieApi, fetchUpcomingMovieApi } = require('./fetchUpcomingMovieApi.js');
 const AppError = require('../../../utils/appError.js');
-const { create, findAll } = require('../../upcomingmovie/upcomingMovie.service.js');
+const { create, findAll } = require('../../movie/movie.service.js');
 
 async function upcomingMovieHandler() {
   try {
