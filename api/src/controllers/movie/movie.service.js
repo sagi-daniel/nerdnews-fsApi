@@ -8,12 +8,13 @@ exports.create = (movie) => {
 exports.findAll = () => Movie.find();
 
 exports.findByQuery = (fromDate, toDate, genre, sortOrder, page, pageSize) => {
-  let query = {
-    release: {
-      $lte: toDate,
+  let query = {};
+  if (fromDate && toDate) {
+    query.release = {
       $gte: fromDate,
-    },
-  };
+      $lte: toDate,
+    };
+  }
 
   if (genre) {
     let genreArr = [];

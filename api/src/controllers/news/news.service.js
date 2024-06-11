@@ -20,12 +20,13 @@ exports.findAll = async (sortOrder, limit, skip, categoryName) => {
 };
 
 exports.findByQuery = async (fromDate, toDate, category, sortOrder, page, pageSize) => {
-  let query = {
-    release: {
-      $lte: toDate,
+  let query = {};
+  if (fromDate && toDate) {
+    query.release = {
       $gte: fromDate,
-    },
-  };
+      $lte: toDate,
+    };
+  }
 
   if (category) {
     const categoryObj = await Category.findOne({ categoryName: category.toUpperCase() }).select('_id');
