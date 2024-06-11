@@ -8,15 +8,36 @@ exports.create = (news) => {
 };
 
 exports.findAll = async (sortOrder, limit, skip, categoryName) => {
-  let query = {};
-  if (categoryName) {
-    const category = await Category.findOne({ categoryName: categoryName.toUpperCase() }).select('_id');
-    if (category) {
-      query.category = category._id;
+  return await News.find()
+    .populate({
+      path: 'category',
+      select: '-__v',
+    })
+    .populate({
+      path: 'source',
+      select: '-__v -createdAt -updatedAt',
+    });
+};
+
+exports.findByQuery = async (fromDate, toDate, category, sortOrder, page, pageSize) => {
+  let query = {
+    release: {
+      $lte: toDate,
+      $gte: fromDate,
+    },
+  };
+
+  if (category) {
+    const categoryObj = await Category.findOne({ categoryName: category.toUpperCase() }).select('_id');
+    if (categoryObj) {
+      query.category = categoryObj._id;
     } else {
       return [];
     }
   }
+
+  const skip = (page - 1) * pageSize;
+
   return await News.find(query)
     .populate({
       path: 'category',
@@ -27,8 +48,8 @@ exports.findAll = async (sortOrder, limit, skip, categoryName) => {
       select: '-__v -createdAt -updatedAt',
     })
     .sort({ release: sortOrder })
-    .skip(parseInt(skip))
-    .limit(parseInt(limit));
+    .skip(skip)
+    .limit(pageSize);
 };
 
 exports.findById = (id) =>
