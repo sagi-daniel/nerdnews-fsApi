@@ -1,3 +1,4 @@
+const AppError = require('../../utils/appError');
 const logger = require('../../utils/logger');
 const rssHandler = require('./rssScheduleHandling/rssHandler');
 const upcomingMovieHandler = require('./movieScheduleHandling/upcomingMovieHandler');
@@ -6,20 +7,12 @@ async function scheduler(req, res, next) {
   logger.info('Scheduled tasks started...');
   try {
     await rssHandler();
-    logger.info('RSS handler completed successfully.');
-  } catch (error) {
-    logger.error(`RSS handler error: ${error.message}`);
-  }
-
-  try {
     await upcomingMovieHandler();
-    logger.info('Upcoming movie handler completed successfully.');
+    logger.info('Scheduled tasks completed successfully');
   } catch (error) {
-    logger.error(`Upcoming movie handler error: ${error.message}`);
+    logger.error(`Scheduled task error: ${error.message}`);
+    return next(new AppError('Scheduled task error', 500));
   }
-
-  logger.info('Scheduled tasks completed.');
-  next();
 }
 
 module.exports = scheduler;
