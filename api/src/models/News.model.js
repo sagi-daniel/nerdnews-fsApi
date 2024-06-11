@@ -10,7 +10,7 @@ const NewsSchema = mongoose.Schema(
     },
     source: {
       type: mongoose.SchemaTypes.ObjectId,
-      ref: 'RssSource',
+      ref: 'Source',
       required: true,
     },
     category: {
