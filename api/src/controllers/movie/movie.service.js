@@ -32,6 +32,6 @@ exports.findByQuery = (fromDate, toDate, genre, sortOrder, page, pageSize) => {
 
 exports.findById = (id) => Movie.findById(id);
 
-exports.update = (id, Movie) => Movie.findByIdAndUpdate(id, Movie, { new: true });
+exports.update = (id, movie) => Movie.findByIdAndUpdate(id, movie, { new: true });
 
 exports.remove = (id) => Movie.findByIdAndDelete(id);
