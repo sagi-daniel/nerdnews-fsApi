@@ -1,5 +1,5 @@
 const News = require('../../../models/News.model');
-const RssSource = require('../../../models/RssSource.model');
+const RssSource = require('../../../models/Source.model');
 
 exports.create = (news) => {
   const newNews = new News(news);
