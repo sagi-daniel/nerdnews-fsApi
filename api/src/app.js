@@ -57,9 +57,9 @@ app.use(express.static(`${__dirname}/public`));
 // ROUTES MIDDLEWARES
 app.use('/user', require('./controllers/user/user.routes'));
 
-app.use('/movie', require('./controllers/upcomingmovie/upcomingMovie.routes'));
+app.use('/movie', require('./controllers/movie/movie.routes'));
 app.use('/news', require('./controllers/news/news.routes'));
-app.use('/source', require('./controllers/rssSource/rssSource.routes'));
+app.use('/source', require('./controllers/source/source.routes'));
 app.use('/category', require('./controllers/category/category.routes'));
 
 //SCHEDULED TASKS
