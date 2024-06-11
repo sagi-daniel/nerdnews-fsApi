@@ -1,7 +1,7 @@
 const mongoose = require('mongoose');
 const validator = require('validator');
 
-const UpcomingMovieSchema = mongoose.Schema(
+const MovieSchema = mongoose.Schema(
   {
     tmdb_id: {
       type: Number,
@@ -39,4 +39,4 @@ const UpcomingMovieSchema = mongoose.Schema(
   { timestamps: true }
 );
 
-module.exports = mongoose.model('UpcomingMovie', UpcomingMovieSchema);
+module.exports = mongoose.model('Movie', MovieSchema);
