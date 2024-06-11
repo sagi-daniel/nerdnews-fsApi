@@ -1,7 +1,7 @@
 const Source = require('../../models/Source.model');
 
-exports.create = (Source) => {
-  const newSource = new Source(Source);
+exports.create = (source) => {
+  const newSource = new Source(source);
   return newSource.save();
 };
 

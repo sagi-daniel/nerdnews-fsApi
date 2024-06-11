@@ -1,6 +1,6 @@
 const mongoose = require('mongoose');
 
-const RssSourceSchema = mongoose.Schema(
+const SourceSchema = mongoose.Schema(
   {
     sourceName: {
       type: String,
@@ -29,4 +29,4 @@ const RssSourceSchema = mongoose.Schema(
   { timestamps: true }
 );
 
-module.exports = mongoose.model('RssSource', RssSourceSchema);
+module.exports = mongoose.model('Source', SourceSchema);
