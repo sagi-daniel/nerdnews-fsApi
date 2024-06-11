@@ -1,7 +1,7 @@
 const router = require('express').Router();
-const { create, findAll, findById, update, remove, top3fresh } = require('./news.controller');
+const { create, findByQuery, findById, update, remove, top3fresh } = require('./news.controller');
 
-router.route('/').get(findAll).post(create);
+router.route('/').get(findByQuery).post(create);
 router.route('/top3fresh').get(top3fresh);
 router.route('/:id').get(findById).patch(update).delete(remove);
 
