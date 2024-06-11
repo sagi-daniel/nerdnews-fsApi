@@ -18,11 +18,11 @@ exports.findAll = catchAsync(async (req, res) => {
 });
 
 exports.findByQuery = catchAsync(async (req, res, next) => {
-  const fromDate = parseDate(req.query.fromDate);
-  const toDate = parseDate(req.query.toDate);
+  const fromDate = parseDate(req.query.fromDate, 'from');
+  const toDate = parseDate(req.query.toDate, 'to');
 
   const { pageSize, page } = parsePaginationParams(req.query);
-  const sortOrder = parseSortOrder(req.query.sortOrder, next);
+  const sortOrder = parseSortOrder(req.query.sortOrder);
   const genre = req.query.genre || '';
 
   const movies = await movieService.findByQuery(fromDate, toDate, genre, sortOrder, page, pageSize);
