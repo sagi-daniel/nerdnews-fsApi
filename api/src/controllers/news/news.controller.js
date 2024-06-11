@@ -1,113 +1,60 @@
+const newsService = require('./news.service');
 const AppError = require('../../utils/appError');
 const catchAsync = require('../../utils/catchAsync');
-const newsService = require('./news.service');
+const sendResponse = require('../../utils/sendResponse');
+const { DEFAULTS, parseDate, parseSortOrder, parsePaginationParams } = require('../../utils/helpers');
 
 exports.create = catchAsync(async (req, res, next) => {
   const news = await newsService.create(req.body);
   if (!news) {
-    return next(new AppError(`News could not saved`));
+    return next(new AppError('News could not be saved'));
   }
-  res.status(200).json({
-    status: 'success',
-    data: {
-      news,
-    },
-  });
+  sendResponse(res, { data: { news } });
 });
 
-exports.findAll = catchAsync(async (req, res, next) => {
-  const DEFAULTS = {
-    LIMIT: null,
-    SKIP: 0,
-    SORT_ORDER: -1, // desc
-  };
+exports.findAll = catchAsync(async (req, res) => {
+  const news = await newsService.findAll();
+  sendResponse(res, { results: news.length, data: { news } });
+});
 
-  let limit = parseInt(req.query.limit, 10) || DEFAULTS.LIMIT;
-  let skip = parseInt(req.query.skip, 10) || DEFAULTS.SKIP;
-  let sortOrder;
-  const category = req.query.category;
+exports.findByQuery = catchAsync(async (req, res, next) => {
+  const fromDate = parseDate(req.query.fromDate);
+  const toDate = parseDate(req.query.toDate);
 
-  if (limit < 1) limit = DEFAULTS.LIMIT;
-  if (skip < 0) skip = DEFAULTS.SKIP;
+  const { pageSize, page } = parsePaginationParams(req.query);
+  const sortOrder = parseSortOrder(req.query.sortOrder, next);
+  const category = req.query.category || '';
 
-  if (req.query.sortOrder) {
-    if (req.query.sortOrder.toLowerCase() === 'asc') {
-      sortOrder = 1;
-    } else if (req.query.sortOrder.toLowerCase() === 'desc') {
-      sortOrder = -1;
-    } else {
-      return next(new AppError('Invalid sortOrder parameter. Use "asc" or "desc".', 400));
-    }
-  } else {
-    sortOrder = DEFAULTS.SORT_ORDER;
-  }
-
-  const news = await newsService.findAll(sortOrder, limit, skip, category);
-
-  res.status(200).json({
-    status: 'success',
-    results: news.length,
-    data: {
-      news,
-    },
-  });
+  const news = await newsService.findByQuery(fromDate, toDate, category, sortOrder, page, pageSize);
+  sendResponse(res, { results: news.length, data: { news } });
 });
 
 exports.findById = catchAsync(async (req, res, next) => {
-  const id = req.params.id;
-  const news = await newsService.findById(id);
+  const news = await newsService.findById(req.params.id);
   if (!news) {
-    return next(new AppError(`News with ${id} ID could not found`));
+    return next(new AppError(`News with ID ${req.params.id} could not be found`));
   }
-  if (news) {
-    res.status(200).json({
-      status: 'success',
-      data: {
-        news,
-      },
-    });
-  }
+  sendResponse(res, { data: { news } });
 });
 
 exports.update = catchAsync(async (req, res, next) => {
-  const id = req.params.id;
-  const news = await newsService.update(id, req.body);
+  const news = await newsService.update(req.params.id, req.body);
   if (!news) {
-    return next(new AppError(`News with ${id} ID could not found`));
+    return next(new AppError(`News with ID ${req.params.id} could not be found`));
   }
-  res.status(200).json({
-    status: 'success',
-    data: {
-      news,
-    },
-  });
+  sendResponse(res, { data: { news } });
 });
 
 exports.remove = catchAsync(async (req, res, next) => {
-  const id = req.params.id;
-  const news = await newsService.remove(id);
+  const news = await newsService.remove(req.params.id);
   if (!news) {
-    return next(new AppError(`News with ${id} ID could not found`));
+    return next(new AppError(`News with ID ${req.params.id} could not be found`));
   }
-
-  res.status(200).json({
-    status: 'success',
-    data: {
-      news,
-    },
-  });
+  sendResponse(res, { data: { news } });
 });
 
-exports.top3fresh = catchAsync(async (req, res, next) => {
-  const limit = 3;
-  const skip = 0;
-  const sort = -1;
-  const news = await newsService.findAll(sort, limit, skip);
-  res.status(200).json({
-    status: 'success',
-    results: news.length,
-    data: {
-      news,
-    },
-  });
+exports.top3fresh = catchAsync(async (req, res) => {
+  const sortOrder = parseSortOrder(req.query.sortOrder, next);
+  const news = await newsService.findAll(sortOrder, 3, 0);
+  sendResponse(res, { results: news.length, data: { news } });
 });
