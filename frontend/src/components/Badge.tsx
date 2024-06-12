@@ -1,7 +1,7 @@
 import { MouseEvent } from 'react';
 import { CategoryName } from '../models/CategoryModel';
 
-type CategoryType = 'NORMAL' | 'BUTTON';
+type CategoryType = 'NORMAL' | 'BUTTON' | 'THIN';
 
 interface BadgeProps {
   categoryName?: CategoryName;
@@ -32,6 +32,14 @@ function Badge({ categoryName = 'DEFAULT', type = 'NORMAL', isSelected, onClick 
         } px-1 py-0.5 text-lg font-semibold rounded cursor-pointer`}
         onClick={handleClick}
       >
+        {categoryName}
+      </span>
+    );
+  }
+
+  if (type === 'THIN') {
+    return (
+      <span className={` ${categoriesColorOptions[categoryName]} px-1 py-0.5 text-lg font-semibold rounded`}>
         {categoryName}
       </span>
     );
