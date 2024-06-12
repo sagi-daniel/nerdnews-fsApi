@@ -1,10 +1,10 @@
-import { useState } from "react";
-import calculateCIDR from "../utils/cidrCalc";
-import InputField from "../components/InputField";
-import Section from "../components/Section";
-import { validateIpAddress, validatePrefix } from "../utils/validators";
-import { useLocalStorageState } from "../hooks/useLocalStorageState";
-import { FiRefreshCcw } from "react-icons/fi";
+import React, { useEffect, useState } from 'react';
+import InputField from '../components/InputField';
+import Section from '../components/Section';
+import calculateCIDR from '../utils/cidrCalc';
+import { validateIpAddress, validatePrefix } from '../utils/validators';
+import { useLocalStorageState } from '../hooks/useLocalStorageState';
+import { FiRefreshCcw } from 'react-icons/fi';
 
 interface CIDRResult {
   network: string;
@@ -15,15 +15,17 @@ interface CIDRResult {
 }
 
 function CidrCalculator() {
-  const [ip, setIp] = useLocalStorageState<string>("", "ip-input");
-  const [prefix, setPrefix] = useLocalStorageState<string>("", "prefix-input");
-  const [result, setResult] = useLocalStorageState<CIDRResult | null>(
-    null,
-    "cidr"
-  );
+  const [ip, setIp] = useLocalStorageState<string>('', 'ip-input');
+  const [prefix, setPrefix] = useLocalStorageState<string>('', 'prefix-input');
+  const [result, setResult] = useLocalStorageState<CIDRResult | null>(null, 'cidr');
 
   const [ipValid, setIpValid] = useState<boolean>(false);
   const [prefixValid, setPrefixValid] = useState<boolean>(false);
+
+  useEffect(() => {
+    setIpValid(validateIpAddress(ip));
+    setPrefixValid(validatePrefix(prefix));
+  }, [ip, prefix]);
 
   const handleCalculate = () => {
     if (!ip || !prefix || !validateIpAddress(ip) || !validatePrefix(prefix)) {
@@ -36,13 +38,15 @@ function CidrCalculator() {
 
   const handleCloseResult = () => {
     setResult(null);
-    setIp("");
-    setPrefix("");
+    setIp('');
+    setPrefix('');
+    setIpValid(false);
+    setPrefixValid(false);
   };
 
   return (
     <Section type="horizontal" space="large">
-      <div className="flex flex-col md:w-1/2 justify-center ">
+      <div className="flex flex-col  md:w-1/2 justify-center ">
         <h1 className="">CIDR IP Calculator</h1>
         <InputField
           type="text"
@@ -50,8 +54,7 @@ function CidrCalculator() {
           label="Target IP Address:"
           value={ip}
           setValue={setIp}
-          validateInput={validateIpAddress}
-          validationResult={setIpValid}
+          isValid={ipValid}
           errorMessage="Please enter a valid IP address."
           successMessage="Valid IP address"
         />
@@ -61,17 +64,12 @@ function CidrCalculator() {
           label="Prefix"
           value={prefix}
           setValue={setPrefix}
-          validateInput={validatePrefix}
-          validationResult={setPrefixValid}
-          errorMessage="Please enter a valid prefix (0-32)."
-          successMessage="Valid prefix"
+          isValid={prefixValid}
+          errorMessage="Please enter a valid Prefix number 0-32."
+          successMessage="Valid Prefix number"
         />
         <div>
-          <button
-            onClick={handleCalculate}
-            disabled={!ipValid || !prefixValid}
-            className="btn-primary-md"
-          >
+          <button onClick={handleCalculate} disabled={!ipValid || !prefixValid} className="btn-primary-md">
             Calculate
           </button>
         </div>
@@ -101,8 +99,7 @@ function CidrCalculator() {
               <span className="font-bold">Last Host:</span> {result.lastHost}
             </p>
             <p>
-              <span className="font-bold">Next Subnet:</span>{" "}
-              {result.nextSubnet}
+              <span className="font-bold">Next Subnet:</span> {result.nextSubnet}
             </p>
           </div>
         )}
