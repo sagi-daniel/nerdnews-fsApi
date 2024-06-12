@@ -5,12 +5,9 @@ function useNewsFilter() {
   const location = useLocation();
   const navigate = useNavigate();
 
-  const getQueryParam = (param: string) => {
-    const params = new URLSearchParams(location.search);
-    return params.get(param);
-  };
+  const getQueryParam = (param: string) => new URLSearchParams(location.search).get(param);
 
-  const setQueryParams = (params: { [key: string]: string }) => {
+  const setParams = (params: { [key: string]: string }) => {
     const searchParams = new URLSearchParams(location.search);
     Object.entries(params).forEach(([key, value]) => {
       if (value) {
@@ -24,29 +21,34 @@ function useNewsFilter() {
 
   const selectedCategory = getQueryParam('category') || 'TECH';
   const selectedSort = getQueryParam('sortOrder') || 'desc';
-  const fromDate = getQueryParam('fromDate') || '';
-  const toDate = getQueryParam('toDate') || '';
 
-  const [dateRange, setDateRange] = useState<{ fromDate: string; toDate: string }>({
-    fromDate,
-    toDate,
-  });
+  // Kezdeti érték beállítása az előző 30 napra
+  const startDate = new Date();
+  startDate.setDate(startDate.getDate() - 30);
+
+  const initialFromDate = getQueryParam('fromDate') || startDate.toISOString().split('T')[0];
+  const initialToDate = getQueryParam('toDate') || new Date().toISOString().split('T')[0];
+
+  const [fromDate, setFromDate] = useState<string>(initialFromDate);
+  const [toDate, setToDate] = useState<string>(initialToDate);
 
   useEffect(() => {
-    setQueryParams({ category: selectedCategory, sortOrder: selectedSort });
+    setParams({ category: selectedCategory, sortOrder: selectedSort });
   }, [selectedCategory, selectedSort]);
 
   useEffect(() => {
-    setQueryParams({ fromDate: dateRange.fromDate, toDate: dateRange.toDate });
-  }, [dateRange]);
+    setParams({ fromDate, toDate });
+  }, [fromDate, toDate]);
 
   return {
     selectedCategory,
-    setSelectedCategory: (category: string) => setQueryParams({ category }),
+    setSelectedCategory: (category: string) => setParams({ category }),
     selectedSort,
-    setSelectedSort: (sortOrder: string) => setQueryParams({ sortOrder }),
-    dateRange,
-    setDateRange,
+    setSelectedSort: (sortOrder: string) => setParams({ sortOrder }),
+    fromDate,
+    setFromDate,
+    toDate,
+    setToDate,
   };
 }
 
