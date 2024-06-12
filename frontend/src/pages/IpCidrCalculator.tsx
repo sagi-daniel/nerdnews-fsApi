@@ -3,7 +3,7 @@ import InputField from '../components/InputField';
 import Section from '../components/Section';
 import calculateCIDR from '../utils/cidrCalc';
 import { validateIpAddress, validatePrefix } from '../utils/validators';
-import { useLocalStorageState } from '../hooks/useLocalStorageState';
+import useLocalStorageState from '../hooks/useLocalStorageState';
 import { FiRefreshCcw } from 'react-icons/fi';
 
 interface CIDRResult {
