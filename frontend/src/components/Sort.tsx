@@ -1,28 +1,40 @@
-import { useState, ChangeEvent } from 'react';
+import { useNavigate, useLocation } from 'react-router-dom';
+import SelectField from './SelectField';
 
 interface SortProps {
-  onSort: (sortOrder: string) => void;
+  selectedSort: string;
+  setSelectedSort: (sortOrder: string) => void;
 }
 
-function Sort({ onSort }: SortProps) {
-  const [sortOrder, setSortOrder] = useState<string>('desc'); // Alapértelmezett érték: asc
+function Sort({ selectedSort, setSelectedSort }: SortProps) {
+  const navigate = useNavigate();
+  const location = useLocation();
 
-  const handleSortChange = (event: ChangeEvent<HTMLSelectElement>) => {
-    const newSortOrder = event.target.value;
-    setSortOrder(newSortOrder);
-    onSort(newSortOrder);
+  const handleSortOrderChange = (sortOrder: string) => {
+    const params = new URLSearchParams(location.search);
+    if (sortOrder) {
+      params.set('sortOrder', sortOrder);
+    } else {
+      params.delete('sortOrder');
+    }
+
+    const newUrl = `${location.pathname}?${params.toString()}`.replace(/%2C/g, ',');
+    navigate(newUrl, { replace: true });
   };
 
   return (
-    <div className="relative inline-flex">
-      <select
-        value={sortOrder}
-        onChange={handleSortChange}
-        className="appearance-none w-full text-content-light  border border-border-dark  py-2 px-4 pr-8 rounded shadow leading-tight focus:outline-none focus:border-primary"
-      >
-        <option value="desc">Legújabb elöl</option>
-        <option value="asc">Régebbi elöl</option>
-      </select>
+    <div className="flex  md:flex-col  rounded-md">
+      <SelectField
+        options={[
+          { name: 'Újak elől', value: 'desc' },
+          { name: 'Régiek elől', value: 'asc' },
+        ]}
+        id="sortOrder"
+        label="Sorrend:"
+        value={selectedSort}
+        setValue={setSelectedSort}
+        handleSortOrderChange={handleSortOrderChange}
+      />
     </div>
   );
 }

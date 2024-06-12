@@ -11,15 +11,27 @@ export async function getNews(): Promise<NewsModel[]> {
   return responseData.data.news;
 }
 
-export async function getNewsByCategory(category: string | null, sortOrder?: string | null): Promise<NewsModel[]> {
+export async function getNewsByQuery(
+  category: string,
+  sortOrder: string,
+  fromDate?: string,
+  toDate?: string
+): Promise<NewsModel[]> {
   const params = new URLSearchParams();
-  if (category) params.append('category', category);
-  if (sortOrder) params.append('sortOrder', sortOrder);
+  params.append('category', category);
+  params.append('sortOrder', sortOrder);
+  if (fromDate) {
+    params.append('fromDate', fromDate);
+  }
+  if (toDate) {
+    params.append('toDate', toDate);
+  }
 
   const response = await fetch(`${BASE_URL}/news?${params.toString()}`);
   if (!response.ok) {
     throw new Error('Network response was not ok');
   }
+
   const responseData = await response.json();
   return responseData.data.news;
 }

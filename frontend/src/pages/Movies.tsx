@@ -1,4 +1,4 @@
-import { useLocation, useNavigate } from 'react-router-dom';
+// import { useLocation, useNavigate } from 'react-router-dom';
 import { useQuery } from '@tanstack/react-query';
 import { getMovies } from '../services/apiMovies';
 import { useState } from 'react';
@@ -10,9 +10,9 @@ import LoadingSpinner from '../components/loaders/LoadingSpinner';
 import Error from '../components/Error';
 
 function UpcomingMovies() {
-  const location = useLocation();
-  const navigate = useNavigate();
-  const searchParams = new URLSearchParams(location.search);
+  // const location = useLocation();
+  // const navigate = useNavigate();
+  // const searchParams = new URLSearchParams(location.search);
   // const category = searchParams.get('category');
   // const sortOrder = searchParams.get('sortOrder');
 
@@ -28,7 +28,7 @@ function UpcomingMovies() {
   //   navigate(`${location.pathname}?${params.toString()}`);
   // };
 
-  const movies: MovieModel[] | undefined = data;
+  // const movies: MovieModel[] | undefined = data;
 
   const [selectedMovie, setSelectedMovie] = useState<MovieModel | null>(null);
   const [modalVisible, setModalVisible] = useState(false);
