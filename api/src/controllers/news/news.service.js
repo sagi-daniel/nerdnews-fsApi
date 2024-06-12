@@ -29,11 +29,21 @@ exports.findByQuery = async (fromDate, toDate, category, sortOrder, page, pageSi
   }
 
   if (category) {
-    const categoryObj = await Category.findOne({ categoryName: category.toUpperCase() }).select('_id');
-    if (categoryObj) {
-      query.category = categoryObj._id;
-    } else {
-      return [];
+    const categoryArr = category.split(',').map((category) => category.trim().toUpperCase());
+
+    // Using Promise.all to wait for all findOne queries to complete
+    const categoryIdArr = await Promise.all(
+      categoryArr.map(async (category) => {
+        const categoryObj = await Category.findOne({ categoryName: category }).select('_id');
+        return categoryObj ? categoryObj._id : null;
+      })
+    );
+
+    // Filtering out null values (in case some categories were not found)
+    const validCategoryIds = categoryIdArr.filter((id) => id !== null);
+
+    if (validCategoryIds.length > 0) {
+      query.category = { $in: validCategoryIds };
     }
   }
 
