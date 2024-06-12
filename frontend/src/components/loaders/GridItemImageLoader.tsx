@@ -11,7 +11,7 @@ function GridItemImageLoader({ src }: GridItemImageLoader) {
   const loaded = useLoaderHook(src);
 
   return (
-    <div className="relative size-full z-[-999]">
+    <div className="relative size-full z-[-999] overflow-hidden">
       {!loaded && <LoadingSpinner />}
       {loaded && (
         <div
