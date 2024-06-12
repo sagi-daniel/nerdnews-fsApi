@@ -19,7 +19,7 @@ function NewsGridItem({ news, highlighted = false }: NewsGridItemProps) {
         <h3 className={`${textStyle} font-semibold`}>{news?.title}</h3>
         <p>
           <span>{formatDateIsoToNormal(news?.release)}</span> |{' '}
-          <Badge categoryName={news?.category.categoryName} type="NORMAL" />
+          <Badge categoryName={news?.category.categoryName} type="THIN" />
         </p>
         {highlighted && <p className="text-sm md:text-lg ">{truncateText(news?.content, 80)}</p>}
       </div>
