@@ -5,17 +5,19 @@ interface InputFieldProps {
   id?: string;
   label: string;
   value: string;
-  setValue: React.Dispatch<React.SetStateAction<string>>;
+  defaultValue?: string;
+  setValue: React.Dispatch<React.SetStateAction<string>> | ((newValue: string) => void);
   isValid?: boolean;
   errorMessage?: string;
   successMessage?: string;
 }
 
 function InputField({
-  type = 'text',
+  type,
   id,
   label,
   value,
+  defaultValue,
   setValue,
   isValid,
   errorMessage,
@@ -34,6 +36,7 @@ function InputField({
         id={id}
         value={value}
         onChange={handleChange}
+        defaultValue={defaultValue}
         className="w-full border border-bg-border-light dark:border-bg-dark rounded-md p-2 text-content-light"
       />
       {!isValid && <small className="text-error">{errorMessage}</small>}

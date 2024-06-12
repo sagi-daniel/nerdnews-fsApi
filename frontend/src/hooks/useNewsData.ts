@@ -4,11 +4,10 @@ import NewsModel from '../models/News.model';
 import useNewsFilter from '../hooks/useNewsFilter';
 
 function useNewsData() {
-  const { selectedCategory, selectedSort, dateRange } = useNewsFilter();
+  const { selectedCategory, selectedSort, fromDate, toDate } = useNewsFilter();
 
-  return useQuery<NewsModel[], Error>(
-    ['NewsByCategory', selectedCategory, selectedSort, dateRange.fromDate, dateRange.toDate],
-    () => getNewsByQuery(selectedCategory, selectedSort, dateRange.fromDate, dateRange.toDate)
+  return useQuery<NewsModel[], Error>(['NewsByCategory', selectedCategory, selectedSort, fromDate, toDate], () =>
+    getNewsByQuery(selectedCategory, selectedSort, fromDate, toDate)
   );
 }
 

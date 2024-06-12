@@ -1,40 +1,24 @@
-import React from 'react';
 import InputField from './InputField';
+import useInputValidation from '../hooks/useInputValidation';
 
 interface DateRangeFilterProps {
-  dateRange: { fromDate: string; toDate: string };
-  setDateRange: React.Dispatch<React.SetStateAction<{ fromDate: string; toDate: string }>>;
+  fromDate: string;
+  toDate: string;
+  setFromDate: React.Dispatch<React.SetStateAction<string>>;
+  setToDate: React.Dispatch<React.SetStateAction<string>>;
 }
 
-function useInputValidation(initialValue: string, validateInput: (value: string) => boolean) {
-  const [value, setValue] = React.useState<string>(initialValue);
-  const [error, setError] = React.useState<string>('');
-
-  const handleChange = (newValue: string) => {
-    setValue(newValue);
-
-    if (!validateInput(newValue)) {
-      setError('Hibás érték');
-    } else {
-      setError('');
-    }
-  };
-
-  return { value, error, setValue: handleChange }; // Módosítás itt
-}
-
-function DateRangeFilter({ dateRange, setDateRange }: DateRangeFilterProps) {
-  const fromDateInput = useInputValidation(dateRange.fromDate, (value) => true);
-  const toDateInput = useInputValidation(dateRange.toDate, (value) => true);
-
+function DateRangeFilter({ fromDate, toDate, setFromDate, setToDate }: DateRangeFilterProps) {
+  const fromDateInput = useInputValidation(fromDate, () => true);
+  const toDateInput = useInputValidation(toDate, () => true);
   const handleFromDateChange = (newValue: string) => {
-    fromDateInput.setValue(newValue); // Módosítás itt
-    setDateRange((prev) => ({ ...prev, fromDate: newValue }));
+    fromDateInput.setValue(newValue);
+    setFromDate(newValue);
   };
 
   const handleToDateChange = (newValue: string) => {
-    toDateInput.setValue(newValue); // Módosítás itt
-    setDateRange((prev) => ({ ...prev, toDate: newValue }));
+    toDateInput.setValue(newValue);
+    setToDate(newValue);
   };
 
   return (
@@ -44,6 +28,7 @@ function DateRangeFilter({ dateRange, setDateRange }: DateRangeFilterProps) {
         id="fromDate"
         label="Kezdő dátum:"
         value={fromDateInput.value}
+        defaultValue={fromDate}
         setValue={handleFromDateChange}
         errorMessage={fromDateInput.error}
         successMessage="Érvényes érték"
@@ -54,6 +39,7 @@ function DateRangeFilter({ dateRange, setDateRange }: DateRangeFilterProps) {
         id="toDate"
         label="Vége dátum:"
         value={toDateInput.value}
+        defaultValue={toDate}
         setValue={handleToDateChange}
         errorMessage={toDateInput.error}
         successMessage="Érvényes érték"

@@ -40,7 +40,7 @@ function CategoryFilter({ selectedCategory, setSelectedCategory }: CategoryFilte
 
   return (
     <div>
-      <div className="flex flex-wrap gap-2 ">
+      <div className="flex flex-wrap gap-2 mb-3">
         {data?.map((category) => (
           <Badge
             key={category._id}
