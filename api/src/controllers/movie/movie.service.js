@@ -1,4 +1,5 @@
 const Movie = require('../../models/Movie.model');
+const { GENRES } = require('../../utils/constants');
 
 exports.create = (movie) => {
   const newMovie = new Movie(movie);
@@ -7,8 +8,9 @@ exports.create = (movie) => {
 
 exports.findAll = () => Movie.find();
 
-exports.findByQuery = (fromDate, toDate, genre, sortOrder, page, pageSize) => {
+exports.findByQuery = async (fromDate, toDate, genre, sortOrder, page, pageSize) => {
   let query = {};
+
   if (fromDate && toDate) {
     query.release = {
       $gte: fromDate,
@@ -16,19 +18,21 @@ exports.findByQuery = (fromDate, toDate, genre, sortOrder, page, pageSize) => {
     };
   }
 
-  if (genre) {
-    let genreArr = [];
-    if (!Array.isArray(genre)) {
-      genreArr = genre.split(',').map((genre) => genre.trim().toUpperCase());
-    } else {
-      genreArr = genre.map((genre) => genre.toUpperCase());
-    }
-    query.genre = { $all: genreArr };
-  }
+  if (genre && genre !== 'ALL') {
+    const genreUpperCase = genre.trim().toUpperCase();
 
+    if (GENRES.includes(genreUpperCase)) {
+      query.genre = genreUpperCase;
+    }
+  }
   const skip = (page - 1) * pageSize;
 
-  return Movie.find(query).sort({ release: sortOrder }).skip(skip).limit(pageSize);
+  const [movies, totalItems] = await Promise.all([
+    Movie.find(query).sort({ release: sortOrder }).skip(skip).limit(pageSize),
+    Movie.countDocuments(query),
+  ]);
+
+  return { movies, totalItems };
 };
 
 exports.findById = (id) => Movie.findById(id);

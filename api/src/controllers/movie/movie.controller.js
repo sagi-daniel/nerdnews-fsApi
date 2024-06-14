@@ -25,8 +25,14 @@ exports.findByQuery = catchAsync(async (req, res, next) => {
   const sortOrder = parseSortOrder(req.query.sortOrder);
   const genre = req.query.genre || '';
 
-  const movies = await movieService.findByQuery(fromDate, toDate, genre, sortOrder, page, pageSize);
-  sendResponse(res, { results: movies.length, data: { movies } });
+  const { movies, totalItems } = await movieService.findByQuery(fromDate, toDate, genre, sortOrder, page, pageSize);
+
+  sendResponse(res, {
+    status: 'success',
+    results: movies.length,
+    totalItems,
+    data: { movies },
+  });
 });
 
 exports.findById = catchAsync(async (req, res, next) => {
