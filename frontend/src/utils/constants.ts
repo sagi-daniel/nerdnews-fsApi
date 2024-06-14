@@ -1,9 +1,11 @@
+import { FilterOption } from '../models/FiltersOption.model';
+
 //SITE META
 export const SITE_NAME = 'Portfolio';
 export const SITE_DESCRIPTION = 'Ez egy portfolio oldal';
 export const CURRENT_YEAR = new Date().getFullYear();
 
-//APP
+//Options
 export const QUERY_DEFAULT_OPTIONS = {
   defaultOptions: {
     queries: {
@@ -26,5 +28,27 @@ export const MENU_ITEMS = [
 
 export const CATEGORY_ITEMS = [{ name: '', path: 'home', type: 'regular', element: 'Home' }];
 
+export const CATEGORY_COLORS: FilterOption[] = [
+  { name: 'ALL', colorClass: 'bg-primary text-primary-content' },
+  { name: 'TECH', colorClass: 'bg-tech text-tech-content' },
+  { name: 'CYBERSEC', colorClass: 'bg-cybersec text-cybersec-content' },
+  { name: 'GAMING', colorClass: 'bg-gaming text-gaming-content' },
+];
+
+export const GENRE_COLORS: FilterOption[] = [
+  { name: 'ALL', colorClass: 'bg-primary text-primary-content' },
+  { name: 'ACTION', colorClass: 'bg-genre-action text-genre-action-content' },
+  { name: 'CRIME', colorClass: 'bg-genre-crime text-genre-crime-content' },
+  { name: 'HORROR', colorClass: 'bg-genre-horror text-genre-horror-content' },
+  { name: 'THRILLER', colorClass: 'bg-genre-thriller text-genre-thriller-content' },
+  { name: 'COMEDY', colorClass: 'bg-genre-comedy text-genre-comedy-content' },
+  { name: 'FAMILY', colorClass: 'bg-genre-family text-genre-family-content' },
+  { name: 'DRAMA', colorClass: 'bg-genre-drama text-genre-drama-content' },
+  { name: 'ANIMATION', colorClass: 'bg-genre-animation text-genre-animation-content' },
+  { name: 'ADVENTURE', colorClass: 'bg-genre-adventure text-genre-adventure-content' },
+  { name: 'SCIENCE FICTION', colorClass: 'bg-genre-scifi text-genre-scifi-content' },
+  { name: 'FANTASY', colorClass: 'bg-genre-fantasy text-genre-fantasy-content' },
+  { name: 'ROMANCE', colorClass: 'bg-genre-romance text-genre-romance-content' },
+];
 //API URL
 export const BASE_URL = 'http://localhost:8000';

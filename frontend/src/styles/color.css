@@ -30,6 +30,32 @@
   --color-gaming-lighter: #9b69f1;
   --color-gaming-content: #ffffff;
 
+  /* Movie Genre Colors */
+  --color-genre-action: #f94144;
+  --color-genre-action-content: #ffffff;
+  --color-genre-crime: #dc2f02;
+  --color-genre-crime-content: #ffe5de;
+  --color-genre-horror: #370617;
+  --color-genre-horror-content: #ec5086;
+  --color-genre-thriller: #03071e;
+  --color-genre-thriller-content: #3550eb;
+  --color-genre-comedy: #3a0ca3;
+  --color-genre-comedy-content: #cab4fa;
+  --color-genre-family: #3a7ca5;
+  --color-genre-family-content: #e7f1f7;
+  --color-genre-drama: #bc4749;
+  --color-genre-drama-content: #ffffff;
+  --color-genre-animation: #f9844a;
+  --color-genre-animation-content: #421702;
+  --color-genre-adventure: #4cc9f0;
+  --color-genre-adventure-content: #052c38;
+  --color-genre-scifi: #0d3b66;
+  --color-genre-scifi-content: #83bbef;
+  --color-genre-fantasy: #90be6d;
+  --color-genre-fantasy-content: #151e0e;
+  --color-genre-romance: #fb6f92;
+  --color-genre-romance-content: #68031c;
+
   /* Utility colors */
   --color-success: #35e435;
   --color-success-content: #031703;
