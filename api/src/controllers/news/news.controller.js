@@ -25,8 +25,9 @@ exports.findByQuery = catchAsync(async (req, res, next) => {
   const sortOrder = parseSortOrder(req.query.sortOrder);
   const category = req.query.category || '';
 
-  const news = await newsService.findByQuery(fromDate, toDate, category, sortOrder, page, pageSize);
-  sendResponse(res, { results: news.length, data: { news } });
+  const { news, totalItems } = await newsService.findByQuery(fromDate, toDate, category, sortOrder, page, pageSize);
+
+  sendResponse(res, { results: news.length, totalItems, data: { news } });
 });
 
 exports.findById = catchAsync(async (req, res, next) => {

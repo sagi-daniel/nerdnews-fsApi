@@ -21,17 +21,17 @@ exports.findAll = async (sortOrder, limit, skip, categoryName) => {
 
 exports.findByQuery = async (fromDate, toDate, category, sortOrder, page, pageSize) => {
   let query = {};
-  if (fromDate && toDate) {
+
+  if (fromDate && toDate && fromDate < toDate) {
     query.release = {
       $gte: fromDate,
       $lte: toDate,
     };
   }
 
-  if (category) {
+  if (category && category !== 'ALL') {
     const categoryArr = category.split(',').map((category) => category.trim().toUpperCase());
 
-    // Using Promise.all to wait for all findOne queries to complete
     const categoryIdArr = await Promise.all(
       categoryArr.map(async (category) => {
         const categoryObj = await Category.findOne({ categoryName: category }).select('_id');
@@ -39,7 +39,6 @@ exports.findByQuery = async (fromDate, toDate, category, sortOrder, page, pageSi
       })
     );
 
-    // Filtering out null values (in case some categories were not found)
     const validCategoryIds = categoryIdArr.filter((id) => id !== null);
 
     if (validCategoryIds.length > 0) {
@@ -47,9 +46,15 @@ exports.findByQuery = async (fromDate, toDate, category, sortOrder, page, pageSi
     }
   }
 
+  const totalCount = await News.countDocuments(query);
+  const totalPages = Math.ceil(totalCount / pageSize);
+
+  // Ensure the page value is within the valid range
+  page = Math.max(1, Math.min(page, totalPages));
+
   const skip = (page - 1) * pageSize;
 
-  return await News.find(query)
+  const news = await News.find(query)
     .populate({
       path: 'category',
       select: '-__v',
@@ -61,6 +66,8 @@ exports.findByQuery = async (fromDate, toDate, category, sortOrder, page, pageSi
     .sort({ release: sortOrder })
     .skip(skip)
     .limit(pageSize);
+
+  return { news, totalItems: totalCount, totalPages };
 };
 
 exports.findById = (id) =>
