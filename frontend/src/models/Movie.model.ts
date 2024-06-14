@@ -1,3 +1,5 @@
+import { FilterName } from './FiltersOption.model';
+
 export default interface MovieModel {
   _id: string;
   tmdb_id: number;
@@ -5,7 +7,7 @@ export default interface MovieModel {
   title: string;
   overview: string;
   poster: string;
-  genre: string[];
+  genre: FilterName[];
   voteAverage: number;
   voteCount: number;
   createdAt: string;
