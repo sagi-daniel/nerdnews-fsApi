@@ -1,13 +1,14 @@
 import { useQuery } from '@tanstack/react-query';
 import { getNewsByQuery } from '../services/apiNews';
-import NewsModel from '../models/News.model';
 import useNewsFilter from '../hooks/useNewsFilter';
+import NewsResponseModel from '../models/responseModel/NewsResponseModel';
 
 function useNewsData() {
-  const { selectedCategory, selectedSort, fromDate, toDate } = useNewsFilter();
+  const { selectedCategory, selectedSort, selectedFromDate, selectedToDate, page, pageSize } = useNewsFilter();
 
-  return useQuery<NewsModel[], Error>(['NewsByCategory', selectedCategory, selectedSort, fromDate, toDate], () =>
-    getNewsByQuery(selectedCategory, selectedSort, fromDate, toDate)
+  return useQuery<NewsResponseModel, Error>(
+    ['NewsByQuery', selectedCategory, selectedSort, selectedFromDate, selectedToDate, page, pageSize],
+    () => getNewsByQuery(selectedCategory, selectedSort, selectedFromDate, selectedToDate, page, pageSize)
   );
 }
 
