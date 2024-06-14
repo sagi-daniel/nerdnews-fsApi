@@ -1,4 +1,3 @@
-import { useNavigate, useLocation } from 'react-router-dom';
 import SelectField from './SelectField';
 
 interface SortProps {
@@ -7,21 +6,6 @@ interface SortProps {
 }
 
 function Sort({ selectedSort, setSelectedSort }: SortProps) {
-  const navigate = useNavigate();
-  const location = useLocation();
-
-  const handleSortOrderChange = (sortOrder: string) => {
-    const params = new URLSearchParams(location.search);
-    if (sortOrder) {
-      params.set('sortOrder', sortOrder);
-    } else {
-      params.delete('sortOrder');
-    }
-
-    const newUrl = `${location.pathname}?${params.toString()}`.replace(/%2C/g, ',');
-    navigate(newUrl, { replace: true });
-  };
-
   return (
     <div className="flex  md:flex-col  rounded-md">
       <SelectField
@@ -30,10 +14,9 @@ function Sort({ selectedSort, setSelectedSort }: SortProps) {
           { name: 'Régiek elől', value: 'asc' },
         ]}
         id="sortOrder"
-        label="Sorrend:"
+        label="Rendezés:"
         value={selectedSort}
         setValue={setSelectedSort}
-        handleSortOrderChange={handleSortOrderChange}
       />
     </div>
   );

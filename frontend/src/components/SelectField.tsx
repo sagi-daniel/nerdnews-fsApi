@@ -4,14 +4,12 @@ interface SelectFieldProps {
   label: string;
   value: string;
   setValue: (sortOrder: string) => void;
-  handleSortOrderChange: (value: string) => void;
 }
 
-function SelectField({ options, id, label, value, setValue, handleSortOrderChange }: SelectFieldProps) {
+function SelectField({ options, id, label, value, setValue }: SelectFieldProps) {
   const handleChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
     const newValue = event.target.value;
     setValue(newValue);
-    handleSortOrderChange(newValue);
   };
 
   return (

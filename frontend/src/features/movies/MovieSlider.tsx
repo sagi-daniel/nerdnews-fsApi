@@ -11,7 +11,7 @@ import MovieModel from '../../models/Movie.model';
 
 function MovieSlider({ sliderLabel }: { sliderLabel: string }) {
   const { data, isLoading, error, isError } = useQuery(['Movie'], getMovies);
-  const movies: MovieModel[] | undefined = data;
+  const movies = data?.data?.movies;
 
   const [selectedMovie, setSelectedMovie] = useState<MovieModel | null>(null);
   const [modalVisible, setModalVisible] = useState(false);
@@ -40,9 +40,8 @@ function MovieSlider({ sliderLabel }: { sliderLabel: string }) {
       {modalVisible && selectedMovie && <MovieModal closeModal={closeModal} movie={selectedMovie} />}
 
       <Slider moreLabel={'Még több mozifilm...'} morePath={'/movies'}>
-        {movies?.map((movie: MovieModel) => (
-          <MovieCard key={movie._id} movie={movie} onClick={handlePosterClick} />
-        ))}
+        {movies &&
+          movies.map((movie: MovieModel) => <MovieCard key={movie._id} movie={movie} onClick={handlePosterClick} />)}
       </Slider>
     </Section>
   );

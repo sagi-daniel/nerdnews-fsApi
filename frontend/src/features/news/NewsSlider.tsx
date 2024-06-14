@@ -9,7 +9,7 @@ import NewsModel from '../../models/News.model';
 
 function NewsSlider({ sliderLabel }: { sliderLabel: string }) {
   const { data, error, isLoading, isError } = useQuery(['News'], getNews);
-  const news: NewsModel[] | undefined = data;
+  const news = data?.data.news;
 
   if (isLoading) {
     return <LoadingSpinner />;
@@ -23,9 +23,7 @@ function NewsSlider({ sliderLabel }: { sliderLabel: string }) {
     <Section type="vertical">
       <h2>{sliderLabel}</h2>
       <Slider moreLabel={'Még több hír...'} morePath={'/news'}>
-        {news?.map((news: NewsModel) => (
-          <NewsCard key={news._id} news={news} />
-        ))}
+        {news && news.map((news: NewsModel) => <NewsCard key={news._id} news={news} />)}
       </Slider>
     </Section>
   );
