@@ -13,7 +13,7 @@ function Pagination({ page, totalItems, itemsPerPage, onPageChange }: Pagination
 
   useEffect(() => {
     if (page !== currentPage) {
-      onPageChange(currentPage.toString());
+      onPageChange('1');
     }
   }, [page, currentPage, onPageChange]);
 
