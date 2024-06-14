@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useEffect } from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
 
 function useNewsFilter() {
@@ -19,36 +19,42 @@ function useNewsFilter() {
     navigate(`${location.pathname}?${searchParams.toString()}`);
   };
 
-  const selectedCategory = getQueryParam('category') || 'TECH';
+  const selectedCategory = getQueryParam('category') || 'ALL';
   const selectedSort = getQueryParam('sortOrder') || 'desc';
 
-  // Kezdeti érték beállítása az előző 30 napra
+  // Kezdeti érték beállítása az előző 7 napra
   const startDate = new Date();
-  startDate.setDate(startDate.getDate() - 30);
+  startDate.setDate(startDate.getDate() - 7);
 
-  const initialFromDate = getQueryParam('fromDate') || startDate.toISOString().split('T')[0];
-  const initialToDate = getQueryParam('toDate') || new Date().toISOString().split('T')[0];
+  const selectedFromDate = getQueryParam('fromDate') || startDate.toISOString().split('T')[0];
+  const selectedToDate = getQueryParam('toDate') || new Date().toISOString().split('T')[0];
 
-  const [fromDate, setFromDate] = useState<string>(initialFromDate);
-  const [toDate, setToDate] = useState<string>(initialToDate);
-
-  useEffect(() => {
-    setParams({ category: selectedCategory, sortOrder: selectedSort });
-  }, [selectedCategory, selectedSort]);
+  const page = getQueryParam('page') || '1';
+  const pageSize = getQueryParam('pageSize') || '9';
 
   useEffect(() => {
-    setParams({ fromDate, toDate });
-  }, [fromDate, toDate]);
+    setParams({
+      page,
+      pageSize,
+      category: selectedCategory,
+      sortOrder: selectedSort,
+      fromDate: selectedFromDate,
+      toDate: selectedToDate,
+    });
+  }, [page, pageSize, selectedCategory, selectedSort, selectedFromDate, selectedToDate]);
 
   return {
     selectedCategory,
     setSelectedCategory: (category: string) => setParams({ category }),
     selectedSort,
     setSelectedSort: (sortOrder: string) => setParams({ sortOrder }),
-    fromDate,
-    setFromDate,
-    toDate,
-    setToDate,
+    selectedFromDate,
+    setSelectedFromDate: (fromDate: string) => setParams({ fromDate }),
+    selectedToDate,
+    setSelectedToDate: (toDate: string) => setParams({ toDate }),
+    page,
+    setPage: (page: string) => setParams({ page }),
+    pageSize,
   };
 }
 
