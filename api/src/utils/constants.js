@@ -1,0 +1,15 @@
+exports.GENRES = [
+  'ALL',
+  'ACTION',
+  'CRIME',
+  'HORROR',
+  'THRILLER',
+  'COMEDY',
+  'FAMILY',
+  'DRAMA',
+  'ANIMATION',
+  'ADVENTURE',
+  'SCIENCE FICTION',
+  'FANTASY',
+  'ROMANCE',
+];
