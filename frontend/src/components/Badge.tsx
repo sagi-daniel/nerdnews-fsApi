@@ -1,22 +1,18 @@
 import { MouseEvent } from 'react';
-import { CategoryName } from '../models/CategoryModel';
+import { FilterOption } from '../models/FiltersOption.model';
 
 type CategoryType = 'NORMAL' | 'BUTTON' | 'THIN';
 
-interface BadgeProps {
-  categoryName?: CategoryName;
+interface BadgeProps<T extends string> {
+  name: T;
   type?: CategoryType;
   isSelected?: boolean;
+  colorOptions: FilterOption[];
   onClick?: (event: MouseEvent<HTMLSpanElement>) => void;
 }
 
-function Badge({ categoryName = 'DEFAULT', type = 'NORMAL', isSelected, onClick }: BadgeProps) {
-  const categoriesColorOptions: Record<CategoryName, string> = {
-    DEFAULT: 'bg-secondary text-secondary-content',
-    TECH: 'bg-tech text-tech-content',
-    CYBERSEC: 'bg-cybersec text-cybersec-content',
-    GAMING: 'bg-gaming text-gaming-content',
-  };
+function Badge<T extends string>({ name, type = 'NORMAL', isSelected, colorOptions, onClick }: BadgeProps<T>) {
+  const style = colorOptions.find((opt) => opt.name === name)?.colorClass;
 
   const handleClick = (event: MouseEvent<HTMLSpanElement>) => {
     if (onClick) {
@@ -27,29 +23,21 @@ function Badge({ categoryName = 'DEFAULT', type = 'NORMAL', isSelected, onClick 
   if (type === 'BUTTON') {
     return (
       <span
-        className={` ${
-          isSelected ? categoriesColorOptions[categoryName] : 'bg-border-light text-content-light'
+        className={`${
+          isSelected ? style : 'bg-border-light text-content-light'
         } px-1 py-0.5 text-lg font-semibold rounded cursor-pointer`}
         onClick={handleClick}
       >
-        {categoryName}
+        {name}
       </span>
     );
   }
 
   if (type === 'THIN') {
-    return (
-      <span className={` ${categoriesColorOptions[categoryName]} px-1 py-0.5 text-lg font-semibold rounded`}>
-        {categoryName}
-      </span>
-    );
+    return <span className={`${style} px-1 py-0.5 text-lg font-semibold rounded`}>{name}</span>;
   }
 
-  return (
-    <span className={` ${categoriesColorOptions[categoryName]} px-4 py-2 text-lg font-semibold rounded`}>
-      {categoryName}
-    </span>
-  );
+  return <span className={`${style} px-4 py-2 text-lg font-semibold rounded`}>{name}</span>;
 }
 
 export default Badge;
