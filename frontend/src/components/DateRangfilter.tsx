@@ -1,48 +1,60 @@
+import React, { useState } from 'react';
 import InputField from './InputField';
-import useInputValidation from '../hooks/useInputValidation';
 
 interface DateRangeFilterProps {
   fromDate: string;
   toDate: string;
-  setFromDate: React.Dispatch<React.SetStateAction<string>>;
-  setToDate: React.Dispatch<React.SetStateAction<string>>;
+  setFromDate: (fromDate: string) => void;
+  setToDate: (toDate: string) => void;
 }
 
 function DateRangeFilter({ fromDate, toDate, setFromDate, setToDate }: DateRangeFilterProps) {
-  const fromDateInput = useInputValidation(fromDate, () => true);
-  const toDateInput = useInputValidation(toDate, () => true);
+  const [isValidFromDate, setIsValidFromDate] = useState(true);
+  const [isValidToDate, setIsValidToDate] = useState(true);
+  const [fromDateError, setFromDateError] = useState('');
+  const [toDateError, setToDateError] = useState('');
+
   const handleFromDateChange = (newValue: string) => {
-    fromDateInput.setValue(newValue);
-    setFromDate(newValue);
+    if (newValue < toDate) {
+      setFromDate(newValue);
+      setIsValidFromDate(true);
+      setFromDateError('');
+    } else {
+      setIsValidFromDate(false);
+      setFromDateError('Kezdő dátum nem lehet nagyobb vagy egyenlő, mint a vég dátum.');
+    }
   };
 
   const handleToDateChange = (newValue: string) => {
-    toDateInput.setValue(newValue);
-    setToDate(newValue);
+    if (newValue > fromDate) {
+      setToDate(newValue);
+      setIsValidToDate(true);
+      setToDateError('');
+    } else {
+      setIsValidToDate(false);
+      setToDateError('Vég dátum nem lehet kisebb vagy egyenlő, mint a kezdő dátum.');
+    }
   };
 
   return (
-    <div className="flex w-full md:flex-col mb-3 gap-2 md-gap-0 rounded-md ">
+    <div className="flex w-full md:flex-col mb-3 gap-2 md-gap-0 rounded-md">
       <InputField
         type="date"
         id="fromDate"
         label="Kezdő dátum:"
-        value={fromDateInput.value}
-        defaultValue={fromDate}
+        value={fromDate}
         setValue={handleFromDateChange}
-        errorMessage={fromDateInput.error}
-        successMessage="Érvényes érték"
+        isValid={isValidFromDate}
+        errorMessage={fromDateError}
       />
-
       <InputField
         type="date"
         id="toDate"
         label="Vége dátum:"
-        value={toDateInput.value}
-        defaultValue={toDate}
+        value={toDate}
         setValue={handleToDateChange}
-        errorMessage={toDateInput.error}
-        successMessage="Érvényes érték"
+        isValid={isValidToDate}
+        errorMessage={toDateError}
       />
     </div>
   );
