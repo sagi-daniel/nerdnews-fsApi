@@ -2,6 +2,7 @@ import { formatDateIsoToNormal, truncateText } from '../../utils/helpers';
 import Badge from '../../components/Badge';
 import NewsModel from '../../models/News.model';
 import ImageLoader from '../../components/loaders/ImageLoader';
+import { CATEGORY_COLORS } from '../../utils/constants';
 
 function NewsCard({ news }: { news: NewsModel }) {
   return (
@@ -9,10 +10,15 @@ function NewsCard({ news }: { news: NewsModel }) {
       <a href={news.link} rel="noreferrer" target="_blank">
         <div className=" flex flex-col justify-between max-w-sm bg-border-dark text-content-dark h-full w-80 rounded-md">
           <div className="relative flex flex-col justify-evenly">
-            <ImageLoader src={news.imageUrl} alt={news.title} classes="h-48 object-cover rounded-t-md" />
+            <ImageLoader
+              src={news.imageUrl}
+              alt={news.title}
+              classes="h-48 object-cover rounded-t-md"
+              rounded={false}
+            />
             <div className="p-4">
               <div className="absolute top-2 right-1">
-                <Badge categoryName={news.category.categoryName} />
+                <Badge name={news.category.categoryName} colorOptions={CATEGORY_COLORS} />
               </div>
 
               <div className="flex justify-between items-center mb-4">

@@ -9,12 +9,12 @@ interface MovieCardProps {
 
 function MovieCard({ movie, onClick }: MovieCardProps) {
   return (
-    <div className="relative cursor-pointer p-2 m-0.5 flex-[0_0_40%] sm:flex-[0_0_25%] lg:flex-[0_0_15%]">
+    <div className="relative cursor-pointer flex-[0_0_40%] sm:flex-[0_0_25%] lg:flex-[0_0_15%] rounded-md">
       <ImageLoader
         src={movie.poster}
         alt={movie.title}
         onClick={() => onClick(movie)}
-        classes="my-1 rounded-md hover-outline-highlight "
+        classes="h-full w-full rounded-md"
       />
     </div>
   );
