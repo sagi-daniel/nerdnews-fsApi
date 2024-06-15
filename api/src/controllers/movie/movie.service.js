@@ -11,7 +11,7 @@ exports.findAll = () => Movie.find();
 exports.findByQuery = async (fromDate, toDate, genre, sortOrder, page, pageSize) => {
   let query = {};
 
-  if (fromDate && toDate) {
+  if (fromDate && toDate && fromDate < toDate) {
     query.release = {
       $gte: fromDate,
       $lte: toDate,
@@ -20,19 +20,23 @@ exports.findByQuery = async (fromDate, toDate, genre, sortOrder, page, pageSize)
 
   if (genre && genre !== 'ALL') {
     const genreUpperCase = genre.trim().toUpperCase();
+    const categoryArr = category.split(',').map((genre) => genre.trim().toUpperCase());
 
     if (GENRES.includes(genreUpperCase)) {
       query.genre = genreUpperCase;
     }
   }
+
+  const totalCount = await Movie.countDocuments(query);
+  const totalPages = Math.ceil(totalCount / pageSize);
+
+  // Ensure the page value is within the valid range
+  page = Math.max(1, Math.min(page, totalPages));
+
   const skip = (page - 1) * pageSize;
 
-  const [movies, totalItems] = await Promise.all([
-    Movie.find(query).sort({ release: sortOrder }).skip(skip).limit(pageSize),
-    Movie.countDocuments(query),
-  ]);
-
-  return { movies, totalItems };
+  const movies = await Movie.find(query).sort({ release: sortOrder }).skip(skip).limit(pageSize);
+  return { movies, totalItems: totalCount, totalPages };
 };
 
 exports.findById = (id) => Movie.findById(id);
