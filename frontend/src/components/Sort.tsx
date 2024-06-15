@@ -1,11 +1,11 @@
 import SelectField from './SelectField';
 
 interface SortProps {
-  selectedSort: string;
-  setSelectedSort: (sortOrder: string) => void;
+  sortOrder: string;
+  setSortOrder: (sortOrder: string) => void;
 }
 
-function Sort({ selectedSort, setSelectedSort }: SortProps) {
+function Sort({ sortOrder, setSortOrder }: SortProps) {
   return (
     <div className="flex  md:flex-col  rounded-md">
       <SelectField
@@ -15,8 +15,8 @@ function Sort({ selectedSort, setSelectedSort }: SortProps) {
         ]}
         id="sortOrder"
         label="Rendezés:"
-        value={selectedSort}
-        setValue={setSelectedSort}
+        value={sortOrder}
+        setValue={setSortOrder}
       />
     </div>
   );

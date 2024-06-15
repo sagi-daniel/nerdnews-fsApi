@@ -4,11 +4,11 @@ import useNewsFilter from '../hooks/useNewsFilter';
 import NewsResponseModel from '../models/responseModel/NewsResponseModel';
 
 function useNewsData() {
-  const { selectedCategory, selectedSort, selectedFromDate, selectedToDate, page, pageSize } = useNewsFilter();
+  const { category, sortOrder, fromDate, toDate, page, pageSize } = useNewsFilter().params;
 
   return useQuery<NewsResponseModel, Error>(
-    ['NewsByQuery', selectedCategory, selectedSort, selectedFromDate, selectedToDate, page, pageSize],
-    () => getNewsByQuery(selectedCategory, selectedSort, selectedFromDate, selectedToDate, page, pageSize)
+    ['NewsByQuery', category, sortOrder, fromDate, toDate, page, pageSize],
+    () => getNewsByQuery(category, sortOrder, fromDate, toDate, page, pageSize)
   );
 }
 
