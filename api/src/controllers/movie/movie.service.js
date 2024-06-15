@@ -20,8 +20,6 @@ exports.findByQuery = async (fromDate, toDate, genre, sortOrder, page, pageSize)
 
   if (genre && genre !== 'ALL') {
     const genreUpperCase = genre.trim().toUpperCase();
-    const categoryArr = category.split(',').map((genre) => genre.trim().toUpperCase());
-
     if (GENRES.includes(genreUpperCase)) {
       query.genre = genreUpperCase;
     }

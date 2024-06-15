@@ -1,4 +1,3 @@
-const mongoose = require('mongoose');
 const News = require('../../models/News.model');
 const Category = require('../../models/Category.model');
 
