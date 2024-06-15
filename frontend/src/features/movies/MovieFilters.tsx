@@ -5,18 +5,14 @@ import useMovieFilter from '../../hooks/useMovieFilter';
 import { GENRE_COLORS } from '../../utils/constants';
 
 function MovieFilters() {
-  const { selectedGenre, setSelectedGenre, selectedSort, setSelectedSort, fromDate, toDate, setFromDate, setToDate } =
-    useMovieFilter();
+  const { genre, sortOrder, fromDate, toDate } = useMovieFilter().params;
+  const { setGenre, setSortOrder, setFromDate, setToDate } = useMovieFilter().setters;
 
   return (
     <div className="flex flex-col h-full md:w-1/6 md:h-96 p-2 gap-2">
       <h1>Filmek</h1>
-      <CategoryFilter
-        categoryOptions={GENRE_COLORS}
-        selectedCategory={selectedGenre}
-        setSelectedCategory={setSelectedGenre}
-      />
-      <Sort selectedSort={selectedSort} setSelectedSort={setSelectedSort} />
+      <CategoryFilter categoryOptions={GENRE_COLORS} category={genre} setCategory={setGenre} />
+      <Sort sortOrder={sortOrder} setSortOrder={setSortOrder} />
       <DateRangeFilter fromDate={fromDate} toDate={toDate} setToDate={setToDate} setFromDate={setFromDate} />
     </div>
   );

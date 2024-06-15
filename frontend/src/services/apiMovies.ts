@@ -15,20 +15,16 @@ export async function getMoviesByQuery(
   sortOrder: string,
   page: string,
   pageSize: string,
-  fromDate?: string,
-  toDate?: string
+  fromDate: string,
+  toDate: string
 ): Promise<MovieResponseModel> {
   const params = new URLSearchParams();
-  params.append('genre', genre);
-  params.append('sortOrder', sortOrder);
-  params.append('page', page);
-  params.append('pageSize', pageSize);
-  if (fromDate) {
-    params.append('fromDate', fromDate);
-  }
-  if (toDate) {
-    params.append('toDate', toDate);
-  }
+  if (genre) params.append('category', genre);
+  if (sortOrder) params.append('sortOrder', sortOrder);
+  if (page) params.append('page', page);
+  if (pageSize) params.append('pageSize', pageSize);
+  if (fromDate) params.append('fromDate', fromDate);
+  if (toDate) params.append('toDate', toDate);
 
   const response = await fetch(`${BASE_URL}/movie?${params.toString()}`);
   if (!response.ok) {

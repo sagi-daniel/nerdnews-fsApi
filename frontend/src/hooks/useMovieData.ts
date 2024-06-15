@@ -1,14 +1,14 @@
 import { useQuery } from '@tanstack/react-query';
 import { getMoviesByQuery } from '../services/apiMovies';
-import useMoviesFilter from '../hooks/useMovieFilter';
 import MovieResponseModel from '../models/responseModel/MovieResponseModel';
+import useMoviesFilter from '../hooks/useMovieFilter';
 
-function useMoviesData(page: string, pageSize: string) {
-  const { selectedGenre, selectedSort, fromDate, toDate } = useMoviesFilter();
+function useMoviesData() {
+  const { genre, sortOrder, fromDate, toDate, page, pageSize } = useMoviesFilter().params;
 
   return useQuery<MovieResponseModel, Error>(
-    ['MoviesByQuery', selectedGenre, selectedSort, page, pageSize, fromDate, toDate],
-    () => getMoviesByQuery(selectedGenre, selectedSort, page, pageSize, fromDate, toDate)
+    ['MoviesByQuery', genre, sortOrder, fromDate, toDate, page, pageSize],
+    () => getMoviesByQuery(genre, sortOrder, fromDate, toDate, page, pageSize)
   );
 }
 
