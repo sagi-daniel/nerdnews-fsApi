@@ -7,6 +7,7 @@ import LoadingSpinner from '../../components/loaders/LoadingSpinner';
 import Error from '../../components/Error';
 import MovieCard from './MovieCard';
 import MovieModal from './MovieModal';
+import Empty from '../../components/Empty';
 
 function MovieList() {
   const { page, pageSize } = useMovieFilter().params;
@@ -15,8 +16,6 @@ function MovieList() {
   const { data, error, isLoading, isError } = useMovieData();
   const movies = data?.data.movies;
   const totalItemes = data?.totalItems;
-
-  console.log(movies);
 
   const [selectedMovie, setSelectedMovie] = useState<MovieModel | null>(null);
   const [modalVisible, setModalVisible] = useState(false);
@@ -33,9 +32,10 @@ function MovieList() {
 
   return (
     <div className="flex flex-col md:w-5/6">
-      <div className="relative flex justify-center flex-wrap gap-2 md:gap-5">
+      <div className="flex justify-center flex-wrap gap-2 md:gap-10">
         {modalVisible && selectedMovie && <MovieModal closeModal={closeModal} movie={selectedMovie} />}
         {isLoading && <LoadingSpinner />}
+        {movies?.length === 0 && <Empty message="Nincs találat a megadott szűrési feltételekkel!" />}
         {isError && <Error message={error?.message || 'An error occurred'} />}
         {movies &&
           movies.map((movieItem: MovieModel) => (
@@ -43,16 +43,12 @@ function MovieList() {
           ))}
       </div>
       {totalItemes && (
-        <div className="flex justify-center items-center mt-4 ">
-          {totalItemes !== undefined && (
-            <Pagination
-              page={parseInt(page)}
-              totalItems={totalItemes}
-              itemsPerPage={parseInt(pageSize)}
-              onPageChange={setPage}
-            />
-          )}
-        </div>
+        <Pagination
+          page={parseInt(page)}
+          totalItems={totalItemes}
+          itemsPerPage={parseInt(pageSize)}
+          onPageChange={setPage}
+        />
       )}
     </div>
   );

@@ -9,7 +9,7 @@ function MovieFilters() {
   const { setGenre, setSortOrder, setFromDate, setToDate } = useMovieFilter().setters;
 
   return (
-    <div className="flex flex-col h-full md:w-1/6 md:h-96 p-2 gap-2">
+    <div className="flex flex-col  h-full md:w-1/6 md:h-full p-2 gap-2">
       <h1>Filmek</h1>
       <CategoryFilter categoryOptions={GENRE_COLORS} category={genre} setCategory={setGenre} />
       <Sort sortOrder={sortOrder} setSortOrder={setSortOrder} />

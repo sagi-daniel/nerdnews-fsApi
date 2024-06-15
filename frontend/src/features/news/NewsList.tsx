@@ -4,6 +4,7 @@ import Pagination from '../../components/Pagination';
 import NewsCard from '../../features/news/NewsCard';
 import LoadingSpinner from '../../components/loaders/LoadingSpinner';
 import Error from '../../components/Error';
+import Empty from '../../components/Empty';
 
 function NewsList() {
   const { page, pageSize } = useNewsFilter().params;
@@ -17,10 +18,11 @@ function NewsList() {
     <div className="flex flex-col md:w-5/6">
       <div className="flex justify-center flex-wrap gap-2 md:gap-5">
         {isLoading && <LoadingSpinner />}
+        {news?.length === 0 && <Empty message="Nincs találat a megadott szűrési feltételekkel!" />}
         {isError && <Error message={error?.message || 'An error occurred'} />}
-        {news && news.map((newsItem) => <NewsCard key={newsItem._id} news={newsItem} />)}
+        {news && news.length > 0 && news.map((newsItem) => <NewsCard key={newsItem._id} news={newsItem} />)}
       </div>
-      {totalItems !== undefined && (
+      {totalItems && (
         <Pagination
           page={parseInt(page)}
           totalItems={totalItems}

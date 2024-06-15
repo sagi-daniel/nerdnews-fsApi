@@ -10,7 +10,7 @@ function NewsFilters() {
   const { setCategory, setSortOrder, setFromDate, setToDate } = useNewsFilter().setters;
 
   return (
-    <div className="flex flex-col h-full md:w-1/6 md:h-96 p-2 gap-2">
+    <div className="flex flex-col h-full md:w-1/6 md:h-full p-2 gap-2">
       <h1>Hírek</h1>
       <CategoryFilter categoryOptions={CATEGORY_COLORS} category={category} setCategory={setCategory} />
       <Sort sortOrder={sortOrder} setSortOrder={setSortOrder} />

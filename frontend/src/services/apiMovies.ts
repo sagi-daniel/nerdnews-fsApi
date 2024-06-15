@@ -13,13 +13,13 @@ export const getMovies = async (): Promise<MovieResponseModel> => {
 export async function getMoviesByQuery(
   genre: string,
   sortOrder: string,
-  page: string,
-  pageSize: string,
   fromDate: string,
-  toDate: string
+  toDate: string,
+  page: string,
+  pageSize: string
 ): Promise<MovieResponseModel> {
   const params = new URLSearchParams();
-  if (genre) params.append('category', genre);
+  if (genre) params.append('genre', genre);
   if (sortOrder) params.append('sortOrder', sortOrder);
   if (page) params.append('page', page);
   if (pageSize) params.append('pageSize', pageSize);
