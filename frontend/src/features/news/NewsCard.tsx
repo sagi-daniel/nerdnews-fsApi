@@ -1,10 +1,20 @@
 import { formatDateIsoToNormal, truncateText } from '../../utils/helpers';
+import { CATEGORY_COLORS } from '../../utils/constants';
+import useLoaderHook from '../../hooks/useLoaderHook';
 import Badge from '../../components/Badge';
 import NewsModel from '../../models/News.model';
 import ImageLoader from '../../components/loaders/ImageLoader';
-import { CATEGORY_COLORS } from '../../utils/constants';
+import NewsCardSkeleton from '../../components/loaders/skeletons/NewsCardSkeleton';
 
-function NewsCard({ news }: { news: NewsModel }) {
+interface NewsCardProps {
+  news: NewsModel;
+}
+
+function NewsCard({ news }: NewsCardProps) {
+  const loaded = useLoaderHook(news.imageUrl);
+
+  if (!loaded) return <NewsCardSkeleton />;
+
   return (
     <div className="mx-1 hover-outline-highlight cursor-pointer flex-[0_0_40%] sm:flex-[0_0_25%] lg:flex-[0_0_15%]">
       <a href={news.link} rel="noreferrer" target="_blank">

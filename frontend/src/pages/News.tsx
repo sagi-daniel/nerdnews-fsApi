@@ -4,10 +4,12 @@ import NewsList from '../features/news/NewsList';
 
 function News() {
   return (
-    <Section type="horizontal" gap="small">
-      <NewsFilters />
-      <NewsList />
-    </Section>
+    <>
+      <Section type="horizontal" gap="small">
+        <NewsFilters />
+        <NewsList />
+      </Section>
+    </>
   );
 }
 

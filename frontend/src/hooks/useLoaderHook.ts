@@ -4,9 +4,10 @@ function useImageLoader(src: string) {
   const [loaded, setLoaded] = useState(false);
 
   useEffect(() => {
-    const img = new Image();
-    img.src = src;
-    img.onload = () => setLoaded(true);
+    const image = new Image();
+    image.src = src;
+    image.onload = () => setLoaded(true);
+    image.onerror = () => setLoaded(false);
   }, [src]);
 
   return loaded;

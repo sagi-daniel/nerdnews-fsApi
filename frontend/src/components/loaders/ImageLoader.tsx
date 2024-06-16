@@ -1,5 +1,4 @@
 import useLoaderHook from '../../hooks/useLoaderHook';
-import LoadingSpinner from './LoadingSpinner';
 
 interface ImageWithLoaderProps {
   src: string;
@@ -14,8 +13,6 @@ function ImageLoader({ src, alt, classes, rounded = true, onClick }: ImageWithLo
 
   return (
     <div className={`relative size-full z-1 overflow-hidden ${rounded ? 'rounded-md' : 'rounded-t-md'}`}>
-      {!loaded && <LoadingSpinner />}
-
       <img
         src={src}
         alt={alt}
