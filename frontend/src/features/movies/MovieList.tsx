@@ -33,7 +33,7 @@ function MovieList() {
 
   return (
     <div className="flex flex-col md:w-5/6">
-      <div className="flex justify-center flex-wrap gap-2 md:gap-10">
+      <div className="flex justify-center flex-wrap gap-2 md:gap-5">
         {isLoading && [...Array(SKELETON_COUNT)].map((_, index) => <ImageSkeleton key={index} />)}
         {isError && <Error message={error?.message || 'An error occurred'} />}
         {movies &&

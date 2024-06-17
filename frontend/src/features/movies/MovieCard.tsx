@@ -15,12 +15,7 @@ function MovieCard({ movie, onClick }: MovieCardProps) {
 
   return (
     <div className="relative cursor-pointer flex-[0_0_40%] sm:flex-[0_0_25%] lg:flex-[0_0_15%] rounded-md">
-      <ImageLoader
-        src={movie.poster}
-        alt={movie.title}
-        onClick={() => onClick(movie)}
-        classes="h-full w-full rounded-md"
-      />
+      <ImageLoader src={movie.poster} onClick={() => onClick(movie)} classes="h-72 w-44 rounded-md" />
     </div>
   );
 }
