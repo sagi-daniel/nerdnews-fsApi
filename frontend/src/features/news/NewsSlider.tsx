@@ -10,6 +10,7 @@ import ImageSkeleton from '../../components/loaders/skeletons/ImageSkeleton';
 
 function NewsSlider({ sliderLabel }: { sliderLabel: string }) {
   const { data, error, isLoading, isError } = useQuery(['News'], getNews);
+
   const news = data?.data.news;
 
   return (

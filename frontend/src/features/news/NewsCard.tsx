@@ -5,6 +5,7 @@ import Badge from '../../components/Badge';
 import NewsModel from '../../models/News.model';
 import ImageLoader from '../../components/loaders/ImageLoader';
 import NewsCardSkeleton from '../../components/loaders/skeletons/NewsCardSkeleton';
+import SaveLater from '../../components/SaveLater';
 
 interface NewsCardProps {
   news: NewsModel;
@@ -16,9 +17,11 @@ function NewsCard({ news }: NewsCardProps) {
   if (!loaded) return <NewsCardSkeleton />;
 
   return (
-    <div className="mx-1 hover-outline-highlight cursor-pointer flex-[0_0_40%] sm:flex-[0_0_25%] lg:flex-[0_0_15%]">
-      <a href={news.link} rel="noreferrer" target="_blank">
-        <div className=" flex flex-col justify-between max-w-sm bg-border-dark text-content-dark h-full w-80 rounded-md">
+    <div className="relative mx-1 flex-[0_0_40%] sm:flex-[0_0_25%] lg:flex-[0_0_15%]">
+      <SaveLater />
+
+      <div className=" hover-outline-highlight cursor-pointer flex flex-col justify-between max-w-sm bg-border-dark text-content-dark h-full w-80 rounded-md">
+        <a href={news.link} rel="noreferrer" target="_blank">
           <div className="relative flex flex-col justify-evenly">
             <ImageLoader
               src={news.imageUrl}
@@ -40,8 +43,8 @@ function NewsCard({ news }: NewsCardProps) {
               <p className="mt-2">{truncateText(news.content, 100)}</p>
             </div>
           </div>
-        </div>
-      </a>
+        </a>
+      </div>
     </div>
   );
 }
