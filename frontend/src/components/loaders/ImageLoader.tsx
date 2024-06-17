@@ -12,12 +12,16 @@ function ImageLoader({ src, alt, classes, rounded = true, onClick }: ImageWithLo
   const loaded = useLoaderHook(src);
 
   return (
-    <div className={`relative size-full z-1 overflow-hidden ${rounded ? 'rounded-md' : 'rounded-t-md'}`}>
+    <div
+      className={`relative no-select no-pointer-events size-full z-1 overflow-hidden ${
+        rounded ? 'rounded-md' : 'rounded-t-md'
+      }`}
+    >
       <img
         src={src}
         alt={alt}
         onClick={onClick}
-        className={`${classes} w-full bg-cover bg-center ease-in-out hover:scale-110 transition-transform duration-500 ${
+        className={`${classes} select-none w-full bg-cover bg-center ease-in-out hover:scale-110 transition-transform duration-500 ${
           loaded ? 'opacity-100' : 'opacity-0'
         }`}
       />

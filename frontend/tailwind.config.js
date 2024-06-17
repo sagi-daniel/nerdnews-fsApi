@@ -89,6 +89,18 @@ export default {
             display: 'none' /* Safari and Chrome */,
           },
         },
+        '.no-select': {
+          '-webkit-user-select': 'none' /* Safari */,
+          '-moz-user-select': 'none' /* Firefox */,
+          '-ms-user-select': 'none' /* IE10+/Edge */,
+          'user-select': 'none' /* Non-prefixed version, currently supported by Chrome, Edge, Opera and Firefox */,
+        },
+        '.no-pointer-events': {
+          'pointer-events': 'none',
+        },
+        '.pointer-events-auto': {
+          'pointer-events': 'auto',
+        },
       });
     },
   ],
