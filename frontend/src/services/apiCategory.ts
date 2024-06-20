@@ -1,12 +1,16 @@
-import CategoryModel from '../models/CategoryModel';
+import axios from 'axios';
+import CategoryModel from '../models/Category.model';
 import { BASE_URL } from '../utils/constants';
 
 export async function getCategories(): Promise<CategoryModel[]> {
-  const response = await fetch(`${BASE_URL}/category`);
-  if (!response.ok) {
-    throw new Error('Network response was not ok');
+  try {
+    const response = await axios.get(`${BASE_URL}/category`);
+    return response.data.data.categories;
+  } catch (error) {
+    if (axios.isAxiosError(error)) {
+      throw new Error(error.response?.statusText || 'Network response was not ok');
+    } else {
+      throw new Error('An unexpected error occurred');
+    }
   }
-
-  const responseData = await response.json();
-  return responseData.data.categories;
 }
