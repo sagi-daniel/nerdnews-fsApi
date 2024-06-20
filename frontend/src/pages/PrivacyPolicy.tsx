@@ -2,7 +2,7 @@ import React from 'react';
 
 const PrivacyPolicy = () => {
   return (
-    <div className="p-6 text-content-light dark:text-content-dark dark:bg-border-dark rounded-md">
+    <div className="p-6 my-5 text-content-dark bg-border-dark rounded-md">
       <h1 className="text-2xl font-bold mb-4">Adatkezelési Tájékoztató</h1>
 
       <section className="mb-6">
