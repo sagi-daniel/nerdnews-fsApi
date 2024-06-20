@@ -11,7 +11,7 @@ function SaveLater() {
 
   return (
     <span
-      className="absolute top-2 left-2 text-3xl text-yellow-300 cursor-pointer z-[5] hover:animate-pulse"
+      className="absolute top-1 left-1 text-3xl text-yellow-300 cursor-pointer z-[5] hover:animate-pulse"
       onClick={handleSave}
     >
       {!isSaved && <FiStar />}

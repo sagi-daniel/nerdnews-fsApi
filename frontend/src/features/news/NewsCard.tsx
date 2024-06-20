@@ -5,7 +5,6 @@ import Badge from '../../components/Badge';
 import NewsModel from '../../models/News.model';
 import ImageLoader from '../../components/loaders/ImageLoader';
 import NewsCardSkeleton from '../../components/loaders/skeletons/NewsCardSkeleton';
-import SaveLater from '../../components/SaveLater';
 
 interface NewsCardProps {
   news: NewsModel;
@@ -18,17 +17,10 @@ function NewsCard({ news }: NewsCardProps) {
 
   return (
     <div className="relative mx-1 flex-[0_0_40%] sm:flex-[0_0_25%] lg:flex-[0_0_15%]">
-      <SaveLater />
-
       <div className=" hover-outline-highlight cursor-pointer flex flex-col justify-between max-w-sm bg-border-dark text-content-dark h-full w-80 rounded-md">
         <a href={news.link} rel="noreferrer" target="_blank">
           <div className="relative flex flex-col justify-evenly">
-            <ImageLoader
-              src={news.imageUrl}
-              alt={news.title}
-              classes="h-48 object-cover rounded-t-md"
-              rounded={false}
-            />
+            <ImageLoader src={news.imageUrl} classes="h-48 object-cover rounded-t-md" rounded={false} />
             <div className="p-4">
               <div className="absolute top-2 right-1">
                 <Badge name={news.category.categoryName} colorOptions={CATEGORY_COLORS} />
