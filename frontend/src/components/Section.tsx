@@ -25,7 +25,7 @@ function Section({ children, type = 'horizontal', space = 'small', gap = 'small'
   };
 
   return (
-    <section className={`relative flex ${sizeAlignment[type]} ${sizeGap[gap]} ${sizeSpace[space]} h-full w-full`}>
+    <section className={`relative flex ${sizeAlignment[type]} ${sizeGap[gap]} ${sizeSpace[space]} size-full`}>
       {children}
     </section>
   );
