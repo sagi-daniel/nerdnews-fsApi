@@ -23,8 +23,9 @@ export const MENU_ITEMS = [
     element: 'UpcomingMovies',
   },
   // { name: 'Egyéb', path: 'cidr', type: 'regular', element: 'IpCidrCalculator' },
-  { name: 'Regisztráció', path: 'signup', type: 'action', element: 'SignUp' },
 ];
+
+export const USER_MENU_ITEMS = [{ name: 'Fiók', path: 'myAccount', type: 'regular', element: 'myAccount' }];
 
 export const CATEGORY_ITEMS = [{ name: '', path: 'home', type: 'regular', element: 'Home' }];
 
