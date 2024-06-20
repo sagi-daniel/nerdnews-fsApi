@@ -1,5 +1,5 @@
-import CategoryModel from './CategoryModel';
-import SourceModel from './SourceModel';
+import CategoryModel from './Category.model';
+import SourceModel from './Source.model';
 
 export default interface NewsModel {
   _id: string;

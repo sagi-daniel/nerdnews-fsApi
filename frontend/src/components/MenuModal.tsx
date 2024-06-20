@@ -1,7 +1,9 @@
 import { Link } from 'react-router-dom';
 import { FiX } from 'react-icons/fi';
+import { useUser } from '../features/auth/useUser';
 import ControlPanel from './ControlPanel';
 import MenuItem from '../models/MenuItem.model';
+import NavItem from './NavItem';
 
 interface MenuModalProps {
   menuItems: MenuItem[];
@@ -10,6 +12,8 @@ interface MenuModalProps {
 }
 
 function MenuModal({ menuItems, isModalOpen, toggleModal }: MenuModalProps) {
+  const { isAuthenticated } = useUser();
+
   return (
     <div
       className={`fixed inset-0 bg-black bg-opacity-50 z-50 ${
@@ -34,12 +38,14 @@ function MenuModal({ menuItems, isModalOpen, toggleModal }: MenuModalProps) {
             <Link
               to={menuItem.path}
               key={menuItem.name}
-              className="relative hover-half-underline cursor-pointer font-semibold"
+              className="relative hover-half-underline cursor-pointer"
               onClick={toggleModal}
             >
               {menuItem.name}
             </Link>
           ))}
+          {!isAuthenticated && <NavItem menuItem={{ name: 'Regisztráció', path: 'signup', type: 'regular' }} />}
+
           <ControlPanel mobile={true} />
         </div>
       </div>

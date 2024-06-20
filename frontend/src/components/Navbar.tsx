@@ -3,9 +3,12 @@ import { FiAlignRight } from 'react-icons/fi';
 import { MENU_ITEMS } from '../utils/constants';
 import MenuModal from './MenuModal';
 import NavItem from './NavItem';
+import { useUser } from '../features/auth/useUser';
 
 function Navbar() {
   const [isModalOpen, setIsModalOpen] = useState(false);
+
+  const { isAuthenticated } = useUser();
 
   const toggleModal = () => {
     setIsModalOpen(!isModalOpen);
@@ -17,6 +20,7 @@ function Navbar() {
         {MENU_ITEMS.map((menuItem, index) => (
           <NavItem menuItem={menuItem} key={index} />
         ))}
+        {!isAuthenticated && <NavItem menuItem={{ name: 'Regisztráció', path: 'signup', type: 'action' }} />}
       </div>
       <FiAlignRight
         className="text-4xl cursor-pointer text-content-light dark:text-primary hover:text-primary-dark md:hidden"
