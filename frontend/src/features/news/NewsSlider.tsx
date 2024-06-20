@@ -1,5 +1,5 @@
 import { useQuery } from '@tanstack/react-query';
-import { getNews } from '../../services/apiNews';
+import { sliderNews } from '../../services/apiNews';
 import Slider from '../../components/parts/slider/Slider';
 import NewsCard from './NewsCard';
 import Error from '../../components/Error';
@@ -9,7 +9,7 @@ import ListSkeleton from '../../components/loaders/skeletons/ListSkeleton';
 import ImageSkeleton from '../../components/loaders/skeletons/ImageSkeleton';
 
 function NewsSlider({ sliderLabel }: { sliderLabel: string }) {
-  const { data, error, isLoading, isError } = useQuery(['News'], getNews);
+  const { data, error, isLoading, isError } = useQuery(['SliderNews'], sliderNews);
 
   const news = data?.data.news;
 
