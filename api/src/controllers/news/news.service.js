@@ -6,7 +6,7 @@ exports.create = (news) => {
   return newNews.save();
 };
 
-exports.findAll = async (sortOrder, limit, skip, categoryName) => {
+exports.findAll = async (sortOrder, limit, skip) => {
   return await News.find()
     .populate({
       path: 'category',
@@ -15,7 +15,10 @@ exports.findAll = async (sortOrder, limit, skip, categoryName) => {
     .populate({
       path: 'source',
       select: '-__v -createdAt -updatedAt',
-    });
+    })
+    .sort({ release: sortOrder })
+    .limit(limit)
+    .skip(skip);
 };
 
 exports.findByQuery = async (fromDate, toDate, category, sortOrder, page, pageSize) => {

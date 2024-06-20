@@ -1,5 +1,5 @@
-const router = require("express").Router();
-const authController = require("../auth/auth.controller");
+const router = require('express').Router();
+const authController = require('../auth/auth.controller');
 
 const {
   create,
@@ -16,45 +16,34 @@ const {
   addMovieToMyMovies,
   removeNewsFromMyNews,
   removeMovieFromMyMovies,
-} = require("./user.controller");
+} = require('./user.controller');
 
-router.post("/signup", authController.signup);
-router.post("/login", authController.login);
-router.post("/forgotPassword", authController.forgotPassword);
-router.patch("/resetPassword/:token", authController.resetPassword);
+router.post('/signup', authController.signup);
+router.post('/login', authController.login);
+router.post('/logout', authController.logout);
+router.post('/forgotPassword', authController.forgotPassword);
+router.patch('/resetPassword/:token', authController.resetPassword);
 
-router.patch(
-  "/updateMyPassword",
-  authController.protect,
-  authController.updatePassword
-);
+router.patch('/updateMyPassword', authController.protect, authController.updatePassword);
 
-router.get("/me", authController.protect, getMe);
-router.patch("/updateMe", authController.protect, updateMe);
-router.delete("/deleteMe", authController.protect, deleteMe);
+router.get('/me', authController.protect, getMe);
+router.patch('/updateMe', authController.protect, updateMe);
+router.delete('/deleteMe', authController.protect, deleteMe);
 
-router
-  .route("/news")
-  .get(authController.protect, getMyNews)
-  .post(authController.protect, addNewsToMyNews);
-router.route("/news/:id").delete(authController.protect, removeNewsFromMyNews);
+router.route('/news').get(authController.protect, getMyNews).post(authController.protect, addNewsToMyNews);
+router.route('/news/:id').delete(authController.protect, removeNewsFromMyNews);
+
+router.route('/movies').get(authController.protect, getMyMovies).post(authController.protect, addMovieToMyMovies);
+router.route('/movies/:id').delete(authController.protect, removeMovieFromMyMovies);
 
 router
-  .route("/movies")
-  .get(authController.protect, getMyMovies)
-  .post(authController.protect, addMovieToMyMovies);
+  .route('/')
+  .get(authController.protect, authController.restrictTo('admin'), findAll)
+  .post(authController.protect, authController.restrictTo('admin'), create);
 router
-  .route("/movies/:id")
-  .delete(authController.protect, removeMovieFromMyMovies);
-
-router
-  .route("/")
-  .get(authController.protect, authController.restrictTo("admin"), findAll)
-  .post(authController.protect, authController.restrictTo("admin"), create);
-router
-  .route("/:id")
-  .get(authController.protect, authController.restrictTo("admin"), findById)
-  .patch(authController.protect, authController.restrictTo("admin"), update)
-  .delete(authController.protect, authController.restrictTo("admin"), remove);
+  .route('/:id')
+  .get(authController.protect, authController.restrictTo('admin'), findById)
+  .patch(authController.protect, authController.restrictTo('admin'), update)
+  .delete(authController.protect, authController.restrictTo('admin'), remove);
 
 module.exports = router;

@@ -59,3 +59,9 @@ exports.top3fresh = catchAsync(async (req, res) => {
   const news = await newsService.findAll(sortOrder, 3, 0);
   sendResponse(res, { results: news.length, data: { news } });
 });
+
+exports.slider = catchAsync(async (req, res) => {
+  const sortOrder = parseSortOrder(req.query.sortOrder);
+  const news = await newsService.findAll(sortOrder, 20, 3);
+  sendResponse(res, { results: news.length, data: { news } });
+});
