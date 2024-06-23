@@ -1,5 +1,5 @@
-import Section from '../components/Section';
-import { useUser } from '../features/auth/useUser';
+import Section from '../../components/Section';
+import { useUser } from '../../features/auth/useUser';
 
 function MyAccount() {
   const { user } = useUser();

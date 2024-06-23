@@ -1,9 +1,9 @@
 import { Link } from 'react-router-dom';
-import { FiX } from 'react-icons/fi';
 import { useUser } from '../features/auth/useUser';
 import ControlPanel from './ControlPanel';
 import MenuItem from '../models/MenuItem.model';
 import NavItem from './NavItem';
+import CloseIcon from './CloseIcon';
 
 interface MenuModalProps {
   menuItems: MenuItem[];
@@ -28,10 +28,7 @@ function MenuModal({ menuItems, isModalOpen, toggleModal }: MenuModalProps) {
         onClick={(e) => e.stopPropagation()}
       >
         <div className="flex justify-end mb-4">
-          <FiX
-            className="text-2xl cursor-pointer text-content-light dark:text-primary hover:text-primary-dark"
-            onClick={toggleModal}
-          />
+          <CloseIcon onClick={toggleModal} />
         </div>
         <div className="flex flex-col gap-4">
           {menuItems.map((menuItem) => (
