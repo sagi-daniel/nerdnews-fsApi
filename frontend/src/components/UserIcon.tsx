@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { FiUser } from 'react-icons/fi';
-import DropdownMenu from './DropDwonMenu';
+import DropDownMenu from './DropDownMenu';
 import Divider from './Divider';
 
 function LoginIcon({ mobile }: { mobile: boolean }) {
@@ -15,7 +15,7 @@ function LoginIcon({ mobile }: { mobile: boolean }) {
       <>
         <Divider />
         <FiUser className="text-2xl" />
-        <DropdownMenu mobile={mobile} />
+        <DropDownMenu mobile={mobile} />
       </>
     );
 
@@ -26,7 +26,7 @@ function LoginIcon({ mobile }: { mobile: boolean }) {
         className="text-2xl duration-200 cursor-pointer text-content-light hover:text-primary dark:text-content-dark hover:dark:text-primary"
       />
 
-      {isOpen && <DropdownMenu />}
+      {isOpen && <DropDownMenu />}
     </div>
   );
 }

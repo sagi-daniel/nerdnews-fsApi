@@ -3,7 +3,7 @@ import { USER_MENU_ITEMS } from '../utils/constants';
 import MenuItem from '../models/MenuItem.model';
 import { useLogout } from '../features/auth/useLogout';
 
-const DropdownMenu = ({ mobile }: { mobile?: boolean }) => {
+const DropDownMenu = ({ mobile }: { mobile?: boolean }) => {
   const { logout } = useLogout();
 
   if (mobile)
@@ -43,4 +43,4 @@ const DropdownMenu = ({ mobile }: { mobile?: boolean }) => {
   );
 };
 
-export default DropdownMenu;
+export default DropDownMenu;
