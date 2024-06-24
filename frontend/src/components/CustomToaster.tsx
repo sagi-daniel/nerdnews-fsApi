@@ -13,12 +13,12 @@ const CustomToaster = () => (
     toastOptions={{
       success: {
         duration: 3000,
-        className: 'text-success-content bg-success text-sm max-w-[500px] p-4 flex items-center space-x-3',
+        className: 'text-success-content bg-success text-lg max-w-[500px] p-4 flex items-center space-x-3',
         icon: <SuccessIcon />,
       },
       error: {
         duration: 5000,
-        className: 'text-error-content bg-error text-sm max-w-[500px] p-4 flex items-center space-x-3',
+        className: 'text-error-content bg-error text-lg max-w-[500px] p-4 flex items-center space-x-3',
         icon: <ErrorIcon />,
       },
     }}
