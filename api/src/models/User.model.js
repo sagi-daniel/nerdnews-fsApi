@@ -1,55 +1,54 @@
-const crypto = require("crypto");
-const mongoose = require("mongoose");
-const validator = require("validator");
-const bcrypt = require("bcryptjs");
+const crypto = require('crypto');
+const mongoose = require('mongoose');
+const validator = require('validator');
+const bcrypt = require('bcryptjs');
 
 const UserSchema = mongoose.Schema(
   {
     role: {
       type: String,
-      enum: ["user", "admin"],
-      default: "user",
+      enum: ['user', 'admin'],
+      default: 'user',
     },
     userName: {
       type: String,
-      required: [true, "Please provide a valid userName!"],
+      required: [true, 'Please provide a valid userName!'],
     },
     email: {
       type: String,
       unique: true,
       lowercase: true,
-      required: [true, "Please provide your email!"],
-      validate: [validator.isEmail, "Please provide a valid email"],
+      required: [true, 'Please provide your email!'],
+      validate: [validator.isEmail, 'Please provide a valid email'],
     },
     password: {
       type: String,
-      required: [true, "Please provide a password!"],
+      required: [true, 'Please provide a password!'],
       minlength: 8,
       select: false,
     },
     passwordConfirm: {
       type: String,
-      required: [true, "Please confrim your password!"],
+      required: [true, 'Please confrim your password!'],
       validate: {
         validator: function (confirmP) {
           return confirmP === this.password;
         },
-        message: "Passwords are NOT match",
+        message: 'Passwords are NOT match',
       },
     },
     firstName: {
       type: String,
-      required: [false, "Please tell us your firstname!"],
+      required: [false, 'Please tell us your firstname!'],
     },
     lastName: {
       type: String,
-      required: [false, "Please tell us your lastname!"],
+      required: [false, 'Please tell us your lastname!'],
     },
     photo: String,
-    userNews: [{ type: mongoose.Schema.Types.ObjectId, ref: "RssNews" }],
-    userMovies: [
-      { type: mongoose.Schema.Types.ObjectId, ref: "UpcomingMovie" },
-    ],
+    userNews: [{ type: mongoose.Schema.Types.ObjectId, ref: 'RssNews' }],
+    userMovies: [{ type: mongoose.Schema.Types.ObjectId, ref: 'UpcomingMovie' }],
+    passwordResetRequestedAt: Date,
     passwordChangedAt: Date,
     passwordResetToken: String,
     passwordResetExpires: Date,
@@ -62,8 +61,8 @@ const UserSchema = mongoose.Schema(
   { timestamps: true }
 );
 
-UserSchema.pre("save", async function (next) {
-  if (!this.isModified("password")) return next();
+UserSchema.pre('save', async function (next) {
+  if (!this.isModified('password')) return next();
 
   this.password = await bcrypt.hash(this.password, 12);
 
@@ -71,8 +70,8 @@ UserSchema.pre("save", async function (next) {
   next();
 });
 
-UserSchema.pre("save", function (next) {
-  if (!this.isModified("password") || this.isNew) return next();
+UserSchema.pre('save', function (next) {
+  if (!this.isModified('password') || this.isNew) return next();
 
   this.passwordChangedAt = Date.now() - 1000;
   next();
@@ -83,19 +82,13 @@ UserSchema.pre(/^find/, function (next) {
   next();
 });
 
-UserSchema.methods.correctPassword = async function (
-  candidatePassword,
-  userPassword
-) {
+UserSchema.methods.correctPassword = async function (candidatePassword, userPassword) {
   return await bcrypt.compare(candidatePassword, userPassword);
 };
 
 UserSchema.methods.changedPasswordAfter = function (JWTTimestamp) {
   if (this.passwordChangedAt) {
-    const changedTimestamp = parseInt(
-      this.passwordChangedAt.getTime() / 1000,
-      10
-    );
+    const changedTimestamp = parseInt(this.passwordChangedAt.getTime() / 1000, 10);
 
     return JWTTimestamp < changedTimestamp;
   }
@@ -104,12 +97,9 @@ UserSchema.methods.changedPasswordAfter = function (JWTTimestamp) {
 };
 
 UserSchema.methods.createPasswordResetToken = function () {
-  const resetToken = crypto.randomBytes(32).toString("hex");
+  const resetToken = crypto.randomBytes(32).toString('hex');
 
-  this.passwordResetToken = crypto
-    .createHash("sha256")
-    .update(resetToken)
-    .digest("hex");
+  this.passwordResetToken = crypto.createHash('sha256').update(resetToken).digest('hex');
 
   console.log({ resetToken }, this.passwordResetToken);
 
@@ -118,4 +108,4 @@ UserSchema.methods.createPasswordResetToken = function () {
   return resetToken;
 };
 
-module.exports = mongoose.model("User", UserSchema);
+module.exports = mongoose.model('User', UserSchema);

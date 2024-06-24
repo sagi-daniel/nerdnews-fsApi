@@ -22,9 +22,7 @@ const createSendToken = (user, statusCode, res) => {
 
   res.cookie('jwt', token, cookieOptions);
 
-  // Remove password from output
   user.password = undefined;
-
   res.status(statusCode).json({
     status: 'success',
     token,
@@ -64,7 +62,7 @@ exports.login = catchAsync(async (req, res, next) => {
 
 exports.logout = catchAsync((req, res, next) => {
   res.cookie('jwt', 'loggedout', {
-    expires: new Date(Date.now() + 10 * 1000), // Rövid élettartamú süti
+    expires: new Date(Date.now() + 10 * 1000),
     httpOnly: true,
   });
 
@@ -112,7 +110,15 @@ exports.forgotPassword = catchAsync(async (req, res, next) => {
     return next(new AppError('There is no user with email address.', 404));
   }
 
+  const now = Date.now();
+  const requestCooldown = 10 * 60 * 1000; // 10 perc
+
+  if (user.passwordResetRequestedAt && now - new Date(user.passwordResetRequestedAt).getTime() < requestCooldown) {
+    return next(new AppError('You can request a password reset only once every 10 minutes.', 429));
+  }
+
   const resetToken = user.createPasswordResetToken();
+  user.passwordResetRequestedAt = now;
   await user.save({ validateBeforeSave: false });
 
   const resetURL = `${req.protocol}://${req.get('host')}/api/v1/users/resetPassword/${resetToken}`;
@@ -133,6 +139,7 @@ exports.forgotPassword = catchAsync(async (req, res, next) => {
   } catch (err) {
     user.passwordResetToken = undefined;
     user.passwordResetExpires = undefined;
+    user.passwordResetRequestedAt = undefined;
     await user.save({ validateBeforeSave: false });
 
     return next(new AppError('There was an error sending the email. Try again later!'), 500);
