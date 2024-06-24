@@ -1,6 +1,6 @@
-import Section from '../components/Section';
-import NewsFilters from '../features/news/NewsFilters';
-import NewsList from '../features/news/NewsList';
+import Section from '../../components/Section';
+import NewsFilters from '../../features/news/NewsFilters';
+import NewsList from '../../features/news/NewsList';
 
 function News() {
   return (

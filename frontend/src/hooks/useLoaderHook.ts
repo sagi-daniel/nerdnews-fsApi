@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 
-function useImageLoader(src: string) {
+function useLoaderHook(src: string) {
   const [loaded, setLoaded] = useState(false);
 
   useEffect(() => {
@@ -13,4 +13,4 @@ function useImageLoader(src: string) {
   return loaded;
 }
 
-export default useImageLoader;
+export default useLoaderHook;

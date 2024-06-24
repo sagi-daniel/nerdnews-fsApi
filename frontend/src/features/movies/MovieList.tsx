@@ -1,5 +1,4 @@
 import { useState } from 'react';
-import { SKELETON_COUNT } from '../../utils/constants';
 import useMovieData from '../../hooks/useMovieData';
 import useMovieFilter from '../../hooks/useMovieFilter';
 import MovieModel from '../../models/Movie.model';
@@ -7,8 +6,7 @@ import Pagination from '../../components/Pagination';
 import Error from '../../components/Error';
 import MovieCard from './MovieCard';
 import MovieModal from './MovieModal';
-import Empty from '../../components/Empty';
-import ImageSkeleton from '../../components/loaders/skeletons/ImageSkeleton';
+import LoadingSpinner from '../../components/loaders/LoadingSpinner';
 
 function MovieList() {
   const { page, pageSize } = useMovieFilter().params;
@@ -31,16 +29,17 @@ function MovieList() {
     setModalVisible(false);
   };
 
+  if (isLoading) return <LoadingSpinner />;
+
+  if (isError) return <Error message={(error as Error).message} />;
+
   return (
     <div className="flex flex-col md:w-5/6">
-      <div className="flex justify-center flex-wrap gap-2 md:gap-5">
-        {isLoading && [...Array(SKELETON_COUNT)].map((_, index) => <ImageSkeleton key={index} />)}
-        {isError && <Error message={error?.message || 'An error occurred'} />}
+      <div className=" relative py-4 flex justify-center flex-wrap gap-4 ">
         {movies &&
           movies.map((movieItem: MovieModel) => (
             <MovieCard key={movieItem._id} movie={movieItem} onClick={handlePosterClick} />
           ))}
-        {movies?.length === 0 && <Empty message="Nincs találat a megadott szűrési feltételekkel!" />}
         {modalVisible && selectedMovie && <MovieModal closeModal={closeModal} movie={selectedMovie} />}
       </div>
       {totalItemes && (

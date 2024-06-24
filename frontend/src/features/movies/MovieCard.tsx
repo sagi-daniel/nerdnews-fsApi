@@ -1,5 +1,4 @@
-import ImageLoader from '../../components/loaders/ImageLoader';
-import ImageSkeleton from '../../components/loaders/skeletons/ImageSkeleton';
+import MovieCardSkeleton from '../../components/loaders/skeletons/MovieCardSkeleton';
 import useLoaderHook from '../../hooks/useLoaderHook';
 import MovieModel from '../../models/Movie.model';
 
@@ -11,11 +10,17 @@ interface MovieCardProps {
 function MovieCard({ movie, onClick }: MovieCardProps) {
   const loaded = useLoaderHook(movie.poster);
 
-  if (!loaded) return <ImageSkeleton />;
+  if (!loaded) return <MovieCardSkeleton />;
 
   return (
-    <div className="relative cursor-pointer flex-[0_0_40%] sm:flex-[0_0_25%] lg:flex-[0_0_15%] rounded-md">
-      <ImageLoader src={movie.poster} onClick={() => onClick(movie)} classes="h-72 w-44 rounded-md" />
+    <div className="relative h-72 cursor-pointer flex-[0_0_40%] sm:flex-[0_0_25%] lg:flex-[0_0_15%] ">
+      <div className={`relative size-full  no-select overflow-hidden rounded-md`}>
+        <div
+          onClick={() => onClick(movie)}
+          className={`size-full  select-none justify-end rounded-md bg-cover bg-center ease-in-out hover:scale-105 transition-transform duration-500 `}
+          style={{ backgroundImage: `url(${movie.poster})` }}
+        />
+      </div>
     </div>
   );
 }

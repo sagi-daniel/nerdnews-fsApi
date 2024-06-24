@@ -3,9 +3,9 @@ import useNewsFilter from '../../hooks/useNewsFilter';
 import Pagination from '../../components/Pagination';
 import NewsCard from '../../features/news/NewsCard';
 import Error from '../../components/Error';
-import Empty from '../../components/Empty';
-import NewsCardSkeleton from '../../components/loaders/skeletons/NewsCardSkeleton';
-import ListSkeleton from '../../components/loaders/skeletons/ListSkeleton';
+
+import NewsModel from '../../models/News.model';
+import LoadingSpinner from '../../components/loaders/LoadingSpinner';
 
 function NewsList() {
   const { page, pageSize } = useNewsFilter().params;
@@ -15,13 +15,14 @@ function NewsList() {
   const news = data?.data.news;
   const totalItems = data?.totalItems;
 
+  if (isLoading) return <LoadingSpinner />;
+
+  if (isError) return <Error message={error?.message || 'An error occurred'} />;
+
   return (
     <div className="flex flex-col md:w-5/6">
       <div className="flex justify-center flex-wrap gap-2 md:gap-5">
-        {isLoading && <ListSkeleton Child={NewsCardSkeleton} />}
-        {isError && <Error message={error?.message || 'An error occurred'} />}
-        {news && news.length > 0 && news.map((newsItem) => <NewsCard key={newsItem._id} news={newsItem} />)}
-        {news?.length === 0 && <Empty message="Nincs találat a megadott szűrési feltételekkel!" />}
+        {news && news.map((newsItem: NewsModel) => <NewsCard key={newsItem._id} news={newsItem} />)}
       </div>
       {totalItems && (
         <Pagination
