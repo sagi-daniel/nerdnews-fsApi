@@ -1,10 +1,11 @@
 interface ButtonProps {
   type: 'submit' | 'reset' | 'button' | undefined;
   size: 'normal' | 'full';
+  isLoading?: boolean;
   text: string;
 }
 
-function Button({ text, type = 'submit', size = 'normal' }: ButtonProps) {
+function Button({ text, isLoading, type = 'submit', size = 'normal' }: ButtonProps) {
   const sizeStyle = {
     normal: 'w-auto',
     full: 'w-full',
@@ -13,9 +14,10 @@ function Button({ text, type = 'submit', size = 'normal' }: ButtonProps) {
   return (
     <button
       type={type}
-      className={`${sizeStyle[size]} mt-2 bg-primary text-primary-content py-2 rounded-md hover:bg-primary-dark transition-colors`}
+      disabled={isLoading}
+      className={`${sizeStyle[size]} mt-2 bg-primary text-primary-content py-2 rounded-md hover:bg-primary-dark transition-colors disabled:bg-border-light disabled:text-gray-400`}
     >
-      {text}
+      {isLoading ? 'Küldés...' : text}
     </button>
   );
 }

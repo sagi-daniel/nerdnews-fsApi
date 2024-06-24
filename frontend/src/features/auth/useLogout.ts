@@ -1,3 +1,4 @@
+import toast from 'react-hot-toast';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { logoutUser } from '../../services/apiAuth';
 import { useNavigate } from 'react-router-dom';
@@ -9,8 +10,9 @@ export function useLogout() {
   const { mutate: logout, isLoading } = useMutation({
     mutationFn: logoutUser,
     onSuccess: () => {
+      toast.success('Köszi, hogy itt voltál! Viszlát! :)');
       queryClient.removeQueries();
-      navigate('/login', { replace: true });
+      navigate('/home', { replace: true });
     },
   });
 

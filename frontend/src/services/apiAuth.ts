@@ -62,7 +62,7 @@ export const forgotPasswordUser = async (email: string) => {
     const response = await api.post<ForgotPasswordResponseModel>('/user/forgotPassword', { email });
     return response.data;
   } catch (error) {
-    throw new Error('Forgot password  failed');
+    throw new Error('A jelszó visszaállítását csak 10 percenként kérheti.');
   }
 };
 

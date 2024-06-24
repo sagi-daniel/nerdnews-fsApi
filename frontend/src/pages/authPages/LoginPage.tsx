@@ -3,11 +3,11 @@ import LoginForm from '../../features/auth/forms/LoginForm';
 
 function LoginPage() {
   return (
-    <div className="relative h-screen">
+    <section className="relative h-screen">
       <FormWrapper label="Bejelentkezés">
         <LoginForm />
       </FormWrapper>
-    </div>
+    </section>
   );
 }
 

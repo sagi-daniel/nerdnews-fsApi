@@ -22,6 +22,8 @@ import LoginPage from './pages/authPages/LoginPage';
 import ForgetPasswordPage from './pages/authPages/ForgetPasswordPage';
 import ResetPasswordPage from './pages/authPages/ResetPasswordPage';
 
+import ForgetPasswordConfirm from './pages/authPages/ForgetPasswordConfirm';
+
 import PageNotFound from './pages/PageNotFound';
 import PrivacyPolicy from './pages/publicPages/PrivacyPolicy';
 
@@ -71,6 +73,7 @@ const App: React.FC = () => {
             <Route path="signup" element={<SignupPage />} />
             <Route path="login" element={<LoginPage />} />
             <Route path="forgetPassword" element={<ForgetPasswordPage />} />
+            <Route path="forgetPasswordConfirm" element={<ForgetPasswordConfirm />} />
             <Route path="resetPassword/:resetToken" element={<ResetPasswordPage />} />
           </Routes>
         </BrowserRouter>

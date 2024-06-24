@@ -1,15 +1,17 @@
 interface FormConfirmationProps {
   title: string;
   message: string;
-  type?: 'confirm' | 'success' | 'error' | 'thanks';
 }
 
-function FormConfirmation({ title, message, type = 'confirm' }: FormConfirmationProps) {
+function FormConfirmation({ title, message }: FormConfirmationProps) {
   return (
-    <div className={`flex flex-col size-full items-center gap-16 justify-center`}>
-      <h1>{title}</h1>
-      <p>{message}</p>
-    </div>
+    <section className="relative h-screen text-content-light dark:text-content-dark">
+      <div className={`flex flex-col size-full items-center  justify-center`}>
+        <h1>{title}</h1>
+        <p>{message}</p>
+        {/* {TODO home navigation} */}
+      </div>
+    </section>
   );
 }
 

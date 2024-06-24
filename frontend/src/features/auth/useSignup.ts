@@ -12,12 +12,12 @@ export function useSignup() {
   const { mutate: signup, isLoading } = useMutation({
     mutationFn: (newUser: SingupModel) => signupUser(newUser),
     onSuccess: (user: UserModel) => {
+      toast.success('Sikeres regisztráció!');
       queryClient.setQueryData(['user'], user);
       navigate('/myAccount', { replace: true });
     },
-    onError: (err: Error) => {
-      console.log(err);
-      toast.error('Provided user datas are incorrect');
+    onError: () => {
+      toast.error('A megadott felhasználói adatok helytelenek!');
     },
   });
 
