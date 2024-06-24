@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from 'react';
-import InputField from '../components/InputField';
-import Section from '../components/Section';
-import calculateCIDR from '../utils/cidrCalc';
-import { validateIpAddress, validatePrefix } from '../utils/validators';
-import useLocalStorageState from '../hooks/useLocalStorageState';
+import InputField from '../../components/InputField';
+import Section from '../../components/Section';
+import calculateCIDR from '../../utils/cidrCalc';
+import { validateIpAddress, validatePrefix } from '../../utils/validators';
+import useLocalStorageState from '../../hooks/useLocalStorageState';
 import { FiRefreshCcw } from 'react-icons/fi';
 
 interface CIDRResult {
@@ -57,6 +57,7 @@ function CidrCalculator() {
           isValid={ipValid}
           errorMessage="Please enter a valid IP address."
           successMessage="Valid IP address"
+          required={true}
         />
         <InputField
           type="number"
@@ -67,6 +68,7 @@ function CidrCalculator() {
           isValid={prefixValid}
           errorMessage="Please enter a valid Prefix number 0-32."
           successMessage="Valid Prefix number"
+          required={true}
         />
         <div>
           <button onClick={handleCalculate} disabled={!ipValid || !prefixValid} className="btn-primary-md">
