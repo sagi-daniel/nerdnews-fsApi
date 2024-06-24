@@ -20,6 +20,7 @@ import IpCidrCalculator from './pages/publicPages/IpCidrCalculator';
 import SignupPage from './pages/authPages/SignupPage';
 import LoginPage from './pages/authPages/LoginPage';
 import ForgetPasswordPage from './pages/authPages/ForgetPasswordPage';
+import ResetPasswordPage from './pages/authPages/ResetPasswordPage';
 
 import PageNotFound from './pages/PageNotFound';
 import PrivacyPolicy from './pages/publicPages/PrivacyPolicy';
@@ -30,7 +31,8 @@ import UpdatePasswordPage from './pages/authPages/UpdatePasswordPage';
 
 // CONSTANTS
 import { QUERY_DEFAULT_OPTIONS } from './utils/constants';
-import ResetPasswordPage from './pages/authPages/ResetPasswordPage';
+
+//TEST
 import TestPage from './pages/TestPage';
 
 const App: React.FC = () => {

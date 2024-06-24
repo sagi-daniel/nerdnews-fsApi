@@ -1,7 +1,7 @@
-import Divider from "../Divider";
-import Logo from "../Logo";
-import CopyRight from "../CopyRight";
-import PrivacyPolicyLink from "../PrivacyPolicyLink";
+import Divider from '../Divider';
+import Logo from '../Logo';
+import CopyRight from '../CopyRight';
+import CustomNavLink from '../CustomNavLink';
 
 function Footer() {
   return (
@@ -11,7 +11,7 @@ function Footer() {
         <div className="w-full flex items-center justify-between">
           <Logo align="left" size="xsmall" />
           <CopyRight />
-          <PrivacyPolicyLink />
+          <CustomNavLink text="Adatkezelési tájékoztató" path="/privacy-policy" />
         </div>
       </div>
     </footer>
