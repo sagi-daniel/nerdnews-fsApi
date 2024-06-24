@@ -31,7 +31,7 @@ import UpdatePasswordPage from './pages/authPages/UpdatePasswordPage';
 // CONSTANTS
 import { QUERY_DEFAULT_OPTIONS } from './utils/constants';
 import ResetPasswordPage from './pages/authPages/ResetPasswordPage';
-import TesPage from './pages/TesPage';
+import TestPage from './pages/TestPage';
 
 const App: React.FC = () => {
   return (
@@ -47,7 +47,7 @@ const App: React.FC = () => {
               <Route path="movies" element={<Movies />} />
               <Route path="cidr" element={<IpCidrCalculator />} />
               <Route path="privacy-policy" element={<PrivacyPolicy />} />
-              <Route path="test" element={<TesPage />} />
+              <Route path="test" element={<TestPage />} />
               <Route path="*" element={<PageNotFound />} />
               <Route
                 path="myAccount"
