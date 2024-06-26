@@ -17,7 +17,7 @@ function NewsList() {
 
   if (isLoading) return <LoadingSpinner />;
 
-  if (isError) return <Error message={error?.message || 'An error occurred'} />;
+  if (isError) return <Error message={(error as Error).message} />;
 
   return (
     <div className="flex flex-col md:w-5/6">
