@@ -37,14 +37,6 @@ const UserSchema = mongoose.Schema(
         message: 'Passwords are NOT match',
       },
     },
-    firstName: {
-      type: String,
-      required: [false, 'Please tell us your firstname!'],
-    },
-    lastName: {
-      type: String,
-      required: [false, 'Please tell us your lastname!'],
-    },
     photo: String,
     userNews: [{ type: mongoose.Schema.Types.ObjectId, ref: 'RssNews' }],
     userMovies: [{ type: mongoose.Schema.Types.ObjectId, ref: 'UpcomingMovie' }],

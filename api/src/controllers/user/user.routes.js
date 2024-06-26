@@ -36,14 +36,12 @@ router.route('/news/:id').delete(authController.protect, removeNewsFromMyNews);
 router.route('/movies').get(authController.protect, getMyMovies).post(authController.protect, addMovieToMyMovies);
 router.route('/movies/:id').delete(authController.protect, removeMovieFromMyMovies);
 
-router
-  .route('/')
-  .get(authController.protect, authController.restrictTo('admin'), findAll)
-  .post(authController.protect, authController.restrictTo('admin'), create);
+router.route('/').get(authController.protect, findAll).post(authController.protect, create);
 router
   .route('/:id')
-  .get(authController.protect, authController.restrictTo('admin'), findById)
-  .patch(authController.protect, authController.restrictTo('admin'), update)
-  .delete(authController.protect, authController.restrictTo('admin'), remove);
+  .get(authController.protect, findById)
+  .patch(authController.protect, update)
+  .delete(authController.protect, remove);
+// .delete(authController.protect, authController.restrictTo('admin'), remove);
 
 module.exports = router;
