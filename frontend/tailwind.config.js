@@ -69,10 +69,13 @@ export default {
         'genre-romance-content': 'var(--color-genre-romance-content)',
 
         success: 'var(--color-success)',
+        'success-dark': 'var(--color-success-dark)',
         'success-content': 'var(--color-success-content)',
         warning: 'var(--color-warning)',
+        'warning-dark': 'var(--color-warning-dark)',
         'warning-content': 'var(--color-warning-content)',
         error: 'var(--color-error)',
+        'error-dark': 'var(--color-error-dark)',
         'error-content': 'var(--color-error-content)',
       },
       fontSize: {

@@ -58,9 +58,12 @@
 
   /* Utility colors */
   --color-success: #35e435;
+  --color-success-dark: #1bcb1b;
   --color-success-content: #031703;
   --color-warning: #e4e435;
+  --color-warning-dark: #cbcb1b;
   --color-warning-content: #171703;
   --color-error: #e43535;
+  --color-error-dark: #cb1b1b;
   --color-error-content: #ffffff;
 }
