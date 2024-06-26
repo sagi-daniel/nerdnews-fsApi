@@ -3,6 +3,7 @@ interface ButtonProps {
   size: 'normal' | 'full';
   isLoading?: boolean;
   text: string;
+  onClick?: () => void;
 }
 
 function Button({ text, isLoading, type = 'submit', size = 'normal' }: ButtonProps) {
