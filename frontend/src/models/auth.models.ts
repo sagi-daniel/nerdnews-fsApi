@@ -19,8 +19,6 @@ export interface LoginCredentialModel {
 
 export interface SingupModel {
   role?: string;
-  lastName: string;
-  firstName: string;
   userName: string;
   email: string;
   password: string;

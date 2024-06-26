@@ -7,8 +7,6 @@ import Button from '../../../components/Button';
 import CustomNavLink from '../../../components/CustomNavLink';
 
 function SignupForm() {
-  const [lastName, setLastName] = useState('');
-  const [firstName, setFirstName] = useState('');
   const [userName, setUserName] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
@@ -27,8 +25,6 @@ function SignupForm() {
     }
     try {
       const newUser: SingupModel = {
-        lastName,
-        firstName,
         userName,
         email,
         password,
@@ -44,26 +40,7 @@ function SignupForm() {
 
   return (
     <>
-      {' '}
       <form onSubmit={handleSubmit}>
-        <div className="grid grid-cols-2 gap-4">
-          <InputField
-            type="text"
-            id="lastName"
-            label="Vezetéknév"
-            value={lastName}
-            setValue={setLastName}
-            required={true}
-          />
-          <InputField
-            type="text"
-            id="firstName"
-            label="Keresztnév"
-            value={firstName}
-            setValue={setFirstName}
-            required={true}
-          />
-        </div>
         <div className="grid grid-cols-2 gap-4">
           <InputField
             type="text"
