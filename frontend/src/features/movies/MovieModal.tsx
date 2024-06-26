@@ -1,8 +1,7 @@
-import { useOutsideClick } from '../../hooks/useOutsideClick';
 import { formatDateIsoToNormal, truncateText } from '../../utils/helpers';
 import MovieModel from '../../models/Movie.model';
-import CloseIcon from '../../components/CloseIcon';
 import useLoaderHook from '../../hooks/useLoaderHook';
+import FormModal from '../../components/FormModal';
 
 interface ModalProps {
   movie: MovieModel;
@@ -12,18 +11,9 @@ interface ModalProps {
 function MovieModal({ movie, closeModal }: ModalProps) {
   const loaded = useLoaderHook(movie.poster);
 
-  const modalRef = useOutsideClick({
-    handler: closeModal,
-    listenCapturing: true,
-  });
-
   return (
-    <div className="z-20 fixed top-0 left-0 right-0 bottom-0 bg-black bg-opacity-50 flex items-center justify-center">
-      <div
-        ref={modalRef}
-        className="relative flex flex-col md:flex-row gap-5 w-1/2 md:w-1/3 modal-content bg-bg-light dark:bg-bg-dark rounded-md shadow-md p-4"
-      >
-        <CloseIcon onClick={closeModal} />
+    <FormModal title="" closeModal={closeModal}>
+      <div className="flex size-full gap-4">
         <div className="flex h-full md:w-1/3">
           <div className={`relative size-full no-select z-1 overflow-hidden rounded-md`}>
             <div
@@ -41,7 +31,7 @@ function MovieModal({ movie, closeModal }: ModalProps) {
           <p className="mt-2">{truncateText(movie.overview, 370)}</p>
         </div>
       </div>
-    </div>
+    </FormModal>
   );
 }
 
