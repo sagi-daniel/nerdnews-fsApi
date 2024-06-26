@@ -2,7 +2,7 @@ import { ChangeEvent, useState } from 'react';
 import { FiEye, FiEyeOff } from 'react-icons/fi';
 
 interface InputFieldProps {
-  type?: 'text' | 'password' | 'email' | 'number'; // Restrict type to specific values
+  type?: 'text' | 'password' | 'email' | 'number' | 'date'; // Restrict type to specific values
   id?: string;
   label: string;
   value: string;
@@ -36,7 +36,7 @@ function InputField({
   };
 
   return (
-    <div className="mb-3">
+    <div className="mb-3 w-full">
       <label className="block mb-1">{label}</label>
       <div className="relative">
         <input
