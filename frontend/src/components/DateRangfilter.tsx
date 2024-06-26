@@ -37,7 +37,7 @@ function DateRangeFilter({ fromDate, toDate, setFromDate, setToDate }: DateRange
   };
 
   return (
-    <div className="flex w-full md:flex-col mb-3 gap-2 md-gap-0 rounded-md">
+    <div className="flex w-full md:w-full md:mb-3 md:flex-col mb-3 gap-2 md-gap-0 rounded-md">
       <InputField
         type="date"
         id="fromDate"
@@ -46,6 +46,7 @@ function DateRangeFilter({ fromDate, toDate, setFromDate, setToDate }: DateRange
         setValue={handleFromDateChange}
         isValid={isValidFromDate}
         errorMessage={fromDateError}
+        required={false}
       />
       <InputField
         type="date"
@@ -55,6 +56,7 @@ function DateRangeFilter({ fromDate, toDate, setFromDate, setToDate }: DateRange
         setValue={handleToDateChange}
         isValid={isValidToDate}
         errorMessage={toDateError}
+        required={false}
       />
     </div>
   );
