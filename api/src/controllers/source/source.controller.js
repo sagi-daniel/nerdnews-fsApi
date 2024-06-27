@@ -3,40 +3,40 @@ const catchAsync = require('../../utils/catchAsync');
 const sourceService = require('./source.service');
 
 exports.create = catchAsync(async (req, res, next) => {
-  const rssSource = await sourceService.create(req.body);
-  if (!rssSource) {
+  const source = await sourceService.create(req.body);
+  if (!source) {
     return next(new AppError(`Source could not saved`));
   }
   res.status(200).json({
     status: 'success',
     data: {
-      rssSource,
+      source,
     },
   });
 });
 
 exports.findAll = catchAsync(async (req, res, next) => {
-  const rssSources = await sourceService.findAll();
+  const sources = await sourceService.findAll();
   res.status(200).json({
     status: 'success',
-    results: rssSources.length,
+    results: sources.length,
     data: {
-      rssSources,
+      sources,
     },
   });
 });
 
 exports.findById = catchAsync(async (req, res, next) => {
   const id = req.params.id;
-  const rssSource = await sourceService.findById(id);
-  if (!rssSource) {
+  const source = await sourceService.findById(id);
+  if (!source) {
     return next(new AppError(`Source with ${id} ID could not found`));
   }
-  if (rssSource) {
+  if (source) {
     res.status(200).json({
       status: 'success',
       data: {
-        rssSource,
+        source,
       },
     });
   }
@@ -44,28 +44,28 @@ exports.findById = catchAsync(async (req, res, next) => {
 
 exports.update = catchAsync(async (req, res, next) => {
   const id = req.params.id;
-  const rssSource = await sourceService.update(id, req.body);
-  if (!rssSource) {
+  const source = await sourceService.update(id, req.body);
+  if (!source) {
     return next(new AppError(`Source with ${id} ID could not found`));
   }
   res.status(200).json({
     status: 'success',
     data: {
-      rssSource,
+      source,
     },
   });
 });
 
 exports.remove = catchAsync(async (req, res, next) => {
   const id = req.params.id;
-  const rssSource = await sourceService.remove(id);
-  if (!rssSource) {
+  const source = await sourceService.remove(id);
+  if (!source) {
     return next(new AppError(`Source with ${id} ID could not found`));
   }
   res.status(200).json({
     status: 'success',
     data: {
-      rssSource,
+      source,
     },
   });
 });
