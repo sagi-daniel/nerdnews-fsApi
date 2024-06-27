@@ -21,7 +21,7 @@ function FormModal({ title, closeModal, children }: FormModalProps) {
       >
         <CloseIcon onClick={closeModal} />
         <div className="flex flex-col min-h-32 justify-between ">
-          <h2 className="text-center py-10">{title}</h2>
+          <h2 className="text-center ">{title}</h2>
           {children}
         </div>
       </div>
