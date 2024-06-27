@@ -3,16 +3,16 @@ import { Link } from 'react-router-dom';
 
 interface CloseIconProps {
   path?: string;
-  onClick: () => void;
+  onClick?: () => void;
 }
 
 function CloseIcon({ onClick, path }: CloseIconProps) {
-  if (!path)
+  if (onClick || !path)
     return <FiX onClick={onClick} className="absolute top-2 right-2 cursor-pointer text-xl hover:text-primary" />;
 
   return (
     <Link to={path}>
-      <FiX onClick={onClick} className="absolute top-2 right-2 cursor-pointer text-xl hover:text-primary" />
+      <FiX className="absolute top-2 right-2 cursor-pointer text-xl hover:text-primary" />
     </Link>
   );
 }
