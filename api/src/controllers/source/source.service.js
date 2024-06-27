@@ -5,7 +5,11 @@ exports.create = (source) => {
   return newSource.save();
 };
 
-exports.findAll = () => Source.find();
+exports.findAll = () =>
+  Source.find().populate({
+    path: 'category',
+    select: '-__v -createdAt -updatedAt',
+  });
 
 exports.findById = (id) =>
   Source.findById(id).populate({
