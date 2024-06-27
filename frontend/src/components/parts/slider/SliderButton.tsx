@@ -24,7 +24,7 @@ function SliderButton({ direction, sliderRef }: SliderButtonProps) {
   return (
     <button
       onClick={() => handleScroll(direction)}
-      className={`${directionStyle[direction]} hover-outline-highlight absolute m-0 mx-1.5 p-1.5 top-[45%] transform -translate-y-1/2 bg-black bg-opacity-60 text-white border-none cursor-pointer  hover:bg-opacity-80`}
+      className={`${directionStyle[direction]} btn-slider hover-outline-highlight absolute m-0 mx-1.5 p-1.5 top-[45%] transform -translate-y-1/2 bg-black bg-opacity-60 text-white border-none cursor-pointer transition duration-300 ease-in-out hover:bg-opacity-80`}
     >
       {direction === 'left' ? <FiChevronLeft size={30} /> : <FiChevronRight size={30} />}
     </button>
