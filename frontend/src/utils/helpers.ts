@@ -51,7 +51,7 @@ export const truncateText = (text: string | undefined, trunc: number | undefined
   return text.slice(0, trunc) + '...';
 };
 
-export function generateRandomPassword(): string {
+export const generateRandomPassword = (): string => {
   const length = 12;
   const charset = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789';
   let password = '';
@@ -62,4 +62,11 @@ export function generateRandomPassword(): string {
   }
 
   return password;
-}
+};
+
+export const capitalizeWord = (word: string): string => {
+  if (typeof word !== 'string' || word.length === 0) {
+    return '';
+  }
+  return word.charAt(0).toUpperCase() + word.slice(1).toLowerCase();
+};
