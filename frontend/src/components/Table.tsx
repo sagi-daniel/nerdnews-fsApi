@@ -3,7 +3,7 @@ import { FiEdit, FiTrash, FiPlus } from 'react-icons/fi';
 export interface Column<T> {
   key: keyof T;
   label: string;
-  formatter?: (value: string | undefined) => string;
+  formatter?: (value: unknown) => string;
 }
 
 interface TableProps<T> {
@@ -35,9 +35,7 @@ function Table<T extends { _id: string }>({ data, columns, onEdit, onDelete, onC
             <tr key={item._id} className="border-t border-border-light">
               {columns.map((column) => (
                 <td key={String(column.key)}>
-                  {column.formatter
-                    ? column.formatter(item[column.key] as string | undefined)
-                    : String(item[column.key])}
+                  {column.formatter ? column.formatter(item[column.key]) : String(item[column.key])}
                 </td>
               ))}
               <td className="flex justify-center space-x-2">
