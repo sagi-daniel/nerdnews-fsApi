@@ -1,19 +1,17 @@
 import { ReactNode } from 'react';
 import CloseIcon from '../../components/CloseIcon';
 import Logo from '../../components/Logo';
-import useMoveBack from '../../hooks/useMoveBack';
 
 type Size = 'small' | 'medium' | 'large';
 
 interface FormWrapperProps {
   label: string;
   size?: Size;
+  formClosePath?: string;
   children: ReactNode;
 }
 
-function FormWrapper({ children, label, size = 'small' }: FormWrapperProps) {
-  const moveBack = useMoveBack();
-
+function FormWrapper({ children, label, size = 'small', formClosePath = '/home' }: FormWrapperProps) {
   const sizeClasses = {
     small: 'w-full md:w-96',
     medium: 'w-full md:w-1/3',
@@ -21,10 +19,10 @@ function FormWrapper({ children, label, size = 'small' }: FormWrapperProps) {
   };
 
   return (
-    <div className={`flex flex-col size-full items-center gap-16 justify-center`}>
+    <div className={`flex flex-col size-full items-center gap-16 md:justify-center p-5`}>
       <Logo size="medium" />
       <div className={`relative ${sizeClasses[size]} bg-border-dark text-content-dark p-8 rounded-md w-110`}>
-        <CloseIcon onClick={moveBack} />
+        <CloseIcon path={formClosePath} />
         <h2 className="mb-6 text-center">{label}</h2>
         {children}
       </div>
