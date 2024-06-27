@@ -1,4 +1,4 @@
-import SelectField from './SelectField';
+import SelectField from './form-ui/SelectField';
 
 interface SortProps {
   sortOrder: string;
