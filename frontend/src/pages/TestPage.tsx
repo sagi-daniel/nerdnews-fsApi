@@ -1,5 +1,7 @@
+import Users from './protectedPages/Users';
+
 function TestPage() {
-  return <div className="h-72 flex flex-wrap "></div>;
+  return <Users />;
 }
 
 export default TestPage;
