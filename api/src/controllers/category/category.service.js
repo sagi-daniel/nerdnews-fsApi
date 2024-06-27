@@ -9,6 +9,6 @@ exports.findAll = () => Category.find();
 
 exports.findById = (id) => Category.findById(id);
 
-exports.update = (id, category) => Category.findByIdAndUpdate(id, Category, { new: true });
+exports.update = (id, category) => Category.findByIdAndUpdate(id, category, { new: true });
 
 exports.remove = (id) => Category.findByIdAndDelete(id);
