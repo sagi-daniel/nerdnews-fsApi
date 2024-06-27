@@ -10,7 +10,6 @@ const SourceSchema = mongoose.Schema(
       type: String,
       enum: ['RSS', 'RDF'],
       default: 'RSS',
-      required: true,
     },
     sourceLink: {
       type: String,
