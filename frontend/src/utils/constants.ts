@@ -25,7 +25,16 @@ export const MENU_ITEMS = [
   // { name: 'Egyéb', path: 'cidr', type: 'regular', element: 'IpCidrCalculator' },
 ];
 
-export const USER_MENU_ITEMS = [{ name: 'Fiók', path: 'myAccount', type: 'regular', element: 'myAccount' }];
+export const USER_MENU_ITEMS = [
+  { name: 'Fiók', path: 'myAccount', type: 'regular', element: 'myAccount' },
+  { name: 'Mentett hírek', path: 'myNews', type: 'regular', element: 'myNews' },
+  { name: 'Mentett filmek', path: 'myMovies', type: 'regular', element: 'myMovies' },
+];
+export const ADMIN_MENU_TEMS = [
+  { name: 'Felhasználók', path: 'users', type: 'regular', element: 'users' },
+  { name: 'Rss Források', path: 'sources', type: 'regular', element: 'sources' },
+  { name: 'Hír kategóriák', path: 'categories', type: 'regular', element: 'categories' },
+];
 
 export const CATEGORY_ITEMS = [{ name: '', path: 'home', type: 'regular', element: 'Home' }];
 
