@@ -12,15 +12,15 @@ export interface UserModel {
   updatedAt: string;
 }
 
-export interface UpdateUserModel {
-  user: UserModel;
-  userId: string;
-}
-
 export interface CreateUserModel {
   password: string;
   passwordConfirm: string;
   role: string;
   userName: string;
   email: string;
+}
+
+export interface UpdateUserModel {
+  user: UserModel;
+  userId: string;
 }
