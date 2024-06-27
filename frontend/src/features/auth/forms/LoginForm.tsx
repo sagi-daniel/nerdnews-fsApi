@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useLogin } from '../useLogin';
-import InputField from '../../../components/InputField';
+import InputField from '../../../components/form-ui/InputField';
 import Button from '../../../components/Button';
 import CustomNavLink from '../../../components/CustomNavLink';
 

@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { useResetPassword } from '../useResetPassword';
-import InputField from '../../../components/InputField';
+import InputField from '../../../components/form-ui/InputField';
 import Button from '../../../components/Button';
 import { useParams } from 'react-router-dom';
 

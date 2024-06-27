@@ -1,6 +1,6 @@
 import CategoryFilter from '../../components/CategoryFilter';
 import Sort from '../../components/Sort';
-import DateRangeFilter from '../../components/DateRangfilter';
+import DateRangeFilter from '../../components/form-ui/DateRangfilter';
 import useMovieFilter from '../../hooks/useMovieFilter';
 import { GENRE_COLORS } from '../../utils/constants';
 

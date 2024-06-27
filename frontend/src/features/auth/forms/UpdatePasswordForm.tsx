@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { useUpdatePassword } from '../../auth/useUpdatePassword';
-import InputField from '../../../components/InputField';
+import InputField from '../../../components/form-ui/InputField';
 import Button from '../../../components/Button';
 
 function UpdatePasswordForm() {

@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useSignup } from '../useSignup';
 import { SingupModel } from '../../../models/auth.models';
-import InputField from '../../../components/InputField';
+import InputField from '../../../components/form-ui/InputField';
 import Button from '../../../components/Button';
 import CustomNavLink from '../../../components/CustomNavLink';
 

@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import InputField from '../../components/InputField';
+import InputField from '../../components/form-ui/InputField';
 import Section from '../../components/Section';
 import calculateCIDR from '../../utils/cidrCalc';
 import { validateIpAddress, validatePrefix } from '../../utils/validators';

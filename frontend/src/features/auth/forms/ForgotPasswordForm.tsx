@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { useForgotPassword } from '../useforgotPassword';
-import InputField from '../../../components/InputField';
+import InputField from '../../../components/form-ui/InputField';
 import Button from '../../../components/Button';
 
 function ForgotPasswordForm() {
