@@ -46,6 +46,8 @@ export const getCurrentUser = async (): Promise<UserModel | null> => {
   }
 };
 
+/* TODO MyNews and MyMovies */
+
 export const signupUser = async (newUser: SingupModel): Promise<UserModel> => {
   try {
     const response = await api.post<LoginResponseModel>('/user/signup', newUser);
