@@ -3,6 +3,7 @@ import { ADMIN_MENU_TEMS, USER_MENU_ITEMS } from '../../../utils/constants';
 import MenuItem from '../../../models/MenuItem.model';
 import { useLogout } from '../../../features/auth/useLogout';
 import { useUser } from '../../../features/auth/useUser';
+import Divider from '../../Divider';
 
 const DropDownMenu = ({ mobile }: { mobile?: boolean }) => {
   const { user } = useUser();
@@ -15,6 +16,8 @@ const DropDownMenu = ({ mobile }: { mobile?: boolean }) => {
           {menuItem.name}
         </Link>
       ))}
+      <Divider margin="full" />
+
       {user?.role === 'admin' &&
         ADMIN_MENU_TEMS.map((menuItem: MenuItem) => (
           <Link key={menuItem.path} to={menuItem.path} className={className}>
