@@ -17,7 +17,7 @@ const userColumns: Column<UserModel>[] = [
   { key: 'email', label: 'Email' },
 ];
 
-function UserTable() {
+function Users() {
   const [selectedUser, setSelectedUser] = useState<UserModel | null>(null);
   const [modalVisible, setModalVisible] = useState(false);
   const [confirmationVisible, setConfirmationVisible] = useState(false);
@@ -103,4 +103,4 @@ function UserTable() {
   );
 }
 
-export default UserTable;
+export default Users;

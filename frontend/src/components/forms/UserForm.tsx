@@ -5,10 +5,10 @@ import { UserModel } from '../../models/User.model';
 import { FiRefreshCcw } from 'react-icons/fi';
 import { createUser, updateUser } from '../../services/apiUser';
 import { generateRandomPassword } from '../../utils/helpers';
-import InputField from '../InputField';
+import InputField from '../form-ui/InputField';
 import Button from '../Button';
 import toast from 'react-hot-toast';
-import SelectField from '../SelectField';
+import SelectField from '../form-ui/SelectField';
 
 interface UserFormProps {
   user?: UserModel | null;
