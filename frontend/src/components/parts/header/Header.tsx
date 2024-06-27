@@ -11,7 +11,7 @@ function Header() {
         <Navbar />
         <ControlPanel />
       </div>
-      <Divider color="neutral" />
+      <Divider margin="none" color="neutral" />
     </header>
   );
 }

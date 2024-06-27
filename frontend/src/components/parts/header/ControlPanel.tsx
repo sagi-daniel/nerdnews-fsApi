@@ -6,16 +6,13 @@ import UserIcon from './UserIcon';
 function ControlPanel({ mobile = false }: { mobile?: boolean }) {
   const { isAuthenticated } = useUser();
 
-  const mobileStyle = `flex flex-col justify-start pt-2`;
+  const mobileStyle = `flex justify-start items-center gap-2`;
   const desktopStyle = `flex hidden md:flex justify-end items-center`;
 
   return (
-    <div className={`${mobile ? mobileStyle : desktopStyle} gap-5 `}>
-      {isAuthenticated && <UserIcon mobile={mobile} />}
-
-      <span className=" md:hidden">Sötét mód:</span>
+    <div className={`${mobile ? mobileStyle : desktopStyle} md:gap-5 `}>
       <ToggleDarkMode />
-
+      {isAuthenticated && <UserIcon mobile={mobile} />}
       {!isAuthenticated && <LoginIcon />}
     </div>
   );

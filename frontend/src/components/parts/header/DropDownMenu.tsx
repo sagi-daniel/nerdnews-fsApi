@@ -4,26 +4,34 @@ import MenuItem from '../../../models/MenuItem.model';
 import { useLogout } from '../../../features/auth/useLogout';
 import { useUser } from '../../../features/auth/useUser';
 import Divider from '../../Divider';
+import { capitalizeWord } from '../../../utils/helpers';
 
 const DropDownMenu = ({ mobile }: { mobile?: boolean }) => {
   const { user } = useUser();
   const { logout } = useLogout();
 
+  const userName = capitalizeWord(user?.userName || '');
+  const userRole = capitalizeWord(user?.role || '');
+
   const renderMenuItems = (className: string) => (
     <>
+      <Divider margin="full" align="center" tag={userName} />
       {USER_MENU_ITEMS.map((menuItem: MenuItem) => (
         <Link key={menuItem.path} to={menuItem.path} className={className}>
           {menuItem.name}
         </Link>
       ))}
-      <Divider margin="full" />
 
-      {user?.role === 'admin' &&
-        ADMIN_MENU_TEMS.map((menuItem: MenuItem) => (
-          <Link key={menuItem.path} to={menuItem.path} className={className}>
-            {menuItem.name}
-          </Link>
-        ))}
+      {user?.role === 'admin' && (
+        <>
+          <Divider margin="full" align="center" tag={userRole} />
+          {ADMIN_MENU_TEMS.map((menuItem: MenuItem) => (
+            <Link key={menuItem.path} to={menuItem.path} className={className}>
+              {menuItem.name}
+            </Link>
+          ))}
+        </>
+      )}
 
       <span className={`${className} cursor-pointer`} onClick={() => logout()}>
         Kilépés
