@@ -1,9 +1,11 @@
 import { Link } from 'react-router-dom';
-import { USER_MENU_ITEMS } from '../utils/constants';
-import MenuItem from '../models/MenuItem.model';
-import { useLogout } from '../features/auth/useLogout';
+import { ADMIN_MENU_TEMS, USER_MENU_ITEMS } from '../../../utils/constants';
+import MenuItem from '../../../models/MenuItem.model';
+import { useLogout } from '../../../features/auth/useLogout';
+import { useUser } from '../../../features/auth/useUser';
 
 const DropDownMenu = ({ mobile }: { mobile?: boolean }) => {
+  const { user } = useUser();
   const { logout } = useLogout();
 
   const renderMenuItems = (className: string) => (
@@ -13,6 +15,13 @@ const DropDownMenu = ({ mobile }: { mobile?: boolean }) => {
           {menuItem.name}
         </Link>
       ))}
+      {user?.role === 'admin' &&
+        ADMIN_MENU_TEMS.map((menuItem: MenuItem) => (
+          <Link key={menuItem.path} to={menuItem.path} className={className}>
+            {menuItem.name}
+          </Link>
+        ))}
+
       <span className={`${className} cursor-pointer`} onClick={() => logout()}>
         Kilépés
       </span>

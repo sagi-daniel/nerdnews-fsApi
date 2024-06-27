@@ -1,9 +1,9 @@
 import { useState } from 'react';
 import { FiAlignRight } from 'react-icons/fi';
-import { MENU_ITEMS } from '../utils/constants';
+import { MENU_ITEMS } from '../../../utils/constants';
+import { useUser } from '../../../features/auth/useUser';
 import MenuModal from './MenuModal';
 import NavItem from './NavItem';
-import { useUser } from '../features/auth/useUser';
 
 function Navbar() {
   const [isModalOpen, setIsModalOpen] = useState(false);

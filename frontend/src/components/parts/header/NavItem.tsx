@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom';
-import MenuItem from '../models/MenuItem.model';
+import MenuItem from '../../../models/MenuItem.model';
 
 function NavItem({ menuItem }: { menuItem: MenuItem }) {
   return (

@@ -1,9 +1,9 @@
 import { Link } from 'react-router-dom';
-import { useUser } from '../features/auth/useUser';
+import { useUser } from '../../../features/auth/useUser';
 import ControlPanel from './ControlPanel';
-import MenuItem from '../models/MenuItem.model';
+import MenuItem from '../../../models/MenuItem.model';
 import NavItem from './NavItem';
-import CloseIcon from './CloseIcon';
+import CloseIcon from '../../CloseIcon';
 
 interface MenuModalProps {
   menuItems: MenuItem[];
@@ -32,12 +32,7 @@ function MenuModal({ menuItems, isModalOpen, toggleModal }: MenuModalProps) {
         </div>
         <div className="flex flex-col gap-4">
           {menuItems.map((menuItem) => (
-            <Link
-              to={menuItem.path}
-              key={menuItem.name}
-              className="relative hover-half-underline cursor-pointer"
-              onClick={toggleModal}
-            >
+            <Link to={menuItem.path} key={menuItem.name} className="relative cursor-pointer" onClick={toggleModal}>
               {menuItem.name}
             </Link>
           ))}

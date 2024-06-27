@@ -1,8 +1,8 @@
 import { useState } from 'react';
 import { FiUser } from 'react-icons/fi';
 import DropDownMenu from './DropDownMenu';
-import Divider from './Divider';
-import { useOutsideClick } from '../hooks/useOutsideClick';
+import Divider from '../../Divider';
+import { useOutsideClick } from '../../../hooks/useOutsideClick';
 
 function LoginIcon({ mobile }: { mobile: boolean }) {
   const [isOpen, setIsOpen] = useState(false);

@@ -4,7 +4,7 @@ interface SelectFieldProps {
   label: string;
   required: boolean;
   value: string;
-  setValue: (sortOrder: string) => void;
+  setValue: (value: string) => void;
 }
 
 function SelectField({ options, id, label, required, value, setValue }: SelectFieldProps) {
@@ -24,11 +24,12 @@ function SelectField({ options, id, label, required, value, setValue }: SelectFi
         required={required}
         className="w-full border border-bg-border-light dark:border-bg-dark rounded-md p-2 text-content-light"
       >
-        {options.map((option) => (
-          <option key={option.value} value={option.value}>
-            {option.name}
-          </option>
-        ))}
+        {options &&
+          options.map((option) => (
+            <option key={option.value} value={option.value}>
+              {option.name}
+            </option>
+          ))}
       </select>
     </div>
   );
