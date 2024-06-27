@@ -1,12 +1,20 @@
-import { BASE_URL } from '../utils/constants';
 import axios from 'axios';
+import api from './api';
 import NewsModel from '../models/News.model';
 import ResponseModel from '../models/Response.model';
 
-export async function getNews(): Promise<ResponseModel<NewsModel[], 'news'>> {
+interface NewsQueryParams {
+  category: string;
+  sortOrder: string;
+  fromDate: string;
+  toDate: string;
+  page: string;
+  pageSize: string;
+}
+
+async function fetchData<T>(url: string, params?: object): Promise<T> {
   try {
-    const response = await axios.get(`${BASE_URL}/news?`);
-    console.log(response);
+    const response = await api.get(url, { params });
     return response.data;
   } catch (error) {
     if (axios.isAxiosError(error)) {
@@ -17,14 +25,18 @@ export async function getNews(): Promise<ResponseModel<NewsModel[], 'news'>> {
   }
 }
 
-export async function getNewsByQuery(
-  category: string,
-  sortOrder: string,
-  fromDate: string,
-  toDate: string,
-  page: string,
-  pageSize: string
-): Promise<ResponseModel<NewsModel[], 'news'>> {
+export async function getNews(): Promise<ResponseModel<NewsModel[], 'news'>> {
+  return fetchData<ResponseModel<NewsModel[], 'news'>>('/news');
+}
+
+export async function getNewsByQuery({
+  category,
+  sortOrder,
+  fromDate,
+  toDate,
+  page,
+  pageSize,
+}: NewsQueryParams): Promise<ResponseModel<NewsModel[], 'news'>> {
   const params = {
     category,
     sortOrder,
@@ -34,47 +46,21 @@ export async function getNewsByQuery(
     pageSize,
   };
 
-  try {
-    const response = await axios.get(`${BASE_URL}/news`, { params });
-
-    return response.data;
-  } catch (error) {
-    if (axios.isAxiosError(error)) {
-      throw new Error(error.response?.statusText || 'Network response was not ok');
-    } else {
-      throw new Error('An unexpected error occurred');
-    }
-  }
+  return fetchData<ResponseModel<NewsModel[], 'news'>>('/news', params);
 }
 
 export async function getTop3FreshNews(): Promise<ResponseModel<NewsModel[], 'news'>> {
   const params = {
     sortOrder: 'desc',
   };
-  try {
-    const response = await axios.get(`${BASE_URL}/news/top3fresh`, { params });
-    return response.data;
-  } catch (error) {
-    if (axios.isAxiosError(error)) {
-      throw new Error(error.response?.statusText || 'Network response was not ok');
-    } else {
-      throw new Error('An unexpected error occurred');
-    }
-  }
+
+  return fetchData<ResponseModel<NewsModel[], 'news'>>('/news/top3fresh', params);
 }
 
 export async function sliderNews(): Promise<ResponseModel<NewsModel[], 'news'>> {
   const params = {
     sortOrder: 'desc',
   };
-  try {
-    const response = await axios.get(`${BASE_URL}/news/slider`, { params });
-    return response.data;
-  } catch (error) {
-    if (axios.isAxiosError(error)) {
-      throw new Error(error.response?.statusText || 'Network response was not ok');
-    } else {
-      throw new Error('An unexpected error occurred');
-    }
-  }
+
+  return fetchData<ResponseModel<NewsModel[], 'news'>>('/news/slider', params);
 }

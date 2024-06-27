@@ -1,16 +1,34 @@
-import axios from 'axios';
-import CategoryModel from '../models/Category.model';
-import { BASE_URL } from '../utils/constants';
+import api from './api';
+import { UpdateCategoryModel, CreateCategoryModel, CategoryModel } from '../models/Category.model';
 
-export async function getCategories(): Promise<CategoryModel[]> {
+type ResponseKeys = 'category' | 'categories';
+
+const handleRequest = async <T>(
+  method: 'get' | 'post' | 'patch' | 'delete',
+  url: string,
+  responseKey: ResponseKeys,
+  data?: CategoryModel | CreateCategoryModel | UpdateCategoryModel | string
+): Promise<T | null> => {
   try {
-    const response = await axios.get(`${BASE_URL}/category`);
-    return response.data.data.categories;
+    const response = await api[method](url, data);
+    return response.data.data[responseKey];
   } catch (error) {
-    if (axios.isAxiosError(error)) {
-      throw new Error(error.response?.statusText || 'Network response was not ok');
-    } else {
-      throw new Error('An unexpected error occurred');
-    }
+    throw new Error(`${method.toUpperCase()} request to ${url} failed`);
   }
-}
+};
+
+export const getCategories = async (): Promise<CategoryModel[] | null> => {
+  return await handleRequest<CategoryModel[]>('get', '/category', 'categories');
+};
+
+export const createCategory = async (category: CreateCategoryModel): Promise<CategoryModel | null> => {
+  return await handleRequest<CategoryModel>('post', '/category', 'category', category);
+};
+
+export const updateCategory = async ({ category, categoryId }: UpdateCategoryModel): Promise<CategoryModel | null> => {
+  return await handleRequest<CategoryModel>('patch', `/category/${categoryId}`, 'category', category);
+};
+
+export const deleteCategory = async (categoryId: string): Promise<CategoryModel | null> => {
+  return await handleRequest<CategoryModel>('delete', `/category/${categoryId}`, 'category');
+};
