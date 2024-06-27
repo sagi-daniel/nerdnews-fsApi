@@ -1,16 +1,16 @@
 import { useState, useEffect } from 'react';
 
 function useLoaderHook(src: string) {
-  const [loaded, setLoaded] = useState(false);
+  const [loadedSrc, setLoadedSrc] = useState<string>('');
 
   useEffect(() => {
     const image = new Image();
     image.src = src;
-    image.onload = () => setLoaded(true);
-    image.onerror = () => setLoaded(false);
+    image.onload = () => setLoadedSrc(src);
+    image.onerror = () => setLoadedSrc('/assets/image/placeholder.png');
   }, [src]);
 
-  return loaded;
+  return loadedSrc;
 }
 
 export default useLoaderHook;
