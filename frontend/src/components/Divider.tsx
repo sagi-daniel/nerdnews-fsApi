@@ -2,10 +2,11 @@ interface DividerProps {
   size?: 'small' | 'medium' | 'full';
   align?: 'left' | 'center' | 'right';
   color?: 'primary' | 'neutral';
-  margin?: 'full' | 'top' | 'bottom';
+  margin?: 'none' | 'full' | 'top' | 'bottom';
+  tag?: string;
 }
 
-function Divider({ size = 'full', align = 'left', color = 'primary', margin = 'top' }: DividerProps) {
+function Divider({ size = 'full', align = 'left', color = 'primary', margin = 'top', tag = '' }: DividerProps) {
   const alignmentClasses: Record<string, string> = {
     left: 'justify-start',
     center: 'justify-center',
@@ -23,14 +24,26 @@ function Divider({ size = 'full', align = 'left', color = 'primary', margin = 't
   };
 
   const marginClasses: Record<string, string> = {
-    full: 'm-3',
+    none: '',
+    full: 'my-6',
     top: 'mt-3',
     bottom: 'mb-3',
   };
 
+  if (tag) {
+    return (
+      <div className="flex items-center gap-2 px-4">
+        <span className="text-xs text-primary">{tag}</span>
+        <div
+          className={`flex border-y-2 rounded-full ${marginClasses[margin]}  ${alignmentClasses[align]} ${alignmentClasses[align]} ${sizeClasses[size]} border-t ${colorClasses[color]} `}
+        />
+      </div>
+    );
+  }
+
   return (
     <div
-      className={`flex border-y-2 rounded-${marginClasses[margin]}full  ${alignmentClasses[align]} ${alignmentClasses[align]} ${sizeClasses[size]} border-t ${colorClasses[color]} `}
+      className={`flex border-y-2 rounded-full ${marginClasses[margin]}  ${alignmentClasses[align]} ${alignmentClasses[align]} ${sizeClasses[size]} border-t ${colorClasses[color]} `}
     />
   );
 }
