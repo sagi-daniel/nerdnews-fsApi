@@ -4,6 +4,7 @@ import { loginUser } from '../../services/apiAuth';
 import { useNavigate } from 'react-router-dom';
 import { UserModel } from '../../models/User.model';
 import { LoginCredentialModel } from '../../models/auth.models';
+import { capitalizeWord } from '../../utils/helpers';
 
 export function useLogin() {
   const queryClient = useQueryClient();
@@ -12,7 +13,7 @@ export function useLogin() {
   const { mutate: login, isLoading } = useMutation({
     mutationFn: ({ email, password }: LoginCredentialModel) => loginUser({ email, password }),
     onSuccess: (user: UserModel) => {
-      toast.success(`Sikeres bejelentkezés! Üdv, ${user.userName}`);
+      toast.success(`Üdv, ${capitalizeWord(user.userName)}`);
       queryClient.setQueryData(['user'], user);
       navigate('/myAccount', { replace: true });
     },
