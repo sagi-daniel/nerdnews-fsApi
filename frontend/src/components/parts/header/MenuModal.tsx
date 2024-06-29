@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom';
-import { useUser } from '../../../features/auth/useUser';
+import { useAuth } from '../../../context/AuthContext';
 import ControlPanel from './ControlPanel';
 import MenuItem from '../../../models/MenuItem.model';
 import NavItem from './NavItem';
@@ -12,7 +12,7 @@ interface MenuModalProps {
 }
 
 function MenuModal({ menuItems, isModalOpen, toggleModal }: MenuModalProps) {
-  const { isAuthenticated } = useUser();
+  const { isAuthenticated } = useAuth();
 
   return (
     <div
