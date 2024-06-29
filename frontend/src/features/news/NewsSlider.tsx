@@ -8,7 +8,7 @@ import LoadingSpinner from '../../components/loaders/LoadingSpinner';
 import Error from '../../components/Error';
 
 function NewsSlider({ sliderLabel }: { sliderLabel: string }) {
-  const { data, error, isLoading, isError } = useQuery(['SliderNews'], sliderNews);
+  const { data, error, isLoading, isError } = useQuery(['sliderNews'], sliderNews);
 
   const news = data?.data.news;
 
