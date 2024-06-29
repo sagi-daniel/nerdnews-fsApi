@@ -1,10 +1,10 @@
 import { useState } from 'react';
 import { UserModel } from '../../models/User.model';
-import { useUser } from '../../features/auth/useUser';
 import Section from '../../components/Section';
+import { useAuth } from '../../context/AuthContext';
 
 function MyAccount() {
-  const { user } = useUser();
+  const { user } = useAuth();
 
   const [editedUser, setEditedUser] = useState<Partial<UserModel>>({});
 

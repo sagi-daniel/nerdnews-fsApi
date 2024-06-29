@@ -4,6 +4,7 @@ import Badge from '../../components/Badge';
 import NewsModel from '../../models/News.model';
 import useLoaderHook from '../../hooks/useLoaderHook';
 import NewsCardSkeleton from '../../components/loaders/skeletons/NewsCardSkeleton';
+import SaveLater from '../../components/SaveLater';
 
 interface NewsCardProps {
   news: NewsModel;
@@ -17,6 +18,7 @@ function NewsCard({ news }: NewsCardProps) {
   return (
     <div className="relative mx-1 flex-[0_0_40%] sm:flex-[0_0_25%] lg:flex-[0_0_15%] ">
       <div className=" cursor-pointer flex flex-col justify-between max-w-sm bg-border-dark text-content-dark h-full w-80 rounded-md">
+        {/* <SaveLater newsId={news._id} /> */}
         <a href={news.link} rel="noreferrer" target="_blank">
           <div className="relative flex flex-col justify-evenly overflow-hidden">
             <div className={`h-48 relative size-full no-select z-1 overflow-hidden rounded-t-md`}>
@@ -25,7 +27,6 @@ function NewsCard({ news }: NewsCardProps) {
                 style={{ backgroundImage: `url(${news.imageUrl})` }}
               />
             </div>
-
             <div className="p-4">
               <div className="absolute top-2 right-1">
                 <Badge name={news.category.categoryName} colorOptions={CATEGORY_COLORS} />
