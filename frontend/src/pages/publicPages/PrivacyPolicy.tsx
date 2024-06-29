@@ -34,7 +34,6 @@ const PrivacyPolicy = () => {
         <h2 className="text-xl font-semibold">3. A kezelt adatok köre</h2>
         <p>Az adatkezelő az alábbi személyes adatokat gyűjti és kezeli:</p>
         <ul className="list-disc list-inside ml-4">
-          <li>Név</li>
           <li>E-mail cím</li>
           <li>Felhasználónév</li>
         </ul>
