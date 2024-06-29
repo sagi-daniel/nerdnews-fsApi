@@ -3,15 +3,15 @@ import { FiEdit, FiTrash, FiPlus } from 'react-icons/fi';
 export interface Column<T> {
   key: keyof T;
   label: string;
-  formatter?: (value: unknown) => string;
+  formatter?: (value: any) => string;
 }
 
 interface TableProps<T> {
   data: T[];
   columns: Column<T>[];
-  onEdit: (item: T) => void;
+  onEdit?: (item: T) => void;
   onDelete: (id: string) => void;
-  onCreate: () => void;
+  onCreate?: () => void;
 }
 
 function Table<T extends { _id: string }>({ data, columns, onEdit, onDelete, onCreate }: TableProps<T>) {
@@ -23,11 +23,13 @@ function Table<T extends { _id: string }>({ data, columns, onEdit, onDelete, onC
             {columns.map((column) => (
               <th key={String(column.key)}>{column.label}</th>
             ))}
-            <th className="flex justify-center">
-              <button onClick={onCreate} className="btn-icon flex items-center  justify-center">
-                <FiPlus />
-              </button>
-            </th>
+            {onCreate && (
+              <th className="flex justify-center">
+                <button onClick={onCreate} className="btn-icon flex items-center  justify-center">
+                  <FiPlus />
+                </button>
+              </th>
+            )}
           </tr>
         </thead>
         <tbody>
@@ -38,10 +40,13 @@ function Table<T extends { _id: string }>({ data, columns, onEdit, onDelete, onC
                   {column.formatter ? column.formatter(item[column.key]) : String(item[column.key])}
                 </td>
               ))}
-              <td className="flex justify-center space-x-2">
-                <button onClick={() => onEdit(item)} className="btn-icon">
-                  <FiEdit />
-                </button>
+              <td className="flex items-center justify-center space-x-2 ">
+                {onEdit && (
+                  <button onClick={() => onEdit(item)} className="btn-icon">
+                    <FiEdit />
+                  </button>
+                )}
+
                 <button onClick={() => onDelete(item._id)} className="btn-icon">
                   <FiTrash />
                 </button>
