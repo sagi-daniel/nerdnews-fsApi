@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { useLogin } from '../useLogin';
+import { useAuth } from '../../../context/AuthContext';
 import InputField from '../../../components/form-ui/InputField';
 import Button from '../../../components/Button';
 import CustomNavLink from '../../../components/CustomNavLink';
@@ -8,7 +8,7 @@ import CustomNavLink from '../../../components/CustomNavLink';
 function LoginForm() {
   const [email, setEmail] = useState('testuser7@gmail.com');
   const [password, setPassword] = useState('testUser123');
-  const { login } = useLogin();
+  const { login } = useAuth();
 
   const navigate = useNavigate();
 

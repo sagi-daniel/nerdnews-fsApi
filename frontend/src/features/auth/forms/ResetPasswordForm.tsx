@@ -1,13 +1,13 @@
 import { useState } from 'react';
-import { useResetPassword } from '../useResetPassword';
+import { useParams } from 'react-router-dom';
+import { useAuth } from '../../../context/AuthContext';
 import InputField from '../../../components/form-ui/InputField';
 import Button from '../../../components/Button';
-import { useParams } from 'react-router-dom';
 
 function ResetPasswordPage() {
   const [password, setPassword] = useState('');
   const [passwordConfirm, setPasswordConfirm] = useState('');
-  const { resetPassword } = useResetPassword();
+  const { resetPassword } = useAuth();
 
   const { resetToken } = useParams();
 

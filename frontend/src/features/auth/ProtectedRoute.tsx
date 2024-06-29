@@ -1,8 +1,6 @@
-import { useUser } from '../auth/useUser';
+import { useAuth } from '../../context/AuthContext';
 import { useNavigate } from 'react-router-dom';
 import { ReactNode, useEffect } from 'react';
-import LoadingSpinner from '../../components/loaders/LoadingSpinner';
-import Section from '../../components/Section';
 
 interface ProtectedRouteProps {
   children: ReactNode;
@@ -11,33 +9,18 @@ interface ProtectedRouteProps {
 
 function ProtectedRoute({ children, allowedRoles = ['admin', 'user'] }: ProtectedRouteProps) {
   const navigate = useNavigate();
-
-  const { isLoading, isAuthenticated, user } = useUser();
+  const { isAuthenticated, user } = useAuth();
   const role = user?.role;
 
-  useEffect(
-    function () {
-      if (!isLoading) {
-        if (!isAuthenticated) {
-          navigate('/login');
-        } else if (role && !allowedRoles.includes(role)) {
-          navigate('/unauthorized');
-        }
-      }
-    },
-    [isAuthenticated, isLoading, role, allowedRoles, navigate]
-  );
+  useEffect(() => {
+    if (!isAuthenticated) {
+      navigate('/login');
+    } else if (role && !allowedRoles.includes(role)) {
+      navigate('/unauthorized');
+    }
+  }, [isAuthenticated, role, allowedRoles, navigate]);
 
-  if (isLoading)
-    return (
-      <Section type="horizontal" gap="large">
-        <div className="flex justify-center items-center">
-          <LoadingSpinner />
-        </div>
-      </Section>
-    );
-
-  if (isAuthenticated && role && allowedRoles.includes(role)) return children;
+  if (isAuthenticated && role && allowedRoles.includes(role)) return <>{children}</>;
 
   return null;
 }

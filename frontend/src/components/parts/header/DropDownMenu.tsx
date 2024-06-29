@@ -1,14 +1,12 @@
 import { Link } from 'react-router-dom';
 import { ADMIN_MENU_TEMS, USER_MENU_ITEMS } from '../../../utils/constants';
 import MenuItem from '../../../models/MenuItem.model';
-import { useLogout } from '../../../features/auth/useLogout';
-import { useUser } from '../../../features/auth/useUser';
-import Divider from '../../Divider';
 import { capitalizeWord } from '../../../utils/helpers';
+import { useAuth } from '../../../context/AuthContext';
+import Divider from '../../Divider';
 
 const DropDownMenu = ({ mobile }: { mobile?: boolean }) => {
-  const { user } = useUser();
-  const { logout } = useLogout();
+  const { user, logout } = useAuth();
 
   const userName = capitalizeWord(user?.userName || '');
   const userRole = capitalizeWord(user?.role || '');

@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { useSignup } from '../useSignup';
 import { SingupModel } from '../../../models/auth.models';
+import { useAuth } from '../../../context/AuthContext';
 import InputField from '../../../components/form-ui/InputField';
 import Button from '../../../components/Button';
 import CustomNavLink from '../../../components/CustomNavLink';
@@ -12,7 +12,7 @@ function SignupForm() {
   const [password, setPassword] = useState('');
   const [passwordConfirm, setPasswordConfirm] = useState('');
 
-  const { signup } = useSignup();
+  const { signup } = useAuth();
   const navigate = useNavigate();
 
   /* TODO A validációt megcsinálni */

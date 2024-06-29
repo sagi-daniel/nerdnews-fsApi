@@ -7,6 +7,7 @@ import CustomToaster from './components/CustomToaster';
 import ProtectedRoute from './features/auth/ProtectedRoute';
 
 // CONTEXTS
+import { AuthProvider } from './context/AuthContext';
 import { DarkModeProvider } from './context/DarkModeContext';
 
 // PAGES
@@ -50,80 +51,82 @@ function App() {
       <ReactQueryDevtools initialIsOpen={false} />
       <DarkModeProvider>
         <BrowserRouter>
-          <Routes>
-            <Route element={<AppLayout />}>
-              <Route index element={<Navigate replace to="home" />} />
-              <Route path="home" element={<Home />} />
-              <Route path="news" element={<News />} />
-              <Route path="movies" element={<Movies />} />
-              <Route path="cidr" element={<IpCidrCalculator />} />
-              <Route path="privacy-policy" element={<PrivacyPolicy />} />
-              <Route path="test" element={<TestPage />} />
-              <Route path="*" element={<PageNotFound />} />
-              <Route
-                path="myAccount"
-                element={
-                  <ProtectedRoute>
-                    <MyAccount />
-                  </ProtectedRoute>
-                }
-              />
-              <Route
-                path="myNews"
-                element={
-                  <ProtectedRoute>
-                    <MyNews />
-                  </ProtectedRoute>
-                }
-              />
-              <Route
-                path="myMovies"
-                element={
-                  <ProtectedRoute>
-                    <MyMovies />
-                  </ProtectedRoute>
-                }
-              />
-              <Route
-                path="updatePassword"
-                element={
-                  <ProtectedRoute>
-                    <UpdatePasswordPage />
-                  </ProtectedRoute>
-                }
-              />
-              <Route
-                path="users"
-                element={
-                  <ProtectedRoute allowedRoles={['admin']}>
-                    <Users />
-                  </ProtectedRoute>
-                }
-              />
-              <Route
-                path="categories"
-                element={
-                  <ProtectedRoute allowedRoles={['admin']}>
-                    <Categories />
-                  </ProtectedRoute>
-                }
-              />
-              <Route
-                path="sources"
-                element={
-                  <ProtectedRoute allowedRoles={['admin']}>
-                    <Sources />
-                  </ProtectedRoute>
-                }
-              />
-            </Route>
-            <Route path="signup" element={<SignupPage />} />
-            <Route path="login" element={<LoginPage />} />
-            <Route path="forgetPassword" element={<ForgetPasswordPage />} />
-            <Route path="forgetPasswordConfirm" element={<ForgetPasswordConfirm />} />
-            <Route path="resetPassword/:resetToken" element={<ResetPasswordPage />} />
-            <Route path="unauthorized" element={<Forbidden />} />
-          </Routes>
+          <AuthProvider>
+            <Routes>
+              <Route element={<AppLayout />}>
+                <Route index element={<Navigate replace to="home" />} />
+                <Route path="home" element={<Home />} />
+                <Route path="news" element={<News />} />
+                <Route path="movies" element={<Movies />} />
+                <Route path="cidr" element={<IpCidrCalculator />} />
+                <Route path="privacy-policy" element={<PrivacyPolicy />} />
+                <Route path="test" element={<TestPage />} />
+                <Route path="*" element={<PageNotFound />} />
+                <Route
+                  path="myAccount"
+                  element={
+                    <ProtectedRoute>
+                      <MyAccount />
+                    </ProtectedRoute>
+                  }
+                />
+                <Route
+                  path="myNews"
+                  element={
+                    <ProtectedRoute>
+                      <MyNews />
+                    </ProtectedRoute>
+                  }
+                />
+                <Route
+                  path="myMovies"
+                  element={
+                    <ProtectedRoute>
+                      <MyMovies />
+                    </ProtectedRoute>
+                  }
+                />
+                <Route
+                  path="updatePassword"
+                  element={
+                    <ProtectedRoute>
+                      <UpdatePasswordPage />
+                    </ProtectedRoute>
+                  }
+                />
+                <Route
+                  path="users"
+                  element={
+                    <ProtectedRoute allowedRoles={['admin']}>
+                      <Users />
+                    </ProtectedRoute>
+                  }
+                />
+                <Route
+                  path="categories"
+                  element={
+                    <ProtectedRoute allowedRoles={['admin']}>
+                      <Categories />
+                    </ProtectedRoute>
+                  }
+                />
+                <Route
+                  path="sources"
+                  element={
+                    <ProtectedRoute allowedRoles={['admin']}>
+                      <Sources />
+                    </ProtectedRoute>
+                  }
+                />
+              </Route>
+              <Route path="signup" element={<SignupPage />} />
+              <Route path="login" element={<LoginPage />} />
+              <Route path="forgetPassword" element={<ForgetPasswordPage />} />
+              <Route path="forgetPasswordConfirm" element={<ForgetPasswordConfirm />} />
+              <Route path="resetPassword/:resetToken" element={<ResetPasswordPage />} />
+              <Route path="unauthorized" element={<Forbidden />} />
+            </Routes>
+          </AuthProvider>
         </BrowserRouter>
         <CustomToaster />
       </DarkModeProvider>

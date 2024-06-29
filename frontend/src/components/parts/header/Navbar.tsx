@@ -1,14 +1,14 @@
 import { useState } from 'react';
 import { FiAlignRight } from 'react-icons/fi';
 import { MENU_ITEMS } from '../../../utils/constants';
-import { useUser } from '../../../features/auth/useUser';
+import { useAuth } from '../../../context/AuthContext';
 import MenuModal from './MenuModal';
 import NavItem from './NavItem';
 
 function Navbar() {
   const [isModalOpen, setIsModalOpen] = useState(false);
 
-  const { isAuthenticated } = useUser();
+  const { isAuthenticated } = useAuth();
 
   const toggleModal = () => {
     setIsModalOpen(!isModalOpen);

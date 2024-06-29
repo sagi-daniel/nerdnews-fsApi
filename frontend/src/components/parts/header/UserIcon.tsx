@@ -1,13 +1,13 @@
 import { useState } from 'react';
 import DropDownMenu from './DropDownMenu';
 import { useOutsideClick } from '../../../hooks/useOutsideClick';
-import { useUser } from '../../../features/auth/useUser';
 import UserAvatar from './UserAvatar';
+import { useAuth } from '../../../context/AuthContext';
 
 function LoginIcon({ mobile }: { mobile: boolean }) {
   const [isOpen, setIsOpen] = useState(false);
 
-  const { user } = useUser();
+  const { user } = useAuth();
 
   const toggleDropdown = () => {
     setIsOpen(!isOpen);

@@ -1,15 +1,15 @@
 import { useState } from 'react';
-import { useForgotPassword } from '../useforgotPassword';
 import InputField from '../../../components/form-ui/InputField';
 import Button from '../../../components/Button';
+import { useAuth } from '../../../context/AuthContext';
 
 function ForgotPasswordForm() {
   const [email, setEmail] = useState('testuser7@gmail.com');
-  const { forgotPassword, isLoading } = useForgotPassword();
+  const { forgotPassword, isLoading } = useAuth();
 
   function handleSubmit(e: React.FormEvent): void {
     e.preventDefault();
-    forgotPassword({ email });
+    forgotPassword(email);
   }
 
   return (
