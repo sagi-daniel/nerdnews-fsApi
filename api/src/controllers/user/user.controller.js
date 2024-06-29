@@ -1,6 +1,6 @@
-const AppError = require("../../utils/appError");
-const catchAsync = require("../../utils/catchAsync");
-const userService = require("./user.service");
+const AppError = require('../../utils/appError');
+const catchAsync = require('../../utils/catchAsync');
+const userService = require('./user.service');
 
 const filterObj = (obj, ...allowedFields) => {
   const newObj = {};
@@ -18,7 +18,7 @@ exports.getMe = catchAsync(async (req, res, next) => {
     return next(new AppError(`User with ${id} ID could not found`));
   }
   res.status(200).json({
-    status: "success",
+    status: 'success',
     data: {
       user,
     },
@@ -27,26 +27,15 @@ exports.getMe = catchAsync(async (req, res, next) => {
 
 exports.updateMe = catchAsync(async (req, res, next) => {
   if (req.body.password || req.body.passwordConfirm) {
-    return next(
-      new AppError(
-        "This route is not for updating password. Please use /updateMyPassword.",
-        400
-      )
-    );
+    return next(new AppError('This route is not for updating password. Please use /updateMyPassword.', 400));
   }
-  const filteredBody = filterObj(
-    req.body,
-    "userName",
-    "email",
-    "firstName",
-    "lastName"
-  );
+  const filteredBody = filterObj(req.body, 'userName', 'email', 'firstName', 'lastName');
   const user = await userService.update(req.user._id, filteredBody);
   if (!user) {
     return next(new AppError(`User with ${id} ID could not found`));
   }
   res.status(200).json({
-    status: "success",
+    status: 'success',
     data: {
       user,
     },
@@ -59,7 +48,7 @@ exports.deleteMe = catchAsync(async (req, res, next) => {
     return next(new AppError(`User with ${id} ID could not found`));
   }
   res.status(204).json({
-    status: "success",
+    status: 'success',
     data: null,
   });
 });
@@ -71,7 +60,7 @@ exports.getMyNews = catchAsync(async (req, res, next) => {
     return next(new AppError(`User with ${id} ID could not found`));
   }
   res.status(200).json({
-    status: "success",
+    status: 'success',
     data: {
       user,
     },
@@ -86,7 +75,7 @@ exports.addNewsToMyNews = catchAsync(async (req, res, next) => {
     return next(new AppError(`User news could not added`));
   }
   res.status(200).json({
-    status: "success",
+    status: 'success',
     data: {
       user,
     },
@@ -97,26 +86,26 @@ exports.removeNewsFromMyNews = catchAsync(async (req, res, next) => {
   const userId = req.user._id;
   const newsId = req.params.id;
 
-  const updatedUser = await userService.removeNewsFromUserNews(userId, newsId);
-  if (!updatedUser) {
+  const user = await userService.removeNewsFromUserNews(userId, newsId);
+  if (!user) {
     return next(new AppError(`User news could not removed`));
   }
   res.status(200).json({
-    status: "success",
+    status: 'success',
     data: {
-      updatedUser,
+      user,
     },
   });
 });
 
 exports.getMyMovies = catchAsync(async (req, res, next) => {
-  const id = req.user._id;
-  const user = await userService.findMoviesById(id);
+  const userId = req.user._id;
+  const user = await userService.findMoviesById(userId);
   if (!user) {
-    return next(new AppError(`User with ${id} ID could not found`));
+    return next(new AppError(`User with ${userId} ID could not found`));
   }
   res.status(200).json({
-    status: "success",
+    status: 'success',
     data: {
       user,
     },
@@ -126,12 +115,13 @@ exports.getMyMovies = catchAsync(async (req, res, next) => {
 exports.addMovieToMyMovies = catchAsync(async (req, res, next) => {
   const userId = req.user._id;
   const movieId = req.body.movieId;
+
   const user = await userService.addMovieToUserMovies(userId, movieId);
   if (!user) {
     return next(new AppError(`User news could not added`));
   }
   res.status(200).json({
-    status: "success",
+    status: 'success',
     data: {
       user,
     },
@@ -142,19 +132,16 @@ exports.removeMovieFromMyMovies = catchAsync(async (req, res, next) => {
   const userId = req.user._id;
   const movieId = req.params.id;
 
-  const updatedUser = await userService.removeMovieFromUserMovies(
-    userId,
-    movieId
-  );
+  const user = await userService.removeMovieFromUserMovies(userId, movieId);
 
-  if (!updatedUser) {
+  if (!user) {
     return next(new AppError(`User movie could not removed`));
   }
 
   res.status(200).json({
-    status: "success",
+    status: 'success',
     data: {
-      updatedUser,
+      user,
     },
   });
 });
@@ -165,7 +152,7 @@ exports.create = catchAsync(async (req, res, next) => {
     return next(new AppError(`User could not saved`));
   }
   res.status(200).json({
-    status: "success",
+    status: 'success',
     data: {
       user,
     },
@@ -175,7 +162,7 @@ exports.create = catchAsync(async (req, res, next) => {
 exports.findAll = catchAsync(async (req, res, next) => {
   const users = await userService.findAll();
   res.status(200).json({
-    status: "success",
+    status: 'success',
     results: users.length,
     data: {
       users,
@@ -184,13 +171,13 @@ exports.findAll = catchAsync(async (req, res, next) => {
 });
 
 exports.findById = catchAsync(async (req, res, next) => {
-  const id = req.params.id;
-  const user = await userService.findById(id);
+  const userId = req.params.id;
+  const user = await userService.findById(userId);
   if (!user) {
-    return next(new AppError(`User with ${id} ID could not found`));
+    return next(new AppError(`User with ${userId} ID could not found`));
   }
   res.status(200).json({
-    status: "success",
+    status: 'success',
     data: {
       user,
     },
@@ -198,13 +185,13 @@ exports.findById = catchAsync(async (req, res, next) => {
 });
 
 exports.update = catchAsync(async (req, res, next) => {
-  const id = req.params.id;
-  const user = await userService.update(id, req.body);
+  const userId = req.params.id;
+  const user = await userService.update(userId, req.body);
   if (!user) {
-    return next(new AppError(`User with ${id} ID could not found`));
+    return next(new AppError(`User with ${userId} ID could not found`));
   }
   res.status(200).json({
-    status: "success",
+    status: 'success',
     data: {
       user,
     },
@@ -212,13 +199,13 @@ exports.update = catchAsync(async (req, res, next) => {
 });
 
 exports.remove = catchAsync(async (req, res, next) => {
-  const id = req.params.id;
-  const user = await userService.remove(id);
+  const userId = req.params.id;
+  const user = await userService.remove(userId);
   if (!user) {
-    return next(new AppError(`User with ${id} ID could not found`));
+    return next(new AppError(`User with ${userId} ID could not found`));
   }
   res.status(200).json({
-    status: "success",
+    status: 'success',
     data: {
       user,
     },
