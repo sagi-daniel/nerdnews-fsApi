@@ -4,6 +4,7 @@ import Badge from '../../components/Badge';
 import NewsModel from '../../models/News.model';
 import useLoaderHook from '../../hooks/useLoaderHook';
 import GridItemSkeleton from '../../components/loaders/skeletons/GridItemSkeleton';
+import SaveLater from '../../components/SaveLater';
 
 interface NewsGridItemProps {
   news: NewsModel;
@@ -21,6 +22,7 @@ function NewsGridItem({ news, highlighted = false }: NewsGridItemProps) {
 
   return (
     <div className="relative overflow-hidden text-content-dark size-full rounded-md">
+      <SaveLater itemId={news._id} type="news" />
       <a href={news?.link} rel="noreferrer" target="_blank">
         <div className="relative no-select size-full  ">
           <div className="relative no-select size-full ">

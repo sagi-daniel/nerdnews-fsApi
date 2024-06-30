@@ -1,13 +1,10 @@
 import { useState } from 'react';
-import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
+import { useUser } from '../../context/UserContext';
 import { formatDateIsoToNormal } from '../../utils/helpers';
-import { getMyNews, removeFromMyNews } from '../../services/apiMyNews';
 import Table, { Column } from '../../components/Table';
 import NewsModel from '../../models/News.model';
-import toast from 'react-hot-toast';
 import LoadingSpinner from '../../components/loaders/LoadingSpinner';
-import Error from '../../components/Error';
-import FormModal from '../../components/FormModal';
+import FormModal from '../../components/Modal';
 
 const newsColumns: Column<NewsModel>[] = [
   { key: 'release', label: 'Publikálva', formatter: formatDateIsoToNormal },
@@ -16,29 +13,19 @@ const newsColumns: Column<NewsModel>[] = [
 ];
 
 function MyNews() {
+  const { news, removeFromMyNews, isLoading } = useUser();
+
   const [confirmationVisible, setConfirmationVisible] = useState(false);
   const [newsIdToDelete, setNewsIdToDelete] = useState<string | null>(null);
 
-  const queryClient = useQueryClient();
-  const { data: news, error, isLoading, isError } = useQuery(['MyNews'], getMyNews);
-
-  const { mutate: deleteMovieMutate } = useMutation(removeFromMyNews, {
-    onSuccess: () => {
-      toast.success(`Mentett hír törölve!`);
-      queryClient.invalidateQueries(['MyNews']);
-      queryClient.invalidateQueries(['user']);
-    },
-  });
-
   function handleDelete(newsId: string) {
-    console.log(newsId);
     setNewsIdToDelete(newsId);
     setConfirmationVisible(true);
   }
 
   function confirmDelete() {
     if (newsIdToDelete) {
-      deleteMovieMutate(newsIdToDelete);
+      removeFromMyNews(newsIdToDelete);
       setConfirmationVisible(false);
       setNewsIdToDelete(null);
     }
@@ -50,8 +37,6 @@ function MyNews() {
   };
 
   if (isLoading) return <LoadingSpinner />;
-
-  if (isError) return <Error message={(error as Error).message} />;
 
   return (
     <>
