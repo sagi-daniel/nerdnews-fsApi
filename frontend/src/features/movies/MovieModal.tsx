@@ -1,8 +1,8 @@
 import { formatDateIsoToNormal, truncateText } from '../../utils/helpers';
 import MovieModel from '../../models/Movie.model';
 import useLoaderHook from '../../hooks/useLoaderHook';
-import FormModal from '../../components/FormModal';
 import SaveLater from '../../components/SaveLater';
+import Modal from '../../components/Modal';
 
 interface ModalProps {
   movie: MovieModel;
@@ -13,7 +13,7 @@ function MovieModal({ movie, closeModal }: ModalProps) {
   const loaded = useLoaderHook(movie.poster);
 
   return (
-    <FormModal title="" closeModal={closeModal}>
+    <Modal title="" closeModal={closeModal}>
       <div className="flex justify-center items-center py-5 size-full gap-4">
         <div className="flex h-full md:w-1/3">
           <div className={`relative size-full no-select z-1 overflow-hidden rounded-md`}>
@@ -22,7 +22,7 @@ function MovieModal({ movie, closeModal }: ModalProps) {
               src={movie.poster}
               alt={movie.title}
             />
-            {/* <SaveLater /> */}
+            <SaveLater itemId={movie._id} type="movie" />
           </div>
         </div>
         <div className="flex flex-col md:w-2/3">
@@ -31,7 +31,7 @@ function MovieModal({ movie, closeModal }: ModalProps) {
           <p className="mt-2">{truncateText(movie.overview, 370)}</p>
         </div>
       </div>
-    </FormModal>
+    </Modal>
   );
 }
 

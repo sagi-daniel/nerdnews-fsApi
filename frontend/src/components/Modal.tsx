@@ -1,13 +1,13 @@
 import { useOutsideClick } from '../hooks/useOutsideClick';
 import CloseIcon from './CloseIcon';
 
-interface FormModalProps {
+interface ModalProps {
   title: string;
-  closeModal: () => void;
   children: React.ReactNode;
+  closeModal: () => void;
 }
 
-function FormModal({ title, closeModal, children }: FormModalProps) {
+function Modal({ title, closeModal, children }: ModalProps) {
   const modalRef = useOutsideClick({
     handler: closeModal,
     listenCapturing: true,
@@ -29,4 +29,4 @@ function FormModal({ title, closeModal, children }: FormModalProps) {
   );
 }
 
-export default FormModal;
+export default Modal;
