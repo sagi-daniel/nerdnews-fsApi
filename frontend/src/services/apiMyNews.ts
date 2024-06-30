@@ -2,14 +2,13 @@ import api from './api';
 import { LoginResponseModel } from '../models/auth.models';
 import NewsModel from '../models/News.model';
 
-export const getMyNews = async (): Promise<NewsModel[] | null> => {
+export const getMyNews = async (): Promise<NewsModel[]> => {
   const token = localStorage.getItem('jwt');
   if (!token) {
-    return null;
+    return [];
   }
   try {
     const response = await api.get<LoginResponseModel>('/user/news');
-    console.log(response.data);
     const responseData = response.data;
     return responseData.data.user.userNews;
   } catch (error) {
@@ -17,13 +16,12 @@ export const getMyNews = async (): Promise<NewsModel[] | null> => {
   }
 };
 
-export const addToMyNews = async (newsId: string): Promise<NewsModel[] | null> => {
+export const addToMyNews = async (newsId: string): Promise<NewsModel[]> => {
   const token = localStorage.getItem('jwt');
   if (!token) {
-    return null;
+    return [];
   }
   try {
-    console.log(newsId);
     const response = await api.post<LoginResponseModel>('/user/news', { newsId });
     const responseData = response.data;
     return responseData.data.user.userNews;
@@ -32,12 +30,12 @@ export const addToMyNews = async (newsId: string): Promise<NewsModel[] | null> =
   }
 };
 
-export const removeFromMyNews = async (newsId: string): Promise<NewsModel[] | null> => {
+export const removeFromMyNews = async (newsId: string): Promise<NewsModel[]> => {
   const token = localStorage.getItem('jwt');
   if (!token) {
-    return null;
+    return [];
   }
-  console.log(newsId);
+
   try {
     const response = await api.delete<LoginResponseModel>(`/user/news/${newsId}`);
     const responseData = response.data;

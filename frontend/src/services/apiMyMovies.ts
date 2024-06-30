@@ -2,14 +2,13 @@ import api from './api';
 import { LoginResponseModel } from '../models/auth.models';
 import MovieModel from '../models/Movie.model';
 
-export const getMyMovies = async (): Promise<MovieModel[] | null> => {
+export const getMyMovies = async (): Promise<MovieModel[]> => {
   const token = localStorage.getItem('jwt');
   if (!token) {
-    return null;
+    return [];
   }
   try {
     const response = await api.get<LoginResponseModel>('/user/movies');
-    console.log(response.data);
     const responseData = response.data;
     return responseData.data.user.userMovies;
   } catch (error) {
@@ -17,13 +16,13 @@ export const getMyMovies = async (): Promise<MovieModel[] | null> => {
   }
 };
 
-export const addToMyMovies = async (movieId: string): Promise<MovieModel[] | null> => {
+export const addToMyMovies = async (movieId: string): Promise<MovieModel[]> => {
   const token = localStorage.getItem('jwt');
   if (!token) {
-    return null;
+    return [];
   }
   try {
-    const response = await api.post<LoginResponseModel>('/user/movies', movieId);
+    const response = await api.post<LoginResponseModel>('/user/movies', { movieId });
     const responseData = response.data;
     return responseData.data.user.userMovies;
   } catch (error) {
@@ -31,12 +30,11 @@ export const addToMyMovies = async (movieId: string): Promise<MovieModel[] | nul
   }
 };
 
-export const removeFromMyMovies = async (movieId: string): Promise<MovieModel[] | null> => {
+export const removeFromMyMovies = async (movieId: string): Promise<MovieModel[]> => {
   const token = localStorage.getItem('jwt');
   if (!token) {
-    return null;
+    return [];
   }
-
   try {
     const response = await api.delete<LoginResponseModel>(`/user/movies/${movieId}`);
     const responseData = response.data;

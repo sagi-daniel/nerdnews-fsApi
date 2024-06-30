@@ -6,7 +6,6 @@ import ResponseModel from '../models/Response.model';
 export async function getNews(): Promise<ResponseModel<NewsModel[], 'news'> | Error> {
   try {
     const response = await axios.get(`${BASE_URL}/news?`);
-    console.log(response);
     return response.data;
   } catch (error) {
     if (axios.isAxiosError(error)) {
@@ -36,7 +35,6 @@ export async function getNewsByQuery(
 
   try {
     const response = await axios.get(`${BASE_URL}/news`, { params });
-
     return response.data;
   } catch (error) {
     if (axios.isAxiosError(error)) {
@@ -69,8 +67,6 @@ export async function sliderNews(): Promise<ResponseModel<NewsModel[], 'news'> |
   };
   try {
     const response = await axios.get(`${BASE_URL}/news/slider`, { params });
-    console.log(response);
-
     return response.data;
   } catch (error) {
     if (axios.isAxiosError(error)) {
