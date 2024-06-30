@@ -1,68 +1,71 @@
-import { useState } from 'react';
-import { UserModel } from '../../models/User.model';
-import Section from '../../components/Section';
+import React, { useState } from 'react';
+import UserAvatar from '../../components/parts/header/UserAvatar';
 import { useAuth } from '../../context/AuthContext';
+import { UserModel } from '../../models/User.model';
 
-function MyAccount() {
+const mockUser: UserModel = {
+  _id: '1234567890',
+  role: 'User',
+  userName: 'John Doe',
+  email: 'john.doe@example.com',
+  userNews: [],
+  userMovies: [],
+  createdAt: '2021-01-01T00:00:00Z',
+  updatedAt: '2022-01-01T00:00:00Z',
+  // Add more user details as needed
+};
+
+const MyAccount = () => {
   const { user } = useAuth();
 
-  const [editedUser, setEditedUser] = useState<Partial<UserModel>>({});
+  const [isActive, setIsActive] = useState(false);
 
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const { name, value } = e.target;
-    setEditedUser((prevState) => ({ ...prevState, [name]: value }));
-  };
-
-  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-    // updateUser(editedUser);
+  const handleAvatarClick = () => {
+    setIsActive(!isActive);
   };
 
   return (
-    <Section type="horizontal" space="large" gap="small">
-      {' '}
-      <div className="size-full max-w-md mx-auto mt-8 p-6 bg-border-dark shadow-md rounded-lg">
-        <h2 className="text-xl font-semibold mb-4">My Account</h2>
-        <form onSubmit={handleSubmit}>
-          <div className="mb-4">
-            <label className="block text-sm font-medium text-gray-700">Username</label>
-            <input
-              type="text"
-              name="userName"
-              value={editedUser.userName || user?.userName}
-              onChange={handleChange}
-              className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
-              readOnly
-            />
-          </div>
-          <div className="mb-4">
-            <label className="block text-sm font-medium text-gray-700">Email</label>
-            <input
-              type="email"
-              name="email"
-              value={editedUser.email || user?.email}
-              onChange={handleChange}
-              className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
-              required
-            />
-          </div>
-
-          <div className="flex justify-between">
-            <button
-              type="submit"
-              className="bg-blue-500 hover:bg-blue-600 text-white font-medium py-2 px-4 rounded focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50"
-            >
-              Save Changes
-            </button>
-          </div>
-        </form>
-        <div className="mt-6 text-sm text-gray-600">
-          <p>Account created: {user && new Date(user.createdAt).toLocaleDateString()}</p>
-          <p>Last updated: {user && new Date(user.updatedAt).toLocaleDateString()}</p>
+    <div className="max-w-4xl mx-auto p-4">
+      <h1 className="text-3xl font-bold mb-6">My Account</h1>
+      <div className="flex items-center space-x-4 mb-6">
+        {user && <UserAvatar user={user} isActive={isActive} onClick={handleAvatarClick} size="large" />}
+        <div>
+          <h2 className="text-2xl font-semibold">{user ? user.userName : mockUser.userName}</h2>
+          <p className="text-gray-600">{user ? user.email : mockUser.email}</p>
         </div>
       </div>
-    </Section>
+      <div className="bg-white shadow rounded-lg p-6">
+        <h3 className="text-xl font-semibold mb-4">Account Details</h3>
+        <div className="space-y-4">
+          <div className="flex justify-between items-center">
+            <span className="text-gray-700">Username:</span>
+            <span>{user ? user.userName : mockUser.userName}</span>
+          </div>
+          <div className="flex justify-between items-center">
+            <span className="text-gray-700">Email:</span>
+            <span>{user ? user.email : mockUser.email}</span>
+          </div>
+          <div className="flex justify-between items-center">
+            <span className="text-gray-700">Role:</span>
+            <span>{user ? user.role : mockUser.role}</span>
+          </div>
+          <div className="flex justify-between items-center">
+            <span className="text-gray-700">Account Created:</span>
+            <span>
+              {user ? new Date(user.createdAt).toLocaleDateString() : new Date(mockUser.createdAt).toLocaleDateString()}
+            </span>
+          </div>
+          <div className="flex justify-between items-center">
+            <span className="text-gray-700">Last Updated:</span>
+            <span>
+              {user ? new Date(user.updatedAt).toLocaleDateString() : new Date(mockUser.updatedAt).toLocaleDateString()}
+            </span>
+          </div>
+          {/* Add more account details as needed */}
+        </div>
+      </div>
+    </div>
   );
-}
+};
 
 export default MyAccount;
