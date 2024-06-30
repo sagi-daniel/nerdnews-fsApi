@@ -15,17 +15,17 @@ exports.findNewsById = (id) =>
     select: '-__v -createdAt -updatedAt',
   });
 
-exports.addNewsToUserNews = (userId, newsId) =>
-  User.findByIdAndUpdate(userId, { $push: { userNews: newsId } }, { new: true, runValidators: true });
-
-exports.removeNewsFromUserNews = (userId, newsId) =>
-  User.findByIdAndUpdate(userId, { $pull: { userNews: newsId } }, { new: true, runValidators: true });
-
 exports.findMoviesById = (id) =>
   User.findById(id).populate({
     path: 'userMovies',
     select: '-__v -createdAt -updatedAt',
   });
+
+exports.addNewsToUserNews = (userId, newsId) =>
+  User.findByIdAndUpdate(userId, { $push: { userNews: newsId } }, { new: true, runValidators: true });
+
+exports.removeNewsFromUserNews = (userId, newsId) =>
+  User.findByIdAndUpdate(userId, { $pull: { userNews: newsId } }, { new: true, runValidators: true });
 
 exports.addMovieToUserMovies = (userId, movieId) =>
   User.findByIdAndUpdate(userId, { $push: { userMovies: movieId } }, { new: true, runValidators: true });

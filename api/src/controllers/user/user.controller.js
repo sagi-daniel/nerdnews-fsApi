@@ -12,10 +12,10 @@ const filterObj = (obj, ...allowedFields) => {
 };
 
 exports.getMe = catchAsync(async (req, res, next) => {
-  const id = req.user._id;
-  const user = await userService.findById(id);
+  const userId = req.user._id;
+  const user = await userService.findById(userId);
   if (!user) {
-    return next(new AppError(`User with ${id} ID could not found`));
+    return next(new AppError(`User with ${userId} ID could not found`));
   }
   res.status(200).json({
     status: 'success',
@@ -54,10 +54,10 @@ exports.deleteMe = catchAsync(async (req, res, next) => {
 });
 
 exports.getMyNews = catchAsync(async (req, res, next) => {
-  const id = req.user._id;
-  const user = await userService.findNewsById(id);
+  const userId = req.user._id;
+  const user = await userService.findNewsById(userId);
   if (!user) {
-    return next(new AppError(`User with ${id} ID could not found`));
+    return next(new AppError(`User with ${userId} ID could not found`));
   }
   res.status(200).json({
     status: 'success',
