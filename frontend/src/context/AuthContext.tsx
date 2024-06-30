@@ -1,3 +1,4 @@
+// AuthContext.tsx
 import { ReactNode, createContext, useContext } from 'react';
 import { useQueryClient, useMutation, useQuery } from '@tanstack/react-query';
 import { toast } from 'react-hot-toast';
@@ -37,6 +38,8 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     onSuccess: (user: UserModel) => {
       toast.success(`Üdv, ${user.userName}`);
       queryClient.setQueryData(['user'], user);
+      queryClient.invalidateQueries(['movies']);
+      queryClient.invalidateQueries(['news']);
       navigate('/myAccount', { replace: true });
     },
     onError: () => {
@@ -48,7 +51,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
   const { mutate: logoutMutation, isLoading: logoutLoading } = useMutation(logoutUser, {
     onSuccess: () => {
       queryClient.removeQueries(['user']);
-      navigate('/login', { replace: true });
+      navigate('/home', { replace: true });
     },
   });
 
