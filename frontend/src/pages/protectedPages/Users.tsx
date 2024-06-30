@@ -4,7 +4,7 @@ import { UserModel } from '../../models/User.model';
 import { formatDateIsoToNormal } from '../../utils/helpers';
 import { deleteUser, getUsers } from '../../services/apiUser';
 import Table, { Column } from '../../components/Table';
-import FormModal from '../../components/FormModal';
+import FormModal from '../../components/Modal';
 import UserForm from '../../components/forms/UserForm';
 import toast from 'react-hot-toast';
 import LoadingSpinner from '../../components/loaders/LoadingSpinner';

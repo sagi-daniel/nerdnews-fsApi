@@ -4,7 +4,7 @@ import { SourceModel } from '../../models/Source.model';
 import { capitalizeWord, formatDateIsoToNormal } from '../../utils/helpers';
 import { deleteSource, getSources } from '../../services/apiSource';
 import Table, { Column } from '../../components/Table';
-import FormModal from '../../components/FormModal';
+import FormModal from '../../components/Modal';
 import toast from 'react-hot-toast';
 import LoadingSpinner from '../../components/loaders/LoadingSpinner';
 import Error from '../../components/Error';

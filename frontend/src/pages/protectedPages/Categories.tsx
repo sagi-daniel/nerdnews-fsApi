@@ -4,7 +4,7 @@ import { CategoryModel } from '../../models/Category.model';
 
 import { deleteCategory, getCategories } from '../../services/apiCategory';
 import Table, { Column } from '../../components/Table';
-import FormModal from '../../components/FormModal';
+import FormModal from '../../components/Modal';
 import CategoryForm from '../../components/forms/CategoryForm';
 import toast from 'react-hot-toast';
 import LoadingSpinner from '../../components/loaders/LoadingSpinner';
