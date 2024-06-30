@@ -21,7 +21,7 @@ function UserAvatar({ user, onClick, isActive = false, size = 'medium' }: userAv
       onClick={onClick}
       className={`${isActive ? 'bg-bg-dark dark:bg-primary-dark' : 'dark:bg-primary bg-content-light'} ${
         sizeClasses[size]
-      } text-content-dark hover:bg-bg-dark dark:text-primary-content hover:dark:bg-primary-dark cursor-pointer font-semibold rounded-full`}
+      } text-content-dark hover:bg-content-light dark:text-primary-content hover:dark:bg-primary-dark cursor-pointer font-semibold rounded-full`}
     >
       {userIconWords}
     </span>
