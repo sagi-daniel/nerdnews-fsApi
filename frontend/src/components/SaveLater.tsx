@@ -3,7 +3,9 @@ import { GoStarFill } from 'react-icons/go';
 import { useAuth } from '../context/AuthContext';
 import { useUser } from '../context/UserContext';
 import { useEffect, useState } from 'react';
-import AuhtAlertModal from '../pages/authPages/AuhtAlertModal';
+import { useNavigate } from 'react-router-dom';
+import Modal from './Modal';
+import Alert from './Alert';
 
 interface SaveLaterProps {
   type: 'news' | 'movie';
@@ -16,6 +18,8 @@ function SaveLater({ itemId, type }: SaveLaterProps) {
   const { news, movies, addToMyNews, removeFromMyNews, addToMyMovies, removeFromMyMovies } = useUser();
   const [isSaved, setIsSaved] = useState<boolean | undefined>(false);
   const [modalVisible, setModalVisible] = useState(false);
+
+  const navigate = useNavigate();
 
   useEffect(() => {
     if (type === 'news') {
@@ -55,14 +59,18 @@ function SaveLater({ itemId, type }: SaveLaterProps) {
         >
           <FiStar />
         </span>
-        {modalVisible && (
-          <AuhtAlertModal
-            title="Kérjük, regisztrálj vagy jelentkezz be!"
-            description="A funkció használatához regisztráció szükséges. Kérjük, jelentkezz be, vagy hozd létre saját fiókodat az
+        <Modal isOpen={modalVisible} setIsOpen={setModalVisible}>
+          <Alert
+            alertIcon="login"
+            alertMessage="Kérjük, regisztrálj vagy jelentkezz be!"
+            alertDescription="A funkció használatához regisztráció szükséges. Kérjük, jelentkezz be, vagy hozd létre saját fiókodat az
           alábbi gombok valamelyikére kattintva."
-            closeModal={() => setModalVisible(false)}
+            buttonText="Bejelentkezés"
+            buttonAction={() => navigate('/login')}
+            confrimText="Regisztráció"
+            confirmAction={() => navigate('/signup')}
           />
-        )}
+        </Modal>
       </>
     );
   }
