@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { useAuth } from '../../../context/AuthContext';
 import { useOutsideClick } from '../../../hooks/useOutsideClick';
 import DropDownMenu from './DropDownMenu';
-import UserAvatar from './UserAvatar';
+import UserAvatar from '../../UserAvatar';
 
 function LoginIcon({ mobile }: { mobile: boolean }) {
   const [isOpen, setIsOpen] = useState(false);
