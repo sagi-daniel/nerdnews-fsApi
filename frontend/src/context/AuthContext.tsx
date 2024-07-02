@@ -77,7 +77,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     onError: (err: Error) => {
       toast.error(err.message);
       queryClient.removeQueries(['user']);
-      navigate('/home', { replace: true });
+      navigate('/login', { replace: true });
     },
   });
 
