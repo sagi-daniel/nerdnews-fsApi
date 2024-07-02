@@ -2,16 +2,25 @@ import { Link } from 'react-router-dom';
 
 interface NavlinkProps {
   text: string;
-  path: string;
-  classes?: string;
+  path?: string;
+  onClick?: () => void;
 }
 
-function CustomNavLink({ text, path, classes }: NavlinkProps) {
+function CustomNavLink({ text, path, onClick }: NavlinkProps) {
+  if (onClick)
+    return (
+      <small onClick={onClick} className="link">
+        {text}
+      </small>
+    );
+
   return (
     <small>
-      <Link to={path} className={`${classes} hover:underline hover:text-primary`}>
-        {text}
-      </Link>
+      {path && (
+        <Link to={path} className="link">
+          {text}
+        </Link>
+      )}
     </small>
   );
 }
