@@ -21,6 +21,8 @@ function UserForm({ user, setModalVisible }: UserFormProps) {
   const [email, setEmail] = useState(user?.email || '');
   const [password, setPassword] = useState(generateRandomPassword());
 
+  /* TODO userContext be bedolgozni de lőtte letezstelni hogy szükséges-e  */
+
   const queryClient = useQueryClient();
 
   const { mutate: updateUserMutate } = useMutation(updateUser, {
@@ -64,52 +66,54 @@ function UserForm({ user, setModalVisible }: UserFormProps) {
 
   return (
     <form onSubmit={handleSubmit}>
-      <div className="grid grid-cols-2 gap-4">
-        <div className="w-full">
-          <SelectField
-            id="role"
-            label="Szerepkör"
-            options={[
-              { name: 'Admin', value: 'admin' },
-              { name: 'User', value: 'user' },
-            ]}
-            value={role}
-            setValue={setRole}
-            required={true}
-          />
-        </div>
-
-        {user ? (
-          <div className="mb-3">
-            <label className="block mb-1">Jelszó</label>
-            <Link className="btn-primary-md w-full" to="/updatePassword">
-              Jelszó csere
-            </Link>
+      {user?.role === 'admin' && (
+        <div className="grid grid-cols-2 gap-4">
+          <div className="w-full">
+            <SelectField
+              id="role"
+              label="Szerepkör"
+              options={[
+                { name: 'Admin', value: 'admin' },
+                { name: 'User', value: 'user' },
+              ]}
+              value={role}
+              setValue={setRole}
+              required={true}
+            />
           </div>
-        ) : (
-          <div className="mb-3">
-            <label className="block mb-1">Jelszó</label>
-            <div className="relative">
-              <input
-                type="text"
-                id="password"
-                value={password}
-                onChange={handleGeneratePassword}
-                required={true}
-                className="w-full rounded-md p-2 text-primary-content bg-primary font-semibold focus:outline-none focus:ring focus:ring-primary"
-              />
 
-              <button
-                type="button"
-                className="absolute text-2xl text-border-dark inset-y-0 right-0 px-3 py-1"
-                onClick={handleGeneratePassword}
-              >
-                <FiRefreshCcw className="text-2xl " />
-              </button>
+          {user ? (
+            <div className="mb-3">
+              <label className="block mb-1">Jelszó</label>
+              <Link className="btn-primary-md w-full" to="/updatePassword">
+                Jelszó csere
+              </Link>
             </div>
-          </div>
-        )}
-      </div>
+          ) : (
+            <div className="mb-3">
+              <label className="block mb-1">Jelszó</label>
+              <div className="relative">
+                <input
+                  type="text"
+                  id="password"
+                  value={password}
+                  onChange={handleGeneratePassword}
+                  required={true}
+                  className="w-full rounded-md p-2 text-primary-content bg-primary font-semibold focus:outline-none focus:ring focus:ring-primary"
+                />
+
+                <button
+                  type="button"
+                  className="absolute text-2xl text-border-dark inset-y-0 right-0 px-3 py-1"
+                  onClick={handleGeneratePassword}
+                >
+                  <FiRefreshCcw className="text-2xl " />
+                </button>
+              </div>
+            </div>
+          )}
+        </div>
+      )}
       <div className="grid grid-cols-2 gap-4">
         <InputField
           type="text"

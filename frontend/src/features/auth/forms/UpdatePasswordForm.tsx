@@ -1,8 +1,7 @@
 import { useState } from 'react';
-
+import { useAuth } from '../../../context/AuthContext';
 import InputField from '../../../components/form-ui/InputField';
 import Button from '../../../components/Button';
-import { useAuth } from '../../../context/AuthContext';
 
 function UpdatePasswordForm() {
   const [passwordCurrent, setPasswordCurrent] = useState('');

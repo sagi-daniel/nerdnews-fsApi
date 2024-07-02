@@ -5,12 +5,15 @@ import { useAuth } from '../../../context/AuthContext';
 import InputField from '../../../components/form-ui/InputField';
 import Button from '../../../components/Button';
 import CustomNavLink from '../../../components/CustomNavLink';
+import ForgotPasswordForm from './ForgotPasswordForm';
+import Modal from '../../../components/Modal';
 
 function SignupForm() {
   const [userName, setUserName] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [passwordConfirm, setPasswordConfirm] = useState('');
+  const [isForgetPasswordModel, setIsForgetPasswordModel] = useState(false);
 
   const { signup } = useAuth();
   const navigate = useNavigate();
@@ -73,9 +76,12 @@ function SignupForm() {
         <Button type="submit" text="Regisztráció" size="full" />
       </form>
       <div className="flex justify-between mt-4">
-        <CustomNavLink text="Elfelejtett jelszó" path="/forgetPassword" />
-        <CustomNavLink text="Regisztráció" path="/signup" />
+        <CustomNavLink text="Elfelejtett jelszó" onClick={() => setIsForgetPasswordModel(true)} />
+        <CustomNavLink text="Bejelentkezés" path="/login" />
       </div>
+      <Modal isOpen={isForgetPasswordModel} setIsOpen={setIsForgetPasswordModel}>
+        <ForgotPasswordForm />
+      </Modal>
     </>
   );
 }
