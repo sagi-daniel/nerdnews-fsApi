@@ -64,7 +64,7 @@ export const generateRandomPassword = (): string => {
   return password;
 };
 
-export const capitalizeWord = (word: string): string => {
+export const capitalizeWord = (word: string | undefined): string => {
   if (typeof word !== 'string' || word.length === 0) {
     return '';
   }
