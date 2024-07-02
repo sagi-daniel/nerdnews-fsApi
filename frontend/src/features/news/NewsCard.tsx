@@ -29,12 +29,14 @@ function NewsCard({ news }: NewsCardProps) {
             </div>
             <div className="p-4">
               <div className="absolute top-2 right-1">
-                <Badge name={news.category.categoryName} colorOptions={CATEGORY_COLORS} />
+                {news.category.categoryName && (
+                  <Badge name={news.category.categoryName} colorOptions={CATEGORY_COLORS} />
+                )}
               </div>
 
               <div className="flex justify-between items-center mb-4">
                 <span>{formatDateIsoToNormal(news.release)}</span>
-                <span>{news.source.sourceName}</span>
+                {news.source.sourceName && <span>{news.source.sourceName}</span>}
               </div>
 
               <h3 className="text-lg font-bold mt-1">{truncateText(news.title, 80)}</h3>
