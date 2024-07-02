@@ -200,7 +200,7 @@ exports.update = catchAsync(async (req, res, next) => {
 
 exports.remove = catchAsync(async (req, res, next) => {
   const userId = req.params.id;
-  const user = await userService.remove(userId);
+  const user = await userService.inactivate(userId);
   if (!user) {
     return next(new AppError(`User with ${userId} ID could not found`));
   }
