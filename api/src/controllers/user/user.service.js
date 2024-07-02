@@ -13,6 +13,10 @@ exports.findNewsById = (id) =>
   User.findById(id).populate({
     path: 'userNews',
     select: '-__v -createdAt -updatedAt',
+    populate: {
+      path: 'category',
+      select: 'categoryName -_id',
+    },
   });
 
 exports.findMoviesById = (id) =>
