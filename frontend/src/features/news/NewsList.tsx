@@ -15,14 +15,13 @@ function NewsList() {
   const news = data?.data.news;
   const totalItems = data?.totalItems;
 
-  if (isLoading) return <LoadingSpinner />;
-
   if (isError) return <Error message={(error as Error).message} />;
 
   return (
-    <div className="flex flex-col md:w-5/6">
+    <div className="flex flex-col justify-between items-center md:w-5/6">
       <div className="flex justify-center flex-wrap gap-2 md:gap-5">
         {news && news.map((newsItem: NewsModel) => <NewsCard key={newsItem._id} news={newsItem} />)}
+        {isLoading && <LoadingSpinner />}
       </div>
       {totalItems && (
         <Pagination

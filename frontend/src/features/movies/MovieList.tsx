@@ -7,6 +7,7 @@ import Error from '../../components/Error';
 import MovieCard from './MovieCard';
 import MovieModal from './MovieDetails';
 import LoadingSpinner from '../../components/loaders/LoadingSpinner';
+import Modal from '../../components/Modal';
 
 function MovieList() {
   const { page, pageSize } = useMovieFilter().params;
@@ -24,13 +25,6 @@ function MovieList() {
     setModalVisible(true);
   };
 
-  const closeModal = () => {
-    setSelectedMovie(null);
-    setModalVisible(false);
-  };
-
-  if (isLoading) return <LoadingSpinner />;
-
   if (isError) return <Error message={(error as Error).message} />;
 
   return (
@@ -40,7 +34,10 @@ function MovieList() {
           movies.map((movieItem: MovieModel) => (
             <MovieCard key={movieItem._id} movie={movieItem} onClick={handlePosterClick} />
           ))}
-        {modalVisible && selectedMovie && <MovieModal closeModal={closeModal} movie={selectedMovie} />}
+        {isLoading && <LoadingSpinner />}
+        <Modal isOpen={modalVisible} setIsOpen={setModalVisible}>
+          {selectedMovie && <MovieModal movie={selectedMovie} />}
+        </Modal>
       </div>
       {totalItemes && (
         <Pagination
