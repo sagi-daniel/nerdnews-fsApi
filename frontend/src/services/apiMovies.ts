@@ -1,9 +1,7 @@
 import axios from 'axios';
 import { BASE_URL } from '../utils/constants';
-import MovieModel from '../models/Movie.model';
-import ResponseModel from '../models/Response.model';
 
-export const getMovies = async (): Promise<ResponseModel<MovieModel[], 'movies'>> => {
+export const getMovies = async () => {
   try {
     const response = await axios.get(`${BASE_URL}/movie`);
     return response.data;
@@ -23,7 +21,7 @@ export async function getMoviesByQuery(
   toDate: string,
   page: string,
   pageSize: string
-): Promise<ResponseModel<MovieModel[], 'movies'>> {
+) {
   const params = {
     genre,
     sortOrder,

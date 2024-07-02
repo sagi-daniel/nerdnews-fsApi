@@ -1,9 +1,7 @@
 import axios from 'axios';
 import { BASE_URL } from '../utils/constants';
-import NewsModel from '../models/News.model';
-import ResponseModel from '../models/Response.model';
 
-export async function getNews(): Promise<ResponseModel<NewsModel[], 'news'> | Error> {
+export async function getNews() {
   try {
     const response = await axios.get(`${BASE_URL}/news?`);
     return response.data;
@@ -23,7 +21,7 @@ export async function getNewsByQuery(
   toDate: string,
   page: string,
   pageSize: string
-): Promise<ResponseModel<NewsModel[], 'news'> | Error> {
+) {
   const params = {
     category,
     sortOrder,
@@ -45,7 +43,7 @@ export async function getNewsByQuery(
   }
 }
 
-export async function getTop3FreshNews(): Promise<ResponseModel<NewsModel[], 'news'> | Error> {
+export async function getTop3FreshNews() {
   const params = {
     sortOrder: 'desc',
   };
@@ -61,7 +59,7 @@ export async function getTop3FreshNews(): Promise<ResponseModel<NewsModel[], 'ne
   }
 }
 
-export async function sliderNews(): Promise<ResponseModel<NewsModel[], 'news'> | Error> {
+export async function sliderNews() {
   const params = {
     sortOrder: 'desc',
   };

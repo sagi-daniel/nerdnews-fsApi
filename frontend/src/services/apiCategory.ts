@@ -17,18 +17,18 @@ const handleRequest = async <T>(
   }
 };
 
-export const getCategories = async (): Promise<CategoryModel[] | null> => {
+export const getCategories = async () => {
   return await handleRequest<CategoryModel[]>('get', '/category', 'categories');
 };
 
-export const createCategory = async (category: CreateCategoryModel): Promise<CategoryModel | null> => {
+export const createCategory = async (category: CreateCategoryModel) => {
   return await handleRequest<CategoryModel>('post', '/category', 'category', category);
 };
 
-export const updateCategory = async ({ category, categoryId }: UpdateCategoryModel): Promise<CategoryModel | null> => {
+export const updateCategory = async ({ category, categoryId }: UpdateCategoryModel) => {
   return await handleRequest<CategoryModel>('patch', `/category/${categoryId}`, 'category', category);
 };
 
-export const deleteCategory = async (categoryId: string): Promise<CategoryModel | null> => {
+export const deleteCategory = async (categoryId: string) => {
   return await handleRequest<CategoryModel>('delete', `/category/${categoryId}`, 'category');
 };

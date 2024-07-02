@@ -18,18 +18,18 @@ const handleRequest = async <T>(
   }
 };
 
-export const getUsers = async (): Promise<UserModel[] | null> => {
+export const getUsers = async () => {
   return await handleRequest<UserModel[]>('get', '/user', 'users');
 };
 
-export const createUser = async (user: CreateUserModel): Promise<UserModel | null> => {
+export const createUser = async (user: CreateUserModel) => {
   return await handleRequest<UserModel>('post', '/user', 'user', user);
 };
 
-export const updateUser = async ({ user, userId }: UpdateUserModel): Promise<UserModel | null> => {
+export const updateUser = async ({ user, userId }: UpdateUserModel) => {
   return await handleRequest<UserModel>('patch', `/user/${userId}`, 'user', user);
 };
 
-export const deleteUser = async (userId: string): Promise<UserModel | null> => {
+export const deleteUser = async (userId: string) => {
   return await handleRequest<UserModel>('delete', `/user/${userId}`, 'user');
 };

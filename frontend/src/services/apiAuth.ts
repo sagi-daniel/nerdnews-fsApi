@@ -1,5 +1,4 @@
 import api from './api';
-import { UserModel } from '../models/User.model';
 import {
   ForgotPasswordResponseModel,
   LoginCredentialModel,
@@ -8,7 +7,7 @@ import {
   SingupModel,
 } from '../models/auth.models';
 
-export const loginUser = async ({ email, password }: LoginCredentialModel): Promise<UserModel> => {
+export const loginUser = async ({ email, password }: LoginCredentialModel) => {
   try {
     const loginData = {
       email,
@@ -32,7 +31,7 @@ export const logoutUser = async () => {
   }
 };
 
-export const getCurrentUser = async (): Promise<UserModel | null> => {
+export const getCurrentUser = async () => {
   const token = localStorage.getItem('jwt');
   if (!token) {
     return null;
@@ -46,7 +45,7 @@ export const getCurrentUser = async (): Promise<UserModel | null> => {
   }
 };
 
-export const signupUser = async (newUser: SingupModel): Promise<UserModel> => {
+export const signupUser = async (newUser: SingupModel) => {
   try {
     const response = await api.post<LoginResponseModel>('/user/signup', newUser);
     const responseData = response.data;
@@ -62,7 +61,7 @@ export const forgotPasswordUser = async (email: string) => {
     const response = await api.post<ForgotPasswordResponseModel>('/user/forgotPassword', { email });
     return response.data;
   } catch (error) {
-    throw new Error('A jelszó visszaállítását csak 10 percenként kérheti.');
+    throw new Error('A jelszó visszaállítás sikertelen volt!');
   }
 };
 
@@ -72,7 +71,7 @@ export const resetPasswordUser = async ({
 }: {
   passwords: PasswordsModel;
   resetToken: string;
-}): Promise<UserModel> => {
+}) => {
   try {
     const response = await api.patch<LoginResponseModel>(`/user/resetPassword/${resetToken}`, passwords);
     const responseData = response.data;
@@ -83,7 +82,7 @@ export const resetPasswordUser = async ({
   }
 };
 
-export const updatePasswordUser = async (passwords: PasswordsModel): Promise<UserModel> => {
+export const updatePasswordUser = async (passwords: PasswordsModel) => {
   try {
     const response = await api.patch<LoginResponseModel>(`/user/updateMyPassword`, passwords);
     const responseData = response.data;

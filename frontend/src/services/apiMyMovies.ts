@@ -1,8 +1,7 @@
 import api from './api';
 import { LoginResponseModel } from '../models/auth.models';
-import MovieModel from '../models/Movie.model';
 
-export const getMyMovies = async (): Promise<MovieModel[]> => {
+export const getMyMovies = async () => {
   const token = localStorage.getItem('jwt');
   if (!token) {
     return [];
@@ -16,7 +15,7 @@ export const getMyMovies = async (): Promise<MovieModel[]> => {
   }
 };
 
-export const addToMyMovies = async (movieId: string): Promise<MovieModel[]> => {
+export const addToMyMovies = async (movieId: string) => {
   const token = localStorage.getItem('jwt');
   if (!token) {
     return [];
@@ -30,7 +29,7 @@ export const addToMyMovies = async (movieId: string): Promise<MovieModel[]> => {
   }
 };
 
-export const removeFromMyMovies = async (movieId: string): Promise<MovieModel[]> => {
+export const removeFromMyMovies = async (movieId: string) => {
   const token = localStorage.getItem('jwt');
   if (!token) {
     return [];

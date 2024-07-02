@@ -1,8 +1,7 @@
 import api from './api';
 import { LoginResponseModel } from '../models/auth.models';
-import NewsModel from '../models/News.model';
 
-export const getMyNews = async (): Promise<NewsModel[]> => {
+export const getMyNews = async () => {
   const token = localStorage.getItem('jwt');
   if (!token) {
     return [];
@@ -16,7 +15,7 @@ export const getMyNews = async (): Promise<NewsModel[]> => {
   }
 };
 
-export const addToMyNews = async (newsId: string): Promise<NewsModel[]> => {
+export const addToMyNews = async (newsId: string) => {
   const token = localStorage.getItem('jwt');
   if (!token) {
     return [];
@@ -30,7 +29,7 @@ export const addToMyNews = async (newsId: string): Promise<NewsModel[]> => {
   }
 };
 
-export const removeFromMyNews = async (newsId: string): Promise<NewsModel[]> => {
+export const removeFromMyNews = async (newsId: string) => {
   const token = localStorage.getItem('jwt');
   if (!token) {
     return [];

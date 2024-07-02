@@ -17,18 +17,18 @@ const handleRequest = async <T>(
   }
 };
 
-export const getSources = async (): Promise<SourceModel[] | null> => {
+export const getSources = async () => {
   return await handleRequest<SourceModel[]>('get', '/source', 'sources');
 };
 
-export const createSource = async (source: CreateSourceModel): Promise<SourceModel | null> => {
+export const createSource = async (source: CreateSourceModel) => {
   return await handleRequest<SourceModel>('post', '/source', 'source', source);
 };
 
-export const updateSource = async ({ source, sourceId }: UpdateSourceModel): Promise<SourceModel | null> => {
+export const updateSource = async ({ source, sourceId }: UpdateSourceModel) => {
   return await handleRequest<SourceModel>('patch', `/source/${sourceId}`, 'source', source);
 };
 
-export const deleteSource = async (sourceId: string): Promise<SourceModel | null> => {
+export const deleteSource = async (sourceId: string) => {
   return await handleRequest<SourceModel>('delete', `/source/${sourceId}`, 'source');
 };
