@@ -1,31 +1,36 @@
-import { useOutsideClick } from '../hooks/useOutsideClick';
+import { AnimatePresence, motion } from 'framer-motion';
 import CloseIcon from './CloseIcon';
 
 interface ModalProps {
-  title: string;
+  isOpen: boolean;
+  setIsOpen: (value: boolean) => void;
   children: React.ReactNode;
-  closeModal: () => void;
 }
 
-function Modal({ title, closeModal, children }: ModalProps) {
-  const modalRef = useOutsideClick({
-    handler: closeModal,
-    listenCapturing: true,
-  });
-
+function Modal({ isOpen, setIsOpen, children }: ModalProps) {
   return (
-    <div className="z-20 fixed top-0 left-0 right-0 bottom-0 bg-black bg-opacity-50 flex items-center justify-center">
-      <div
-        ref={modalRef}
-        className="relative flex flex-col gap-5 w-1/2 md:w-1/3 modal-content bg-bg-light dark:bg-bg-dark rounded-md shadow-md p-4"
-      >
-        <CloseIcon onClick={closeModal} />
-        <div className="flex flex-col min-h-32 justify-between ">
-          <h2 className="text-center ">{title}</h2>
-          {children}
-        </div>
-      </div>
-    </div>
+    <AnimatePresence>
+      {isOpen && (
+        <motion.div
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          exit={{ opacity: 0 }}
+          onClick={() => setIsOpen(false)}
+          className="bg-slate-900/20 backdrop-blur p-8 fixed inset-0 z-50 grid place-items-center overflow-y-scroll cursor-pointer"
+        >
+          <motion.div
+            initial={{ scale: 0, rotate: '12.5deg' }}
+            animate={{ scale: 1, rotate: '0deg' }}
+            exit={{ scale: 0, rotate: '0deg' }}
+            onClick={(e) => e.stopPropagation()}
+            className="bg-bg-light dark:bg-bg-dark text-content-light dark:text-content-dark p-6 rounded-md w-full max-w-lg shadow-xl cursor-default relative overflow-hidden"
+          >
+            <CloseIcon onClick={() => setIsOpen(false)} />
+            {children}
+          </motion.div>
+        </motion.div>
+      )}
+    </AnimatePresence>
   );
 }
 

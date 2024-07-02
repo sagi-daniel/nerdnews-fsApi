@@ -1,14 +1,14 @@
 import { useState } from 'react';
 import { useQuery } from '@tanstack/react-query';
 import { getMovies } from '../../services/apiMovies';
-
 import Error from '../../components/Error';
-import MovieModal from './MovieModal';
+import MovieDetails from './MovieDetails';
 import Slider from '../../components/parts/slider/Slider';
 import MovieCard from './MovieCard';
 import Section from '../../components/Section';
 import MovieModel from '../../models/Movie.model';
 import LoadingSpinner from '../../components/loaders/LoadingSpinner';
+import Modal from '../../components/Modal';
 
 function MovieSlider({ sliderLabel }: { sliderLabel: string }) {
   const { data, isLoading, error, isError } = useQuery(['Movie'], getMovies);
@@ -22,11 +22,6 @@ function MovieSlider({ sliderLabel }: { sliderLabel: string }) {
     setModalVisible(true);
   };
 
-  const closeModal = () => {
-    setSelectedMovie(null);
-    setModalVisible(false);
-  };
-
   if (isLoading) return <LoadingSpinner />;
 
   if (isError) return <Error message={(error as Error).message} />;
@@ -34,11 +29,14 @@ function MovieSlider({ sliderLabel }: { sliderLabel: string }) {
   return (
     <Section type="vertical">
       <h2>{sliderLabel}</h2>
-      {modalVisible && selectedMovie && <MovieModal closeModal={closeModal} movie={selectedMovie} />}
+
       <Slider moreLabel={'Még több mozifilm...'} morePath={'/movies'}>
         {movies &&
           movies.map((movie: MovieModel) => <MovieCard key={movie._id} movie={movie} onClick={handlePosterClick} />)}
       </Slider>
+      <Modal isOpen={modalVisible} setIsOpen={setModalVisible}>
+        {selectedMovie && <MovieDetails movie={selectedMovie} />}
+      </Modal>
     </Section>
   );
 }
