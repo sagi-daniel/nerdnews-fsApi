@@ -4,7 +4,6 @@ import { SingupModel } from '../../../models/auth.models';
 import { useAuth } from '../../../context/AuthContext';
 import InputField from '../../../components/form-ui/InputField';
 import Button from '../../../components/Button';
-import CustomNavLink from '../../../components/CustomNavLink';
 import ForgotPasswordForm from './ForgotPasswordForm';
 import Modal from '../../../components/Modal';
 
@@ -75,10 +74,6 @@ function SignupForm() {
         </div>
         <Button type="submit" text="Regisztráció" size="full" />
       </form>
-      <div className="flex justify-between mt-4">
-        <CustomNavLink text="Elfelejtett jelszó" onClick={() => setIsForgetPasswordModel(true)} />
-        <CustomNavLink text="Bejelentkezés" path="/login" />
-      </div>
       <Modal isOpen={isForgetPasswordModel} setIsOpen={setIsForgetPasswordModel}>
         <ForgotPasswordForm />
       </Modal>
