@@ -111,7 +111,7 @@ exports.forgotPassword = catchAsync(async (req, res, next) => {
   }
 
   const now = Date.now();
-  const requestCooldown = 10 * 60 * 1000; // 10 perc
+  const requestCooldown = 3000; // 10 másodperc
 
   if (user.passwordResetRequestedAt && now - new Date(user.passwordResetRequestedAt).getTime() < requestCooldown) {
     return next(new AppError('You can request a password reset only once every 10 minutes.', 429));
