@@ -1,70 +1,61 @@
-import React, { useState } from 'react';
-import UserAvatar from '../../components/parts/header/UserAvatar';
+import { useState } from 'react';
+import { capitalizeWord, formatDateIsoToNormal } from '../../utils/helpers';
 import { useAuth } from '../../context/AuthContext';
-import { UserModel } from '../../models/User.model';
+import UserAvatar from '../../components/UserAvatar';
+import Section from '../../components/Section';
+import Button from '../../components/Button';
+import Modal from '../../components/Modal';
+import UpdatePasswordForm from '../../features/auth/forms/UpdatePasswordForm';
 
-const mockUser: UserModel = {
-  _id: '1234567890',
-  role: 'User',
-  userName: 'John Doe',
-  email: 'john.doe@example.com',
-  userNews: [],
-  userMovies: [],
-  createdAt: '2021-01-01T00:00:00Z',
-  updatedAt: '2022-01-01T00:00:00Z',
-  // Add more user details as needed
-};
+import UserForm from '../../components/forms/UserForm';
 
 const MyAccount = () => {
   const { user } = useAuth();
-
   const [isActive, setIsActive] = useState(false);
+  const [isPasswordUpdateShow, setIsPasswordUpdateShow] = useState(false);
+  const [isUserUpdateShow, setIsIsUserUpdateShow] = useState(false);
 
   const handleAvatarClick = () => {
     setIsActive(!isActive);
   };
 
   return (
-    <div className="max-w-4xl mx-auto p-4">
-      <h1 className="text-3xl font-bold mb-6">My Account</h1>
-      <div className="flex items-center space-x-4 mb-6">
-        {user && <UserAvatar user={user} isActive={isActive} onClick={handleAvatarClick} size="large" />}
-        <div>
-          <h2 className="text-2xl font-semibold">{user ? user.userName : mockUser.userName}</h2>
-          <p className="text-gray-600">{user ? user.email : mockUser.email}</p>
+    <Section type="horizontal">
+      <div className="flex flex-col md:w-3/12 w-full">
+        <h1 className="text-3xl font-bold mb-6">Felhasználói fiók</h1>
+        <div className="flex items-center space-x-4 mb-6">
+          {user && <UserAvatar user={user} isActive={isActive} onClick={handleAvatarClick} size="large" />}
+          <div>
+            <h2 className="text-2xl font-semibold">{user && user.userName}</h2>
+            <p className="">{user && user.email}</p>
+          </div>
+        </div>
+        <div className="bg-border-dark text-content-dark p-4 rounded-md">
+          <ol>
+            <li>
+              Szerepkör: <span className="font-semibold text-primary">{capitalizeWord(user?.role)}</span>
+            </li>
+            <li>
+              Regisztráció: <span className="font-semibold"> {formatDateIsoToNormal(user?.createdAt)}</span>
+            </li>
+            <li>
+              Adatváltoztatás: <span className="font-semibold">{formatDateIsoToNormal(user?.updatedAt)}</span>
+            </li>
+          </ol>
+          <div className="flex items-center space-x-2 mt-4">
+            <Button type="button" size="normal" text="Szerkesztése" onClick={() => setIsIsUserUpdateShow(true)} />
+            <Button type="button" size="normal" text="Jelszó csere" onClick={() => setIsPasswordUpdateShow(true)} />
+          </div>
+          <Modal isOpen={isPasswordUpdateShow} setIsOpen={setIsPasswordUpdateShow}>
+            <UpdatePasswordForm />
+          </Modal>
+          <Modal isOpen={isUserUpdateShow} setIsOpen={setIsIsUserUpdateShow}>
+            <UserForm setModalVisible={() => true} />
+          </Modal>
         </div>
       </div>
-      <div className="bg-white shadow rounded-lg p-6">
-        <h3 className="text-xl font-semibold mb-4">Account Details</h3>
-        <div className="space-y-4">
-          <div className="flex justify-between items-center">
-            <span className="text-gray-700">Username:</span>
-            <span>{user ? user.userName : mockUser.userName}</span>
-          </div>
-          <div className="flex justify-between items-center">
-            <span className="text-gray-700">Email:</span>
-            <span>{user ? user.email : mockUser.email}</span>
-          </div>
-          <div className="flex justify-between items-center">
-            <span className="text-gray-700">Role:</span>
-            <span>{user ? user.role : mockUser.role}</span>
-          </div>
-          <div className="flex justify-between items-center">
-            <span className="text-gray-700">Account Created:</span>
-            <span>
-              {user ? new Date(user.createdAt).toLocaleDateString() : new Date(mockUser.createdAt).toLocaleDateString()}
-            </span>
-          </div>
-          <div className="flex justify-between items-center">
-            <span className="text-gray-700">Last Updated:</span>
-            <span>
-              {user ? new Date(user.updatedAt).toLocaleDateString() : new Date(mockUser.updatedAt).toLocaleDateString()}
-            </span>
-          </div>
-          {/* Add more account details as needed */}
-        </div>
-      </div>
-    </div>
+      <div className="flex flex-col md:w-9/12 w-full"></div>
+    </Section>
   );
 };
 
