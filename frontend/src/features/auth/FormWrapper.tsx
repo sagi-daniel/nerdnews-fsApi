@@ -1,6 +1,5 @@
 import { ReactNode } from 'react';
 import CloseIcon from '../../components/CloseIcon';
-import Logo from '../../components/Logo';
 
 type Size = 'small' | 'medium' | 'large';
 
@@ -19,8 +18,7 @@ function FormWrapper({ children, label, size = 'small', formClosePath = '/home' 
   };
 
   return (
-    <div className={`flex flex-col size-full items-center gap-16 md:justify-center p-5`}>
-      <Logo size="medium" />
+    <div className={`flex flex-col  items-center gap-16 md:justify-center p-5`}>
       <div className={`relative ${sizeClasses[size]} bg-border-dark text-content-dark p-8 rounded-md w-110`}>
         <CloseIcon path={formClosePath} />
         <h2 className="mb-6 text-center">{label}</h2>
