@@ -17,8 +17,6 @@ function SignupForm() {
   const { signup } = useAuth();
   const navigate = useNavigate();
 
-  /* TODO A validációt megcsinálni */
-
   async function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
     if (password !== passwordConfirm) {
