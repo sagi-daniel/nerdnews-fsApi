@@ -3,8 +3,9 @@ import { formatDateIsoToNormal } from '../../utils/helpers';
 import { useUser } from '../../context/UserContext';
 import Table, { Column } from '../../components/Table';
 import LoadingSpinner from '../../components/loaders/LoadingSpinner';
-import FormModal from '../../components/Modal';
 import MovieModel from '../../models/Movie.model';
+import Alert from '../../components/Alert';
+import Modal from '../../components/Modal';
 
 const moviesColumns: Column<MovieModel>[] = [
   { key: 'release', label: 'Megjelenés', formatter: formatDateIsoToNormal },
@@ -42,18 +43,18 @@ function MyMovies() {
   return (
     <>
       {movies && <Table<MovieModel> data={movies} columns={moviesColumns} onDelete={handleDelete} />}
-      {confirmationVisible && (
-        <FormModal title="Biztosan törölni szeretné a felhasználót?" closeModal={cancelDelete}>
-          <div className="flex justify-end  space-x-2">
-            <button className="btn-delete" onClick={confirmDelete}>
-              Töröl
-            </button>
-            <button onClick={cancelDelete} className="btn-cancel">
-              Mégsem
-            </button>
-          </div>
-        </FormModal>
-      )}
+      <Modal isOpen={confirmationVisible} setIsOpen={setConfirmationVisible}>
+        <Alert
+          alertIcon="error"
+          alertMessage="Biztosan törölni szeretné az Rss forrást?"
+          buttonText="Mégsem"
+          buttonStyle="neutral"
+          buttonAction={cancelDelete}
+          confrimText="Töröl"
+          confrimStyle="delete"
+          confirmAction={confirmDelete}
+        />
+      </Modal>
     </>
   );
 }

@@ -4,11 +4,12 @@ import { UserModel } from '../../models/User.model';
 import { formatDateIsoToNormal } from '../../utils/helpers';
 import { deleteUser, getUsers } from '../../services/apiUser';
 import Table, { Column } from '../../components/Table';
-import FormModal from '../../components/Modal';
+import Modal from '../../components/Modal';
 import UserForm from '../../components/forms/UserForm';
 import toast from 'react-hot-toast';
 import LoadingSpinner from '../../components/loaders/LoadingSpinner';
 import Error from '../../components/Error';
+import Alert from '../../components/Alert';
 
 const userColumns: Column<UserModel>[] = [
   { key: 'createdAt', label: 'Létrehozva', formatter: formatDateIsoToNormal },
@@ -61,11 +62,6 @@ function Users() {
     setUserIdToDelete(null);
   };
 
-  const closeModal = () => {
-    setSelectedUser(null);
-    setModalVisible(false);
-  };
-
   if (isLoading) return <LoadingSpinner />;
 
   if (isError) return <Error message={(error as Error).message} />;
@@ -83,22 +79,24 @@ function Users() {
       )}
 
       {modalVisible && (
-        <FormModal title={selectedUser ? 'Szerkesztés' : 'Létrehozás'} closeModal={closeModal}>
+        <Modal isOpen={modalVisible} setIsOpen={setModalVisible}>
+          <h2> {selectedUser ? 'Szerkesztés' : 'Létrehozás'}</h2>
           <UserForm user={selectedUser} setModalVisible={setModalVisible} />
-        </FormModal>
+        </Modal>
       )}
-      {confirmationVisible && (
-        <FormModal title="Biztosan törölni szeretné a felhasználót?" closeModal={cancelDelete}>
-          <div className="flex justify-end  space-x-2">
-            <button className="btn-delete" onClick={confirmDelete}>
-              Töröl
-            </button>
-            <button onClick={cancelDelete} className="btn-cancel">
-              Mégsem
-            </button>
-          </div>
-        </FormModal>
-      )}
+
+      <Modal isOpen={confirmationVisible} setIsOpen={setConfirmationVisible}>
+        <Alert
+          alertIcon="error"
+          alertMessage="Biztosan törölni szeretné a felhasználót?"
+          buttonText="Mégsem"
+          buttonStyle="neutral"
+          buttonAction={cancelDelete}
+          confrimText="Töröl"
+          confrimStyle="delete"
+          confirmAction={confirmDelete}
+        />
+      </Modal>
     </>
   );
 }

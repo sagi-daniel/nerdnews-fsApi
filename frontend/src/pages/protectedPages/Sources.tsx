@@ -4,11 +4,12 @@ import { SourceModel } from '../../models/Source.model';
 import { capitalizeWord, formatDateIsoToNormal } from '../../utils/helpers';
 import { deleteSource, getSources } from '../../services/apiSource';
 import Table, { Column } from '../../components/Table';
-import FormModal from '../../components/Modal';
+import Modal from '../../components/Modal';
 import toast from 'react-hot-toast';
 import LoadingSpinner from '../../components/loaders/LoadingSpinner';
 import Error from '../../components/Error';
 import SourceForm from '../../components/forms/SourceForm';
+import Alert from '../../components/Alert';
 
 const sourceColumns: Column<SourceModel>[] = [
   { key: 'createdAt', label: 'Létrehozva', formatter: formatDateIsoToNormal },
@@ -66,11 +67,6 @@ function Sources() {
     setSourceIdToDelete(null);
   };
 
-  const closeModal = () => {
-    setSelectedSource(null);
-    setModalVisible(false);
-  };
-
   if (isLoading) return <LoadingSpinner />;
 
   if (isError) return <Error message={(error as Error).message} />;
@@ -87,23 +83,23 @@ function Sources() {
         />
       )}
 
-      {modalVisible && (
-        <FormModal title={selectedSource ? 'Szerkesztés' : 'Létrehozás'} closeModal={closeModal}>
-          <SourceForm source={selectedSource} setModalVisible={setModalVisible} />
-        </FormModal>
-      )}
-      {confirmationVisible && (
-        <FormModal title="Biztosan törölni szeretné az Rss forrást?" closeModal={cancelDelete}>
-          <div className="flex justify-end  space-x-2">
-            <button className="btn-delete" onClick={confirmDelete}>
-              Töröl
-            </button>
-            <button onClick={cancelDelete} className="btn-cancel">
-              Mégsem
-            </button>
-          </div>
-        </FormModal>
-      )}
+      <Modal isOpen={modalVisible} setIsOpen={setModalVisible}>
+        <h2>{selectedSource ? 'Szerkesztés' : 'Létrehozás'}</h2>
+        <SourceForm source={selectedSource} setModalVisible={setModalVisible} />
+      </Modal>
+
+      <Modal isOpen={confirmationVisible} setIsOpen={setConfirmationVisible}>
+        <Alert
+          alertIcon="error"
+          alertMessage="Biztosan törölni szeretné az Rss forrást?"
+          buttonText="Mégsem"
+          buttonStyle="neutral"
+          buttonAction={cancelDelete}
+          confrimText="Töröl"
+          confrimStyle="delete"
+          confirmAction={confirmDelete}
+        />
+      </Modal>
     </>
   );
 }

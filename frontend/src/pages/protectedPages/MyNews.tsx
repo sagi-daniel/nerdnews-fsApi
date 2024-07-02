@@ -4,7 +4,8 @@ import { formatDateIsoToNormal } from '../../utils/helpers';
 import Table, { Column } from '../../components/Table';
 import NewsModel from '../../models/News.model';
 import LoadingSpinner from '../../components/loaders/LoadingSpinner';
-import FormModal from '../../components/Modal';
+import Modal from '../../components/Modal';
+import Alert from '../../components/Alert';
 
 const newsColumns: Column<NewsModel>[] = [
   { key: 'release', label: 'Publikálva', formatter: formatDateIsoToNormal },
@@ -41,18 +42,18 @@ function MyNews() {
   return (
     <>
       {news && <Table<NewsModel> data={news} columns={newsColumns} onDelete={handleDelete} />}
-      {confirmationVisible && (
-        <FormModal title="Biztosan törölni szeretné a felhasználót?" closeModal={cancelDelete}>
-          <div className="flex justify-end  space-x-2">
-            <button className="btn-delete" onClick={confirmDelete}>
-              Töröl
-            </button>
-            <button onClick={cancelDelete} className="btn-cancel">
-              Mégsem
-            </button>
-          </div>
-        </FormModal>
-      )}
+      <Modal isOpen={confirmationVisible} setIsOpen={setConfirmationVisible}>
+        <Alert
+          alertIcon="error"
+          alertMessage="Biztosan törölni szeretné az Rss forrást?"
+          buttonText="Mégsem"
+          buttonStyle="neutral"
+          buttonAction={cancelDelete}
+          confrimText="Töröl"
+          confrimStyle="delete"
+          confirmAction={confirmDelete}
+        />
+      </Modal>
     </>
   );
 }
