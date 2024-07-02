@@ -3,14 +3,14 @@ import { FiEdit, FiTrash, FiPlus } from 'react-icons/fi';
 export interface Column<T> {
   key: keyof T;
   label: string;
-  formatter?: (value: any) => string;
+  formatter?: (value: T[keyof T]) => string;
 }
 
 interface TableProps<T> {
   data: T[];
   columns: Column<T>[];
   onEdit?: (item: T) => void;
-  onDelete: (id: string) => void;
+  onDelete?: (id: string) => void;
   onCreate?: () => void;
 }
 
@@ -46,10 +46,11 @@ function Table<T extends { _id: string }>({ data, columns, onEdit, onDelete, onC
                     <FiEdit />
                   </button>
                 )}
-
-                <button onClick={() => onDelete(item._id)} className="btn-icon">
-                  <FiTrash />
-                </button>
+                {onDelete && (
+                  <button onClick={() => onDelete(item._id)} className="btn-icon">
+                    <FiTrash />
+                  </button>
+                )}
               </td>
             </tr>
           ))}

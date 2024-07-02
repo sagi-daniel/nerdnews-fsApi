@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { useUser } from '../../context/UserContext';
-import { formatDateIsoToNormal } from '../../utils/helpers';
+import { capitalizeWord, formatDateIsoToNormal } from '../../utils/helpers';
 import Table, { Column } from '../../components/Table';
 import NewsModel from '../../models/News.model';
 import LoadingSpinner from '../../components/loaders/LoadingSpinner';
@@ -8,8 +8,14 @@ import Modal from '../../components/Modal';
 import Alert from '../../components/Alert';
 
 const newsColumns: Column<NewsModel>[] = [
-  { key: 'release', label: 'Publikálva', formatter: formatDateIsoToNormal },
+  { key: 'release', label: 'Publikálva', formatter: (value) => formatDateIsoToNormal(value?.toString()) },
   { key: 'title', label: 'Cím' },
+  {
+    key: 'category',
+    label: 'Kategória',
+    formatter: (value) =>
+      typeof value === 'object' && 'categoryName' in value ? capitalizeWord(value?.categoryName) : '',
+  },
   { key: 'link', label: 'Link' },
 ];
 

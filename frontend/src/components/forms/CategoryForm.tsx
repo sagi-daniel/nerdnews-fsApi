@@ -38,14 +38,14 @@ function CategoryForm({ category, setModalVisible }: CategoryFormProps) {
         categoryId: category._id,
         category: categoryName,
       };
-      console.log(updateCategory);
+
       updateCategoryMutate(updateCategory);
       setModalVisible(false);
     } else {
       const newCategory: CreateCategoryModel = {
         categoryName,
       };
-      console.log(newCategory);
+
       createCategoryMutate(newCategory);
       setModalVisible(false);
     }

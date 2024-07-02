@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { formatDateIsoToNormal } from '../../utils/helpers';
+import { capitalizeWord, formatDateIsoToNormal } from '../../utils/helpers';
 import { useUser } from '../../context/UserContext';
 import Table, { Column } from '../../components/Table';
 import LoadingSpinner from '../../components/loaders/LoadingSpinner';
@@ -8,9 +8,18 @@ import Alert from '../../components/Alert';
 import Modal from '../../components/Modal';
 
 const moviesColumns: Column<MovieModel>[] = [
-  { key: 'release', label: 'Megjelenés', formatter: formatDateIsoToNormal },
+  {
+    key: 'release',
+    label: 'Megjelenés',
+    formatter: (value) => formatDateIsoToNormal(value.toString()),
+  },
   { key: 'title', label: 'Cím' },
-  { key: 'genre', label: 'Műfaj' },
+  {
+    key: 'genre',
+    label: 'Műfaj',
+    formatter: (value) =>
+      typeof value === 'object' ? value.map((genre) => capitalizeWord(genre)).join(', ') : value.toString(),
+  },
   { key: 'poster', label: 'Poszter' },
 ];
 

@@ -12,7 +12,11 @@ import Error from '../../components/Error';
 import Alert from '../../components/Alert';
 
 const userColumns: Column<UserModel>[] = [
-  { key: 'createdAt', label: 'Létrehozva', formatter: formatDateIsoToNormal },
+  {
+    key: 'createdAt',
+    label: 'Létrehozva',
+    formatter: (value) => formatDateIsoToNormal(value?.toString()),
+  },
   { key: 'role', label: 'Szerepkör' },
   { key: 'userName', label: 'Felhasználónév' },
   { key: 'email', label: 'Email' },

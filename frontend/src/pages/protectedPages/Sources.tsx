@@ -1,43 +1,35 @@
 import { useState } from 'react';
-import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
+import { useQuery } from '@tanstack/react-query';
 import { SourceModel } from '../../models/Source.model';
 import { capitalizeWord, formatDateIsoToNormal } from '../../utils/helpers';
-import { deleteSource, getSources } from '../../services/apiSource';
+import { getSources } from '../../services/apiSource';
 import Table, { Column } from '../../components/Table';
 import Modal from '../../components/Modal';
-import toast from 'react-hot-toast';
 import LoadingSpinner from '../../components/loaders/LoadingSpinner';
 import Error from '../../components/Error';
 import SourceForm from '../../components/forms/SourceForm';
-import Alert from '../../components/Alert';
 
 const sourceColumns: Column<SourceModel>[] = [
-  { key: 'createdAt', label: 'Létrehozva', formatter: formatDateIsoToNormal },
+  {
+    key: 'createdAt',
+    label: 'Létrehozva',
+    formatter: (value) => formatDateIsoToNormal(value?.toString()),
+  },
   { key: 'sourceName', label: 'Kategória Neve' },
   { key: 'sourceType', label: 'Típus' },
   { key: 'sourceLink', label: 'Link' },
   {
     key: 'category',
     label: 'Kategória',
-    formatter: (value) => capitalizeWord(value.categoryName),
+    formatter: (value) => (typeof value === 'object' ? capitalizeWord(value.categoryName) : ''),
   },
 ];
 
 function Sources() {
   const [selectedSource, setSelectedSource] = useState<SourceModel | null>(null);
   const [modalVisible, setModalVisible] = useState(false);
-  const [confirmationVisible, setConfirmationVisible] = useState(false);
-  const [sourceIdToDelete, setSourceIdToDelete] = useState<string | null>(null);
 
-  const queryClient = useQueryClient();
   const { data: sources, error, isLoading, isError } = useQuery(['Sources'], getSources);
-
-  const { mutate: deleteSourceMutate } = useMutation(deleteSource, {
-    onSuccess: () => {
-      toast.success(`Rss forrás törölve!`);
-      queryClient.invalidateQueries(['Sources']);
-    },
-  });
 
   function handleCreate() {
     setSelectedSource(null);
@@ -49,24 +41,6 @@ function Sources() {
     setModalVisible(true);
   }
 
-  function handleDelete(userId: string) {
-    setSourceIdToDelete(userId);
-    setConfirmationVisible(true);
-  }
-
-  function confirmDelete() {
-    if (sourceIdToDelete) {
-      deleteSourceMutate(sourceIdToDelete);
-      setConfirmationVisible(false);
-      setSourceIdToDelete(null);
-    }
-  }
-
-  const cancelDelete = () => {
-    setConfirmationVisible(false);
-    setSourceIdToDelete(null);
-  };
-
   if (isLoading) return <LoadingSpinner />;
 
   if (isError) return <Error message={(error as Error).message} />;
@@ -74,31 +48,12 @@ function Sources() {
   return (
     <>
       {sources && (
-        <Table<SourceModel>
-          data={sources}
-          columns={sourceColumns}
-          onEdit={handleUpdate}
-          onDelete={handleDelete}
-          onCreate={handleCreate}
-        />
+        <Table<SourceModel> data={sources} columns={sourceColumns} onEdit={handleUpdate} onCreate={handleCreate} />
       )}
 
       <Modal isOpen={modalVisible} setIsOpen={setModalVisible}>
         <h2>{selectedSource ? 'Szerkesztés' : 'Létrehozás'}</h2>
         <SourceForm source={selectedSource} setModalVisible={setModalVisible} />
-      </Modal>
-
-      <Modal isOpen={confirmationVisible} setIsOpen={setConfirmationVisible}>
-        <Alert
-          alertIcon="error"
-          alertMessage="Biztosan törölni szeretné az Rss forrást?"
-          buttonText="Mégsem"
-          buttonStyle="neutral"
-          buttonAction={cancelDelete}
-          confrimText="Töröl"
-          confrimStyle="delete"
-          confirmAction={confirmDelete}
-        />
       </Modal>
     </>
   );
