@@ -3,11 +3,9 @@ import SignupForm from '../../features/auth/forms/SignupForm';
 
 function SignupPage() {
   return (
-    <div className="relative h-screen">
-      <FormWrapper label="Regisztráció" size="medium">
-        <SignupForm />
-      </FormWrapper>
-    </div>
+    <FormWrapper label="Regisztráció" size="medium">
+      <SignupForm />
+    </FormWrapper>
   );
 }
 
