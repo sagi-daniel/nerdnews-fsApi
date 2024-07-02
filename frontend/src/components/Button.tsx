@@ -1,23 +1,26 @@
 interface ButtonProps {
-  type: 'submit' | 'reset' | 'button' | undefined;
+  type: 'button' | 'submit' | 'reset' | undefined;
+  style?: 'primary' | 'neutral' | 'cancel';
   size: 'normal' | 'full';
   isLoading?: boolean;
   text: string;
-  onClick?: () => void;
+  onClick?: (() => void | undefined) | undefined;
 }
 
-function Button({ text, isLoading, type = 'submit', size = 'normal' }: ButtonProps) {
+function Button({ text, isLoading, type = 'button', size = 'normal', style = 'primary', onClick }: ButtonProps) {
   const sizeStyle = {
     normal: 'w-auto',
     full: 'w-full',
   };
 
+  const buttonStyle = {
+    primary: 'btn-primary',
+    neutral: 'btn-neutral',
+    cancel: 'btn-cancel',
+  };
+
   return (
-    <button
-      type={type}
-      disabled={isLoading}
-      className={`${sizeStyle[size]} mt-2 bg-primary text-primary-content py-2 rounded-md hover:bg-primary-dark transition-colors disabled:bg-border-light disabled:text-gray-400`}
-    >
+    <button type={type} disabled={isLoading} className={`${sizeStyle[size]} ${buttonStyle[style]}`} onClick={onClick}>
       {isLoading ? 'Küldés...' : text}
     </button>
   );
