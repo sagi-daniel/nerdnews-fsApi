@@ -120,13 +120,13 @@ function App() {
                       </ProtectedRoute>
                     }
                   />
+                  <Route path="signup" element={<SignupPage />} />
+                  <Route path="login" element={<LoginPage />} />
+                  <Route path="forgetPassword" element={<ForgetPasswordPage />} />
+                  <Route path="forgetPasswordConfirm" element={<ForgetPasswordConfirm />} />
+                  <Route path="resetPassword/:resetToken" element={<ResetPasswordPage />} />
+                  <Route path="unauthorized" element={<Forbidden />} />
                 </Route>
-                <Route path="signup" element={<SignupPage />} />
-                <Route path="login" element={<LoginPage />} />
-                <Route path="forgetPassword" element={<ForgetPasswordPage />} />
-                <Route path="forgetPasswordConfirm" element={<ForgetPasswordConfirm />} />
-                <Route path="resetPassword/:resetToken" element={<ResetPasswordPage />} />
-                <Route path="unauthorized" element={<Forbidden />} />
               </Routes>
             </UserProvider>
           </AuthProvider>
