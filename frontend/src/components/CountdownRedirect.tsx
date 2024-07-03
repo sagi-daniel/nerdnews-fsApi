@@ -21,7 +21,11 @@ function CountdownRedirect({ path, counter }: CountdownRedirectProps) {
 
   return (
     <div className="text-center mt-4">
-      <p>Átirányítunk a főoldalra {count} másodperc múlva...</p>
+      <p>
+        Átirányítunk a főoldalra{' '}
+        <span className="bg-primary text-primary-content p-2 rounded-full">{count < 10 ? `0${count}` : count}</span>{' '}
+        másodperc múlva...
+      </p>
     </div>
   );
 }
