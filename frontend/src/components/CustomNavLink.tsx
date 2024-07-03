@@ -3,13 +3,14 @@ import { Link } from 'react-router-dom';
 interface NavlinkProps {
   text: string;
   path?: string;
+  className?: string;
   onClick?: () => void;
 }
 
-function CustomNavLink({ text, path, onClick }: NavlinkProps) {
+function CustomNavLink({ text, path, className, onClick }: NavlinkProps) {
   if (onClick)
     return (
-      <small onClick={onClick} className="link">
+      <small onClick={onClick} className={`${className} link`}>
         {text}
       </small>
     );
@@ -18,7 +19,7 @@ function CustomNavLink({ text, path, onClick }: NavlinkProps) {
     <small>
       {path && (
         <Link to={path} className="link">
-          {text}
+          <span className={`${className}`}>{text}</span>
         </Link>
       )}
     </small>
