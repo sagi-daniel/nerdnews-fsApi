@@ -19,7 +19,7 @@ const newsColumns: Column<NewsModel>[] = [
   { key: 'link', label: 'Link' },
 ];
 
-function MyNews() {
+function EditNews() {
   const { news, removeFromMyNews, isLoading } = useUser();
 
   const [confirmationVisible, setConfirmationVisible] = useState(false);
@@ -64,4 +64,4 @@ function MyNews() {
   );
 }
 
-export default MyNews;
+export default EditNews;

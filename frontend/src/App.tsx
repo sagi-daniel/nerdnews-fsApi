@@ -23,7 +23,8 @@ import LoginPage from './pages/authPages/LoginPage';
 import ForgetPasswordPage from './pages/authPages/ForgetPasswordPage';
 import ResetPasswordPage from './pages/authPages/ResetPasswordPage';
 
-import ForgetPasswordConfirm from './pages/authPages/ForgetPasswordConfirm';
+import ForgetPasswordConfirmPage from './pages/authPages/ForgetPasswordConfirmPage';
+import DeleteAccountConfimPage from './pages/authPages/DeleteAccountConfimPage';
 
 import PrivacyPolicy from './pages/publicPages/PrivacyPolicy';
 import PageNotFound from './pages/PageNotFound';
@@ -32,13 +33,14 @@ import Forbidden from './pages/Forbidden';
 //PROTECTED PAGES
 //USER PRIVILEGE
 import MyAccount from './pages/protectedPages/MyAccount';
-import MyNews from './pages/protectedPages/MyNews';
-import MyMovies from './pages/protectedPages/MyMovies';
 import UpdatePasswordPage from './pages/authPages/UpdatePasswordPage';
+
 //ADMIN PIRIVLEGE
-import Users from './pages/protectedPages/Users';
-import Categories from './pages/protectedPages/Categories';
-import Sources from './pages/protectedPages/Sources';
+import EditUsers from './pages/protectedPages/EditUsers';
+import EditCategories from './pages/protectedPages/EditCategories';
+import EditSources from './pages/protectedPages/EditSources';
+import EditNews from './pages/protectedPages/EditNews';
+import EditMovies from './pages/protectedPages/EditMovies';
 
 // CONSTANTS
 import { QUERY_DEFAULT_OPTIONS } from './utils/constants';
@@ -73,18 +75,18 @@ function App() {
                     }
                   />
                   <Route
-                    path="myNews"
+                    path="editNews"
                     element={
-                      <ProtectedRoute>
-                        <MyNews />
+                      <ProtectedRoute allowedRoles={['admin']}>
+                        <EditNews />
                       </ProtectedRoute>
                     }
                   />
                   <Route
-                    path="myMovies"
+                    path="EditMovies"
                     element={
-                      <ProtectedRoute>
-                        <MyMovies />
+                      <ProtectedRoute allowedRoles={['admin']}>
+                        <EditMovies />
                       </ProtectedRoute>
                     }
                   />
@@ -97,34 +99,35 @@ function App() {
                     }
                   />
                   <Route
-                    path="users"
+                    path="EditUsers"
                     element={
                       <ProtectedRoute allowedRoles={['admin']}>
-                        <Users />
+                        <EditUsers />
                       </ProtectedRoute>
                     }
                   />
                   <Route
-                    path="categories"
+                    path="EditCategories"
                     element={
                       <ProtectedRoute allowedRoles={['admin']}>
-                        <Categories />
+                        <EditCategories />
                       </ProtectedRoute>
                     }
                   />
                   <Route
-                    path="sources"
+                    path="EditSources"
                     element={
                       <ProtectedRoute allowedRoles={['admin']}>
-                        <Sources />
+                        <EditSources />
                       </ProtectedRoute>
                     }
                   />
                   <Route path="signup" element={<SignupPage />} />
                   <Route path="login" element={<LoginPage />} />
                   <Route path="forgetPassword" element={<ForgetPasswordPage />} />
-                  <Route path="forgetPasswordConfirm" element={<ForgetPasswordConfirm />} />
+                  <Route path="forgetPasswordConfirm" element={<ForgetPasswordConfirmPage />} />
                   <Route path="resetPassword/:resetToken" element={<ResetPasswordPage />} />
+                  <Route path="deleteAccountConfrim" element={<DeleteAccountConfimPage />} />
                   <Route path="unauthorized" element={<Forbidden />} />
                 </Route>
               </Routes>

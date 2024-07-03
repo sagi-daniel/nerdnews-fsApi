@@ -10,7 +10,7 @@ import Modal from '../../components/Modal';
 
 const categoryColumns: Column<CategoryModel>[] = [{ key: 'categoryName', label: 'Kategória név' }];
 
-function Categories() {
+function EditCategories() {
   const [selectedCategory, setSelectedCategory] = useState<CategoryModel | null>(null);
   const [modalVisible, setModalVisible] = useState(false);
 
@@ -50,4 +50,4 @@ function Categories() {
   );
 }
 
-export default Categories;
+export default EditCategories;

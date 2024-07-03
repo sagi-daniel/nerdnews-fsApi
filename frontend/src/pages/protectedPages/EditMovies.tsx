@@ -23,7 +23,7 @@ const moviesColumns: Column<MovieModel>[] = [
   { key: 'poster', label: 'Poszter' },
 ];
 
-function MyMovies() {
+function EditCategories() {
   const { movies, removeFromMyMovies, isLoading } = useUser();
 
   const [confirmationVisible, setConfirmationVisible] = useState(false);
@@ -68,4 +68,4 @@ function MyMovies() {
   );
 }
 
-export default MyMovies;
+export default EditCategories;

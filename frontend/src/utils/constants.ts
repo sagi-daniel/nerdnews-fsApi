@@ -22,18 +22,19 @@ export const MENU_ITEMS = [
     type: 'regular',
     element: 'UpcomingMovies',
   },
+  /*TODO egyéb dropdown menu cidr ,quiz stb... */
   // { name: 'Egyéb', path: 'cidr', type: 'regular', element: 'IpCidrCalculator' },
 ];
 
 export const USER_MENU_ITEMS = [
-  { name: 'Fiók', path: 'myAccount', type: 'regular', element: 'myAccount' },
-  { name: 'Mentett hírek', path: 'myNews', type: 'regular', element: 'myNews' },
-  { name: 'Mentett filmek', path: 'myMovies', type: 'regular', element: 'myMovies' },
+  { name: 'Felhasználói fiók', path: 'myAccount', type: 'regular', element: 'myAccount' },
 ];
 export const ADMIN_MENU_TEMS = [
-  { name: 'Felhasználók', path: 'users', type: 'regular', element: 'users' },
-  { name: 'Rss Források', path: 'sources', type: 'regular', element: 'sources' },
-  { name: 'Hír kategóriák', path: 'categories', type: 'regular', element: 'categories' },
+  { name: 'Felhasználók', path: 'editUsers', type: 'regular', element: 'EditUsers' },
+  { name: 'Hírek', path: 'editNews', type: 'regular', element: 'EditNews' },
+  { name: 'Filmek', path: 'editMovies', type: 'regular', element: 'EditMovies' },
+  { name: 'Rss Források', path: 'editSources', type: 'regular', element: 'EditSources' },
+  { name: 'Hír kategóriák', path: 'editCategories', type: 'regular', element: 'EditCategories' },
 ];
 
 export const CATEGORY_ITEMS = [{ name: '', path: 'home', type: 'regular', element: 'Home' }];

@@ -25,7 +25,7 @@ const sourceColumns: Column<SourceModel>[] = [
   },
 ];
 
-function Sources() {
+function EditSources() {
   const [selectedSource, setSelectedSource] = useState<SourceModel | null>(null);
   const [modalVisible, setModalVisible] = useState(false);
 
@@ -59,4 +59,4 @@ function Sources() {
   );
 }
 
-export default Sources;
+export default EditSources;
