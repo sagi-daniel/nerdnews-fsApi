@@ -64,7 +64,7 @@ app.use('/source', require('./controllers/source/source.routes'));
 app.use('/category', require('./controllers/category/category.routes'));
 
 //SCHEDULED TASKS
-cron.schedule('* * * * *', require('./controllers/scheduler/scheduler.controller'));
+cron.schedule('* 1,8 * * *', require('./controllers/scheduler/scheduler.controller'));
 
 app.all('*', (req, res, next) => {
   next(new AppError(`Could not found ${req.originalUrl} on this server!`, 404));
