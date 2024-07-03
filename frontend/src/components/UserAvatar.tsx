@@ -1,10 +1,10 @@
-import { UserModel } from '../../../models/User.model';
+import { UserModel } from '../models/User.model';
 
 interface userAvatarProps {
   user: UserModel;
   isActive?: boolean;
   size?: 'small' | 'medium' | 'large';
-  onClick: () => void;
+  onClick?: () => void;
 }
 
 function UserAvatar({ user, onClick, isActive = false, size = 'medium' }: userAvatarProps) {
