@@ -28,7 +28,7 @@ function MovieList() {
   if (isError) return <Error message={(error as Error).message} />;
 
   return (
-    <div className="flex flex-col justify-between md:w-5/6">
+    <div className="flex flex-col justify-between md:w-5/6 ">
       <div className=" relative py-4 flex justify-center flex-wrap gap-4 ">
         {movies &&
           movies.map((movieItem: MovieModel) => (
