@@ -1,13 +1,24 @@
+import { ReactNode } from 'react';
+
 interface ButtonProps {
-  type: 'button' | 'submit' | 'reset' | undefined;
+  type?: 'button' | 'submit' | 'reset' | undefined;
   style?: 'primary' | 'neutral' | 'cancel';
-  size: 'normal' | 'full';
+  size?: 'normal' | 'full';
   isLoading?: boolean;
-  text: string;
+  text?: string;
   onClick?: (() => void | undefined) | undefined;
+  children?: ReactNode;
 }
 
-function Button({ text, isLoading, type = 'button', size = 'normal', style = 'primary', onClick }: ButtonProps) {
+function Button({
+  children,
+  text,
+  isLoading,
+  type = 'button',
+  size = 'normal',
+  style = 'primary',
+  onClick,
+}: ButtonProps) {
   const sizeStyle = {
     normal: 'w-auto',
     full: 'w-full',
@@ -20,8 +31,13 @@ function Button({ text, isLoading, type = 'button', size = 'normal', style = 'pr
   };
 
   return (
-    <button type={type} disabled={isLoading} className={`${sizeStyle[size]} ${buttonStyle[style]}`} onClick={onClick}>
-      {isLoading ? 'Küldés...' : text}
+    <button
+      type={type}
+      disabled={isLoading}
+      className={`${sizeStyle[size]} ${buttonStyle[style]} gap-2`}
+      onClick={onClick}
+    >
+      {isLoading ? 'Küldés...' : children || text}
     </button>
   );
 }
