@@ -1,5 +1,5 @@
 import api from './api';
-import { SourceModel, CreateSourceModel, UpdateSourceModel } from '../models/Source.model';
+import SourceModel, { CreateSourceModel, UpdateSourceModel } from '../models/Source.model';
 
 type ResponseKeys = 'source' | 'sources';
 

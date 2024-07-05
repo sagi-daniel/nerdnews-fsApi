@@ -1,5 +1,5 @@
 import api from './api';
-import { UpdateUserModel, CreateUserModel, UserModel } from '../models/User.model';
+import UserModel, { UpdateUserModel, CreateUserModel } from '../models/User.model';
 import { SingupModel } from '../models/auth.models';
 
 type ResponseKeys = 'user' | 'users';

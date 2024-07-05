@@ -1,18 +1,39 @@
 import axios from 'axios';
+import api from './api';
 import { BASE_URL } from '../utils/constants';
+import NewsModel, { CreateNewsModel, UpdateNewsModel } from '../models/News.model';
 
-export async function getNews() {
+type ResponseKeys = 'news';
+
+const handleRequest = async <T>(
+  method: 'get' | 'post' | 'patch' | 'delete',
+  url: string,
+  responseKey: ResponseKeys,
+  data?: NewsModel | CreateNewsModel | UpdateNewsModel | string
+): Promise<T | null> => {
   try {
-    const response = await axios.get(`${BASE_URL}/news?`);
-    return response.data;
+    const response = await api[method](url, data);
+    return response.data.data[responseKey];
   } catch (error) {
-    if (axios.isAxiosError(error)) {
-      throw new Error(error.response?.statusText || 'Network response was not ok');
-    } else {
-      throw new Error('An unexpected error occurred');
-    }
+    throw new Error(`${method.toUpperCase()} request to ${url} failed`);
   }
-}
+};
+
+export const getNews = async () => {
+  return await handleRequest<NewsModel[]>('get', '/news', 'news');
+};
+
+export const createNews = async (news: CreateNewsModel) => {
+  return await handleRequest<NewsModel>('post', '/news', 'news', news);
+};
+
+export const updateNews = async ({ news, newsId }: UpdateNewsModel) => {
+  return await handleRequest<NewsModel>('patch', `/news/${newsId}`, 'news', news);
+};
+
+export const deleteNews = async (newsId: string) => {
+  return await handleRequest<NewsModel>('delete', `/news/${newsId}`, 'news');
+};
 
 export async function getNewsByQuery(
   category: string,
@@ -32,7 +53,8 @@ export async function getNewsByQuery(
   };
 
   try {
-    const response = await axios.get(`${BASE_URL}/news`, { params });
+    const response = await api.get(`${BASE_URL}/news`, { params });
+
     return response.data;
   } catch (error) {
     if (axios.isAxiosError(error)) {
@@ -48,8 +70,9 @@ export async function getTop3FreshNews() {
     sortOrder: 'desc',
   };
   try {
-    const response = await axios.get(`${BASE_URL}/news/top3fresh`, { params });
-    return response.data;
+    const response = await api.get(`${BASE_URL}/news/top3fresh`, { params });
+
+    return response.data.data['news'];
   } catch (error) {
     if (axios.isAxiosError(error)) {
       throw new Error(error.response?.statusText || 'Network response was not ok');
@@ -64,8 +87,8 @@ export async function sliderNews() {
     sortOrder: 'desc',
   };
   try {
-    const response = await axios.get(`${BASE_URL}/news/slider`, { params });
-    return response.data;
+    const response = await api.get(`${BASE_URL}/news/slider`, { params });
+    return response.data.data['news'];
   } catch (error) {
     if (axios.isAxiosError(error)) {
       throw new Error(error.response?.statusText || 'Network response was not ok');

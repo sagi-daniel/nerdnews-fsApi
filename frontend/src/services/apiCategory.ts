@@ -1,5 +1,5 @@
 import api from './api';
-import { UpdateCategoryModel, CreateCategoryModel, CategoryModel } from '../models/Category.model';
+import CategoryModel, { UpdateCategoryModel, CreateCategoryModel } from '../models/Category.model';
 
 type ResponseKeys = 'category' | 'categories';
 
