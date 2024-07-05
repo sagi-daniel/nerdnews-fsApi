@@ -1,22 +1,22 @@
 import { useState } from 'react';
-import { capitalizeWord, formatDateIsoToNormal } from '../../utils/helpers';
+import { useNavigate } from 'react-router-dom';
+import { capitalizeWord } from '../../utils/helpers';
 import { useAuth } from '../../context/AuthContext';
+import { useUser } from '../../context/UserContext';
+import { useMutation, useQueryClient } from '@tanstack/react-query';
+import { deleteUser } from '../../services/apiUser';
+import { format } from 'date-fns';
 import UserAvatar from '../../components/UserAvatar';
 import Section from '../../components/Section';
 import Button from '../../components/Button';
 import Modal from '../../components/Modal';
 import UpdatePasswordForm from '../../features/auth/forms/UpdatePasswordForm';
-
 import UserForm from '../../components/forms/UserForm';
 import Alert from '../../components/Alert';
-import { useMutation, useQueryClient } from '@tanstack/react-query';
-import { deleteUser } from '../../services/apiUser';
 import CustomNavLink from '../../components/CustomNavLink';
-import { useNavigate } from 'react-router-dom';
 import Slider from '../../components/parts/slider/Slider';
 import NewsModel from '../../models/News.model';
 import NewsCard from '../../features/news/NewsCard';
-import { useUser } from '../../context/UserContext';
 import MovieModel from '../../models/Movie.model';
 import MovieDetails from '../../features/movies/MovieDetails';
 import MovieCard from '../../features/movies/MovieCard';
@@ -33,8 +33,8 @@ const MyAccount = () => {
   const [moviemodalVisible, setMovieModalVisible] = useState(false);
 
   const navigate = useNavigate();
-
   const queryClient = useQueryClient();
+
   const { mutate: deleteUserMutate } = useMutation(deleteUser, {
     onSuccess: () => {
       logout();
@@ -73,6 +73,7 @@ const MyAccount = () => {
           <h1 className="text-3xl font-bold mb-6">Felhasználói fiók</h1>
           <div className="flex items-center space-x-4 mb-6">
             {user && <UserAvatar user={user} size="large" />}
+
             <div>
               <h2 className="text-2xl font-semibold">{user && user.userName}</h2>
               <p className="">{user && user.email}</p>
@@ -84,10 +85,10 @@ const MyAccount = () => {
                 Szerepkör: <span className="font-semibold text-primary">{capitalizeWord(user?.role)}</span>
               </li>
               <li>
-                Regisztráció: <span className="font-semibold"> {formatDateIsoToNormal(user?.createdAt)}</span>
+                Regisztráció: <span className="font-semibold"> {user && format(user.createdAt, 'yyyy.MM.dd')}</span>
               </li>
               <li>
-                Adatváltoztatás: <span className="font-semibold">{formatDateIsoToNormal(user?.updatedAt)}</span>
+                Adatváltoztatás: <span className="font-semibold">{user && format(user.updatedAt, 'yyyy.MM.dd')}</span>
               </li>
             </ol>
             <div className="flex items-center space-x-2 mt-4">
@@ -96,11 +97,13 @@ const MyAccount = () => {
             </div>
           </div>
           {user && (
-            <CustomNavLink
-              text="Fiók törlése"
-              className="text-error text-[12px]"
-              onClick={() => handleDelete(user?._id)}
-            />
+            <div>
+              <CustomNavLink
+                text="Fiók törlése"
+                className="text-error text-[12px]"
+                onClick={() => handleDelete(user?._id)}
+              />
+            </div>
           )}
         </div>
         <div className="flex flex-col md:w-9/12 w-full">
