@@ -40,7 +40,7 @@ export const formatDateIsoToNormal = (isoDate: string | undefined): string => {
   const month = (date.getMonth() + 1).toString().padStart(2, '0');
   const day = date.getDate().toString().padStart(2, '0');
 
-  return `${year}.${month}.${day}`;
+  return `${year}-${month}-${day}`;
 };
 
 export const truncateText = (text: string | undefined, trunc: number | undefined): string => {
