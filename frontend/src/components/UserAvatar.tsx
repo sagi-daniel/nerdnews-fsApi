@@ -1,4 +1,4 @@
-import { UserModel } from '../models/User.model';
+import UserModel from '../models/User.model';
 
 interface userAvatarProps {
   user: UserModel;
@@ -11,7 +11,7 @@ function UserAvatar({ user, onClick, isActive = false, size = 'medium' }: userAv
   const userIconWords = user?.userName.substring(0, 2).toUpperCase();
 
   const sizeClasses = {
-    small: 'text-sm p-1',
+    small: 'text-sm p-2',
     medium: 'text-lg p-3',
     large: 'text-2xl p-5',
   };
