@@ -3,7 +3,7 @@ import SignupForm from '../../features/auth/forms/SignupForm';
 
 function SignupPage() {
   return (
-    <FormWrapper label="Regisztráció" size="medium">
+    <FormWrapper label="Regisztráció" size="large">
       <SignupForm />
     </FormWrapper>
   );

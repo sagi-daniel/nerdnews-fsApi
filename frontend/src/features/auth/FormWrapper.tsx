@@ -13,8 +13,8 @@ interface FormWrapperProps {
 function FormWrapper({ children, label, size = 'small', formClosePath = '/home' }: FormWrapperProps) {
   const sizeClasses = {
     small: 'w-full md:w-96',
-    medium: 'w-full md:w-1/3',
-    large: 'w-full md:w-1/3',
+    medium: 'w-full md:w-2/3',
+    large: 'w-full ',
   };
 
   return (

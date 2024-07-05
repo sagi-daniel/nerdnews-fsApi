@@ -1,7 +1,7 @@
 function NewsCardSkeleton() {
   return (
     <div className="mx-1 flex-[0_0_40%] sm:flex-[0_0_25%] lg:flex-[0_0_15%]">
-      <div className="flex flex-col justify-between max-w-sm bg-gray-700 text-content-dark h-full w-80 rounded-md animate-pulse">
+      <div className="flex flex-col justify-between max-w-sm bg-gray-700 text-content-dark h-full w-80 md:w-64 rounded-md animate-pulse">
         <div className="relative flex flex-col justify-evenly">
           <div className="h-48 bg-gray-600 rounded-t-md"></div>
           <div className="p-4">

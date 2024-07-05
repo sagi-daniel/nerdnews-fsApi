@@ -10,19 +10,19 @@ interface NavlinkProps {
 function CustomNavLink({ text, path, className, onClick }: NavlinkProps) {
   if (onClick)
     return (
-      <small onClick={onClick} className={`${className} link`}>
+      <span onClick={onClick} className={`${className} link `}>
         {text}
-      </small>
+      </span>
     );
 
   return (
-    <small>
+    <span>
       {path && (
-        <Link to={path} className="link">
+        <Link to={path} className="link ">
           <span className={`${className}`}>{text}</span>
         </Link>
       )}
-    </small>
+    </span>
   );
 }
 
