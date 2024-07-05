@@ -45,29 +45,44 @@ function SignupForm() {
           <InputField
             type="text"
             id="userName"
+            name="userName"
             label="Felhasználónév"
             value={userName}
             setValue={setUserName}
             required={true}
+            autoComplete="username"
           />
-          <InputField type="email" id="email" label="Email" value={email} setValue={setEmail} required={true} />
+          <InputField
+            type="email"
+            id="email"
+            name="email"
+            label="Email"
+            value={email}
+            setValue={setEmail}
+            required={true}
+            autoComplete="email"
+          />
         </div>
         <div className="grid grid-cols-2 gap-4">
           <InputField
             type="password"
             id="password"
+            name="password"
             label="Jelszó"
             value={password}
             setValue={setPassword}
             required={true}
+            autoComplete="current-password"
           />
           <InputField
             type="password"
             id="passwordConfirm"
-            label="Jelszó megerősítése"
+            name="passwordConfirm"
+            label="Jelszó újra"
             value={passwordConfirm}
             setValue={setPasswordConfirm}
             required={true}
+            autoComplete="new-password"
           />
         </div>
         <Button type="submit" text="Regisztráció" size="full" />

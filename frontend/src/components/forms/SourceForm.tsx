@@ -1,8 +1,8 @@
 import { useState } from 'react';
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 import { createSource, updateSource } from '../../services/apiSource';
-import { CategoryModel } from '../../models/Category.model';
-import { SourceModel } from '../../models/Source.model';
+import CategoryModel from '../../models/Category.model';
+import SourceModel from '../../models/Source.model';
 import InputField from '../form-ui/InputField';
 import Button from '../Button';
 import toast from 'react-hot-toast';
@@ -10,7 +10,7 @@ import SelectField from '../form-ui/SelectField';
 import { getCategories } from '../../services/apiCategory';
 import { capitalizeWord } from '../../utils/helpers';
 
-interface CategoryOption {
+interface KeyValueOption {
   name: string;
   value: string;
 }
@@ -27,25 +27,25 @@ function SourceForm({ source, setModalVisible }: SourceFormProps) {
   const [category, setCategory] = useState(source?.category._id || '');
   const [comment, setComment] = useState(source?.comment || '');
 
-  const { data: categories } = useQuery(['CategoriesOptions'], getCategories);
+  const { data: categories } = useQuery(['categoriesOptions'], getCategories);
 
   const categoryNames = categories?.map((category: CategoryModel) => {
     return { name: capitalizeWord(category.categoryName), value: category._id };
-  }) as CategoryOption[];
+  }) as KeyValueOption[];
 
   const queryClient = useQueryClient();
 
   const { mutate: updateSourceMutate } = useMutation(updateSource, {
     onSuccess: () => {
       toast.success(`Forrás frissítve!`);
-      queryClient.invalidateQueries(['Sources']);
+      queryClient.invalidateQueries(['sources']);
     },
   });
 
   const { mutate: createSourceMutate } = useMutation(createSource, {
     onSuccess: () => {
       toast.success(`Forrás létrehozva!`);
-      queryClient.invalidateQueries(['Sources']);
+      queryClient.invalidateQueries(['sources']);
     },
   });
 

@@ -14,7 +14,16 @@ function ForgotPasswordForm() {
 
   return (
     <form onSubmit={handleSubmit}>
-      <InputField type="email" id="email" label="Email" value={email} setValue={setEmail} required={true} />
+      <InputField
+        type="email"
+        id="email"
+        name="email"
+        label="Email"
+        value={email}
+        setValue={setEmail}
+        required={true}
+        autoComplete="email"
+      />
 
       <Button isLoading={isLoading} type="submit" text="Jelszó visszaállítás" size="full" />
     </form>

@@ -4,11 +4,12 @@ import InputField from './InputField';
 interface DateRangeFilterProps {
   fromDate: string;
   toDate: string;
+  divClasses?: string;
   setFromDate: (fromDate: string) => void;
   setToDate: (toDate: string) => void;
 }
 
-function DateRangeFilter({ fromDate, toDate, setFromDate, setToDate }: DateRangeFilterProps) {
+function DateRangeFilter({ fromDate, toDate, setFromDate, setToDate, divClasses }: DateRangeFilterProps) {
   const [isValidFromDate, setIsValidFromDate] = useState(true);
   const [isValidToDate, setIsValidToDate] = useState(true);
   const [fromDateError, setFromDateError] = useState('');
@@ -37,10 +38,11 @@ function DateRangeFilter({ fromDate, toDate, setFromDate, setToDate }: DateRange
   };
 
   return (
-    <div className="flex w-full md:w-full md:mb-3 md:flex-col mb-3 gap-2 md-gap-0 rounded-md">
+    <div className={`${divClasses} `}>
       <InputField
         type="date"
         id="fromDate"
+        name="fromDate"
         label="Kezdő dátum:"
         value={fromDate}
         setValue={handleFromDateChange}
@@ -51,6 +53,7 @@ function DateRangeFilter({ fromDate, toDate, setFromDate, setToDate }: DateRange
       <InputField
         type="date"
         id="toDate"
+        name="toDate"
         label="Vége dátum:"
         value={toDate}
         setValue={handleToDateChange}

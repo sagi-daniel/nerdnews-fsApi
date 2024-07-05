@@ -28,26 +28,32 @@ function UpdatePasswordForm() {
       <InputField
         type="password"
         id="passwordCurrent"
+        name="passwordCurrent"
         label="Jelenlegi jelszó"
         value={passwordCurrent}
         setValue={setPasswordCurrent}
         required={true}
+        autoComplete="current-password"
       />
       <InputField
         type="password"
         id="password"
+        name="password"
         label="Új jelszó"
         value={password}
         setValue={setPassword}
         required={true}
+        autoComplete="new-password"
       />
       <InputField
         type="password"
         id="passwordConfirm"
+        name="passwordConfirm"
         label="Új jelszó ismétlés"
         value={passwordConfirm}
         setValue={setPasswordConfirm}
         required={true}
+        autoComplete="new-password"
       />
       <Button type="submit" text="Küldés" size="full" />
     </form>

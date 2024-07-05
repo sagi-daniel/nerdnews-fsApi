@@ -4,7 +4,6 @@ import { useAuth } from '../../../context/AuthContext';
 import InputField from '../../../components/form-ui/InputField';
 import Button from '../../../components/Button';
 import CustomNavLink from '../../../components/CustomNavLink';
-import UpdatePasswordForm from './UpdatePasswordForm';
 import Modal from '../../../components/Modal';
 import ForgotPasswordForm from './ForgotPasswordForm';
 
@@ -29,14 +28,25 @@ function LoginForm() {
   return (
     <>
       <form onSubmit={handleSubmit}>
-        <InputField type="email" id="email" label="Email" value={email} setValue={setEmail} required={true} />
+        <InputField
+          type="email"
+          id="email"
+          name="email"
+          label="Email"
+          value={email}
+          setValue={setEmail}
+          required={true}
+          autoComplete="email"
+        />
         <InputField
           type="password"
           id="password"
+          name="password"
           label="Jelszó"
           value={password}
           setValue={setPassword}
           required={true}
+          autoComplete="current-password"
         />
 
         <Button type="submit" text="Bejelentkezés" size="full" />

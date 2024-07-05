@@ -2,11 +2,13 @@ import { ChangeEvent, useState } from 'react';
 import { FiEye, FiEyeOff } from 'react-icons/fi';
 
 interface InputFieldProps {
-  type?: 'text' | 'password' | 'email' | 'number' | 'date'; // Restrict type to specific values
-  id?: string;
+  type: 'text' | 'password' | 'email' | 'number' | 'date';
+  id: string;
+  name: string;
   label: string;
   value: string;
   required: boolean;
+  autoComplete?: string;
   setValue: React.Dispatch<React.SetStateAction<string>> | ((newValue: string) => void);
   isValid?: boolean;
   errorMessage?: string;
@@ -16,9 +18,11 @@ interface InputFieldProps {
 function InputField({
   type = 'text',
   id,
+  name,
   label,
   value,
   required,
+  autoComplete = 'off',
   setValue,
   isValid,
   errorMessage,
@@ -35,17 +39,22 @@ function InputField({
     setPasswordVisible(!isPasswordVisible);
   };
 
+  // fixed input date style issue
+  const inputPaddingClass = type === 'date' ? 'p-[7px]' : 'p-2';
+
   return (
-    <div className="mb-3 w-full">
-      <label className="block mb-1">{label}</label>
+    <div className="w-full md:mb-3">
+      <label className="mb-1 block">{label}</label>
       <div className="relative">
         <input
           type={isPasswordVisible ? 'text' : type}
           id={id}
+          name={name}
           value={value}
           onChange={handleChange}
           required={required}
-          className="w-full rounded-md p-2 text-content-light focus:outline-none focus:ring focus:ring-primary"
+          autoComplete={autoComplete}
+          className={`w-full rounded-md ${inputPaddingClass} text-content-light focus:outline-none focus:ring focus:ring-primary box-border`}
         />
         {type === 'password' && (
           <button
