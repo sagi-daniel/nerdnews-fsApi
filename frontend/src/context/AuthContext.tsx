@@ -2,7 +2,7 @@
 import { ReactNode, createContext, useContext } from 'react';
 import { useQueryClient, useMutation, useQuery } from '@tanstack/react-query';
 import { toast } from 'react-hot-toast';
-import { UserModel } from '../models/User.model';
+import UserModel from '../models/User.model';
 import { LoginCredentialModel, SingupModel, PasswordsModel } from '../models/auth.models';
 import {
   loginUser,
@@ -38,8 +38,8 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     onSuccess: (user: UserModel) => {
       toast.success(`Üdv, ${user.userName}`);
       queryClient.setQueryData(['user'], user);
-      queryClient.invalidateQueries(['movies']);
-      queryClient.invalidateQueries(['news']);
+      queryClient.invalidateQueries(['myMovies']);
+      queryClient.invalidateQueries(['myNews']);
       navigate('/myAccount', { replace: true });
     },
     onError: () => {
