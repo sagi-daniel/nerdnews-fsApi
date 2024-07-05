@@ -1,5 +1,5 @@
-import { CategoryModel } from './Category.model';
-import { SourceModel } from './Source.model';
+import CategoryModel from './Category.model';
+import SourceModel from './Source.model';
 
 export default interface NewsModel {
   _id: string;
@@ -12,4 +12,19 @@ export default interface NewsModel {
   imageUrl: string;
   createdAt?: string;
   updatedAt?: string;
+}
+
+export interface CreateNewsModel {
+  release: string;
+  source: string;
+  category: string;
+  title: string;
+  link: string;
+  content: string;
+  imageUrl: string;
+}
+
+export interface UpdateNewsModel {
+  newsId: string;
+  news: CreateNewsModel;
 }

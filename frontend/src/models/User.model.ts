@@ -1,7 +1,7 @@
 import MovieModel from './Movie.model';
 import NewsModel from './News.model';
 
-export interface UserModel {
+export default interface UserModel {
   _id: string;
   role: string;
   userName: string;

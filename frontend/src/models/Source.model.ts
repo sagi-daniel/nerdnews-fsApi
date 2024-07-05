@@ -1,6 +1,6 @@
-import { CategoryModel } from './Category.model';
+import CategoryModel from './Category.model';
 
-export interface SourceModel {
+export default interface SourceModel {
   _id: string;
   sourceName: string;
   sourceType: string;

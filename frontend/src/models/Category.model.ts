@@ -1,6 +1,6 @@
 import { FilterName } from './FiltersOption.model';
 
-export interface CategoryModel {
+export default interface CategoryModel {
   _id: string;
   categoryName: FilterName | string;
   createdAt: string;
