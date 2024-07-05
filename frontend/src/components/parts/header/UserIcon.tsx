@@ -26,7 +26,7 @@ function LoginIcon({ mobile }: { mobile: boolean }) {
 
   return (
     <div className="relative" ref={dropdownRef}>
-      {user && <UserAvatar user={user} onClick={toggleDropdown} isActive={isOpen} />}
+      {user && <UserAvatar user={user} onClick={toggleDropdown} isActive={isOpen} size="small" />}
 
       {isOpen && <DropDownMenu />}
     </div>
