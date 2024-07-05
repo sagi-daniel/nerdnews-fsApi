@@ -1,6 +1,7 @@
 import { useAuth } from '../../context/AuthContext';
 import { useNavigate } from 'react-router-dom';
 import { ReactNode, useEffect } from 'react';
+import LoadingSpinner from '../../components/loaders/LoadingSpinner';
 
 interface ProtectedRouteProps {
   children: ReactNode;
@@ -9,7 +10,7 @@ interface ProtectedRouteProps {
 
 function ProtectedRoute({ children, allowedRoles = ['admin', 'user'] }: ProtectedRouteProps) {
   const navigate = useNavigate();
-  const { isAuthenticated, user } = useAuth();
+  const { isAuthenticated, user, isLoading } = useAuth();
   const role = user?.role;
 
   useEffect(() => {
@@ -19,6 +20,8 @@ function ProtectedRoute({ children, allowedRoles = ['admin', 'user'] }: Protecte
       navigate('/unauthorized');
     }
   }, [isAuthenticated, role, allowedRoles, navigate]);
+
+  if (isLoading) return <LoadingSpinner />;
 
   if (isAuthenticated && role && allowedRoles.includes(role)) return <>{children}</>;
 
