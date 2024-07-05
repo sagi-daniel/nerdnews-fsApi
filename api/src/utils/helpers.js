@@ -10,12 +10,18 @@ const DEFAULTS = {
 const parseDate = (dateString, dateType) => {
   const currentDate = new Date();
   if (dateString) {
-    return new Date(dateString);
+    if (dateType === 'from') {
+      return new Date(dateString).setHours(0, 0, 0, 0);
+    } else if (dateType === 'to') {
+      return new Date(dateString).setHours(23, 59, 59, 999);
+    }
   } else {
     if (dateType === 'from') {
-      return new Date(currentDate.setMonth(currentDate.getMonth() - DEFAULTS.DATE_RANGE));
+      const newDate = new Date(currentDate.setMonth(currentDate.getMonth() - DEFAULTS.DATE_RANGE));
+      return newDate.setHours(0, 0, 0, 0);
     } else if (dateType === 'to') {
-      return new Date(currentDate.setMonth(currentDate.getMonth() + DEFAULTS.DATE_RANGE));
+      const newDate = new Date(currentDate.setMonth(currentDate.getMonth() + DEFAULTS.DATE_RANGE));
+      return newDate.setHours(23, 59, 59, 999);
     }
   }
 };
@@ -24,6 +30,7 @@ const parseDate = (dateString, dateType) => {
 const parsePaginationParams = (query, pageSize = null, page = 0) => {
   const parsedPageSize = parseInt(query.pageSize, 10) || pageSize;
   const parsedPage = parseInt(query.page, 10) || page;
+
   return {
     pageSize: parsedPageSize < 1 ? pageSize : parsedPageSize,
     page: parsedPage < 0 ? page : parsedPage,
