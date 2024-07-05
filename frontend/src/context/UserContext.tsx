@@ -27,7 +27,7 @@ export function UserProvider({ children }: { children: ReactNode }) {
     data: news,
     isLoading: newsLoading,
     refetch: refetchNews,
-  } = useQuery<NewsModel[]>(['news'], getMyNews, {
+  } = useQuery<NewsModel[]>(['myNews'], getMyNews, {
     onError: (error) => {
       toast.error('Hiba történt a hírek betöltésekor');
       console.error('Failed to fetch news', error);
@@ -39,7 +39,7 @@ export function UserProvider({ children }: { children: ReactNode }) {
     data: movies,
     isLoading: moviesLoading,
     refetch: refetchMovies,
-  } = useQuery<MovieModel[]>(['movies'], getMyMovies, {
+  } = useQuery<MovieModel[]>(['myMovies'], getMyMovies, {
     onError: (error) => {
       toast.error('Hiba történt a filmek betöltésekor');
       console.error('Failed to fetch movies', error);
@@ -49,14 +49,16 @@ export function UserProvider({ children }: { children: ReactNode }) {
   // Mutation hooks for news
   const { mutate: addNewsMutate } = useMutation(addToMyNews, {
     onSuccess: () => {
-      queryClient.invalidateQueries(['news']);
+      queryClient.invalidateQueries(['myNews']);
+      queryClient.invalidateQueries(['user']);
       refetchNews();
     },
   });
 
   const { mutate: removeNewsMutate } = useMutation(removeFromMyNews, {
     onSuccess: () => {
-      queryClient.invalidateQueries(['news']);
+      queryClient.invalidateQueries(['myNews']);
+      queryClient.invalidateQueries(['user']);
       refetchNews();
     },
   });
@@ -64,14 +66,16 @@ export function UserProvider({ children }: { children: ReactNode }) {
   // Mutation hooks for movies
   const { mutate: addMovieMutate } = useMutation(addToMyMovies, {
     onSuccess: () => {
-      queryClient.invalidateQueries(['movies']);
+      queryClient.invalidateQueries(['myMovies']);
+      queryClient.invalidateQueries(['user']);
       refetchMovies();
     },
   });
 
   const { mutate: removeMovieMutate } = useMutation(removeFromMyMovies, {
     onSuccess: () => {
-      queryClient.invalidateQueries(['movies']);
+      queryClient.invalidateQueries(['myMovies']);
+      queryClient.invalidateQueries(['user']);
       refetchMovies();
     },
   });

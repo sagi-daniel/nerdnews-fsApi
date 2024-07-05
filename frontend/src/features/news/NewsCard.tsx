@@ -1,5 +1,6 @@
-import { formatDateIsoToNormal, truncateText } from '../../utils/helpers';
 import { CATEGORY_COLORS } from '../../utils/constants';
+import { format } from 'date-fns';
+import { truncateText } from '../../utils/helpers';
 import Badge from '../../components/Badge';
 import NewsModel from '../../models/News.model';
 import useLoaderHook from '../../hooks/useLoaderHook';
@@ -17,17 +18,17 @@ function NewsCard({ news }: NewsCardProps) {
 
   return (
     <div className="relative mx-1 flex-[0_0_40%] sm:flex-[0_0_25%] lg:flex-[0_0_15%] ">
-      <div className=" cursor-pointer flex flex-col justify-between max-w-sm bg-border-dark text-content-dark h-full w-80 rounded-md">
+      <div className=" cursor-pointer flex flex-col justify-between max-w-sm bg-border-dark text-content-dark h-full w-80  md:w-64 rounded-md">
         <SaveLater itemId={news._id} type="news" />
         <a href={news.link} rel="noreferrer" target="_blank">
           <div className="relative flex flex-col justify-evenly overflow-hidden">
             <div className={`h-48 relative size-full no-select z-1 overflow-hidden rounded-t-md`}>
               <div
-                className={`size-full select-none justify-end px-2 py-5 rounded-t-md bg-cover bg-center ease-in-out hover:scale-110 transition-transform duration-500 `}
+                className={`size-full select-none justify-end px-1 py-2 rounded-t-md bg-cover bg-center ease-in-out hover:scale-110 transition-transform duration-500 `}
                 style={{ backgroundImage: `url(${news.imageUrl})` }}
               />
             </div>
-            <div className="p-4">
+            <div className="p-2">
               <div className="absolute top-2 right-1">
                 {news.category.categoryName && (
                   <Badge name={news.category.categoryName} colorOptions={CATEGORY_COLORS} />
@@ -35,12 +36,12 @@ function NewsCard({ news }: NewsCardProps) {
               </div>
 
               <div className="flex justify-between items-center mb-4">
-                <span>{formatDateIsoToNormal(news.release)}</span>
+                <span>{format(news.release, 'yyyy.MM.dd.')}</span>
                 {news.source.sourceName && <span>{news.source.sourceName}</span>}
               </div>
 
               <h3 className="text-lg font-bold mt-1">{truncateText(news.title, 80)}</h3>
-              <p className="mt-2">{truncateText(news.content, 80)}</p>
+              <p className="text-sm mt-2 ">{truncateText(news.content, 80)}</p>
             </div>
           </div>
         </a>

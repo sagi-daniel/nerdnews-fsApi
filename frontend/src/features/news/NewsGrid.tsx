@@ -6,9 +6,8 @@ import NewsGridItem from './NewsGridItem';
 import LoadingSpinner from '../../components/loaders/LoadingSpinner';
 
 function NewsGrid() {
-  const { data, error, isLoading, isError } = useQuery(['GetTop3FreshNews'], getTop3FreshNews);
+  const { data: top3News, error, isLoading, isError } = useQuery(['getTop3FreshNews'], getTop3FreshNews);
 
-  const top3News = data?.data?.news;
   const firstNews = top3News?.[0];
   const secondNews = top3News?.[1];
   const thirdNews = top3News?.[2];

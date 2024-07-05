@@ -1,5 +1,6 @@
 import { CATEGORY_COLORS } from '../../utils/constants';
 import { formatDateIsoToNormal, truncateText } from '../../utils/helpers';
+import { format } from 'date-fns';
 import Badge from '../../components/Badge';
 import NewsModel from '../../models/News.model';
 import useLoaderHook from '../../hooks/useLoaderHook';
@@ -36,7 +37,7 @@ function NewsGridItem({ news, highlighted = false }: NewsGridItemProps) {
         <div className="absolute bottom-4 left-4 ">
           <h3 className={`${textStyle} font-semibold`}>{news?.title}</h3>
           <p>
-            <span>{formatDateIsoToNormal(news?.release)}</span> |{' '}
+            <span>{format(news?.release, 'yyyy.MM.dd.')}</span> |{' '}
             <Badge name={news.category.categoryName} type="THIN" colorOptions={CATEGORY_COLORS} />
           </p>
           {highlighted && <p className="text-sm md:text-lg ">{truncateText(news?.content, 80)}</p>}

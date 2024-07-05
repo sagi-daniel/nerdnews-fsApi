@@ -11,8 +11,7 @@ import LoadingSpinner from '../../components/loaders/LoadingSpinner';
 import Modal from '../../components/Modal';
 
 function MovieSlider({ sliderLabel }: { sliderLabel: string }) {
-  const { data, isLoading, error, isError } = useQuery(['Movie'], getMovies);
-  const movies = data?.data?.movies;
+  const { data: movies, isLoading, error, isError } = useQuery(['sliderMovies'], getMovies);
 
   const [selectedMovie, setSelectedMovie] = useState<MovieModel | null>(null);
   const [modalVisible, setModalVisible] = useState(false);
