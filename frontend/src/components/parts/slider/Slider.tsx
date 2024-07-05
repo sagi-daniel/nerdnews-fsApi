@@ -1,5 +1,4 @@
 import { useRef, useState } from 'react';
-import { Link } from 'react-router-dom';
 import SliderButton from './SliderButton';
 import CustomNavLink from '../../CustomNavLink';
 
@@ -36,7 +35,7 @@ function Slider({ children, moreLabel, morePath }: SliderProps) {
       </div>
       {scrollPercentage > 0 && <SliderButton direction="left" sliderRef={sliderRef} />}
       {scrollPercentage < 99 && <SliderButton direction="right" sliderRef={sliderRef} />}
-      <div className="flex justify-end hover:dark:text-primary">
+      <div className="text-right">
         <CustomNavLink text={moreLabel} path={morePath} />
       </div>
     </div>
