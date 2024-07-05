@@ -37,7 +37,13 @@ function Table<T extends { _id: string }>({ data, columns, onEdit, onDelete, onC
             <tr key={item._id} className="border-t border-border-light">
               {columns.map((column) => (
                 <td key={String(column.key)}>
-                  {column.formatter ? column.formatter(item[column.key]) : String(item[column.key])}
+                  {column.formatter ? (
+                    column.formatter(item[column.key])
+                  ) : item[column.key] === 'link' || item[column.key] === 'imageUrl' ? (
+                    <a href={String(item[column.key])}> Megnézem</a>
+                  ) : (
+                    String(item[column.key])
+                  )}
                 </td>
               ))}
               <td className="flex items-center justify-center space-x-2 ">
