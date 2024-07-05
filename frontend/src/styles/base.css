@@ -8,12 +8,15 @@
 
 * {
   box-sizing: border-box;
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
 }
 
 body {
   margin: 0 auto;
   padding: 0;
-  max-width: 1360px;
+  max-width: 1440px;
   min-width: 350px;
   background: var(--color-bg-light);
 }
