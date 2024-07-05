@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { useQuery } from '@tanstack/react-query';
-import { SourceModel } from '../../models/Source.model';
+import SourceModel from '../../models/Source.model';
 import { capitalizeWord, formatDateIsoToNormal } from '../../utils/helpers';
 import { getSources } from '../../services/apiSource';
 import Table, { Column } from '../../components/Table';
