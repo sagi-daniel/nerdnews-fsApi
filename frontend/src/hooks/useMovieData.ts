@@ -5,7 +5,7 @@ import useMoviesFilter from '../hooks/useMovieFilter';
 function useMoviesData() {
   const { genre, sortOrder, fromDate, toDate, page, pageSize } = useMoviesFilter().params;
 
-  return useQuery(['MoviesByQuery', genre, sortOrder, fromDate, toDate, page, pageSize], () =>
+  return useQuery(['moviesByQuery', genre, sortOrder, fromDate, toDate, page, pageSize], () =>
     getMoviesByQuery(genre, sortOrder, fromDate, toDate, page, pageSize)
   );
 }

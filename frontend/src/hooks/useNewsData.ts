@@ -5,7 +5,7 @@ import useNewsFilter from '../hooks/useNewsFilter';
 function useNewsData() {
   const { category, sortOrder, fromDate, toDate, page, pageSize } = useNewsFilter().params;
 
-  return useQuery(['NewsByQuery', category, sortOrder, fromDate, toDate, page, pageSize], () =>
+  return useQuery(['newsByQuery', category, sortOrder, fromDate, toDate, page, pageSize], () =>
     getNewsByQuery(category, sortOrder, fromDate, toDate, page, pageSize)
   );
 }
