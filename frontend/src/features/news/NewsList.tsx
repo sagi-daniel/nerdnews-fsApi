@@ -8,8 +8,7 @@ import NewsModel from '../../models/News.model';
 import LoadingSpinner from '../../components/loaders/LoadingSpinner';
 
 function NewsList() {
-  const { page, pageSize } = useNewsFilter().params;
-  const { setPage } = useNewsFilter().setters;
+  const { params, setters } = useNewsFilter();
 
   const { data, error, isLoading, isError } = useNewsData();
   const news = data?.data.news;
@@ -18,17 +17,17 @@ function NewsList() {
   if (isError) return <Error message={(error as Error).message} />;
 
   return (
-    <div className="flex flex-col justify-between items-center md:w-5/6">
-      <div className="flex justify-center flex-wrap gap-2 md:gap-5">
+    <div className="flex flex-col justify-center md:w-5/6">
+      <div className="flex justify-center flex-wrap gap-2 md:gap-4">
         {news && news.map((newsItem: NewsModel) => <NewsCard key={newsItem._id} news={newsItem} />)}
         {isLoading && <LoadingSpinner />}
       </div>
       {totalItems && (
         <Pagination
-          page={parseInt(page)}
+          page={parseInt(params.page)}
           totalItems={totalItems}
-          itemsPerPage={parseInt(pageSize)}
-          onPageChange={setPage}
+          itemsPerPage={parseInt(params.pageSize)}
+          onPageChange={setters.setPage}
         />
       )}
     </div>
