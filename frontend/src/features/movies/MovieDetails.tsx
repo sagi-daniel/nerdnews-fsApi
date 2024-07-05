@@ -1,4 +1,5 @@
-import { formatDateIsoToNormal, truncateText } from '../../utils/helpers';
+import { truncateText } from '../../utils/helpers';
+import { format } from 'date-fns';
 import MovieModel from '../../models/Movie.model';
 import useLoaderHook from '../../hooks/useLoaderHook';
 import SaveLater from '../../components/SaveLater';
@@ -24,7 +25,7 @@ function MovieModal({ movie }: ModalProps) {
       </div>
       <div className="flex flex-col md:w-2/3">
         <h2 className="font-semibold mb-2">{movie.title}</h2>
-        <p>Megjelenés: {formatDateIsoToNormal(movie.release)}</p>
+        <p>Megjelenés: {format(movie.release, 'yyyy.MM.dd.')}</p>
         <p className="mt-2">{truncateText(movie.overview, 370)}</p>
       </div>
     </div>
