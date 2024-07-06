@@ -28,6 +28,8 @@ export const MENU_ITEMS = [
 
 export const USER_MENU_ITEMS = [
   { name: 'Felhasználói fiók', path: 'myAccount', type: 'regular', element: 'myAccount' },
+  { name: 'Mentett hírek', path: 'myNews', type: 'regular', element: 'MyNews' },
+  { name: 'Mentett filmek', path: 'myMovies', type: 'regular', element: 'MyMovies' },
 ];
 export const ADMIN_MENU_TEMS = [
   { name: 'Felhasználók', path: 'editUsers', type: 'regular', element: 'EditUsers' },
