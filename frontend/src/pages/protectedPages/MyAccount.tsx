@@ -39,7 +39,7 @@ const MyAccount = () => {
     onSuccess: () => {
       logout();
       navigate('/deleteAccountConfrim');
-      queryClient.invalidateQueries(['Users']);
+      queryClient.invalidateQueries(['users']);
     },
   });
 
@@ -92,8 +92,12 @@ const MyAccount = () => {
               </li>
             </ol>
             <div className="flex items-center space-x-2 mt-4">
-              <Button type="button" size="normal" text="Szerkeszt" onClick={() => setIsIsUserUpdateShow(true)} />
-              <Button type="button" size="normal" text="Jelszó csere" onClick={() => setIsPasswordUpdateShow(true)} />
+              <Button
+                type="button"
+                size="normal"
+                text="Adatok szerkesztése"
+                onClick={() => setIsIsUserUpdateShow(true)}
+              />
             </div>
           </div>
           {user && (
@@ -108,13 +112,13 @@ const MyAccount = () => {
         </div>
         <div className="flex flex-col md:w-9/12 w-full">
           <h2 className="text-3xl font-bold mb-6">Mentett Hírek</h2>
-          <Slider moreLabel={'Még több hír...'} morePath={'/news'}>
+          <Slider moreLabel={'Még több mentett hír...'} morePath={'/myNews'}>
             {news?.map((news: NewsModel) => (
               <NewsCard key={news._id} news={news} />
             ))}
           </Slider>
           <h2 className="text-3xl font-bold mb-6">Mentett Filmek</h2>
-          <Slider moreLabel={'Még több mozifilm...'} morePath={'/movies'}>
+          <Slider moreLabel={'Még több mentett mozifilm...'} morePath={'/myMovies'}>
             {movies &&
               movies.map((movie: MovieModel) => (
                 <MovieCard key={movie._id} movie={movie} onClick={handlePosterClick} />
@@ -129,7 +133,7 @@ const MyAccount = () => {
         <UpdatePasswordForm />
       </Modal>
       <Modal isOpen={isUserUpdateShow} setIsOpen={setIsIsUserUpdateShow}>
-        <UserForm setModalVisible={() => true} />
+        <UserForm user={user} setModalVisible={() => true} />
       </Modal>
       <Modal isOpen={confirmationVisible} setIsOpen={setConfirmationVisible}>
         <Alert
