@@ -51,6 +51,7 @@ export function UserProvider({ children }: { children: ReactNode }) {
     onSuccess: () => {
       queryClient.invalidateQueries(['myNews']);
       queryClient.invalidateQueries(['user']);
+      queryClient.invalidateQueries(['users']);
       refetchNews();
     },
   });
@@ -59,6 +60,7 @@ export function UserProvider({ children }: { children: ReactNode }) {
     onSuccess: () => {
       queryClient.invalidateQueries(['myNews']);
       queryClient.invalidateQueries(['user']);
+      queryClient.invalidateQueries(['users']);
       refetchNews();
     },
   });
@@ -68,6 +70,7 @@ export function UserProvider({ children }: { children: ReactNode }) {
     onSuccess: () => {
       queryClient.invalidateQueries(['myMovies']);
       queryClient.invalidateQueries(['user']);
+      queryClient.invalidateQueries(['users']);
       refetchMovies();
     },
   });
@@ -76,6 +79,7 @@ export function UserProvider({ children }: { children: ReactNode }) {
     onSuccess: () => {
       queryClient.invalidateQueries(['myMovies']);
       queryClient.invalidateQueries(['user']);
+      queryClient.invalidateQueries(['users']);
       refetchMovies();
     },
   });
