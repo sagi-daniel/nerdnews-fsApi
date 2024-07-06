@@ -17,25 +17,25 @@ function SelectField({ options, id, name, label, required, autoComplete = 'off',
 
   return (
     <div className="w-full md:mb-3">
-      <label className="mb-1 block">{label}</label>
-      <div className="relative">
-        <select
-          id={id}
-          name={name}
-          value={value}
-          onChange={handleChange}
-          required={required}
-          autoComplete={autoComplete}
-          className="w-full rounded-md p-2 text-content-light focus:outline-none focus:ring focus:ring-primary box-border"
-        >
-          {options &&
-            options.map((option) => (
-              <option key={option.value} value={option.value}>
-                {option.name}
-              </option>
-            ))}
-        </select>
-      </div>
+      <label htmlFor={id} className="mb-1 block">
+        {label}
+      </label>
+      <select
+        id={id}
+        name={name}
+        value={value}
+        onChange={handleChange}
+        required={required}
+        autoComplete={autoComplete}
+        className="w-full rounded-md p-2 text-content-light focus:outline-none focus:ring focus:ring-primary box-border"
+      >
+        {options &&
+          options.map((option) => (
+            <option key={option.value} value={option.value}>
+              {option.name}
+            </option>
+          ))}
+      </select>
     </div>
   );
 }

@@ -44,7 +44,9 @@ function InputField({
 
   return (
     <div className="w-full md:mb-3">
-      <label className="mb-1 block">{label}</label>
+      <label htmlFor={id} className="mb-1 block">
+        {label}
+      </label>
       <div className="relative">
         <input
           type={isPasswordVisible ? 'text' : type}
