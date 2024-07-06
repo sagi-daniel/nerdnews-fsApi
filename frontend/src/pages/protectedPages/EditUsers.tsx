@@ -1,26 +1,14 @@
 import { useState } from 'react';
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
-import { UserModel } from '../../models/User.model';
-import { formatDateIsoToNormal } from '../../utils/helpers';
 import { deleteUser, getUsers } from '../../services/apiUser';
-import Table, { Column } from '../../components/Table';
-import Modal from '../../components/Modal';
-import UserForm from '../../components/forms/UserForm';
-import toast from 'react-hot-toast';
+import UserModel from '../../models/User.model';
 import LoadingSpinner from '../../components/loaders/LoadingSpinner';
-import Error from '../../components/Error';
+import Modal from '../../components/Modal';
 import Alert from '../../components/Alert';
-
-const userColumns: Column<UserModel>[] = [
-  {
-    key: 'createdAt',
-    label: 'Létrehozva',
-    formatter: (value) => formatDateIsoToNormal(value?.toString()),
-  },
-  { key: 'role', label: 'Szerepkör' },
-  { key: 'userName', label: 'Felhasználónév' },
-  { key: 'email', label: 'Email' },
-];
+import toast from 'react-hot-toast';
+import UserForm from '../../components/forms/UserForm';
+import ErrorMessage from '../../components/ErrorMessage';
+import UsersTable from '../../components/tables/UsersTable';
 
 function EditUsers() {
   const [selectedUser, setSelectedUser] = useState<UserModel | null>(null);
@@ -28,13 +16,14 @@ function EditUsers() {
   const [confirmationVisible, setConfirmationVisible] = useState(false);
   const [userIdToDelete, setUserIdToDelete] = useState<string | null>(null);
 
+  const { data: users, error, isLoading, isError } = useQuery(['users'], getUsers);
+
   const queryClient = useQueryClient();
-  const { data: users, error, isLoading, isError } = useQuery(['Users'], getUsers);
 
   const { mutate: deleteUserMutate } = useMutation(deleteUser, {
     onSuccess: () => {
       toast.success(`Felhasználó törölve!`);
-      queryClient.invalidateQueries(['Users']);
+      queryClient.invalidateQueries(['usersByQuery']);
     },
   });
 
@@ -68,20 +57,11 @@ function EditUsers() {
 
   if (isLoading) return <LoadingSpinner />;
 
-  if (isError) return <Error message={(error as Error).message} />;
+  if (isError) return <ErrorMessage message={(error as Error).message} />;
 
   return (
-    <>
-      {users && (
-        <Table<UserModel>
-          data={users}
-          columns={userColumns}
-          onEdit={handleUpdate}
-          onDelete={handleDelete}
-          onCreate={handleCreate}
-        />
-      )}
-
+    <div className="flex flex-col gap-2 my-10">
+      {users && <UsersTable users={users} onEdit={handleUpdate} onCreate={handleCreate} onDelete={handleDelete} />}
       {modalVisible && (
         <Modal isOpen={modalVisible} setIsOpen={setModalVisible}>
           <h2> {selectedUser ? 'Szerkesztés' : 'Létrehozás'}</h2>
@@ -101,7 +81,7 @@ function EditUsers() {
           confirmAction={confirmDelete}
         />
       </Modal>
-    </>
+    </div>
   );
 }
 

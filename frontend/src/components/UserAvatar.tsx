@@ -11,7 +11,7 @@ function UserAvatar({ user, onClick, isActive = false, size = 'medium' }: userAv
   const userIconWords = user?.userName.substring(0, 2).toUpperCase();
 
   const sizeClasses = {
-    small: 'text-sm p-2',
+    small: 'text-lg p-2',
     medium: 'text-lg p-3',
     large: 'text-2xl p-5',
   };

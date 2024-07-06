@@ -27,7 +27,7 @@ function SourceForm({ source, setModalVisible }: SourceFormProps) {
   const [category, setCategory] = useState(source?.category._id || '');
   const [comment, setComment] = useState(source?.comment || '');
 
-  const { data: categories } = useQuery(['categoriesOptions'], getCategories);
+  const { data: categories } = useQuery(['categoriesOptionsSourceForm'], getCategories);
 
   const categoryNames = categories?.map((category: CategoryModel) => {
     return { name: capitalizeWord(category.categoryName), value: category._id };
@@ -76,6 +76,7 @@ function SourceForm({ source, setModalVisible }: SourceFormProps) {
         <InputField
           type="text"
           id="sourceName"
+          name="sourceName"
           label="Forrás neve"
           value={sourceName}
           setValue={setSourceName}
@@ -87,6 +88,7 @@ function SourceForm({ source, setModalVisible }: SourceFormProps) {
             { name: 'RDF', value: 'RDF' },
           ]}
           id="sourceType"
+          name="sourceType"
           label="Forrás típusa"
           value={sourceType}
           setValue={setSourceType}
@@ -97,6 +99,7 @@ function SourceForm({ source, setModalVisible }: SourceFormProps) {
         <InputField
           type="text"
           id="sourceLink"
+          name="sourceLink"
           label="Forrás linkje"
           value={sourceLink}
           setValue={setSourceLink}
@@ -104,6 +107,7 @@ function SourceForm({ source, setModalVisible }: SourceFormProps) {
         />
         <SelectField
           id="category"
+          name="category"
           label="Kategória"
           options={categoryNames}
           value={category}

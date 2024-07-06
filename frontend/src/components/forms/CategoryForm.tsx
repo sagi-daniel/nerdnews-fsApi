@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
-import { CategoryModel, CreateCategoryModel, UpdateCategoryModel } from '../../models/Category.model';
+import CategoryModel, { CreateCategoryModel, UpdateCategoryModel } from '../../models/Category.model';
 import { createCategory, updateCategory } from '../../services/apiCategory';
 import Button from '../Button';
 import toast from 'react-hot-toast';
@@ -19,14 +19,14 @@ function CategoryForm({ category, setModalVisible }: CategoryFormProps) {
   const { mutate: updateCategoryMutate } = useMutation(updateCategory, {
     onSuccess: () => {
       toast.success(`Kategória frissítve!`);
-      queryClient.invalidateQueries(['Categories']);
+      queryClient.invalidateQueries(['categories']);
     },
   });
 
   const { mutate: createCategoryMutate } = useMutation(createCategory, {
     onSuccess: () => {
       toast.success(`Kategória létrehozva!`);
-      queryClient.invalidateQueries(['Categories']);
+      queryClient.invalidateQueries(['categories']);
     },
   });
 
@@ -57,6 +57,7 @@ function CategoryForm({ category, setModalVisible }: CategoryFormProps) {
         <InputField
           type="text"
           id="categoryName"
+          name="categoryName"
           label="Kategória neve"
           value={categoryName}
           setValue={setCategoryName}

@@ -23,7 +23,7 @@ interface NewsFormProps {
   setModalVisible: (value: boolean) => void;
 }
 
-function UserForm({ news, setModalVisible }: NewsFormProps) {
+function NewsForm({ news, setModalVisible }: NewsFormProps) {
   const [release, setRelease] = useState(formatDateIsoToNormal(news?.release) || '');
   const [source, setSource] = useState(news?.source._id || '');
   const [category, setCategory] = useState(news?.category._id || '');
@@ -140,4 +140,4 @@ function UserForm({ news, setModalVisible }: NewsFormProps) {
   );
 }
 
-export default UserForm;
+export default NewsForm;

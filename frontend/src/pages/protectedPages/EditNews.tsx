@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { deleteNews } from '../../services/apiNews';
+import { CATEGORY_COLORS } from '../../utils/constants';
 import useNewsData from '../../hooks/useNewsData';
 import NewsModel from '../../models/News.model';
 import LoadingSpinner from '../../components/loaders/LoadingSpinner';
@@ -8,13 +9,12 @@ import Modal from '../../components/Modal';
 import Alert from '../../components/Alert';
 import toast from 'react-hot-toast';
 import NewsForm from '../../components/forms/NewsForm';
-import Error from '../../components/Error';
+import Error from '../../components/ErrorMessage';
 import Pagination from '../../components/Pagination';
 import useNewsFilter from '../../hooks/useNewsFilter';
 import NewsTable from '../../components/tables/NewsTable';
 import SearchBar from '../../components/SearchBar';
 import DateRangeFilter from '../../components/form-ui/DateRangfilter';
-import { CATEGORY_COLORS } from '../../utils/constants';
 import CategoryFilter from '../../components/CategoryFilter';
 import Sort from '../../components/Sort';
 

@@ -1,17 +1,17 @@
-import { FiEdit, FiTrash, FiPlus } from 'react-icons/fi';
-import { CATEGORY_COLORS } from '../../utils/constants';
 import { format } from 'date-fns';
 import NewsModel from '../../models/News.model';
+import { FiTrash } from 'react-icons/fi';
 import Badge from '../Badge';
+import { CATEGORY_COLORS } from '../../utils/constants';
 
-interface NewsTableProps {
+interface MyNewsTableProps {
   news: NewsModel[];
-  onEdit?: (item: NewsModel) => void;
   onDelete?: (id: string) => void;
-  onCreate?: () => void;
 }
 
-function NewsTable({ news, onEdit, onDelete, onCreate }: NewsTableProps) {
+function MyNewsTable({ news, onDelete }: MyNewsTableProps) {
+  console.log(news);
+
   return (
     <div className="flex size-full items-start">
       <table className=" w-full bg-border-dark text-center text-content-dark rounded-md">
@@ -23,13 +23,6 @@ function NewsTable({ news, onEdit, onDelete, onCreate }: NewsTableProps) {
             <th>Kategória</th>
             <th>Cím</th>
             <th>Link</th>
-            {onCreate && (
-              <th>
-                <button onClick={onCreate} className="btn-icon">
-                  <FiPlus />
-                </button>
-              </th>
-            )}
           </tr>
         </thead>
         <tbody>
@@ -40,7 +33,7 @@ function NewsTable({ news, onEdit, onDelete, onCreate }: NewsTableProps) {
             >
               <td>{index + 1}.</td>
               <td>{format(item.release, 'yyyy.MM.dd')}</td>
-              <td>{item.source.sourceName}</td>
+              <td>{item.source._id}</td>
               <td>
                 <Badge name={item.category.categoryName} colorOptions={CATEGORY_COLORS} />
               </td>
@@ -50,15 +43,9 @@ function NewsTable({ news, onEdit, onDelete, onCreate }: NewsTableProps) {
                   Megnyit
                 </a>
               </td>
-
               <td>
-                {onEdit && (
-                  <button onClick={() => onEdit(item)} className="btn-icon mx-1">
-                    <FiEdit />
-                  </button>
-                )}
                 {onDelete && (
-                  <button onClick={() => onDelete(item._id)} className="btn-icon mx-1">
+                  <button onClick={() => onDelete(item._id)} className="btn-icon">
                     <FiTrash />
                   </button>
                 )}
@@ -71,4 +58,4 @@ function NewsTable({ news, onEdit, onDelete, onCreate }: NewsTableProps) {
   );
 }
 
-export default NewsTable;
+export default MyNewsTable;

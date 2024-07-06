@@ -1,20 +1,18 @@
 import { useState } from 'react';
 import { useQuery } from '@tanstack/react-query';
-import { CategoryModel } from '../../models/Category.model';
 import { getCategories } from '../../services/apiCategory';
-import Table, { Column } from '../../components/Table';
+import CategoryModel from '../../models/Category.model';
+import CategoriesTable from '../../components/tables/CategoriesTable';
 import CategoryForm from '../../components/forms/CategoryForm';
 import LoadingSpinner from '../../components/loaders/LoadingSpinner';
-import Error from '../../components/Error';
+import ErrorMessage from '../../components/ErrorMessage';
 import Modal from '../../components/Modal';
-
-const categoryColumns: Column<CategoryModel>[] = [{ key: 'categoryName', label: 'Kategória név' }];
 
 function EditCategories() {
   const [selectedCategory, setSelectedCategory] = useState<CategoryModel | null>(null);
   const [modalVisible, setModalVisible] = useState(false);
 
-  const { data: categories, error, isLoading, isError } = useQuery(['Categories'], getCategories);
+  const { data: categories, error, isLoading, isError } = useQuery(['categories'], getCategories);
 
   function handleCreate() {
     setSelectedCategory(null);
@@ -28,25 +26,18 @@ function EditCategories() {
 
   if (isLoading) return <LoadingSpinner />;
 
-  if (isError) return <Error message={(error as Error).message} />;
+  if (isError) return <ErrorMessage message={(error as Error).message} />;
 
   return (
-    <>
-      {categories && (
-        <Table<CategoryModel>
-          data={categories}
-          columns={categoryColumns}
-          onEdit={handleUpdate}
-          onCreate={handleCreate}
-        />
-      )}
+    <div className="flex size-full flex-col gap-2 my-10">
+      {categories && <CategoriesTable categories={categories} onEdit={handleUpdate} onCreate={handleCreate} />}
       {modalVisible && (
         <Modal isOpen={modalVisible} setIsOpen={setModalVisible}>
           <h2>{selectedCategory ? 'Szerkesztés' : 'Létrehozás'}</h2>
           <CategoryForm category={selectedCategory} setModalVisible={setModalVisible} />
         </Modal>
       )}
-    </>
+    </div>
   );
 }
 

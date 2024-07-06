@@ -1,133 +1,89 @@
 import { useState } from 'react';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
-import { Link } from 'react-router-dom';
-import { UserModel } from '../../models/User.model';
-import { FiRefreshCcw } from 'react-icons/fi';
-import { createUser, updateUser } from '../../services/apiUser';
-import { generateRandomPassword } from '../../utils/helpers';
+import { updateMovie } from '../../services/apiMovies';
+import { formatDateIsoToNormal } from '../../utils/helpers';
 import InputField from '../form-ui/InputField';
 import Button from '../Button';
 import toast from 'react-hot-toast';
-import SelectField from '../form-ui/SelectField';
 
-interface UserFormProps {
-  user?: UserModel | null;
+import TextAreaField from '../form-ui/TextAreaField';
+import MovieModel from '../../models/Movie.model';
+
+interface MovieFormProps {
+  movie?: MovieModel | null;
   setModalVisible: (value: boolean) => void;
 }
 
-function UserForm({ user, setModalVisible }: UserFormProps) {
-  const [role, setRole] = useState(user?.role || 'user');
-  const [userName, setUserName] = useState(user?.userName || '');
-  const [email, setEmail] = useState(user?.email || '');
-  const [password, setPassword] = useState(generateRandomPassword());
-
-  /* TODO userContext be bedolgozni de lőtte letezstelni hogy szükséges-e  */
+function MovieForm({ movie, setModalVisible }: MovieFormProps) {
+  const [release, setRelease] = useState(formatDateIsoToNormal(movie?.release) || '');
+  const [title, setTitle] = useState(movie?.title || '');
+  const [overview, setOverview] = useState(movie?.overview || '');
+  const [poster, setPoster] = useState(movie?.poster || '');
 
   const queryClient = useQueryClient();
 
-  const { mutate: updateUserMutate } = useMutation(updateUser, {
+  const { mutate: upadateMovieMutate } = useMutation(updateMovie, {
     onSuccess: () => {
-      toast.success(`Felhasználó frissítve!`);
-      queryClient.invalidateQueries(['Users']);
-    },
-  });
-
-  const { mutate: createUserMutate } = useMutation(createUser, {
-    onSuccess: () => {
-      toast.success(`Felhasználó létrehozva!`);
-      queryClient.invalidateQueries(['Users']);
+      toast.success(`Film frissítve!`);
+      queryClient.invalidateQueries(['movie']);
     },
   });
 
   function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
-    const saveUser = {
-      role,
-      userName,
-      email,
+    const saveMovie = {
+      release,
+      title,
+      overview,
+      poster,
     };
 
-    if (user && user._id) {
-      const updateUser = { ...user, ...saveUser };
-      const userId = user._id;
-      updateUserMutate({ user: updateUser, userId });
-      setModalVisible(false);
-    } else {
-      const newUser = { ...saveUser, password, passwordConfirm: password };
-      createUserMutate(newUser);
+    if (movie && movie._id) {
+      const upadteMovie = { ...movie, ...saveMovie };
+      const movieId = movie._id;
+      upadateMovieMutate({ movie: upadteMovie, movieId });
       setModalVisible(false);
     }
   }
 
-  function handleGeneratePassword() {
-    const newPassword = generateRandomPassword();
-    setPassword(newPassword);
-  }
-
   return (
     <form onSubmit={handleSubmit}>
-      {user?.role === 'admin' && (
-        <div className="grid grid-cols-2 gap-4">
-          <div className="w-full">
-            <SelectField
-              id="role"
-              label="Szerepkör"
-              options={[
-                { name: 'Admin', value: 'admin' },
-                { name: 'User', value: 'user' },
-              ]}
-              value={role}
-              setValue={setRole}
-              required={true}
-            />
-          </div>
-
-          {user ? (
-            <div className="mb-3">
-              <label className="block mb-1">Jelszó</label>
-              <Link className="btn-primary-md w-full" to="/updatePassword">
-                Jelszó csere
-              </Link>
-            </div>
-          ) : (
-            <div className="mb-3">
-              <label className="block mb-1">Jelszó</label>
-              <div className="relative">
-                <input
-                  type="text"
-                  id="password"
-                  value={password}
-                  onChange={handleGeneratePassword}
-                  required={true}
-                  className="w-full rounded-md p-2 text-primary-content bg-primary font-semibold focus:outline-none focus:ring focus:ring-primary"
-                />
-
-                <button
-                  type="button"
-                  className="absolute text-2xl text-border-dark inset-y-0 right-0 px-3 py-1"
-                  onClick={handleGeneratePassword}
-                >
-                  <FiRefreshCcw className="text-2xl " />
-                </button>
-              </div>
-            </div>
-          )}
-        </div>
-      )}
-      <div className="grid grid-cols-2 gap-4">
+      <div className="grid grid-cols-3 gap-4">
         <InputField
-          type="text"
-          id="userName"
-          label="Felhasználónév"
-          value={userName}
-          setValue={setUserName}
+          type="date"
+          id="release"
+          name="release"
+          label="Publikálás"
+          value={release}
+          setValue={setRelease}
           required={true}
         />
-        <InputField type="email" id="email" label="Email" value={email} setValue={setEmail} required={true} />
       </div>
-      <Button type="submit" text={user ? 'Mentés' : 'Létrehozás'} size="full" />
+      <TextAreaField id="title" name="title" label="Cím" value={title} setValue={setTitle} required={true} row={3} />
+      <InputField
+        type="text"
+        id="poster"
+        name="poster"
+        label="Kép"
+        value={poster}
+        setValue={setPoster}
+        required={true}
+      />
+      <TextAreaField
+        label="Tartalom"
+        id="overview"
+        name="overview"
+        value={overview}
+        setValue={setOverview}
+        isValid={overview.length > 0}
+        row={5}
+        errorMessage="A tartalom megadása kötelező"
+        successMessage="Overview is valid"
+        required={true}
+      />
+      <Button type="submit" text={movie ? 'Mentés' : 'Létrehozás'} size="full" />
     </form>
   );
 }
 
-export default UserForm;
+export default MovieForm;
