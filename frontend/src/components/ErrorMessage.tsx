@@ -1,4 +1,4 @@
-function Error({ message }: { message: string }) {
+function ErrorMessage({ message }: { message: string }) {
   return (
     <div className="error-message">
       <p>Error: {message}</p>
@@ -6,4 +6,4 @@ function Error({ message }: { message: string }) {
   );
 }
 
-export default Error;
+export default ErrorMessage;
