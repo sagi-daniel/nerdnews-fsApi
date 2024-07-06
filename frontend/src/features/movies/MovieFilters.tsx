@@ -12,7 +12,6 @@ function MovieFilters() {
     <div className="flex flex-col  h-full md:w-1/6 md:h-full p-2 gap-2">
       <h1>Filmek</h1>
       <CategoryFilter categoryOptions={GENRE_COLORS} category={genre} setCategory={setGenre} />
-      {/* TODO <ShowSavedMoviesFilter /> */}
       <Sort sortOrder={sortOrder} setSortOrder={setSortOrder} />
       <DateRangeFilter fromDate={fromDate} toDate={toDate} setToDate={setToDate} setFromDate={setFromDate} />
     </div>

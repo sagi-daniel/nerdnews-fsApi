@@ -4,6 +4,7 @@ import DateRangeFilter from '../../components/form-ui/DateRangfilter';
 
 import { CATEGORY_COLORS } from '../../utils/constants';
 import useNewsFilter from '../../hooks/useNewsFilter';
+import ShowSavedNewsFilter from '../../components/ShowSavedNewsFilter';
 
 function NewsFilters() {
   const { params, setters } = useNewsFilter();
@@ -12,7 +13,7 @@ function NewsFilters() {
     <div className="flex flex-col h-full md:w-1/6 md:h-full gap-4  ">
       <h1>Hírek</h1>
       <CategoryFilter categoryOptions={CATEGORY_COLORS} category={params.category} setCategory={setters.setCategory} />
-      {/* TODO <ShowSavedNewsFilter /> */}
+      <ShowSavedNewsFilter />
       <Sort sortOrder={params.sortOrder} setSortOrder={setters.setSortOrder} />
       <DateRangeFilter
         fromDate={params.fromDate}

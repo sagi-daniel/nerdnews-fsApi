@@ -3,7 +3,7 @@ import useMovieData from '../../hooks/useMovieData';
 import useMovieFilter from '../../hooks/useMovieFilter';
 import MovieModel from '../../models/Movie.model';
 import Pagination from '../../components/Pagination';
-import Error from '../../components/ErrorMessage';
+import ErrorMessage from '../../components/ErrorMessage';
 import MovieCard from './MovieCard';
 import MovieModal from './MovieDetails';
 import LoadingSpinner from '../../components/loaders/LoadingSpinner';
@@ -25,7 +25,7 @@ function MovieList() {
     setModalVisible(true);
   };
 
-  if (isError) return <Error message={(error as Error).message} />;
+  if (isError) return <ErrorMessage message={(error as Error).message} />;
 
   return (
     <div className="flex flex-col justify-between md:w-5/6 ">

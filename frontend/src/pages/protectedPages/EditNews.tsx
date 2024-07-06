@@ -9,7 +9,7 @@ import Modal from '../../components/Modal';
 import Alert from '../../components/Alert';
 import toast from 'react-hot-toast';
 import NewsForm from '../../components/forms/NewsForm';
-import Error from '../../components/ErrorMessage';
+import ErrorMessage from '../../components/ErrorMessage';
 import Pagination from '../../components/Pagination';
 import useNewsFilter from '../../hooks/useNewsFilter';
 import NewsTable from '../../components/tables/NewsTable';
@@ -74,7 +74,7 @@ function EditNews() {
 
   if (isLoading) return <LoadingSpinner />;
 
-  if (isError) return <Error message={(error as Error).message} />;
+  if (isError) return <ErrorMessage message={(error as Error).message} />;
 
   return (
     <div className="flex flex-col gap-2 my-10">

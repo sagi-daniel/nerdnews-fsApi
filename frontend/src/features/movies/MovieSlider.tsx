@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { useQuery } from '@tanstack/react-query';
 import { getMovies } from '../../services/apiMovies';
-import Error from '../../components/ErrorMessage';
+import ErrorMessage from '../../components/ErrorMessage';
 import MovieDetails from './MovieDetails';
 import Slider from '../../components/parts/slider/Slider';
 import MovieCard from './MovieCard';
@@ -23,7 +23,7 @@ function MovieSlider({ sliderLabel }: { sliderLabel: string }) {
 
   if (isLoading) return <LoadingSpinner />;
 
-  if (isError) return <Error message={(error as Error).message} />;
+  if (isError) return <ErrorMessage message={(error as Error).message} />;
 
   return (
     <Section type="vertical">
