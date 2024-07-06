@@ -33,6 +33,8 @@ import Forbidden from './pages/Forbidden';
 //PROTECTED PAGES
 //USER PRIVILEGE
 import MyAccount from './pages/protectedPages/MyAccount';
+import MyMovies from './pages/protectedPages/MyMovies';
+import MyNews from './pages/protectedPages/MyNews';
 import UpdatePasswordPage from './pages/authPages/UpdatePasswordPage';
 
 //ADMIN PIRIVLEGE
@@ -71,6 +73,22 @@ function App() {
                     element={
                       <ProtectedRoute>
                         <MyAccount />
+                      </ProtectedRoute>
+                    }
+                  />
+                  <Route
+                    path="myNews"
+                    element={
+                      <ProtectedRoute>
+                        <MyNews />
+                      </ProtectedRoute>
+                    }
+                  />
+                  <Route
+                    path="myMovies"
+                    element={
+                      <ProtectedRoute>
+                        <MyMovies />
                       </ProtectedRoute>
                     }
                   />
