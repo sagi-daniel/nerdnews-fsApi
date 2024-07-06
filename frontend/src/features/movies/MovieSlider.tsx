@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { useQuery } from '@tanstack/react-query';
 import { getMovies } from '../../services/apiMovies';
-import Error from '../../components/Error';
+import Error from '../../components/ErrorMessage';
 import MovieDetails from './MovieDetails';
 import Slider from '../../components/parts/slider/Slider';
 import MovieCard from './MovieCard';

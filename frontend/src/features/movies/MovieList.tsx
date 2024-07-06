@@ -3,7 +3,7 @@ import useMovieData from '../../hooks/useMovieData';
 import useMovieFilter from '../../hooks/useMovieFilter';
 import MovieModel from '../../models/Movie.model';
 import Pagination from '../../components/Pagination';
-import Error from '../../components/Error';
+import Error from '../../components/ErrorMessage';
 import MovieCard from './MovieCard';
 import MovieModal from './MovieDetails';
 import LoadingSpinner from '../../components/loaders/LoadingSpinner';

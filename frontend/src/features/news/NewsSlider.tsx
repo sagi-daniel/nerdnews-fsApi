@@ -5,7 +5,7 @@ import NewsCard from './NewsCard';
 import Section from '../../components/Section';
 import NewsModel from '../../models/News.model';
 import LoadingSpinner from '../../components/loaders/LoadingSpinner';
-import Error from '../../components/Error';
+import Error from '../../components/ErrorMessage';
 
 function NewsSlider({ sliderLabel }: { sliderLabel: string }) {
   const { data: news, error, isLoading, isError } = useQuery(['sliderNews'], sliderNews);

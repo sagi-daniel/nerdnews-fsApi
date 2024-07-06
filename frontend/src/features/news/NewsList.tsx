@@ -2,7 +2,7 @@ import useNewsData from '../../hooks/useNewsData';
 import useNewsFilter from '../../hooks/useNewsFilter';
 import Pagination from '../../components/Pagination';
 import NewsCard from '../../features/news/NewsCard';
-import Error from '../../components/Error';
+import Error from '../../components/ErrorMessage';
 
 import NewsModel from '../../models/News.model';
 import LoadingSpinner from '../../components/loaders/LoadingSpinner';
