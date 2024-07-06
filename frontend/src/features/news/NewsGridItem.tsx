@@ -1,5 +1,5 @@
 import { CATEGORY_COLORS } from '../../utils/constants';
-import { formatDateIsoToNormal, truncateText } from '../../utils/helpers';
+import { truncateText } from '../../utils/helpers';
 import { format } from 'date-fns';
 import Badge from '../../components/Badge';
 import NewsModel from '../../models/News.model';
