@@ -1,8 +1,8 @@
 import { Link } from 'react-router-dom';
 import { ADMIN_MENU_TEMS, USER_MENU_ITEMS } from '../../../utils/constants';
-import MenuItem from '../../../models/MenuItem.model';
 import { capitalizeWord } from '../../../utils/helpers';
 import { useAuth } from '../../../context/AuthContext';
+import MenuItem from '../../../models/MenuItem.model';
 import Divider from '../../Divider';
 
 const DropDownMenu = ({ mobile }: { mobile?: boolean }) => {

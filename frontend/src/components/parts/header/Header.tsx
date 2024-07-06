@@ -2,7 +2,6 @@ import Logo from '../../Logo';
 import Navbar from './Navbar';
 import ControlPanel from './ControlPanel';
 import Divider from '../../Divider';
-import ToggleDarkMode from './ToggleDarkMode';
 import SearchBar from '../../SearchBar';
 
 function Header() {
@@ -13,17 +12,16 @@ function Header() {
 
   return (
     <header className="sticky z-10 bg-bg-light dark:bg-bg-dark pt-2 top-0 flex flex-col items-center">
-      <div className=" size-full  flex items-center justify-between space-x-2  text-content-light dark:text-content-dark mb-3 md:mb-0">
-        <div className="w-1/6 md:w-2/6 flex">
+      <div className="w-full flex justify-center items-center space-x-4 text-content-light dark:text-content-dark md:mb-0">
+        <div className="w-[20%] flex  items-center">
           <Logo size="xsmall" />
         </div>
-        <div className="w-5/6 flex flex-row-reverse md:flex-row ">
-          <div className="w-1/6 md:w-4/6 h flex justify-end md:justify-center items-center   ">
+        <div className="w-[80%] flex flex-row-reverse md:flex-row justify-center items-center space-x-4">
+          <div className="w-full md:w-[75%] flex flex-row-reverse md:flex-row md:justify-center justify-between items-center space-x-4 gap-4 ">
             <Navbar />
-          </div>
-          <div className="flex w-5/6 md:w-2/6 md:justify-end justify-center items-center space-x-2">
             <SearchBar onSearch={handleSearch} />
-            <ToggleDarkMode />
+          </div>
+          <div className=" md:w-[25%] flex  justify-center md:justify-end items-center space-x-4 ">
             <ControlPanel />
           </div>
         </div>

@@ -27,7 +27,7 @@ const SearchBar: React.FC<SearchBarProps> = ({ onSearch }) => {
   };
 
   return (
-    <form onSubmit={handleFormSubmit} className="relative flex items-center">
+    <form onSubmit={handleFormSubmit} className="relative flex justify-center items-center">
       <input
         type="text"
         value={query}
@@ -36,8 +36,8 @@ const SearchBar: React.FC<SearchBarProps> = ({ onSearch }) => {
         onFocus={handleFocus}
         onBlur={handleBlur}
         autoComplete="off"
-        className={`transition-all duration-300 rounded-full py-[5px] px-4 dark:bg-border-dark bg-bg-dark text-content-dark focus:outline-none focus:ring focus:ring-primary box-border pl-10 ${
-          isFocused ? 'w-64' : 'w-28'
+        className={`transition-all duration-300 rounded-full py-[5px] px-4 bg-border-dark  text-content-dark focus:outline-none focus:ring focus:ring-primary box-border pl-10 ${
+          isFocused ? 'w-48' : 'w-40'
         }`}
       />
       <FiSearch className="absolute left-3 text-xl text-primary" />

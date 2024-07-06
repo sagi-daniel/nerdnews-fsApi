@@ -19,7 +19,7 @@ function Divider({ size = 'full', align = 'left', color = 'primary', margin = 't
   };
 
   const colorClasses: Record<string, string> = {
-    primary: 'border-primary',
+    primary: 'border-border-dark dark:border-primary',
     neutral: 'border-border-light dark:border-border-dark',
   };
 
@@ -33,7 +33,7 @@ function Divider({ size = 'full', align = 'left', color = 'primary', margin = 't
   if (tag) {
     return (
       <div className="flex items-center gap-2 md:px-4">
-        <span className="text-xs text-primary">{tag}</span>
+        <span className="text-xs text-content-light dark:text-primary">{tag}</span>
         <div
           className={`flex border-y-2 rounded-full ${marginClasses[margin]}  ${alignmentClasses[align]} ${alignmentClasses[align]} ${sizeClasses[size]} border-t ${colorClasses[color]} `}
         />

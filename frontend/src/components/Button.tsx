@@ -34,7 +34,7 @@ function Button({
     <button
       type={type}
       disabled={isLoading}
-      className={`${sizeStyle[size]} ${buttonStyle[style]} gap-2`}
+      className={`${sizeStyle[size]} ${buttonStyle[style]} gap-2 mt-2`}
       onClick={onClick}
     >
       {isLoading ? 'Küldés...' : children || text}
