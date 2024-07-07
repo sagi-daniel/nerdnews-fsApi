@@ -1,0 +1,15 @@
+extends baseEmail
+
+block content
+  p Szia #{userName}!
+  p Köszönjük a regisztrációt! 🎉🙏
+  table.btn.btn-primary(role='presentation', border='0', cellpadding='0', cellspacing='0')
+    tbody
+      tr
+        td(align='left')
+          table(role='presentation', border='0', cellpadding='0', cellspacing='0')
+            tbody
+              tr
+                td
+                  a(href=`${url}`, target='_blank') Nézd meg a fiókod!
+  p - Üdv, Sági Dániel
