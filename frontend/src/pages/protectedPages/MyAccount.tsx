@@ -92,12 +92,8 @@ const MyAccount = () => {
               </li>
             </ol>
             <div className="flex items-center space-x-2 mt-4">
-              <Button
-                type="button"
-                size="normal"
-                text="Adatok szerkesztése"
-                onClick={() => setIsIsUserUpdateShow(true)}
-              />
+              <Button type="button" size="normal" text="Szerkeszt" onClick={() => setIsIsUserUpdateShow(true)} />
+              <Button type="button" size="normal" text="Jelszó csere" onClick={() => setIsPasswordUpdateShow(true)} />
             </div>
           </div>
           {user && (
