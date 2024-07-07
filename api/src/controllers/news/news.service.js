@@ -1,5 +1,6 @@
 const News = require('../../models/News.model');
 const Category = require('../../models/Category.model');
+const { removeAccents } = require('../../utils/helpers');
 
 exports.create = (news) => {
   const newNews = new News(news);
@@ -21,7 +22,7 @@ exports.findAll = async (sortOrder, limit, skip) => {
     .skip(skip);
 };
 
-exports.findByQuery = async (fromDate, toDate, category, sortOrder, page, pageSize) => {
+exports.findByQuery = async (searchText, fromDate, toDate, category, sortOrder, page, pageSize) => {
   let query = {};
 
   if (fromDate && toDate && fromDate < toDate) {
@@ -46,6 +47,11 @@ exports.findByQuery = async (fromDate, toDate, category, sortOrder, page, pageSi
     if (validCategoryIds.length > 0) {
       query.category = { $in: validCategoryIds };
     }
+  }
+
+  if (searchText) {
+    const regex = new RegExp(removeAccents(searchText), 'i'); // 'i' for case-insensitive
+    query.$or = [{ title: { $regex: regex } }, { content: { $regex: regex } }];
   }
 
   const totalCount = await News.countDocuments(query);

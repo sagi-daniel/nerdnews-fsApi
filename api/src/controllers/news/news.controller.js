@@ -18,14 +18,22 @@ exports.findAll = catchAsync(async (req, res) => {
 });
 
 exports.findByQuery = catchAsync(async (req, res, next) => {
+  const searchText = req.query.searchText || '';
   const fromDate = parseDate(req.query.fromDate, 'from');
   const toDate = parseDate(req.query.toDate, 'to');
-
-  const { pageSize, page } = parsePaginationParams(req.query);
   const sortOrder = parseSortOrder(req.query.sortOrder);
   const category = req.query.category || '';
+  const { pageSize, page } = parsePaginationParams(req.query);
 
-  const { news, totalItems } = await newsService.findByQuery(fromDate, toDate, category, sortOrder, page, pageSize);
+  const { news, totalItems } = await newsService.findByQuery(
+    searchText,
+    fromDate,
+    toDate,
+    category,
+    sortOrder,
+    page,
+    pageSize
+  );
 
   sendResponse(res, { results: news.length, totalItems, data: { news } });
 });

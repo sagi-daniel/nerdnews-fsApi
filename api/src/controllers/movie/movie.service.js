@@ -1,5 +1,6 @@
 const Movie = require('../../models/Movie.model');
 const { GENRES } = require('../../utils/constants');
+const { removeAccents } = require('../../utils/helpers');
 
 exports.create = (movie) => {
   const newMovie = new Movie(movie);
@@ -25,6 +26,11 @@ exports.findByQuery = async (fromDate, toDate, genre, sortOrder, page, pageSize)
     }
   }
 
+  if (searchText) {
+    const regex = new RegExp(removeAccents(searchText), 'i'); // 'i' for case-insensitive
+    query.$or = [{ title: { $regex: regex } }, { overview: { $regex: regex } }];
+  }
+
   const totalCount = await Movie.countDocuments(query);
   const totalPages = Math.ceil(totalCount / pageSize);
 
@@ -32,6 +38,7 @@ exports.findByQuery = async (fromDate, toDate, genre, sortOrder, page, pageSize)
   page = Math.max(1, Math.min(page, totalPages));
 
   const skip = (page - 1) * pageSize;
+  console.log(query);
 
   const movies = await Movie.find(query).sort({ release: sortOrder }).skip(skip).limit(pageSize);
   return { movies, totalItems: totalCount, totalPages };

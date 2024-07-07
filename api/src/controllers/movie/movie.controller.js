@@ -18,14 +18,22 @@ exports.findAll = catchAsync(async (req, res) => {
 });
 
 exports.findByQuery = catchAsync(async (req, res, next) => {
+  const searchText = req.query.searchText || '';
   const fromDate = parseDate(req.query.fromDate, 'from');
   const toDate = parseDate(req.query.toDate, 'to');
-
-  const { pageSize, page } = parsePaginationParams(req.query);
   const sortOrder = parseSortOrder(req.query.sortOrder);
   const genre = req.query.genre || '';
+  const { pageSize, page } = parsePaginationParams(req.query);
 
-  const { movies, totalItems } = await movieService.findByQuery(fromDate, toDate, genre, sortOrder, page, pageSize);
+  const { movies, totalItems } = await movieService.findByQuery(
+    searchText,
+    fromDate,
+    toDate,
+    genre,
+    sortOrder,
+    page,
+    pageSize
+  );
 
   sendResponse(res, {
     status: 'success',

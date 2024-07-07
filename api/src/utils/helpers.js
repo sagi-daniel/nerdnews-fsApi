@@ -47,4 +47,11 @@ const parseSortOrder = (sortOrder) => {
   return -1;
 };
 
-module.exports = { parseDate, parsePaginationParams, parseSortOrder };
+const removeAccents = (str) => {
+  return str
+    .normalize('NFD')
+    .replace(/[\u0300-\u036f]/g, '')
+    .toLowerCase();
+};
+
+module.exports = { parseDate, parsePaginationParams, parseSortOrder, removeAccents };
