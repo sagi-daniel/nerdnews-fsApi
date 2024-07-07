@@ -6,7 +6,7 @@ import LoadingSpinner from '../../components/loaders/LoadingSpinner';
 import Modal from '../../components/Modal';
 import Alert from '../../components/Alert';
 import toast from 'react-hot-toast';
-import UserForm from '../../components/forms/UserForm';
+import UsersForm from '../../components/forms/UsersForm';
 import ErrorMessage from '../../components/ErrorMessage';
 import UsersTable from '../../components/tables/UsersTable';
 
@@ -23,7 +23,7 @@ function EditUsers() {
   const { mutate: deleteUserMutate } = useMutation(deleteUser, {
     onSuccess: () => {
       toast.success(`Felhasználó törölve!`);
-      queryClient.invalidateQueries(['usersByQuery']);
+      queryClient.invalidateQueries(['users']);
     },
   });
 
@@ -65,7 +65,7 @@ function EditUsers() {
       {modalVisible && (
         <Modal isOpen={modalVisible} setIsOpen={setModalVisible}>
           <h2> {selectedUser ? 'Szerkesztés' : 'Létrehozás'}</h2>
-          <UserForm user={selectedUser} setModalVisible={setModalVisible} />
+          <UsersForm user={selectedUser} setModalVisible={setModalVisible} />
         </Modal>
       )}
 
