@@ -3,10 +3,10 @@ import { getNewsByQuery } from '../services/apiNews';
 import useNewsFilter from '../hooks/useNewsFilter';
 
 function useNewsData() {
-  const { category, sortOrder, fromDate, toDate, page, pageSize } = useNewsFilter().params;
+  const { searchText, category, sortOrder, fromDate, toDate, page, pageSize } = useNewsFilter().params;
 
-  return useQuery(['newsByQuery', category, sortOrder, fromDate, toDate, page, pageSize], () =>
-    getNewsByQuery(category, sortOrder, fromDate, toDate, page, pageSize)
+  return useQuery(['newsByQuery', searchText, category, sortOrder, fromDate, toDate, page, pageSize], () =>
+    getNewsByQuery(searchText, category, sortOrder, fromDate, toDate, page, pageSize)
   );
 }
 

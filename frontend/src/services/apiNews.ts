@@ -36,6 +36,7 @@ export const deleteNews = async (newsId: string) => {
 };
 
 export async function getNewsByQuery(
+  searchText: string,
   category: string,
   sortOrder: string,
   fromDate: string,
@@ -44,6 +45,7 @@ export async function getNewsByQuery(
   pageSize: string
 ) {
   const params = {
+    searchText,
     category,
     sortOrder,
     fromDate,
@@ -53,6 +55,7 @@ export async function getNewsByQuery(
   };
 
   try {
+    console.log(params);
     const response = await api.get(`${BASE_URL}/news`, { params });
 
     return response.data;

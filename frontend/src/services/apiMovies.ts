@@ -36,6 +36,7 @@ export const deleteMovie = async (movieId: string) => {
 };
 
 export async function getMoviesByQuery(
+  searchText: string,
   genre: string,
   sortOrder: string,
   fromDate: string,
@@ -44,6 +45,7 @@ export async function getMoviesByQuery(
   pageSize: string
 ) {
   const params = {
+    searchText,
     genre,
     sortOrder,
     fromDate,
@@ -53,6 +55,7 @@ export async function getMoviesByQuery(
   };
 
   try {
+    console.log(params);
     const response = await axios.get(`${BASE_URL}/movie`, { params });
     const { data, totalItems } = response.data;
     return { data, totalItems };
