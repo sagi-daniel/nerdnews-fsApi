@@ -40,7 +40,6 @@ exports.findByQuery = async (searchText, fromDate, toDate, genre, sortOrder, pag
   page = Math.max(1, Math.min(page, totalPages));
 
   const skip = (page - 1) * pageSize;
-  console.log(query);
 
   const movies = await Movie.find(query).sort({ release: sortOrder }).skip(skip).limit(pageSize);
   return { movies, totalItems: totalCount, totalPages };
