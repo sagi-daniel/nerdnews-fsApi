@@ -51,7 +51,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
   // Logout Mutation
   const { mutate: logoutMutation, isLoading: logoutLoading } = useMutation(logoutUser, {
     onSuccess: () => {
-      queryClient.invalidateQueries(['user']);
+      queryClient.setQueryData(['user'], null);
       navigate('/home', { replace: true });
     },
   });

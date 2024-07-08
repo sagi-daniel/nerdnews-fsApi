@@ -24,8 +24,8 @@ export const loginUser = async ({ email, password }: LoginCredentialModel) => {
 
 export const logoutUser = async () => {
   try {
-    await api.post<LoginResponseModel>('/user/logout');
     localStorage.removeItem('jwt');
+    await api.post<LoginResponseModel>('/user/logout');
   } catch (error) {
     throw new Error('Logout failed');
   }
