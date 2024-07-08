@@ -13,7 +13,7 @@ export default defineConfig({
     }),
   ],
   build: {
-    outDir: '../api/public', // Specify output directory for build
+    outDir: '/public', // Specify output directory for build
     emptyOutDir: true, // Clear outDir before build
   },
 });
