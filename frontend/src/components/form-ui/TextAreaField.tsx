@@ -33,7 +33,7 @@ function TextAreaField({
   };
 
   return (
-    <div className="w-full md:mb-3">
+    <div className="w-full mb-3">
       <label htmlFor={id} className="mb-1 block">
         {label}
       </label>

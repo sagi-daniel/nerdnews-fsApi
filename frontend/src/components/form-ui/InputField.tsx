@@ -43,7 +43,7 @@ function InputField({
   const inputPaddingClass = type === 'date' ? 'p-[7px]' : 'p-2';
 
   return (
-    <div className="w-full md:mb-3">
+    <div className="w-full mb-3">
       <label htmlFor={id} className="mb-1 block">
         {label}
       </label>
