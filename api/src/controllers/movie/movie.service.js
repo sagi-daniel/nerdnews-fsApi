@@ -11,7 +11,7 @@ exports.findAll = async (sortOrder, limit, skip) => {
   return await Movie.find().sort({ release: sortOrder }).limit(limit).skip(skip);
 };
 
-exports.findByQuery = async (fromDate, toDate, genre, sortOrder, page, pageSize) => {
+exports.findByQuery = async (searchText, fromDate, toDate, genre, sortOrder, page, pageSize) => {
   let query = {};
 
   if (fromDate && toDate && fromDate < toDate) {
