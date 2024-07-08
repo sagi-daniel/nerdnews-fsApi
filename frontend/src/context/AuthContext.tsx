@@ -38,6 +38,9 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     onSuccess: (user: UserModel) => {
       toast.success(`Üdv, ${user.userName}`);
       queryClient.setQueryData(['user'], user);
+      queryClient.invalidateQueries(['myNews']);
+      queryClient.invalidateQueries(['myMovies']);
+
       navigate('/myAccount', { replace: true });
     },
     onError: () => {
@@ -48,7 +51,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
   // Logout Mutation
   const { mutate: logoutMutation, isLoading: logoutLoading } = useMutation(logoutUser, {
     onSuccess: () => {
-      queryClient.removeQueries(['user']);
+      queryClient.invalidateQueries(['user']);
       navigate('/home', { replace: true });
     },
   });
@@ -58,6 +61,8 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     onSuccess: (user: UserModel) => {
       toast.success('Sikeres regisztráció!');
       queryClient.setQueryData(['user'], user);
+      queryClient.invalidateQueries(['myNews']);
+      queryClient.invalidateQueries(['myMovies']);
       navigate('/myAccount', { replace: true });
     },
     onError: () => {
