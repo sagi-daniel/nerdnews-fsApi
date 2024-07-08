@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { useQuery } from '@tanstack/react-query';
-import { getMovies } from '../../services/apiMovies';
+import { sliderMovies } from '../../services/apiMovies';
 import ErrorMessage from '../../components/ErrorMessage';
 import MovieDetails from './MovieDetails';
 import Slider from '../../components/parts/slider/Slider';
@@ -11,10 +11,10 @@ import LoadingSpinner from '../../components/loaders/LoadingSpinner';
 import Modal from '../../components/Modal';
 
 function MovieSlider({ sliderLabel }: { sliderLabel: string }) {
-  const { data: movies, isLoading, error, isError } = useQuery(['sliderMovies'], getMovies);
-
   const [selectedMovie, setSelectedMovie] = useState<MovieModel | null>(null);
   const [modalVisible, setModalVisible] = useState(false);
+
+  const { data: movies, error, isLoading, isError } = useQuery(['sliderMovies'], sliderMovies);
 
   const handlePosterClick = (movie: MovieModel) => {
     setSelectedMovie(movie);

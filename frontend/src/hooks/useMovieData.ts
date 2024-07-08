@@ -3,10 +3,10 @@ import { getMoviesByQuery } from '../services/apiMovies';
 import useMoviesFilter from '../hooks/useMovieFilter';
 
 function useMoviesData() {
-  const { genre, sortOrder, fromDate, toDate, page, pageSize } = useMoviesFilter().params;
+  const { searchText, genre, sortOrder, fromDate, toDate, page, pageSize } = useMoviesFilter().params;
 
-  return useQuery(['moviesByQuery', genre, sortOrder, fromDate, toDate, page, pageSize], () =>
-    getMoviesByQuery(genre, sortOrder, fromDate, toDate, page, pageSize)
+  return useQuery(['moviesByQuery', searchText, genre, sortOrder, fromDate, toDate, page, pageSize], () =>
+    getMoviesByQuery(searchText, genre, sortOrder, fromDate, toDate, page, pageSize)
   );
 }
 

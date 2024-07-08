@@ -67,3 +67,19 @@ export async function getMoviesByQuery(
     }
   }
 }
+
+export async function sliderMovies() {
+  const params = {
+    sortOrder: 'desc',
+  };
+  try {
+    const response = await api.get(`${BASE_URL}/movie/slider`, { params });
+    return response.data.data['movies'];
+  } catch (error) {
+    if (axios.isAxiosError(error)) {
+      throw new Error(error.response?.statusText || 'Network response was not ok');
+    } else {
+      throw new Error('An unexpected error occurred');
+    }
+  }
+}
