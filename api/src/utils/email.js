@@ -7,29 +7,30 @@ module.exports = class Email {
     this.to = user.email;
     this.userName = user.userName;
     this.url = url;
-    this.from = `Sági Dániel <${process.env.EMAIL_FROM}>`;
+    this.from = `nerdnews <${process.env.EMAIL_FROM}>`;
   }
 
   newTransport() {
     if (process.env.NODE_ENV === 'production') {
-      //Sendgrid
+      //VALID EMAIL
       return nodemailer.createTransport({
-        service: 'Brevo',
-        host: process.env.BREVO_HOST,
-        PORT: process.env.BREVO_PORT,
+        host: process.env.EMAIL_HOST,
+        PORT: process.env.EMAIL_PORT,
+        secure: true,
         auth: {
-          user: process.env.BREVO_USERNAME,
-          pass: process.env.BREVO_PASSWORD,
+          user: process.env.EMAIL_USERNAME,
+          pass: process.env.EMAIL_PASSWORD,
         },
       });
     }
 
+    // DEV MAILTRAP
     return nodemailer.createTransport({
-      host: process.env.EMAIL_HOST,
-      PORT: process.env.PORT,
+      host: process.env.MAILTRAP_HOST,
+      PORT: process.env.MAILTRAP_PORT,
       auth: {
-        user: process.env.EMAIL_USERNAME,
-        pass: process.env.EMAIL_PASSWORD,
+        user: process.env.MAILTRAP_USERNAME,
+        pass: process.env.MAILTRAP_PASSWORD,
       },
     });
   }
