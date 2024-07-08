@@ -61,7 +61,6 @@ app.use('/movie', require('./controllers/movie/movie.routes'));
 app.use('/news', require('./controllers/news/news.routes'));
 app.use('/source', require('./controllers/source/source.routes'));
 app.use('/category', require('./controllers/category/category.routes'));
-app.use('/search', require('./controllers/search/search.routes'));
 
 //SCHEDULED TASKS
 cron.schedule('* 1,8 * * *', require('./controllers/scheduler/scheduler.controller'));

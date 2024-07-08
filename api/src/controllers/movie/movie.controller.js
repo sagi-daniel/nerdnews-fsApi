@@ -66,3 +66,9 @@ exports.remove = catchAsync(async (req, res, next) => {
   }
   sendResponse(res, { data: { movie } });
 });
+
+exports.slider = catchAsync(async (req, res) => {
+  const sortOrder = parseSortOrder(req.query.sortOrder);
+  const movies = await movieService.findAll(sortOrder, 20, 0);
+  sendResponse(res, { results: movies.length, data: { movies } });
+});

@@ -7,7 +7,9 @@ exports.create = (movie) => {
   return newMovie.save();
 };
 
-exports.findAll = () => Movie.find();
+exports.findAll = async (sortOrder, limit, skip) => {
+  return await Movie.find().sort({ release: sortOrder }).limit(limit).skip(skip);
+};
 
 exports.findByQuery = async (fromDate, toDate, genre, sortOrder, page, pageSize) => {
   let query = {};
