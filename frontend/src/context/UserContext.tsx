@@ -28,9 +28,8 @@ export function UserProvider({ children }: { children: ReactNode }) {
     isLoading: newsLoading,
     refetch: refetchNews,
   } = useQuery<NewsModel[]>(['myNews'], getMyNews, {
-    onError: (error) => {
+    onError: () => {
       toast.error('Hiba történt a hírek betöltésekor');
-      console.error('Failed to fetch news', error);
     },
   });
 
@@ -40,9 +39,8 @@ export function UserProvider({ children }: { children: ReactNode }) {
     isLoading: moviesLoading,
     refetch: refetchMovies,
   } = useQuery<MovieModel[]>(['myMovies'], getMyMovies, {
-    onError: (error) => {
+    onError: () => {
       toast.error('Hiba történt a filmek betöltésekor');
-      console.error('Failed to fetch movies', error);
     },
   });
 

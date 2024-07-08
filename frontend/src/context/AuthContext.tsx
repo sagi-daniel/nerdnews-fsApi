@@ -38,8 +38,6 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     onSuccess: (user: UserModel) => {
       toast.success(`Üdv, ${user.userName}`);
       queryClient.setQueryData(['user'], user);
-      queryClient.invalidateQueries(['myMovies']);
-      queryClient.invalidateQueries(['myNews']);
       navigate('/myAccount', { replace: true });
     },
     onError: () => {
@@ -71,12 +69,10 @@ export function AuthProvider({ children }: { children: ReactNode }) {
   const { mutate: forgotPasswordMutation, isLoading: forgotPasswordLoading } = useMutation(forgotPasswordUser, {
     onSuccess: () => {
       toast.success('A jelszó-visszaállítási email elküldve!');
-      queryClient.removeQueries(['user']);
       navigate('/forgetPasswordConfirm', { replace: true });
     },
     onError: (err: Error) => {
       toast.error(err.message);
-      queryClient.removeQueries(['user']);
       navigate('/login', { replace: true });
     },
   });
@@ -85,12 +81,10 @@ export function AuthProvider({ children }: { children: ReactNode }) {
   const { mutate: resetPasswordMutation, isLoading: resetPasswordLoading } = useMutation(resetPasswordUser, {
     onSuccess: () => {
       toast.success('Sikeres jelszó-változtatás!');
-      queryClient.removeQueries(['user']);
       navigate('/login', { replace: true });
     },
     onError: () => {
       toast.error('Sikertelen jelszó-változtatás!');
-      queryClient.removeQueries(['user']);
     },
   });
 
@@ -98,12 +92,11 @@ export function AuthProvider({ children }: { children: ReactNode }) {
   const { mutate: updatePasswordMutation, isLoading: updatePasswordLoading } = useMutation(updatePasswordUser, {
     onSuccess: () => {
       toast.success('Sikeres jelszó-változtatás!');
-      queryClient.removeQueries(['user']);
+      queryClient.setQueryData(['user'], user);
       navigate('/myAccount', { replace: true });
     },
     onError: () => {
       toast.error('Sikertelen jelszó-változtatás!');
-      queryClient.removeQueries(['user']);
     },
   });
 
