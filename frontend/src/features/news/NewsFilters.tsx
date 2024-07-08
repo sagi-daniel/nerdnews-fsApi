@@ -4,13 +4,15 @@ import DateRangeFilter from '../../components/form-ui/DateRangfilter';
 
 import { CATEGORY_COLORS } from '../../utils/constants';
 import useNewsFilter from '../../hooks/useNewsFilter';
+import SearchBar from '../../components/SearchBar';
 
 function NewsFilters() {
   const { params, setters } = useNewsFilter();
 
   return (
-    <div className="flex flex-col h-full md:w-1/6 md:h-full gap-4  ">
+    <div className="flex flex-col h-full md:w-1/6 md:h-full gap-2  ">
       <h1>Hírek</h1>
+      <SearchBar searchText={params.searchText} setSearchText={setters.setSearchText} />
       <CategoryFilter categoryOptions={CATEGORY_COLORS} category={params.category} setCategory={setters.setCategory} />
       <Sort sortOrder={params.sortOrder} setSortOrder={setters.setSortOrder} />
       <DateRangeFilter

@@ -22,7 +22,7 @@ function NewsList() {
         {news && news.map((newsItem: NewsModel) => <NewsCard key={newsItem._id} news={newsItem} />)}
         {isLoading && <LoadingSpinner />}
       </div>
-      {totalItems && (
+      {totalItems > 0 && (
         <Pagination
           page={parseInt(params.page)}
           totalItems={totalItems}

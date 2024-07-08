@@ -39,7 +39,7 @@ function MovieList() {
           {selectedMovie && <MovieModal movie={selectedMovie} />}
         </Modal>
       </div>
-      {totalItemes && (
+      {totalItemes > 0 && (
         <Pagination
           page={parseInt(page)}
           totalItems={totalItemes}

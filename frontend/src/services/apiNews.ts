@@ -55,7 +55,6 @@ export async function getNewsByQuery(
   };
 
   try {
-    console.log(params);
     const response = await api.get(`${BASE_URL}/news`, { params });
 
     return response.data;

@@ -55,10 +55,8 @@ export async function getMoviesByQuery(
   };
 
   try {
-    console.log(params);
-    const response = await axios.get(`${BASE_URL}/movie`, { params });
-    const { data, totalItems } = response.data;
-    return { data, totalItems };
+    const response = await api.get(`${BASE_URL}/movie`, { params });
+    return response.data;
   } catch (error) {
     if (axios.isAxiosError(error)) {
       throw new Error(error.response?.statusText || 'Network response was not ok');
