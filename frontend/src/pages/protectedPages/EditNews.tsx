@@ -67,11 +67,6 @@ function EditNews() {
     setNewsIdToDelete(null);
   };
 
-  const handleSearch = (query: string) => {
-    console.log('Keresési kifejezés:', query);
-    // Itt adhatod hozzá a keresési logikádat
-  };
-
   if (isLoading) return <LoadingSpinner />;
 
   if (isError) return <ErrorMessage message={(error as Error).message} />;
@@ -79,7 +74,6 @@ function EditNews() {
   return (
     <div className="flex flex-col gap-2 my-10">
       <div className="flex items-center space-x-2">
-        <SearchBar onSearch={handleSearch} />{' '}
         <CategoryFilter
           categoryOptions={CATEGORY_COLORS}
           category={params.category}

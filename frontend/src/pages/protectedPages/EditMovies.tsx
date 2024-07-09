@@ -62,11 +62,6 @@ function EditMovies() {
     setMovieIdToDelete(null);
   };
 
-  const handleSearch = (query: string) => {
-    console.log('Keresési kifejezés:', query);
-    // Itt adhatod hozzá a keresési logikádat
-  };
-
   if (isLoading) return <LoadingSpinner />;
 
   if (isError) return <ErrorMessage message={(error as Error).message} />;
@@ -74,7 +69,6 @@ function EditMovies() {
   return (
     <div className="flex flex-col gap-2 my-10">
       <div className="flex justify-start space-x-2">
-        <SearchBar onSearch={handleSearch} />
         <CategoryFilter categoryOptions={GENRE_COLORS} category={params.genre} setCategory={setters.setGenre} />
       </div>
       <div className="flex items-center space-x-2 ">

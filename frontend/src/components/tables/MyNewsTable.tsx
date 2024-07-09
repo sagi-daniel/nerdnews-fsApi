@@ -10,8 +10,6 @@ interface MyNewsTableProps {
 }
 
 function MyNewsTable({ news, onDelete }: MyNewsTableProps) {
-  console.log(news);
-
   return (
     <div className="flex size-full items-start">
       <table className=" w-full bg-border-dark text-center text-content-dark rounded-md">
