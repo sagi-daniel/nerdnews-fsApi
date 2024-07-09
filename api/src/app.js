@@ -2,6 +2,8 @@ const express = require('express');
 const morgan = require('morgan');
 const cron = require('node-cron');
 const cors = require('cors');
+const compression = require('compression');
+
 //Security libs
 const rateLimit = require('express-rate-limit');
 const helmet = require('helmet');
@@ -9,6 +11,7 @@ const mongoSanitize = require('express-mongo-sanitize');
 const xss = require('xss-clean');
 const hpp = require('hpp');
 
+//Start express app
 const app = express();
 app.use(
   cors({
@@ -54,6 +57,8 @@ app.use(
 
 // Serving static files
 app.use(express.static(`${__dirname}/public`));
+
+app.use(compression());
 
 // ROUTES MIDDLEWARES
 app.use('/user', require('./controllers/user/user.routes'));
