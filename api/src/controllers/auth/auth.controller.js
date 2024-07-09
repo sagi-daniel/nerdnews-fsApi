@@ -66,7 +66,7 @@ exports.logout = catchAsync((req, res, next) => {
     httpOnly: true,
   });
 
-  res.status(200).json({ status: 'success' });
+  return res.status(200).json({ status: 'success' });
 });
 
 exports.protect = catchAsync(async (req, res, next) => {
