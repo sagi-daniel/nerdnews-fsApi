@@ -4,6 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
+    "start": "node api/src/server.js",
     "start:dev": "set NODE_ENV=development&& nodemon api/src/server.js",
     "start:prod": "set NODE_ENV=production&& nodemon api/src/server.js",
     "debug": "ndb api/src/server.js",
@@ -45,5 +46,8 @@
     "jest": "^29.5.0",
     "jest-mock-req-res": "^1.0.2",
     "ndb": "^1.1.5"
+  },
+  "engines": {
+    "node": ">=10.0.0"
   }
 }

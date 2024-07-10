@@ -4,14 +4,14 @@ const cron = require('node-cron');
 const cors = require('cors');
 const compression = require('compression');
 
-//Security libs
+// Security libs
 const rateLimit = require('express-rate-limit');
 const helmet = require('helmet');
 const mongoSanitize = require('express-mongo-sanitize');
 const xss = require('xss-clean');
 const hpp = require('hpp');
 
-//Start express app
+// Start express app
 const app = express();
 app.use(
   cors({
@@ -25,12 +25,12 @@ const AppError = require('./utils/appError');
 // Set security HTTP headers
 app.use(helmet());
 
-//Development logging
+// Development logging
 if (process.env.NODE_ENV === 'development') {
   app.use(morgan('dev'));
 }
 
-//Limit request from same API
+// Limit request from same API
 app.use(
   rateLimit({
     max: 1000,
@@ -39,16 +39,16 @@ app.use(
   })
 );
 
-//Body parser, reading data from body into req.body
+// Body parser, reading data from body into req.body
 app.use(express.json({ limit: '10kb' }));
 
-//Data sanitization against noSWL query injection
+// Data sanitization against noSQL query injection
 app.use(mongoSanitize());
 
-//Data sanitization against XSS
+// Data sanitization against XSS
 app.use(xss());
 
-//Prevent paramter pollution
+// Prevent parameter pollution
 app.use(
   hpp({
     whitelist: [],
@@ -56,7 +56,7 @@ app.use(
 );
 
 // Serving static files
-app.use(express.static(`${__dirname}/public`));
+app.use(express.static(`${__dirname}/dist`));
 
 app.use(compression());
 
@@ -67,14 +67,27 @@ app.use('/news', require('./controllers/news/news.routes'));
 app.use('/source', require('./controllers/source/source.routes'));
 app.use('/category', require('./controllers/category/category.routes'));
 
-//SCHEDULED TASKS
-cron.schedule('* 1,8 * * *', require('./controllers/scheduler/scheduler.controller'));
+// SCHEDULED TASKS
+cron.schedule('* * * * *', require('./controllers/scheduler/scheduler.controller'));
 
 app.all('*', (req, res, next) => {
   next(new AppError(`Could not found ${req.originalUrl} on this server!`, 404));
 });
 
-//GLOBAL MIDDLEWARE
+// GLOBAL MIDDLEWARE
 app.use(require('./controllers/error/error.controller'));
+
+// Middleware for logging memory usage
+app.use((req, res, next) => {
+  const memoryUsage = process.memoryUsage();
+  console.log(
+    `Memory Usage - RSS: ${(memoryUsage.rss / 1024 / 1024).toFixed(2)} MB, Heap Total: ${(
+      memoryUsage.heapTotal /
+      1024 /
+      1024
+    ).toFixed(2)} MB, Heap Used: ${(memoryUsage.heapUsed / 1024 / 1024).toFixed(2)} MB`
+  );
+  next();
+});
 
 module.exports = app;

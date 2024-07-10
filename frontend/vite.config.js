@@ -12,8 +12,12 @@ export default defineConfig({
       include: ['src/**/*.js', 'src/**/*.jsx', 'src/**/*.ts', 'src/**/*.tsx'], // Specify files to lint
     }),
   ],
+  server: {
+    // CORS beállítása a Vite szerveren
+    cors: true,
+  },
   build: {
-    outDir: '/public', // Specify output directory for build
-    emptyOutDir: true, // Clear outDir before build
+    // Szükség esetén egyéb build beállítások
+    assetsInlineLimit: 0,
   },
 });

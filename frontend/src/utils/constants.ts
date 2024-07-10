@@ -1,8 +1,8 @@
 import { FilterOption } from '../models/FiltersOption.model';
 
 //SITE META
-export const SITE_NAME = 'Portfolio';
-export const SITE_DESCRIPTION = 'Ez egy portfolio oldal';
+export const SITE_NAME = 'nerdnews';
+export const SITE_DESCRIPTION = '';
 export const CURRENT_YEAR = new Date().getFullYear();
 
 //Options

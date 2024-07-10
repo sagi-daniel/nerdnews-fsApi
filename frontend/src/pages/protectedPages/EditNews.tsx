@@ -13,7 +13,6 @@ import ErrorMessage from '../../components/ErrorMessage';
 import Pagination from '../../components/Pagination';
 import useNewsFilter from '../../hooks/useNewsFilter';
 import NewsTable from '../../components/tables/NewsTable';
-import SearchBar from '../../components/SearchBar';
 import DateRangeFilter from '../../components/form-ui/DateRangfilter';
 import CategoryFilter from '../../components/CategoryFilter';
 import Sort from '../../components/Sort';

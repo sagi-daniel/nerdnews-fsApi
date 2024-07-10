@@ -10,7 +10,6 @@ import toast from 'react-hot-toast';
 import ErrorMessage from '../../components/ErrorMessage';
 import Pagination from '../../components/Pagination';
 import useMovieFilter from '../../hooks/useMovieFilter';
-import SearchBar from '../../components/SearchBar';
 import DateRangeFilter from '../../components/form-ui/DateRangfilter';
 import CategoryFilter from '../../components/CategoryFilter';
 import Sort from '../../components/Sort';
