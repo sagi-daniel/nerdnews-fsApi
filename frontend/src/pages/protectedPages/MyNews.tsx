@@ -4,7 +4,7 @@ import { useUser } from '../../context/UserContext';
 import Modal from '../../components/Modal';
 import Alert from '../../components/Alert';
 import toast from 'react-hot-toast';
-import NewsTable from '../../components/tables/NewsTable';
+import MyNewsTable from '../../components/tables/MyNewsTable';
 
 function MyNews() {
   const [confirmationVisible, setConfirmationVisible] = useState(false);
@@ -42,7 +42,7 @@ function MyNews() {
 
   return (
     <div className="flex flex-col items-start gap-2 my-10">
-      {news && <NewsTable news={news} onDelete={handleDelete} />}
+      {news && <MyNewsTable news={news} onDelete={handleDelete} />}
       <Modal isOpen={confirmationVisible} setIsOpen={setConfirmationVisible}>
         <Alert
           alertIcon="error"

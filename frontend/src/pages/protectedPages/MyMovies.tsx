@@ -4,7 +4,7 @@ import { useUser } from '../../context/UserContext';
 import Modal from '../../components/Modal';
 import Alert from '../../components/Alert';
 import toast from 'react-hot-toast';
-import MoviesTable from '../../components/tables/MoviesTable';
+import MyMoviesTable from '../../components/tables/MyMoviesTable';
 
 function MyMovies() {
   const [confirmationVisible, setConfirmationVisible] = useState(false);
@@ -42,7 +42,7 @@ function MyMovies() {
 
   return (
     <div className="flex flex-col items-start gap-2 my-10">
-      {movies && <MoviesTable movies={movies} onDelete={handleDelete} />}
+      {movies && <MyMoviesTable movies={movies} onDelete={handleDelete} />}
       <Modal isOpen={confirmationVisible} setIsOpen={setConfirmationVisible}>
         <Alert
           alertIcon="error"
