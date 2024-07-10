@@ -8,8 +8,8 @@ import Modal from '../../../components/Modal';
 import ForgotPasswordForm from './ForgotPasswordForm';
 
 function LoginForm() {
-  const [email, setEmail] = useState('testuser7@gmail.com');
-  const [password, setPassword] = useState('testUser123');
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
   const [isForgetPasswordModel, setIsForgetPasswordModel] = useState(false);
   const { login } = useAuth();
 
