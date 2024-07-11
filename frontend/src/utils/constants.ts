@@ -64,5 +64,5 @@ export const GENRE_COLORS: FilterOption[] = [
   { name: 'ROMANCE', colorClass: 'bg-genre-romance text-genre-romance-content' },
 ];
 //API URL
-export const BASE_URL = 'http://localhost:8000';
-// export const BASE_URL = 'https://nerdnews.hu';
+// export const BASE_URL = 'http://localhost:8000';
+export const BASE_URL = 'https://nerdnews.hu';
