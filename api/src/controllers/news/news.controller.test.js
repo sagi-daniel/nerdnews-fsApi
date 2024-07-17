@@ -1,5 +1,5 @@
 const { mockResponse, mockRequest } = require('jest-mock-req-res');
-const AppError = require('../../../utils/appError');
+const AppError = require('../../utils/appError');
 const newsController = require('./news.controller');
 const newsService = require('./news.service');
 jest.mock('./news.service.js');
@@ -57,7 +57,7 @@ describe('news Controller Tests', () => {
     expect(newsService.create).toHaveBeenCalledWith(INVALID_DATA);
     expect(newsService.create).toHaveBeenCalledTimes(1);
     expect(response.json).not.toHaveBeenCalled();
-    expect(nextFunction).toHaveBeenCalledWith(new AppError(`News could not saved`));
+    expect(nextFunction).toHaveBeenCalledWith(new AppError(`News could not be saved`));
   });
 
   test('findById() with VALID ID', async () => {
@@ -91,7 +91,7 @@ describe('news Controller Tests', () => {
     expect(newsService.findById).toHaveBeenCalledWith(INVALID_ID);
     expect(newsService.findById).toHaveBeenCalledTimes(1);
     expect(response.json).not.toHaveBeenCalled();
-    expect(nextFunction).toHaveBeenCalledWith(new AppError(`News with ${INVALID_ID} ID could not found`));
+    expect(nextFunction).toHaveBeenCalledWith(new AppError(`News with ${INVALID_ID} ID could not be found`));
   });
 
   test('update() with VALID ID', async () => {
@@ -145,7 +145,7 @@ describe('news Controller Tests', () => {
     expect(newsService.update).toHaveBeenCalledWith(INVALID_ID, VALID_DATA);
     expect(newsService.update).toHaveBeenCalledTimes(1);
     expect(response.json).not.toHaveBeenCalled();
-    expect(nextFunction).toHaveBeenCalledWith(new AppError(`News with ${INVALID_ID} ID could not found`));
+    expect(nextFunction).toHaveBeenCalledWith(new AppError(`News with ${INVALID_ID} ID could not be found`));
   });
 
   test('remove() with VALID ID', async () => {
@@ -189,6 +189,6 @@ describe('news Controller Tests', () => {
     expect(newsService.remove).toHaveBeenCalledWith(INVALID_ID);
     expect(newsService.remove).toHaveBeenCalledTimes(1);
     expect(response.json).not.toHaveBeenCalled();
-    expect(nextFunction).toHaveBeenCalledWith(new AppError(`News with ${INVALID_ID} ID could not found`));
+    expect(nextFunction).toHaveBeenCalledWith(new AppError(`News with ${INVALID_ID} ID could not be found`));
   });
 });

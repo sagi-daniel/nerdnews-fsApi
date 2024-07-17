@@ -20,7 +20,7 @@ exports.findById = catchAsync(async (req, res, next) => {
   const id = req.params.id;
   const source = await sourceService.findById(id);
   if (!source) {
-    return next(new AppError(`Source with ID ${id} could not be found`));
+    return next(new AppError(`Source with ${id} ID could not be found`));
   }
   sendResponse(res, { data: { source } });
 });
@@ -29,7 +29,7 @@ exports.update = catchAsync(async (req, res, next) => {
   const id = req.params.id;
   const source = await sourceService.update(id, req.body);
   if (!source) {
-    return next(new AppError(`Source with ID ${id} could not be found`));
+    return next(new AppError(`Source with ${id} ID could not be found`));
   }
   sendResponse(res, { data: { source } });
 });
@@ -38,7 +38,7 @@ exports.remove = catchAsync(async (req, res, next) => {
   const id = req.params.id;
   const source = await sourceService.remove(id);
   if (!source) {
-    return next(new AppError(`Source with ID ${id} could not be found`));
+    return next(new AppError(`Source with ${id} ID could not be found`));
   }
   sendResponse(res, { data: { source } });
 });

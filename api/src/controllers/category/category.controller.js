@@ -20,7 +20,7 @@ exports.findById = catchAsync(async (req, res, next) => {
   const id = req.params.id;
   const category = await categoryService.findById(id);
   if (!category) {
-    return next(new AppError(`Category with ID ${id} could not be found`));
+    return next(new AppError(`Category with ${id} ID could not be found`));
   }
   sendResponse(res, { data: { category } });
 });
@@ -29,7 +29,7 @@ exports.update = catchAsync(async (req, res, next) => {
   const id = req.params.id;
   const category = await categoryService.update(id, req.body);
   if (!category) {
-    return next(new AppError(`Category with ID ${id} could not be found`));
+    return next(new AppError(`Category with ${id} ID could not be found`));
   }
   sendResponse(res, { data: { category } });
 });
@@ -38,7 +38,7 @@ exports.remove = catchAsync(async (req, res, next) => {
   const id = req.params.id;
   const category = await categoryService.remove(id);
   if (!category) {
-    return next(new AppError(`Category with ID ${id} could not be found`));
+    return next(new AppError(`Category with ${id} ID could not be found`));
   }
   sendResponse(res, { data: { category } });
 });

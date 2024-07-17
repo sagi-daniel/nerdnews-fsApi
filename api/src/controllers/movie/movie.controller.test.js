@@ -56,7 +56,7 @@ describe('Movie Controller Tests', () => {
     expect(movieService.create).toHaveBeenCalledWith(INVALID_DATA);
     expect(movieService.create).toHaveBeenCalledTimes(1);
     expect(response.json).not.toHaveBeenCalled();
-    expect(nextFunction).toHaveBeenCalledWith(new AppError(`Movie could not saved`));
+    expect(nextFunction).toHaveBeenCalledWith(new AppError(`Movie could not be saved`));
   });
 
   test('findById() with VALID ID', async () => {
@@ -90,7 +90,7 @@ describe('Movie Controller Tests', () => {
     expect(movieService.findById).toHaveBeenCalledWith(INVALID_ID);
     expect(movieService.findById).toHaveBeenCalledTimes(1);
     expect(response.json).not.toHaveBeenCalled();
-    expect(nextFunction).toHaveBeenCalledWith(new AppError(`Movie with ${INVALID_ID} ID could not found`));
+    expect(nextFunction).toHaveBeenCalledWith(new AppError(`Movie with ${INVALID_ID} ID could not be found`));
   });
 
   test('update() with VALID ID', async () => {
@@ -149,7 +149,7 @@ describe('Movie Controller Tests', () => {
     expect(movieService.update).toHaveBeenCalledWith(INVALID_ID, VALID_DATA);
     expect(movieService.update).toHaveBeenCalledTimes(1);
     expect(response.json).not.toHaveBeenCalled();
-    expect(nextFunction).toHaveBeenCalledWith(new AppError(`Movie with ${INVALID_ID} ID could not found`));
+    expect(nextFunction).toHaveBeenCalledWith(new AppError(`Movie with ${INVALID_ID} ID could not be found`));
   });
 
   test('remove() with VALID ID', async () => {
@@ -192,6 +192,6 @@ describe('Movie Controller Tests', () => {
     expect(movieService.remove).toHaveBeenCalledWith(INVALID_ID);
     expect(movieService.remove).toHaveBeenCalledTimes(1);
     expect(response.json).not.toHaveBeenCalled();
-    expect(nextFunction).toHaveBeenCalledWith(new AppError(`Movie with ${INVALID_ID} ID could not found`));
+    expect(nextFunction).toHaveBeenCalledWith(new AppError(`Movie with ${INVALID_ID} ID could not be found`));
   });
 });

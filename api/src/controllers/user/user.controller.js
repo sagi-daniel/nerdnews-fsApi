@@ -15,7 +15,7 @@ exports.getMe = catchAsync(async (req, res, next) => {
   const userId = req.user._id;
   const user = await userService.findById(userId);
   if (!user) {
-    return next(new AppError(`User with ID ${userId} could not be found`));
+    return next(new AppError(`User with ${userId} ID could not be found`));
   }
   sendResponse(res, { data: { user } });
 });
@@ -27,7 +27,7 @@ exports.updateMe = catchAsync(async (req, res, next) => {
   const filteredBody = filterObj(req.body, 'userName', 'email', 'firstName', 'lastName');
   const user = await userService.update(req.user._id, filteredBody);
   if (!user) {
-    return next(new AppError(`User with ID ${req.user._id} could not be found`));
+    return next(new AppError(`User with ${req.user._id} ID could not be found`));
   }
   sendResponse(res, { data: { user } });
 });
@@ -35,7 +35,7 @@ exports.updateMe = catchAsync(async (req, res, next) => {
 exports.deleteMe = catchAsync(async (req, res, next) => {
   const user = await userService.inactivate(req.user._id);
   if (!user) {
-    return next(new AppError(`User with ID ${req.user._id} could not be found`));
+    return next(new AppError(`User with ${req.user._id} ID could not be found`));
   }
   sendResponse(res, { statusCode: 204, data: null });
 });
@@ -44,7 +44,7 @@ exports.getMyNews = catchAsync(async (req, res, next) => {
   const userId = req.user._id;
   const user = await userService.findNewsById(userId);
   if (!user) {
-    return next(new AppError(`User with ID ${userId} could not be found`));
+    return next(new AppError(`User with ${userId} ID could not be found`));
   }
   sendResponse(res, { data: { user } });
 });
@@ -73,7 +73,7 @@ exports.getMyMovies = catchAsync(async (req, res, next) => {
   const userId = req.user._id;
   const user = await userService.findMoviesById(userId);
   if (!user) {
-    return next(new AppError(`User with ID ${userId} could not be found`));
+    return next(new AppError(`User with ${userId} ID could not be found`));
   }
   sendResponse(res, { data: { user } });
 });
@@ -115,7 +115,7 @@ exports.findById = catchAsync(async (req, res, next) => {
   const userId = req.params.id;
   const user = await userService.findById(userId);
   if (!user) {
-    return next(new AppError(`User with ID ${userId} could not be found`));
+    return next(new AppError(`User with ${userId} ID could not be found`));
   }
   sendResponse(res, { data: { user } });
 });
@@ -124,7 +124,7 @@ exports.update = catchAsync(async (req, res, next) => {
   const userId = req.params.id;
   const user = await userService.update(userId, req.body);
   if (!user) {
-    return next(new AppError(`User with ID ${userId} could not be found`));
+    return next(new AppError(`User with ${userId} ID could not be found`));
   }
   sendResponse(res, { data: { user } });
 });
@@ -133,7 +133,7 @@ exports.remove = catchAsync(async (req, res, next) => {
   const userId = req.params.id;
   const user = await userService.inactivate(userId);
   if (!user) {
-    return next(new AppError(`User with ID ${userId} could not be found`));
+    return next(new AppError(`User with ${userId} ID could not be found`));
   }
   sendResponse(res, { data: { user } });
 });

@@ -1,6 +1,6 @@
 const { mockResponse, mockRequest } = require('jest-mock-req-res');
-const AppError = require('../../../utils/appError');
-const categoryController = require('./ctegory.controller');
+const AppError = require('../../utils/appError');
+const categoryController = require('./category.controller');
 const categoryService = require('./category.service');
 jest.mock('./category.service.js');
 
@@ -53,7 +53,7 @@ describe('Category Controller Tests', () => {
     expect(categoryService.create).toHaveBeenCalledWith(INVALID_DATA);
     expect(categoryService.create).toHaveBeenCalledTimes(1);
     expect(response.json).not.toHaveBeenCalled();
-    expect(nextFunction).toHaveBeenCalledWith(new AppError(`Category could not saved`));
+    expect(nextFunction).toHaveBeenCalledWith(new AppError(`Category could not be saved`));
   });
 
   test('findById() with VALID ID', async () => {
@@ -87,7 +87,7 @@ describe('Category Controller Tests', () => {
     expect(categoryService.findById).toHaveBeenCalledWith(INVALID_ID);
     expect(categoryService.findById).toHaveBeenCalledTimes(1);
     expect(response.json).not.toHaveBeenCalled();
-    expect(nextFunction).toHaveBeenCalledWith(new AppError(`Category with ${INVALID_ID} ID could not found`));
+    expect(nextFunction).toHaveBeenCalledWith(new AppError(`Category with ${INVALID_ID} ID could not be found`));
   });
 
   test('update() with VALID ID', async () => {
@@ -134,7 +134,7 @@ describe('Category Controller Tests', () => {
     expect(categoryService.update).toHaveBeenCalledWith(INVALID_ID, VALID_DATA);
     expect(categoryService.update).toHaveBeenCalledTimes(1);
     expect(response.json).not.toHaveBeenCalled();
-    expect(nextFunction).toHaveBeenCalledWith(new AppError(`Category with ${INVALID_ID} ID could not found`));
+    expect(nextFunction).toHaveBeenCalledWith(new AppError(`Category with ${INVALID_ID} ID could not be found`));
   });
 
   test('remove() with VALID ID', async () => {
@@ -173,6 +173,6 @@ describe('Category Controller Tests', () => {
     expect(categoryService.remove).toHaveBeenCalledWith(INVALID_ID);
     expect(categoryService.remove).toHaveBeenCalledTimes(1);
     expect(response.json).not.toHaveBeenCalled();
-    expect(nextFunction).toHaveBeenCalledWith(new AppError(`Category with ${INVALID_ID} ID could not found`));
+    expect(nextFunction).toHaveBeenCalledWith(new AppError(`Category with ${INVALID_ID} ID could not be found`));
   });
 });

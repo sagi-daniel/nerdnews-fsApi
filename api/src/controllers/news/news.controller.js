@@ -41,7 +41,7 @@ exports.findByQuery = catchAsync(async (req, res, next) => {
 exports.findById = catchAsync(async (req, res, next) => {
   const news = await newsService.findById(req.params.id);
   if (!news) {
-    return next(new AppError(`News with ID ${req.params.id} could not be found`));
+    return next(new AppError(`News with ${req.params.id} ID could not be found`));
   }
   sendResponse(res, { data: { news } });
 });
@@ -49,7 +49,7 @@ exports.findById = catchAsync(async (req, res, next) => {
 exports.update = catchAsync(async (req, res, next) => {
   const news = await newsService.update(req.params.id, req.body);
   if (!news) {
-    return next(new AppError(`News with ID ${req.params.id} could not be found`));
+    return next(new AppError(`News with ${req.params.id} ID could not be found`));
   }
   sendResponse(res, { data: { news } });
 });
@@ -57,7 +57,7 @@ exports.update = catchAsync(async (req, res, next) => {
 exports.remove = catchAsync(async (req, res, next) => {
   const news = await newsService.remove(req.params.id);
   if (!news) {
-    return next(new AppError(`News with ID ${req.params.id} could not be found`));
+    return next(new AppError(`News with ${req.params.id} ID could not be found`));
   }
   sendResponse(res, { data: { news } });
 });

@@ -46,7 +46,7 @@ exports.findByQuery = catchAsync(async (req, res, next) => {
 exports.findById = catchAsync(async (req, res, next) => {
   const movie = await movieService.findById(req.params.id);
   if (!movie) {
-    return next(new AppError(`Movie with ID ${req.params.id} could not be found`));
+    return next(new AppError(`Movie with ${req.params.id} ID could not be found`));
   }
   sendResponse(res, { data: { movie } });
 });
@@ -54,7 +54,7 @@ exports.findById = catchAsync(async (req, res, next) => {
 exports.update = catchAsync(async (req, res, next) => {
   const movie = await movieService.update(req.params.id, req.body);
   if (!movie) {
-    return next(new AppError(`Movie with ID ${req.params.id} could not be found`));
+    return next(new AppError(`Movie with ${req.params.id} ID could not be found`));
   }
   sendResponse(res, { data: { movie } });
 });
@@ -62,7 +62,7 @@ exports.update = catchAsync(async (req, res, next) => {
 exports.remove = catchAsync(async (req, res, next) => {
   const movie = await movieService.remove(req.params.id);
   if (!movie) {
-    return next(new AppError(`Movie with ID ${req.params.id} could not be found`));
+    return next(new AppError(`Movie with ${req.params.id} ID could not be found`));
   }
   sendResponse(res, { data: { movie } });
 });

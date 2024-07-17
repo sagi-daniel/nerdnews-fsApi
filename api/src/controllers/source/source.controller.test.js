@@ -1,8 +1,8 @@
 const { mockResponse, mockRequest } = require('jest-mock-req-res');
-const AppError = require('../../../utils/appError');
+const AppError = require('../../utils/appError');
 const sourceController = require('./source.controller');
 const sourceService = require('./source.service');
-jest.mock('./rssSource.service.js');
+jest.mock('./source.service.js');
 
 describe('Rss Source Controller Tests', () => {
   let mockData;
@@ -10,7 +10,7 @@ describe('Rss Source Controller Tests', () => {
   let response;
 
   beforeEach(() => {
-    mockData = require('./__mocks__/mockDataRssSource.json');
+    mockData = require('./__mocks__/mockDataSource.json');
 
     sourceService.__setMockData(mockData);
     nextFunction = jest.fn();
@@ -39,7 +39,7 @@ describe('Rss Source Controller Tests', () => {
     expect(response.json).toHaveBeenCalledWith({
       status: 'success',
       data: {
-        rssSource: { ...VALID_DATA, id: mockData.length },
+        source: { ...VALID_DATA, id: mockData.length },
       },
     });
   });
@@ -55,7 +55,7 @@ describe('Rss Source Controller Tests', () => {
     expect(sourceService.create).toHaveBeenCalledWith(INVALID_DATA);
     expect(sourceService.create).toHaveBeenCalledTimes(1);
     expect(response.json).not.toHaveBeenCalled();
-    expect(nextFunction).toHaveBeenCalledWith(new AppError(`Source could not saved`));
+    expect(nextFunction).toHaveBeenCalledWith(new AppError(`Source could not be saved`));
   });
 
   test('findById() with VALID ID', async () => {
@@ -72,7 +72,7 @@ describe('Rss Source Controller Tests', () => {
     expect(sourceService.findById).toHaveBeenCalledTimes(1);
     expect(response.json).toHaveBeenCalledWith({
       status: 'success',
-      data: { rssSource: mockData.find((m) => m.id === VALID_ID) },
+      data: { source: mockData.find((m) => m.id === VALID_ID) },
     });
   });
 
@@ -89,7 +89,7 @@ describe('Rss Source Controller Tests', () => {
     expect(sourceService.findById).toHaveBeenCalledWith(INVALID_ID);
     expect(sourceService.findById).toHaveBeenCalledTimes(1);
     expect(response.json).not.toHaveBeenCalled();
-    expect(nextFunction).toHaveBeenCalledWith(new AppError(`Source with ${INVALID_ID} ID could not found`));
+    expect(nextFunction).toHaveBeenCalledWith(new AppError(`Source with ${INVALID_ID} ID could not be found`));
   });
 
   test('update() with VALID ID', async () => {
@@ -114,7 +114,7 @@ describe('Rss Source Controller Tests', () => {
     expect(response.json).toHaveBeenCalledWith({
       status: 'success',
       data: {
-        rssSource: { ...VALID_DATA, id: VALID_ID },
+        source: { ...VALID_DATA, id: VALID_ID },
       },
     });
   });
@@ -139,7 +139,7 @@ describe('Rss Source Controller Tests', () => {
     expect(sourceService.update).toHaveBeenCalledWith(INVALID_ID, VALID_DATA);
     expect(sourceService.update).toHaveBeenCalledTimes(1);
     expect(response.json).not.toHaveBeenCalled();
-    expect(nextFunction).toHaveBeenCalledWith(new AppError(`Source with ${INVALID_ID} ID could not found`));
+    expect(nextFunction).toHaveBeenCalledWith(new AppError(`Source with ${INVALID_ID} ID could not be found`));
   });
 
   test('remove() with VALID ID', async () => {
@@ -157,7 +157,7 @@ describe('Rss Source Controller Tests', () => {
     expect(response.json).toHaveBeenCalledWith({
       status: 'success',
       data: {
-        rssSource: {
+        source: {
           id: 1,
           sourceName: 'SAMPLE RSS SOURCE 1',
           sourceLink: 'https://sample1.com/',
@@ -181,6 +181,6 @@ describe('Rss Source Controller Tests', () => {
     expect(sourceService.remove).toHaveBeenCalledWith(INVALID_ID);
     expect(sourceService.remove).toHaveBeenCalledTimes(1);
     expect(response.json).not.toHaveBeenCalled();
-    expect(nextFunction).toHaveBeenCalledWith(new AppError(`Source with ${INVALID_ID} ID could not found`));
+    expect(nextFunction).toHaveBeenCalledWith(new AppError(`Source with ${INVALID_ID} ID could not be found`));
   });
 });
