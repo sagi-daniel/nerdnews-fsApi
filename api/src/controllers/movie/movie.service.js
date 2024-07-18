@@ -8,7 +8,7 @@ exports.create = (movie) => {
 };
 
 exports.findAll = async (sortOrder, limit, skip) => {
-  if (!sortOrder || !limit || !skip) return await Movie.find();
+  if (!sortOrder && !limit && !skip) return await Movie.find();
   return await Movie.find().sort({ release: sortOrder }).limit(limit).skip(skip);
 };
 
