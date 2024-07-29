@@ -18,6 +18,6 @@ export default defineConfig({
   },
   build: {
     // Szükség esetén egyéb build beállítások
-    assetsInlineLimit: 0,
+    outDir: '../api/dist',
   },
 });

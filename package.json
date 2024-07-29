@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "node api/src/server.js",
+    "start": "set NODE_ENV=production&& node api/src/server.js",
     "start:dev": "set NODE_ENV=development&& nodemon api/src/server.js",
     "start:prod": "set NODE_ENV=production&& nodemon api/src/server.js",
     "debug": "ndb api/src/server.js",
@@ -36,6 +36,8 @@
     "pug": "^2.0.3",
     "rss-parser": "^3.13.0",
     "string-similarity": "^4.0.4",
+    "swagger-jsdoc": "^6.2.8",
+    "swagger-ui-express": "^5.0.1",
     "validator": "^13.11.0",
     "winston": "^3.13.0",
     "xml2js": "^0.6.2",

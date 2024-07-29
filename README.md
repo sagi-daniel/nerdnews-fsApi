@@ -4,128 +4,119 @@
 
 ### Célja:
 
-### _Egy nyitólap, a projekt gazda által kedvelt híroldalak RSS Feed-jeinek kezelésére és hely a további projekt gazda által kedvelt funkciók implementálására, ami az oldal témájába illik_
+### _Egy weboldal létrehozása a projekt gazda által kedvelt híroldalak híreinek és a közelgő mozifilmek összegzésére, megjelenítésére, illetve ezekhez kapcsolodó funkciók, interakciók _
 
-Az alkalmazás feladata, hogy a egy böngészőben beállítható nyitóoldal szerepét betöltse és a felhasználóknak egy könnyen kezelhető, jó felhasználó élményt nyújtson.
+Az alkalmazás feladata, hogy a egy hír és film tartalmakat megjelenítő weboldal szerepét betöltse és a felhasználóknak egy könnyen kezelhhessék, és jó felhasználó élményt nyújtson.
 
 ### Technikai követelmények és előírások:
 
-- Az alkalmazás REACT alapú, model-service-component architectúra jelemzi
-- Az egyes service-eket egy base service gyűjti össze és szolgálja ki
-- A megjelenés kinézetéért a Tailwind, Font Awesome és SCSS felel
+- Az alkalmazás REACT Vite alapú, model-service-component architectúra jelemzi
+- A megjelenés kinézetéért a Tailwind, React-icon és CSS felel
 - MongoDB alapú, NoSQL adatbázissal rendelkezik
 - NodeJS API: saját API végpontok szolgálják ki a frontendet
 - Minden API végponthoz tartozik egy saját unit teszt
-- Az API-hoz Swagger alapó dokumentáció tartozik
+- Az API-hoz Swagger alapú dokumentáció tartozik
 - A felület bizonyos oldalai csak bejelntkezés után elérhetők (JWT autentikáció)
-- Az alkalmazás dockerizálva van, konténerből futtatható
-- Markdown dokumentáció documentation.md-ben
 
 #### Megjelenése:
 
 - Az alkalmazás egy fejléces navigációval rendelkezik, amivel az egyes oldalak között lehet navigálni
 - Teljesen reszponzív, mobile-first szemlélet
-- Az alkalmazott színeket, betűtípusokat, mixineket és az előre meghatárzott stílus osztályokat a styles/base mappa tárolja, és a main.scss fájl gyűjti össze.
+- Az alkalmazott színeket, betűtípusokat és az előre meghatárzott stílus osztályokat a styles/base mappa tárolja, és a base.css fájl gyűjti össze.
 
 ## 2. Az alkalmazás telepítése
 
 - Forkolni kell az adott GitHub repository tartalmát:
-  LINK
+  https://github.com/dsagi727/nerdnews-fsApi.git
 
 - A célgépre le kell klónozni az adott GitHub repository tartalmát
-  `git clone LINK`
+  `git clone https://github.com/dsagi727/nerdnews-fsApi.git`
 
 - Telepíteni kell az alkalmazás függőségeit:
-  -- Backend:
+  -- api:
   A terminálon be kell lépni a root mappába és futtatni az npm i parancsot.
   -- Frontend:
-  A terminálon be kell lépni a /frontend/react-app mappába és futtatni az npm i parancsot.
+  A terminálon be kell lépni a /frontend mappába és futtatni az npm i parancsot.
 
-- A terminálban ki kell adni az `npm start dev` parancsot.
-
-- A /frontend/dist/frontend mappa tartalmát be kell másolni a /backend/public mappába.
-
-  VAGY
-
-- A terminálon be kell lépni a /backend mappába és futtatni az `npm run build` parancsot.
+- A terminálon be kell lépni a root mappába és ki kell adni az `npm start:dev` parancsot.
+- A terminálon be kell lépni a /frontend mappába és ki kell adni az `npm run dev` parancsot.
 
 ## 3. Az alkalmazás konfigurálása
 
-A /frontend/environments mappában be kell állítani az API végpont elérési útvonalát:
+A root mappában létre kell hozni, egy config.env fájlt és be kell állítani a nélkülözhetetlen környezeti változókat. Ehhez a projekt tartalmaz egy exampleConfig.env fájlt a root mappában, ami már tartalmazza a szükséges változók egy részét és már csak egy mongo adatbázishoz tartozó adatokkal kell kiegészíteni.
 
-- environment.ts állomány: http://127.0.0.1:3000/
-- environment.prod.ts állomány: http://localhost:3000/
-
-## 4. Az alkalmazás indítása
-
-A megadott Docker container indítása és inicializálása:
-
-- El kell indítani a Docker Desktop alkalmazást.
-- A /backend mappába belépve a terminálban ki kell adni az npm run dev parancsot. (Ha szükséges, a /frontend mappába belépve a terminálban az npm start paranccsal indítható a frontend.)
-
-_Megjegyzés_:
-A belépéshez egy érvényes e-mail-cím és jelszó páros (példa):
-|E-mail | Jelszó |
-| ------ | ------ |
-|email | password |
-
-## 5. A végpontok dokumentációja
+## 4. A végpontok dokumentációja
 
 Swagger
 
-- Az alábbi URL-t kell beírni a böngészőbe: https://localhost:3000/api-docs
+- Az alábbi URL-t kell beírni a böngészőbe: http://localhost:8000/api-docs/
 
-## 6. Alkalmazás tesztek futtatása
-
-### Integrációs tezstek futtatása:
+## 5. Alkalmazás tesztek futtatása
 
 ### Egység tesztek futtatása:
 
-## 7. Entitások
-
-### Product:
-
-### CartItem:
+## 6. Entitások
 
 ### User:
 
-### Order:
+### News:
 
-## 8. User Story lista
+### Movie:
+
+### Source:
+
+### Category:
+
+## 7. User Story lista
 
 Aloldalak szerinti user story
 
-## 9. Képernyők
+## 8. Képernyők
 
-### Home
+### Főoldal /home
 
-### About
+### Hírek /news
 
-### Products
+### Filmek /movies
 
-### Contact
+### Felhasználói fiók /myAccount
 
-### Regisztráció
+### Felhasználó mentett hírek /myNews
 
-### Login
+### Felhasználó mentett filmek /myMovies
 
-### Cart
+### Regisztráció /signup
 
-### Logged in pages
+### Bejelentkezés /login
 
-### Thank you
+### Jelszó frissítése /
 
 ### NotFound
 
-## 10. Projekt egyéb adatai:
+### Forbidden
+
+## 9. Projekt egyéb adatai:
 
 ### Piorítás:
 
+Első számú piorítás egy olyan esztétikus portfolió oldal elkészítése, ami közel áll egy production weboldalhoz és naprakész valós tartalmakat jelenít meg automatizált módon.
+
 ### A megvalósítás időtartama:
+
+Backend: Hozzávetőlegesen 2 hónap, bruttó 80 óra
+frontend: Hozzávetőlegesen 3 hónap, bruttó 120 óra
 
 ### Tovább fejlesztési lehetőségek:
 
+- Filmekhez köthető további adatokkal való bővítése, lehetőség szerint backendről külső adatszolgáltató nyílt API bevonsáával, amik a filmek előzeteseivel, szereplőinek adataival tudnák kiegészíteni a meglévő adatokat.
+- Emlékeztető funkció a mentett filmekről.
+- Saját testreszabható hírlevél a mentett hírekről.
+- Oldal bővítése egyénileg létrehozható Quiz funkcióval.
+
 ### Nehézségek:
 
-- n1
-- n2
+- Frontend arculatának elkészítése, ui/ux tervezése.
+- A teljes frontend authentikáció megvalósítása React-ban és a különböző szerepkörök kezelése.
+- Hírek és filmek oldalakon a komplex összefüggő lekérdezések létrehozása és azok összekötése a backend-el.
+- Hírek és filmek mentésének műveletei, az ezzel összefűggő invalidációk meghtarázása react query-vel.
+- Backend cron job-ok létrehozása. Külső hírek és filmek API forrásainak automatikus beolvasása és betöltése az adatbázisba automatizált módon, elkerülve a redundanciát.
