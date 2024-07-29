@@ -1,4 +1,5 @@
 const mongoose = require('mongoose');
+const AppError = require('../../utils/appError');
 
 const SourceSchema = mongoose.Schema(
   {
@@ -35,8 +36,7 @@ SourceSchema.pre('remove', async function (next) {
     const newsCount = await News.countDocuments({ source: this._id });
     if (newsCount > 0) {
       // Ha a Source használva van, ne töröld és dobj hibát
-      const error = new Error('Cannot delete source as it is already used in News');
-      next(error);
+      next(new AppError('Cannot delete source as it is already used in News'));
     } else {
       // Ha nem használják, folytasd a törlést
       next();

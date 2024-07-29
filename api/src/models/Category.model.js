@@ -1,4 +1,5 @@
 const mongoose = require('mongoose');
+const AppError = require('../../utils/appError');
 
 const CategorySchema = mongoose.Schema({
   categoryName: {
@@ -16,8 +17,7 @@ CategorySchema.pre('remove', async function (next) {
     const newsCount = await News.countDocuments({ category: this._id });
     if (newsCount > 0) {
       // Ha a Category használva van, ne töröld és dobj hibát
-      const error = new Error('Cannot delete category as it is already used in News');
-      next(error);
+      next(new AppError('Cannot delete category as it is already used in News'));
     } else {
       // Ha nem használják, folytasd a törlést
       next();
