@@ -78,28 +78,29 @@ function UserForm({ user, setModalVisible }: UserFormProps) {
             required={true}
           />
         </div>
+        {!user && (
+          <div className="mb-3">
+            <label className="block mb-1">Jelszó</label>
+            <div className="relative">
+              <input
+                type="text"
+                id="password"
+                value={password}
+                onChange={handleGeneratePassword}
+                required={true}
+                className="w-full rounded-md p-2 text-primary-content bg-primary font-semibold focus:outline-none focus:ring focus:ring-primary"
+              />
 
-        <div className="mb-3">
-          <label className="block mb-1">Jelszó</label>
-          <div className="relative">
-            <input
-              type="text"
-              id="password"
-              value={password}
-              onChange={handleGeneratePassword}
-              required={true}
-              className="w-full rounded-md p-2 text-primary-content bg-primary font-semibold focus:outline-none focus:ring focus:ring-primary"
-            />
-
-            <button
-              type="button"
-              className="absolute text-2xl text-border-dark inset-y-0 right-0 px-3 py-1"
-              onClick={handleGeneratePassword}
-            >
-              <FiRefreshCcw className="text-2xl " />
-            </button>
+              <button
+                type="button"
+                className="absolute text-2xl text-border-dark inset-y-0 right-0 px-3 py-1"
+                onClick={handleGeneratePassword}
+              >
+                <FiRefreshCcw className="text-2xl " />
+              </button>
+            </div>
           </div>
-        </div>
+        )}
       </div>
       <div className="grid grid-cols-2 gap-4">
         <InputField
