@@ -4,7 +4,7 @@ import Button from '../../../components/Button';
 import { useAuth } from '../../../context/AuthContext';
 
 function ForgotPasswordForm() {
-  const [email, setEmail] = useState('testuser7@gmail.com');
+  const [email, setEmail] = useState('');
   const { forgotPassword, isLoading } = useAuth();
 
   function handleSubmit(e: React.FormEvent): void {
