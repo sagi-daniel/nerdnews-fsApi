@@ -1,14 +1,15 @@
-import { FiEdit, FiPlus } from 'react-icons/fi';
+import { FiEdit, FiPlus, FiTrash } from 'react-icons/fi';
 
 import CategoryModel from '../../models/Category.model';
 
 interface CategoriesTableProps {
   categories: CategoryModel[];
   onEdit?: (item: CategoryModel) => void;
+  onDelete?: (id: string) => void;
   onCreate?: () => void;
 }
 
-function CategoriesTable({ categories, onEdit, onCreate }: CategoriesTableProps) {
+function CategoriesTable({ categories, onEdit, onCreate, onDelete }: CategoriesTableProps) {
   return (
     <div className="flex size-full items-start">
       <table className=" w-full bg-border-dark text-center text-content-dark rounded-md">
@@ -38,6 +39,11 @@ function CategoriesTable({ categories, onEdit, onCreate }: CategoriesTableProps)
                 {onEdit && (
                   <button onClick={() => onEdit(item)} className="btn-icon">
                     <FiEdit />
+                  </button>
+                )}
+                {onDelete && (
+                  <button onClick={() => onDelete(item._id)} className="btn-icon mx-1">
+                    <FiTrash />
                   </button>
                 )}
               </td>
