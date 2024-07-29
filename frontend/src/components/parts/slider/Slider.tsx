@@ -22,8 +22,8 @@ function Slider({ children, moreLabel, morePath }: SliderProps) {
   };
 
   return (
-    <div className="relative py-4  scroll-smooth">
-      <div ref={sliderRef} className="flex gap-4 overflow-x-scroll scrollbar-hide" onScroll={handleScroll}>
+    <div className="relative py-4 scroll-smooth">
+      <div ref={sliderRef} className="flex overflow-x-scroll scrollbar-hide" onScroll={handleScroll}>
         {children}
       </div>
 

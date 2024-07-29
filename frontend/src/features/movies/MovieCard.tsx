@@ -14,8 +14,8 @@ function MovieCard({ movie, onClick }: MovieCardProps) {
   if (!loaded) return <MovieCardSkeleton />;
 
   return (
-    <div className="relative h-72 cursor-pointer flex-[0_0_40%] sm:flex-[0_0_25%] lg:flex-[0_0_15%] ">
-      <div className={`relative size-full  no-select overflow-hidden rounded-md`}>
+    <div className="relative mx-1 flex-[0_0_40%] sm:flex-[0_0_25%] lg:flex-[0_0_15%] ">
+      <div className={`relative h-80 w-48 no-select overflow-hidden rounded-md`}>
         <SaveLater itemId={movie._id} type="movie" />
         <div
           onClick={() => onClick(movie)}
