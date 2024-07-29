@@ -11,18 +11,19 @@ const NewsSchema = mongoose.Schema(
     source: {
       type: mongoose.SchemaTypes.ObjectId,
       ref: 'Source',
-      required: true,
+      required: [true, 'Please provide a source link!'],
     },
     category: {
       type: mongoose.SchemaTypes.ObjectId,
       ref: 'Category',
-      required: true,
+      required: [true, 'Please provide a category!'],
     },
     title: {
       type: String,
     },
     link: {
       type: String,
+      required: [true, 'Please provide a news link!'],
       unique: true,
     },
     content: {

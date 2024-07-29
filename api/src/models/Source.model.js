@@ -4,7 +4,7 @@ const SourceSchema = mongoose.Schema(
   {
     sourceName: {
       type: String,
-      required: true,
+      required: [true, 'Please provide a source name!'],
     },
     sourceType: {
       type: String,
@@ -13,13 +13,13 @@ const SourceSchema = mongoose.Schema(
     },
     sourceLink: {
       type: String,
-      required: true,
+      required: [true, 'Please provide a source link!'],
       unique: true,
     },
     category: {
       type: mongoose.SchemaTypes.ObjectId,
       ref: 'Category',
-      required: true,
+      required: [true, 'Please provide a category!'],
     },
     comment: {
       type: String,

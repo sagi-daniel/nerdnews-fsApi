@@ -5,16 +5,16 @@ const MovieSchema = mongoose.Schema(
   {
     tmdb_id: {
       type: Number,
-      required: true,
+      required: [true, 'Please provide a tmdb ID!'],
       unique: true,
     },
     release: {
       type: Date,
-      required: true,
+      required: [true, 'Please provide a release date!'],
     },
     title: {
       type: String,
-      required: true,
+      required: [true, 'Please provide a title!'],
     },
     overview: {
       type: String,
@@ -22,11 +22,11 @@ const MovieSchema = mongoose.Schema(
     },
     genre: {
       type: [String],
-      required: true,
+      required: [true, 'Please provide a genre!'],
     },
     poster: {
       type: String,
-      required: true,
+      required: [true, 'Please provide a poster!'],
       unique: true,
     },
     voteAverage: {
