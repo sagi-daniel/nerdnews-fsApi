@@ -25,7 +25,7 @@ function Pagination({ page, totalItems, itemsPerPage, onPageChange }: Pagination
   const style = 'text-content-light bg-border-light dark:bg-border-dark dark:text-content-dark focus:outline-none';
 
   return (
-    <div className="flex justify-center items-end my-10">
+    <div className="flex flex-wrap gap-2 justify-center items-end my-10">
       {[...Array(totalPages).keys()].map((_, index) => (
         <button
           key={index}
