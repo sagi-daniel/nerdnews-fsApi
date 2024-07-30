@@ -37,7 +37,6 @@ const UserSchema = mongoose.Schema(
         message: 'Passwords are NOT match',
       },
     },
-    photo: String,
     userNews: [{ type: mongoose.Schema.Types.ObjectId, ref: 'News' }],
     userMovies: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Movie' }],
     passwordResetRequestedAt: Date,
