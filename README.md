@@ -49,7 +49,8 @@ A root mappában létre kell hozni, egy config.env fájlt és be kell állítani
 
 Swagger
 
-- Az alábbi URL-t kell beírni a böngészőbe: http://localhost:8000/api-docs/
+- A lokálisan elindított swagger eléréshez az alábbi URL-t kell beírni a böngészőbe: http://localhost:8000/api-docs/
+- Az éles oldal swagger dokuentáció eléréséhez az alábbi URL-t kell beírni a böngészőbe: https://nerdnews.hu/api-docs/
 
 ## 5. Alkalmazás tesztek futtatása
 
