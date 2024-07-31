@@ -1,10 +1,10 @@
-# Geek HUB
+# nerdnews
 
 ## 1. Alkalmazás leírása
 
 ### Célja:
 
-### _Egy weboldal létrehozása a projekt gazda által kedvelt híroldalak híreinek és a közelgő mozifilmek összegzésére, megjelenítésére, illetve ezekhez kapcsolodó funkciók, interakciók _
+### Egy weboldal létrehozása a projekt gazda által kedvelt híroldalak híreinek és a közelgő mozifilmek összegzésére, megjelenítésére, illetve ezekhez kapcsolodó funkciók, interakciók
 
 Az alkalmazás feladata, hogy a egy hír és film tartalmakat megjelenítő weboldal szerepét betöltse és a felhasználóknak egy könnyen kezelhhessék, és jó felhasználó élményt nyújtson.
 
