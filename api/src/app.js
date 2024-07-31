@@ -91,17 +91,12 @@ app.use('/category', require('./controllers/category/category.routes'));
 // Serve static files
 app.use(express.static(frontendAppPath));
 
-// Root route
-app.get('/', (req, res) => {
-  res.send('Welcome to the server!');
-});
-
 app.get('*', (req, res) => {
   res.sendFile(join(frontendAppPath, 'index.html'));
 });
 
 // SCHEDULED TASKS
-cron.schedule('0 8,16,0 * * *', require('./controllers/scheduler/scheduler.controller'));
+cron.schedule('* * * * *', require('./controllers/scheduler/scheduler.controller'));
 
 app.all('*', (req, res, next) => {
   next(new AppError(`Could not found ${req.originalUrl} on this server!`, 404));
