@@ -49,8 +49,10 @@ A root mappában létre kell hozni, egy config.env fájlt és be kell állítani
 
 Swagger
 
-- A lokálisan elindított swagger eléréshez az alábbi URL-t kell beírni a böngészőbe: http://localhost:8000/api-docs/
-- Az éles oldal swagger dokuentáció eléréséhez az alábbi URL-t kell beírni a böngészőbe: https://nerdnews.hu/api-docs/
+- Az éles oldal swagger dokumentáció eléréséhez az alábbi URL-t kell beírni a böngészőbe: https://nerdnews.hu/api-docs/
+- A lokálisan elindított swagger dokumentáció eléréshez az alábbi URL-t kell beírni a böngészőbe: http://localhost:8000/api-docs/
+
+A védett útvonalak teszteléséhez érvényes JWT token szükséges, amelyet csak regisztrált felhasználók kapnak a bejelentkezés során. Ezt a token-t a böngésző fejlesztői eszközeinek menüjében, az Application/LocalStorage szekció alatt találhatja meg. A JWT token értéket másolja ki és illessze be a Swagger Authorization fülén található Value mezőbe. Ezt követően már tesztelheti a normál felhasználói védett útvonalakat. Az adminisztrátori védett útvonalak tesztelésére biztonsági okokból nincs lehetőség. Ha adminisztrátori szerepkör tesztelésére van szüksége, kérjük, küldje el igényét a dsagi727@gmail.com címre. Az adminisztrátori hozzáférést egyedi elbírálás alapján biztosítjuk.
 
 ## 5. Alkalmazás tesztek futtatása
 
