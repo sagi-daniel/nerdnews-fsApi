@@ -61,26 +61,79 @@ Swagger
 
 ### User:
 
-A felhasználó entitás az alkalmazás legfontosabb eleme, amely a felhasználók adatainak tárolására szolgál.
+A felhasználói entitás tárolja a rendszerben lévő felhasználók adatait. Ez az entitás tartalmazza az alapvető információkat, valamint a felhasználó által mentett híreket és filmeket.
 
-- ID: Egyedi azonosító (MongoDB ObjectId)
-- userName: Felhasználónév, amely egyedi a rendszerben
-- email: Felhasználó email címe, egyedi
-- password: Titkosított jelszó
-- userNews: Hivatkozások a felhasználó által mentett hírekre
-- userMovies: Hivatkozások a felhasználó által mentett filmekre
-- role: Felhasználó szerepkörei (pl. admin, user)
-- active: User entitást nem lehet törölni, csak inaktiválni
-- createdAt: Regisztráció dátuma
-- updatedAt: Utolsó módosítás dátuma
+- id: Egyedi azonosító (string) – A MongoDB által generált egyedi azonosító, amely azonosítja a felhasználót.
+- role: Szerepkör (string) – A felhasználó szerepköre az alkalmazásban, például adminisztrátor, felhasználó stb.
+- userName: Felhasználónév (string) – A felhasználó által választott név, amely egyedi az alkalmazásban.
+- email: Email cím (string) – A felhasználó email címe, amely szintén egyedi a rendszerben.
+- userNews: Mentett hírek (NewsModel[]) – A felhasználó által mentett hírek listája. Minden elem a hírek entitását reprezentálja.
+- userMovies: Mentett filmek (MovieModel[]) – A felhasználó által mentett filmek listája. Minden elem a filmek entitását reprezentálja.
+- createdAt: Létrehozás dátuma (string) – A felhasználó regisztrációjának dátuma ISO 8601 formátumban.
+- updatedAt: Módosítás dátuma (string) – Az utolsó módosítás dátuma ISO 8601 formátumban.
+
+Ezek az adatok biztosítják a felhasználó nyomon követését az alkalmazáson belül, valamint lehetővé teszik a mentett tartalmak kezelését.
 
 ### News:
 
+A hírek entitás az alkalmazás híreinek adatait tárolja. Ez az entitás tartalmazza a hír címét, tartalmát, és egyéb kapcsolódó információkat.
+
+- id: Egyedi azonosító (string) – A MongoDB által generált egyedi azonosító, amely azonosítja a hírt.
+- release: Közzététel dátuma (string) – A hír megjelenésének dátuma ISO 8601 formátumban.
+- source: Forrás (SourceModel) – A hír forrása, amely a SourceModel entitást reprezentálja. Tartalmazza a hírt közzétevő szervezet nevét és URL-jét.
+- category: Kategória (CategoryModel) – A hír kategóriája, amely a CategoryModel entitást reprezentálja. Tartalmazza a kategória nevét és leírását.
+- title: Cím (string) – A hír címe.
+- link: Hivatkozás (string) – A hír teljes szövegéhez vezető URL vagy link.
+- content: Tartalom (string) – A hír teljes szövege.
+- imageUrl: Kép URL (string) – A hírhez kapcsolódó kép URL-je.
+- createdAt: Létrehozás dátuma (string, opcionális) – A hír létrehozásának dátuma ISO 8601 formátumban. Ez az adat opcionális, ha a hír az adatbázisba való belépéskor nem - rendelkezik létrehozási dátummal.
+- updatedAt: Módosítás dátuma (string, opcionális) – Az utolsó módosítás dátuma ISO 8601 formátumban. Ez az adat opcionális, ha a hír az adatbázisba való belépéskor nem rendelkezik módosítási dátummal.
+
+Ez a modell segít a hírek szervezésében, kezelésében és megjelenítésében az alkalmazáson belül, biztosítva a releváns és naprakész információk megjelenítését.
+
 ### Movie:
+
+A filmek entitás az alkalmazásban lévő filmek adatait tárolja. Ez az entitás tartalmazza a filmek alapvető információit és azok értékeléseit.
+
+- id: Egyedi azonosító (string) – A MongoDB által generált egyedi azonosító, amely azonosítja a filmet.
+- tmdb_id: TMDB azonosító (number) – A film egyedi azonosítója a The Movie Database (TMDb) szolgáltatásban.
+- release: Megjelenés dátuma (string) – A film megjelenésének dátuma ISO 8601 formátumban.
+- title: Cím (string) – A film címe.
+- overview: Áttekintés (string) – A film rövid leírása vagy összefoglalója.
+- poster: Poszter URL (string) – A film poszterének URL-je.
+- genre: Műfaj(ok) (FilterName[]) – A film műfajainak listája. A FilterName típusú értékek tartalmazzák a film műfaját (pl. akció, dráma, vígjáték).
+- voteAverage: Átlagos értékelés (number) – A film átlagos értékelése, amelyet általában 1-től 10-ig terjedő skálán mérnek.
+- voteCount: Értékelések száma (number) – Az értékelések összesített száma, amelyet a film kapott.
+- createdAt: Létrehozás dátuma (string) – A film adatainak adatbázisba történő mentésének dátuma ISO 8601 formátumban.
+- updatedAt: Módosítás dátuma (string) – Az utolsó módosítás dátuma ISO 8601 formátumban.
+
+Ez a modell biztosítja a filmek részletes és pontos nyilvántartását, lehetővé téve a felhasználók számára, hogy hozzáférjenek a filmek alapvető információihoz és értékeléseikhez az alkalmazásban.
 
 ### Source:
 
+A forrás entitás az alkalmazásban használt híroldalakat vagy tartalomszolgáltatókat tárolja. Ez az entitás tartalmazza a forrás alapvető adatait és kategóriáját.
+
+- id: Egyedi azonosító (string) – A MongoDB által generált egyedi azonosító, amely azonosítja a forrást.
+- sourceName: Forrás neve (string) – A forrás neve, például a híroldal neve vagy a tartalomszolgáltató neve.
+- sourceType: Forrás típusa (string) – A forrás típusa, például híroldal, blog, magazin stb. Ez segít kategorizálni a forrást az alkalmazásban.
+- sourceLink: Forrás link (string) – A forrás weboldalának URL-je, ahol a felhasználók hozzáférhetnek a tartalomhoz.
+- category: Kategória (CategoryModel) – A forrás kategóriája, amely a CategoryModel entitást reprezentálja. Tartalmazza a kategória nevét és leírását, amely segít a - források rendszerezésében.
+- comment: Megjegyzés (string, opcionális) – Opcionális mező, amely lehetőséget ad extra megjegyzések hozzáadására a forráshoz, például a forrás specifikus jellemzőire - vonatkozóan.
+- createdAt: Létrehozás dátuma (string) – A forrás adatainak adatbázisba történő mentésének dátuma ISO 8601 formátumban.
+- updatedAt: Módosítás dátuma (string) – Az utolsó módosítás dátuma ISO 8601 formátumban.
+
+Ez a modell lehetővé teszi a híroldalak és tartalomszolgáltatók hatékony nyilvántartását és kezelését az alkalmazáson belül, biztosítva, hogy a források megfelelően kategorizálva és könnyen elérhetőek legyenek.
+
 ### Category:
+
+A kategória entitás az alkalmazásban lévő hírek és filmek kategóriáit tárolja. Ez az entitás segít az adatok rendszerezésében és a felhasználói élmény javításában.
+
+- id: Egyedi azonosító (string) – A MongoDB által generált egyedi azonosító, amely azonosítja a kategóriát.
+- categoryName: Kategória neve (FilterName | string) – A kategória neve. Ez lehet egy előre definiált szűrőnév (FilterName típus) vagy szöveges érték (string), amely az adott kategóriát azonosítja.
+- createdAt: Létrehozás dátuma (string) – A kategória adatainak adatbázisba történő mentésének dátuma ISO 8601 formátumban.
+- updatedAt: Módosítás dátuma (string) – Az utolsó módosítás dátuma ISO 8601 formátumban.
+
+Ez a modell segít a hírek és filmek kategorizálásában, lehetővé téve a felhasználók számára, hogy könnyen szűrjék és megtalálják az érdeklődési körüknek megfelelő tartalmakat.
 
 ## 8. Képernyők
 
