@@ -1,6 +1,7 @@
 # nerdnews
 
 Project stack: React, Tailwind, Express.js, MongoDB
+
 Project: [https://nerdnews.hu/home],
 
 Test Login:
